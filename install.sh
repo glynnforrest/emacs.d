@@ -4,5 +4,11 @@
 if [ ! -h ~/.xmonad/xmonad.hs ]
 then
 	ln -s $PWD/xmonad.hs ~/.xmonad/xmonad.hs
-	echo 'Made xmonad soft link.'
+	echo 'Made xmonad link.'
+fi
+
+if [ ! -h ~/.gitconfig ]
+then
+	ln -s $PWD/gitconfig ~/.gitconfig
+	echo 'Made github link.'
 fi
