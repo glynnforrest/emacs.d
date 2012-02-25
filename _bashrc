@@ -39,6 +39,12 @@ alias pup='sudo pacman -Syu'
 alias porph='pacman -Qqdt' #Show package orphans
 alias pgr='pacman -Q | grep -i' #Grep installed packages
 
+alias gst='git status'
+alias gch='git checkout'
+alias gco='git commit'
+alias gad='git add'
+alias gcl='git clone'
+
 alias psgr='ps -A | grep -i' #Grep for a process
 alias mysq='mysql -u root -p'
 alias starwars='telnet towel.blinkenlights.nl'
