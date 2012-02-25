@@ -1,4 +1,11 @@
-# Say something nice, only if we have fortune on the system
+#Bash configuration
+#Author: Glynn Forrest
+#me@glynnforrest.com
+
+#Check for an interactive session
+[ -z "$PS1" ] && return
+
+#Say something nice, only if we have fortune on the system
 command_exists () {
     type "$1" &> /dev/null ;
 }
@@ -6,9 +13,6 @@ command_exists () {
 if command_exists fortune; then
 	fortune
 fi
-
-# Check for an interactive session
-[ -z "$PS1" ] && return
 
 #Load bashmarks
 source ~/.bash/bashmarks.sh
@@ -19,14 +23,13 @@ alias v='gvim --remote-silent'
 alias png='ping www.google.com -c 5'
 alias get='packer'
 alias bin='sudo pacman -Rs'
-alias starwars='telnet towel.blinkenlights.nl'
 alias pacman='pacman-color'
 alias pup='sudo pacman -Syu'
-alias pexp='~/Scripts/pacman_explicit.sh'
-alias porph='pacman -Qqdt'
-alias pgrep='pacman -Q | grep -i'
-alias psgrep='ps -A | grep -i'
+alias porph='pacman -Qqdt' #Show package orphans
+alias pgrep='pacman -Q | grep -i' #Grep installed packages
+alias psgrep='ps -A | grep -i' #Grep for a process
 alias mysq='mysql -u root -p'
+alias starwars='telnet towel.blinkenlights.nl'
 
 #Now load machine specific or private aliases
 if [ -f ~/.bashrc.local ]
@@ -34,23 +37,39 @@ then
 	source ~/.bashrc.local
 fi
 
+#Ignore duplicates in history
+HISTCONTROL=ignoredups:ignorespace
+
+#Navigate history with up/down based on what is already typed.
+bind '"\e[A": history-search-backward'
+bind '"\e[B": history-search-forward'
+
 git_branch() {
 	BR=$(git symbolic-ref HEAD 2>/dev/null) || { echo "$@" ; exit ; }
 	BR=${BR#refs/heads/}
 	echo "($BR) "
 }
 
+#View the list of packages installed explicity
+pexp () {
+	pacman -Qei $(pacman -Qu|cut -d" " -f 1)|awk ' BEGIN {FS=":"}/^Name/{printf("\033[1;36m%s\033[1;37m", $2)}/^Description/{print $2}'
+}
+
+
 #[user@host] cwd $ 
 PS1='\[\033[36m\][\[\033[37m\]\u\[\033[36m\]@\[\033[37m\]\h\[\033[36m\]]\[\033[37m\] \W/\[\033[32m\] $(git_branch)\[\033[36m\]$ \[\033[0m\]'
 
 #[user] cwd $ 
-# PS1='\[\033[36m\][\[\033[37m\]\u\[\033[36m\]]\[\033[37m\] \W/\[\033[32m\] $(git_branch)\[\033[36m\]$ \[\033[0m\]'
+#PS1='\[\033[36m\][\[\033[37m\]\u\[\033[36m\]]\[\033[37m\] \W/\[\033[32m\] $(git_branch)\[\033[36m\]$ \[\033[0m\]'
 
 #Get all the binaries
 PATH=$PATH:usr/include
 
 #Obviously
 EDITOR=vim
+
+#Use vi mode for added pain
+set -o vi
 
 #Autocomplete the following
 complete -cf sudo
