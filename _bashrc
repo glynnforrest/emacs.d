@@ -1,5 +1,11 @@
-# Say something nice
-fortune
+# Say something nice, only if we have fortune on the system
+command_exists () {
+    type "$1" &> /dev/null ;
+}
+
+if command_exists fortune; then
+	fortune
+fi
 
 # Check for an interactive session
 [ -z "$PS1" ] && return
