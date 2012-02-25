@@ -5,7 +5,7 @@ function create_link {
     target="${HOME}/${1/_/.}"
 
     if [ ! -e "${target}" ]; then
-		ln -s ${source} ${target}
+		ln -sf ${source} ${target}
 		echo "Linking $source to $target"
     fi
 
