@@ -18,16 +18,28 @@ fi
 source ~/.bash/bashmarks.sh
 
 #Common aliases
-alias ls='ls --color=auto'
+alias ls='ls -h --group-directories-first --color=always'
+alias ll='ls -l'
+alias la='ls -a'
+alias lla='ls -la'
+
+alias c='cd -'
+alias ..='cd ..'
+alias ...='cd ../..'
+
+alias grep='grep --color=auto'
+
 alias v='gvim --remote-silent'
 alias png='ping www.google.com -c 5'
 alias get='packer'
 alias bin='sudo pacman -Rs'
+
 alias pacman='pacman-color'
 alias pup='sudo pacman -Syu'
 alias porph='pacman -Qqdt' #Show package orphans
-alias pgrep='pacman -Q | grep -i' #Grep installed packages
-alias psgrep='ps -A | grep -i' #Grep for a process
+alias pgr='pacman -Q | grep -i' #Grep installed packages
+
+alias psgr='ps -A | grep -i' #Grep for a process
 alias mysq='mysql -u root -p'
 alias starwars='telnet towel.blinkenlights.nl'
 
@@ -70,8 +82,10 @@ EDITOR=vim
 
 #Use vi mode for added pain
 set -o vi
+set visible-stats on 
 
 #Autocomplete the following
 complete -cf sudo
 complete -cf man
 complete -cf bin
+complete -cf killall
