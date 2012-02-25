@@ -1,0 +1,52 @@
+# Say something nice
+fortune
+
+# Check for an interactive session
+[ -z "$PS1" ] && return
+
+#Load bashmarks
+source ~/.bash/bashmarks.sh
+
+#Common aliases
+alias ls='ls --color=auto'
+alias v='gvim --remote-silent'
+alias png='ping www.google.com -c 5'
+alias get='packer'
+alias bin='sudo pacman -Rs'
+alias starwars='telnet towel.blinkenlights.nl'
+alias pacman='pacman-color'
+alias pup='sudo pacman -Syu'
+alias pexp='~/Scripts/pacman_explicit.sh'
+alias porph='pacman -Qqdt'
+alias pgrep='pacman -Q | grep -i'
+alias psgrep='ps -A | grep -i'
+alias mysq='mysql -u root -p'
+
+#Now load machine specific or private aliases
+if [ -f ~/.bashrc.local ]
+then
+	source ~/.bashrc.local
+fi
+
+git_branch() {
+	BR=$(git symbolic-ref HEAD 2>/dev/null) || { echo "$@" ; exit ; }
+	BR=${BR#refs/heads/}
+	echo "($BR) "
+}
+
+#[user@host] cwd $ 
+# PS1='\[\033[36m\][\[\033[37m\]\u\[\033[36m\]@\[\033[37m\]\h\[\033[36m\]]\[\033[37m\] \W/\[\033[32m\] $(git_branch)\[\033[36m\]$ \[\033[0m\]'
+
+#[user] cwd $ 
+PS1='\[\033[36m\][\[\033[37m\]\u\[\033[36m\]]\[\033[37m\] \W/\[\033[32m\] $(git_branch)\[\033[36m\]$ \[\033[0m\]'
+
+#Get all the binaries
+PATH=$PATH:usr/include
+
+#Obviously
+EDITOR=vim
+
+#Autocomplete the following
+complete -cf sudo
+complete -cf man
+complete -cf bin

@@ -1,14 +1,17 @@
 #!/bin/bash
 
-#really crappy implementation until I learn to do it properly.
-if [ ! -h ~/.xmonad/xmonad.hs ]
-then
-	ln -s $PWD/xmonad.hs ~/.xmonad/xmonad.hs
-	echo 'Made xmonad link.'
-fi
+function create_link {
+	source="${PWD}/$1"
+    target="${HOME}/${1/_/.}"
 
-if [ ! -h ~/.gitconfig ]
-then
-	ln -s $PWD/gitconfig ~/.gitconfig
-	echo 'Made github link.'
-fi
+    if [ ! -e "${target}" ]; then
+		ln -s ${source} ${target}
+		echo "Linking $source to $target"
+    fi
+
+}
+
+for i in _*
+do
+	create_link $i
+done
