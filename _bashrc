@@ -44,6 +44,7 @@ alias gch='git checkout'
 alias gco='git commit'
 alias gad='git add'
 alias gcl='git clone'
+alias gbr='git branch'
 
 alias psgr='ps -A | grep -i' #Grep for a process
 alias mysq='mysql -u root -p'
