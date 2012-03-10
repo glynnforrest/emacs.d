@@ -27,7 +27,7 @@ alignment bottom_right
 background no
 border_width 0
 cpu_avg_samples 2
-default_color cccccc
+default_color ffffff
 default_outline_color black
 default_shade_color black
 double_buffer yes
@@ -80,7 +80,8 @@ lua_draw_hook_pre main
 
 TEXT
 # ${font Terminus:style=bold:size=9}SYSTEM $hr
-$alignc $nodename
+
+# $alignc $nodename
 $alignc ${font}$sysname $kernel
 
 $alignc Uptime: $uptime

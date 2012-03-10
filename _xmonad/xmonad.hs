@@ -43,4 +43,5 @@ myManageHook = composeAll
     -- , resource  =? "sun-awt-X11-XWindowPeer"       --> doIgnore
 	, title =? "Desktop" --> doIgnore
 	, title =? "xfce4-panel" --> doIgnore
+	, className =? "Cairo-dock" --> doIgnore
     ]-- , layoutHook = noBorders

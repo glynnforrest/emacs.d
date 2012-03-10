@@ -50,6 +50,8 @@ alias gloo='git log --oneline'
 alias gfe='git fetch'
 alias gpul='git pull'
 alias gpus='git push'
+alias gme='git merge'
+alias gdi='git diff'
 
 alias psgr='ps -A | grep -i' #Grep for a process
 alias mysq='mysql -u root -p'
