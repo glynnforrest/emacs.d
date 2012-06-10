@@ -9,6 +9,10 @@
 
 (defvar required-packages '(evil
                             auto-complete
+                            molokai-theme
+                            rainbow-delimiters
+                            zencoding-mode
+                            yasnippet
                             magit
                             js2-mode)
   "A list of required packages for this configuration.")
@@ -17,7 +21,7 @@
   (when (not (package-installed-p p))
     (package-install p)))
 
-(require 'tango-2-theme)
+(require 'molokai-theme)
 
 (setq hl-line-sticky-flag 1)
 (global-hl-line-mode t)
@@ -32,6 +36,7 @@
 (ido-mode 1)
 (setq ido-enable-flex-matching t)
 
+
 (setq make-backup-files nil)
 (setq auto-save-default nil)
 (setq-default tab-width 4)
@@ -43,6 +48,7 @@
 (delete-selection-mode t)
 (scroll-bar-mode -1)
 (tool-bar-mode -1)
+;(menu-bar-mode -1)
 (blink-cursor-mode t)
 (show-paren-mode t)
 (column-number-mode t)
@@ -63,7 +69,13 @@
 (define-key evil-normal-state-map ",f" 'find-file)
 (define-key evil-normal-state-map ",s" 'split-window-right)
 (define-key evil-normal-state-map ",S" 'split-window-below)
-(define-key evil-normal-state-map ",b" 'ido-switch-buffer)
+(define-key global-map (kbd "M-b") 'ido-switch-buffer)
+
+(defun my-save-and-eval-buffer ()
+  (interactive)
+  (save-buffer)
+  (eval-buffer))
+(define-key evil-normal-state-map ",e" 'my-save-and-eval-buffer)
 
 (defun remap-lisp-c-j ()
   (local-unset-key (kbd "C-j"))
@@ -119,3 +131,22 @@
 (define-key minibuffer-local-must-match-map [escape] 'minibuffer-keyboard-quit)
 (define-key minibuffer-local-isearch-map [escape] 'minibuffer-keyboard-quit)
 
+
+;Cycle the color of the cursor
+(defvar blink-cursor-colors (list  "#92c48f" "#6785c5" "#be369c" "#d9ca65")
+  "On each blink the cursor will cycle to the next color in this list.")
+
+(setq blink-cursor-count 0)
+(defun blink-cursor-timer-function ()
+  "Zarza wrote this cyberpunk variant of timer `blink-cursor-timer'. 
+Warning: overwrites original version in `frame.el'.
+
+This one changes the cursor color on each blink. Define colors in `blink-cursor-colors'."
+  (when (not (internal-show-cursor-p))
+    (when (>= blink-cursor-count (length blink-cursor-colors))
+      (setq blink-cursor-count 0))
+    (set-cursor-color (nth blink-cursor-count blink-cursor-colors))
+    (setq blink-cursor-count (+ 1 blink-cursor-count))
+    )
+  (internal-show-cursor nil (not (internal-show-cursor-p)))
+  )
