@@ -8,11 +8,13 @@
   (package-refresh-contents))
 
 (defvar required-packages '(evil
-                            auto-complete
                             molokai-theme
+                            auto-complete
+                            php-mode
+                            projectile
                             rainbow-delimiters
+                            smex
                             zencoding-mode
-                            yasnippet
                             magit
                             js2-mode)
   "A list of required packages for this configuration.")
@@ -29,12 +31,38 @@
 (require 'evil)  
 (evil-mode 1)
 
+(require 'smex)
+(smex-initialize)
+(global-set-key (kbd "<menu>") 'smex)
+(global-set-key (kbd "M-X") 'smex-major-mode-commands)
+
+(require 'projectile)
+(projectile-global-mode 1)
+
 (require 'auto-complete-config)
 (add-to-list 'ac-dictionary-directories "~/.emacs.d/ac-dict")
 (ac-config-default)
 
+(recentf-mode 1)
+(defun recentf-ido-find-file ()
+  "Find a recent file using Ido."
+  (interactive)
+  (let ((file (ido-completing-read "Choose recent file: " recentf-list nil t)))
+    (when file
+      (find-file file))))
+
 (ido-mode 1)
 (setq ido-enable-flex-matching t)
+
+;Prevent Emacs from auto-changing the working directory
+(defun find-file-keep-directory ()
+    (interactive)
+    (setq saved-default-directory default-directory)
+    (ido-find-file)
+    (setq default-directory saved-default-directory))
+
+
+(global-linum-mode 1)
 
 
 (setq make-backup-files nil)
@@ -63,13 +91,28 @@
 (define-key global-map (kbd "C-<up>") 'delete-window)
 (define-key global-map (kbd "C-S-<up>") 'delete-other-windows)
 (define-key evil-normal-state-map (kbd "C-<down>") 'kill-this-buffer)
+(define-key evil-insert-state-map (kbd "C-<right>") 'forward-word)
+(define-key evil-insert-state-map (kbd "C-<left>") 'backward-word)
 
 (define-key evil-normal-state-map (kbd "C-u") 'evil-scroll-up)
 (define-key evil-normal-state-map ",w" 'save-buffer)
-(define-key evil-normal-state-map ",f" 'find-file)
+(define-key evil-normal-state-map ",f" 'projectile-find-file)
+(define-key evil-normal-state-map ",F" 'find-file)
+(define-key evil-normal-state-map ",r" 'recentf-ido-find-file)
 (define-key evil-normal-state-map ",s" 'split-window-right)
 (define-key evil-normal-state-map ",S" 'split-window-below)
+(define-key evil-normal-state-map ",u" 'undo-tree-visualize)
+(setq undo-tree-visualizer-timestamps 1)
+
 (define-key global-map (kbd "M-b") 'ido-switch-buffer)
+(define-key evil-normal-state-map " " 'evil-ex)
+
+
+(defun open-init-file ()
+  (interactive)
+  (find-file "~/.emacs.d/init.el"))
+
+(define-key evil-normal-state-map ",i" 'open-init-file)
 
 (defun my-save-and-eval-buffer ()
   (interactive)
