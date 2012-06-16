@@ -1,18 +1,22 @@
 ;set up packages
 (require 'package)
-(add-to-list 'package-archives
-             '("melpa" . "http://melpa.milkbox.net/packages/") t)
+(add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/"))
+(add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
+(add-to-list 'package-archives '("tromey" . "http://tromey.com/elpa/"))
 (package-initialize)
 
 (when (not package-archive-contents)
   (package-refresh-contents))
 
 (defvar required-packages '(evil
+                            surround
                             molokai-theme
                             auto-complete
                             php-mode
+                            ace-jump-mode
                             projectile
                             rainbow-delimiters
+                            multi-web-mode
                             smex
                             zencoding-mode
                             magit
@@ -28,8 +32,10 @@
 (setq hl-line-sticky-flag 1)
 (global-hl-line-mode t)
 
-(require 'evil)  
+(require 'evil)
 (evil-mode 1)
+
+(global-surround-mode t)
 
 (require 'smex)
 (smex-initialize)
@@ -43,16 +49,20 @@
 (add-to-list 'ac-dictionary-directories "~/.emacs.d/ac-dict")
 (ac-config-default)
 
+(require 'ace-jump-mode)
+(define-key evil-normal-state-map ",m" 'ace-jump-mode)
+
 (recentf-mode 1)
 (defun recentf-ido-find-file ()
   "Find a recent file using Ido."
   (interactive)
-  (let ((file (ido-completing-read "Choose recent file: " recentf-list nil t)))
+  (let ((file (ido-completing-read "Open recent file: " recentf-list nil t)))
     (when file
       (find-file file))))
 
 (ido-mode 1)
 (setq ido-enable-flex-matching t)
+(ido-everywhere t)
 
 ;Prevent Emacs from auto-changing the working directory
 (defun find-file-keep-directory ()
@@ -118,7 +128,7 @@
   (interactive)
   (save-buffer)
   (eval-buffer))
-(define-key evil-normal-state-map ",e" 'my-save-and-eval-buffer)
+(define-key evil-normal-state-map ",I" 'my-save-and-eval-buffer)
 
 (defun remap-lisp-c-j ()
   (local-unset-key (kbd "C-j"))
@@ -130,7 +140,7 @@
   (eval-print-last-sexp)
   (evil-insert 1))
 
- 
+
 (define-key global-map (kbd "C-l") 'evil-window-right)
 (define-key global-map (kbd "C-h") 'evil-window-left) ;get help-map with f1
 (define-key global-map (kbd "C-k") 'evil-window-up)
@@ -148,8 +158,8 @@
   (transpose-lines 1)
   (evil-previous-line 1))
 
-(define-key evil-normal-state-map (kbd "M-j") 'my-move-line-down-and-indent) 
-(define-key evil-normal-state-map (kbd "M-k") 'my-move-line-up-and-indent) 
+(define-key evil-normal-state-map (kbd "M-j") 'my-move-line-down-and-indent)
+(define-key evil-normal-state-map (kbd "M-k") 'my-move-line-up-and-indent)
 ;nnoremap <A-l> >>
 ;nnoremap <A-h> <<
 
@@ -181,7 +191,7 @@
 
 (setq blink-cursor-count 0)
 (defun blink-cursor-timer-function ()
-  "Zarza wrote this cyberpunk variant of timer `blink-cursor-timer'. 
+  "Zarza wrote this cyberpunk variant of timer `blink-cursor-timer'.
 Warning: overwrites original version in `frame.el'.
 
 This one changes the cursor color on each blink. Define colors in `blink-cursor-colors'."
@@ -193,3 +203,12 @@ This one changes the cursor color on each blink. Define colors in `blink-cursor-
     )
   (internal-show-cursor nil (not (internal-show-cursor-p)))
   )
+
+;Multi web mode
+(require 'multi-web-mode)
+(setq mweb-default-major-mode 'html-mode)
+(setq mweb-tags '((php-mode "<\\?php\\|<\\? \\|<\\?=" "\\?>")
+                  (js-mode "<script +\\(type=\"text/javascript\"\\|language=\"javascript\"\\)[^>]*>" "</script>")
+                  (css-mode "<style +type=\"text/css\"[^>]*>" "</style>")))
+(setq mweb-filename-extensions '("php" "htm" "html" "ctp" "phtml" "php4" "php5"))
+(multi-web-global-mode 1)
