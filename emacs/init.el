@@ -112,6 +112,7 @@
 (define-key evil-normal-state-map ",s" 'split-window-right)
 (define-key evil-normal-state-map ",S" 'split-window-below)
 (define-key evil-normal-state-map ",u" 'undo-tree-visualize)
+(define-key evil-normal-state-map ",g" 'magit-status)
 (setq undo-tree-visualizer-timestamps 1)
 
 (define-key global-map (kbd "M-b") 'ido-switch-buffer)
@@ -206,9 +207,11 @@ This one changes the cursor color on each blink. Define colors in `blink-cursor-
 
 ;Multi web mode
 (require 'multi-web-mode)
-(setq mweb-default-major-mode 'html-mode)
-(setq mweb-tags '((php-mode "<\\?php\\|<\\? \\|<\\?=" "\\?>")
+(setq mweb-default-major-mode 'php-mode)
+(setq mweb-tags '((php-mode "\\?php\\|<\\? \\|<\\?=" "\\?>")
+                  (html-mode "<.+>" "</.+>")
+                  (html-mode "\\?>" "<\\?")
                   (js-mode "<script +\\(type=\"text/javascript\"\\|language=\"javascript\"\\)[^>]*>" "</script>")
                   (css-mode "<style +type=\"text/css\"[^>]*>" "</style>")))
-(setq mweb-filename-extensions '("php" "htm" "html" "ctp" "phtml" "php4" "php5"))
+(setq mweb-filename-extensions '("php" "php4" "php5"))
 (multi-web-global-mode 1)
