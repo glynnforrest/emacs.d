@@ -1,4 +1,4 @@
-;; set up packages
+ ;; set up packages
 (require 'package)
 (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/"))
 (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
@@ -8,19 +8,21 @@
 (when (not package-archive-contents)
   (package-refresh-contents))
 
-(defvar required-packages '(evil
-                            surround
-                            molokai-theme
-                            auto-complete
-                            php-mode
+(defvar required-packages '(
                             ace-jump-mode
+                            auto-complete
+                            evil
+                            js2-mode
+                            magit
+                            molokai-theme
+                            multi-web-mode
+                            php-mode
                             projectile
                             rainbow-delimiters
-                            multi-web-mode
                             smex
+                            surround
                             zencoding-mode
-                            magit
-                            js2-mode)
+                            )
   "A list of required packages for this setup.")
 
 (dolist (p required-packages)
@@ -231,3 +233,5 @@
                   (css-mode "<style +type=\"text/css\"[^>]*>" "</style>")))
 (setq mweb-filename-extensions '("php" "php4" "php5"))
 (multi-web-global-mode 1)
+(put 'ido-exit-minibuffer 'disabled nil)
+(put 'narrow-to-region 'disabled nil)
