@@ -1,4 +1,4 @@
-;set up packages
+;; set up packages
 (require 'package)
 (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/"))
 (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
@@ -21,19 +21,33 @@
                             zencoding-mode
                             magit
                             js2-mode)
-  "A list of required packages for this configuration.")
+  "A list of required packages for this setup.")
 
 (dolist (p required-packages)
   (when (not (package-installed-p p))
     (package-install p)))
 
+;; Set path to .emacs.d
+(setq emacs-dir (file-name-directory
+                 (or (buffer-file-name) load-file-name)))
+
+;; Set path to manually installed plugins
+(setq plugins-dir (expand-file-name "plugins" emacs-dir))
+
+;; Set up load path
+(let ((default-directory plugins-dir))
+  (normal-top-level-add-to-load-path '("."))
+  (normal-top-level-add-subdirs-to-load-path))
+(add-to-list 'load-path emacs-dir)
+
+(require 'evil)
+(evil-mode 1)
+(setq evil-default-cursor t)
+
 (require 'molokai-theme)
 
 (setq hl-line-sticky-flag 1)
 (global-hl-line-mode t)
-
-(require 'evil)
-(evil-mode 1)
 
 (global-surround-mode t)
 
@@ -45,12 +59,16 @@
 (require 'projectile)
 (projectile-global-mode 1)
 
+
 (require 'auto-complete-config)
 (add-to-list 'ac-dictionary-directories "~/.emacs.d/ac-dict")
 (ac-config-default)
 
 (require 'ace-jump-mode)
 (define-key evil-normal-state-map ",m" 'ace-jump-mode)
+
+(require 'php-mode)
+(electric-pair-mode t)
 
 (recentf-mode 1)
 (defun recentf-ido-find-file ()
@@ -64,12 +82,12 @@
 (setq ido-enable-flex-matching t)
 (ido-everywhere t)
 
-;Prevent Emacs from auto-changing the working directory
+;; Prevent Emacs from auto-changing the working directory
 (defun find-file-keep-directory ()
-    (interactive)
-    (setq saved-default-directory default-directory)
-    (ido-find-file)
-    (setq default-directory saved-default-directory))
+  (interactive)
+  (setq saved-default-directory default-directory)
+  (ido-find-file)
+  (setq default-directory saved-default-directory))
 
 
 (global-linum-mode 1)
@@ -86,14 +104,14 @@
 (delete-selection-mode t)
 (scroll-bar-mode -1)
 (tool-bar-mode -1)
-;(menu-bar-mode -1)
+;; (menu-bar-mode -1)
 (blink-cursor-mode t)
 (show-paren-mode t)
 (column-number-mode t)
 (set-fringe-style -1)
 (tooltip-mode -1)
 
-;Change buffers with left and right, Ctrl if not in evil-mode
+;; Change buffers with left and right, Ctrl if not in evil-mode
 (define-key evil-normal-state-map (kbd "<right>") 'next-buffer)
 (define-key evil-normal-state-map (kbd "<left>") 'previous-buffer)
 (define-key global-map (kbd "C-<right>") 'next-buffer)
@@ -143,7 +161,7 @@
 
 
 (define-key global-map (kbd "C-l") 'evil-window-right)
-(define-key global-map (kbd "C-h") 'evil-window-left) ;get help-map with f1
+(define-key global-map (kbd "C-h") 'evil-window-left) ;; get help-map with f1
 (define-key global-map (kbd "C-k") 'evil-window-up)
 (define-key global-map (kbd "C-j") 'evil-window-down)
 (add-hook 'lisp-interaction-mode-hook 'remap-lisp-c-j)
@@ -161,8 +179,8 @@
 
 (define-key evil-normal-state-map (kbd "M-j") 'my-move-line-down-and-indent)
 (define-key evil-normal-state-map (kbd "M-k") 'my-move-line-up-and-indent)
-;nnoremap <A-l> >>
-;nnoremap <A-h> <<
+;; nnoremap <A-l> >>
+;; nnoremap <A-h> <<
 
 (define-key evil-normal-state-map (kbd "<S-return>") 'my-evil-new-line)
 (defun my-evil-new-line ()
@@ -176,7 +194,7 @@
   (evil-open-above 1)
   (evil-normal-state 1))
 
-;universal escape key as well as C-g
+;; universal escape key as well as C-g
 (define-key evil-normal-state-map [escape] 'keyboard-quit)
 (define-key evil-visual-state-map [escape] 'keyboard-quit)
 (define-key minibuffer-local-map [escape] 'minibuffer-keyboard-quit)
@@ -186,26 +204,24 @@
 (define-key minibuffer-local-isearch-map [escape] 'minibuffer-keyboard-quit)
 
 
-;Cycle the color of the cursor
-(defvar blink-cursor-colors (list  "#92c48f" "#6785c5" "#be369c" "#d9ca65")
-  "On each blink the cursor will cycle to the next color in this list.")
+;; Cursor configuration.
+(blink-cursor-mode -1)
+(setq evil-insert-state-cursor '("#ffffff" bar))
+(setq evil-normal-state-cursor '("#ffffff" box))
+(setq evil-emacs-state-cursor '("#d72626" bar))
 
-(setq blink-cursor-count 0)
-(defun blink-cursor-timer-function ()
-  "Zarza wrote this cyberpunk variant of timer `blink-cursor-timer'.
-Warning: overwrites original version in `frame.el'.
+(require 'init-multiple-cursors)
 
-This one changes the cursor color on each blink. Define colors in `blink-cursor-colors'."
-  (when (not (internal-show-cursor-p))
-    (when (>= blink-cursor-count (length blink-cursor-colors))
-      (setq blink-cursor-count 0))
-    (set-cursor-color (nth blink-cursor-count blink-cursor-colors))
-    (setq blink-cursor-count (+ 1 blink-cursor-count))
-    )
-  (internal-show-cursor nil (not (internal-show-cursor-p)))
-  )
+(global-set-key (kbd "C-<") 'mark-previous-like-this)
+(global-set-key (kbd "C->") 'mark-next-like-this)
+(global-set-key (kbd "C-*") 'mark-all-like-this)
 
-;Multi web mode
+(define-key evil-visual-state-map "mb" 'evil-mc-edit-beginnings-of-lines)
+(define-key evil-visual-state-map "me" 'evil-mc-edit-ends-of-lines)
+(define-key evil-visual-state-map "mm" 'evil-mc-switch-to-cursors)
+
+
+;; Multi web mode
 (require 'multi-web-mode)
 (setq mweb-default-major-mode 'php-mode)
 (setq mweb-tags '((php-mode "\\?php\\|<\\? \\|<\\?=" "\\?>")
