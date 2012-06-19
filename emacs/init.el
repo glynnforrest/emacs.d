@@ -52,6 +52,7 @@
 (global-hl-line-mode t)
 
 (global-surround-mode t)
+(global-auto-revert-mode t)
 
 (require 'smex)
 (smex-initialize)
@@ -129,14 +130,28 @@
 (define-key evil-normal-state-map ",f" 'projectile-find-file)
 (define-key evil-normal-state-map ",F" 'find-file)
 (define-key evil-normal-state-map ",r" 'recentf-ido-find-file)
-(define-key evil-normal-state-map ",s" 'split-window-right)
-(define-key evil-normal-state-map ",S" 'split-window-below)
+(define-key evil-normal-state-map ",d" 'ido-dired)
+(define-key evil-normal-state-map ",cd" 'cd)
+
+(defun split-window-and-move-right ()
+  (interactive)
+  (split-window-right)
+  (other-window 1))
+
+(defun split-window-and-move-below ()
+  (interactive)
+  (split-window-below)
+  (other-window 1))
+
+(define-key evil-normal-state-map ",s" 'split-window-and-move-right)
+(define-key evil-normal-state-map ",S" 'split-window-and-move-below)
 (define-key evil-normal-state-map ",u" 'undo-tree-visualize)
 (define-key evil-normal-state-map ",g" 'magit-status)
 (setq undo-tree-visualizer-timestamps 1)
 
 (define-key global-map (kbd "M-b") 'ido-switch-buffer)
 (define-key evil-normal-state-map " " 'evil-ex)
+(define-key evil-visual-state-map " " 'evil-ex)
 
 
 (defun open-init-file ()
@@ -235,3 +250,26 @@
 (multi-web-global-mode 1)
 (put 'ido-exit-minibuffer 'disabled nil)
 (put 'narrow-to-region 'disabled nil)
+
+;; Org mode
+(mapcar (lambda (state)
+    (evil-declare-key state org-mode-map
+      (kbd "M-l") 'org-metaright
+      (kbd "M-h") 'org-metaleft
+      (kbd "M-k") 'org-metaup
+      (kbd "M-j") 'org-metadown
+      (kbd "M-L") 'org-shiftmetaright
+      (kbd "M-H") 'org-shiftmetaleft
+      (kbd "M-K") 'org-shiftmetaup
+      (kbd "M-J") 'org-shiftmetadown))
+  '(normal insert))
+
+;; Dired mode
+(evil-declare-key 'normal dired-mode-map ",e" (lambda ()
+                                                (interactive)
+                                                (dired-toggle-read-only)
+                                                (evil-normal-state)
+                                                (evil-forward-char)
+                                                ))
+(evil-declare-key 'normal wdired-mode-map ",e" 'wdired-finish-edit)
+(evil-declare-key 'normal wdired-mode-map ",a" 'wdired-abort-changes)
