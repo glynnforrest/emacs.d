@@ -37,6 +37,8 @@
 
 ;; Set path to manually installed plugins
 (setq plugins-dir (expand-file-name "plugins" emacs-dir))
+;; Load personal configurations, like usernames and passwords
+(require 'personal)
 
 ;; Set up load path
 (let ((default-directory plugins-dir))
@@ -153,8 +155,18 @@
 (define-key evil-normal-state-map ",s" 'split-window-and-move-right)
 (define-key evil-normal-state-map ",S" 'split-window-and-move-below)
 (define-key evil-normal-state-map ",u" 'undo-tree-visualize)
+
+;Magit
+(require 'magit)
 (define-key evil-normal-state-map ",g" 'magit-status)
 (evil-declare-key 'normal magit-log-edit-mode-map ",w" 'magit-log-edit-commit)
+(define-key magit-mode-map "q" (lambda ()
+                                 (interactive)
+                                 (if (get-buffer "*magit-process*")
+                                     (kill-buffer "*magit-process*"))
+                                 (kill-this-buffer)
+                                 ))
+
 (setq undo-tree-visualizer-timestamps 1)
 
 (define-key global-map (kbd "M-b") 'ido-switch-buffer)
@@ -190,6 +202,12 @@
 (define-key global-map (kbd "C-h") 'evil-window-left) ;; get help-map with f1
 (define-key global-map (kbd "C-k") 'evil-window-up)
 (define-key global-map (kbd "C-j") 'evil-window-down)
+(define-key evil-insert-state-map (kbd "C-k") 'evil-window-up)
+(define-key evil-normal-state-map (kbd "C-S-k") 'evil-window-increase-height)
+(define-key evil-normal-state-map (kbd "C-S-l") 'evil-window-increase-width)
+(define-key evil-normal-state-map (kbd "C-S-j") 'evil-window-decrease-height)
+(define-key evil-normal-state-map (kbd "C-S-h") 'evil-window-decrease-width)
+
 (add-hook 'lisp-interaction-mode-hook 'remap-lisp-c-j)
 
 (defun my-move-line-up-and-indent ()
@@ -246,6 +264,15 @@
 (define-key evil-visual-state-map "me" 'evil-mc-edit-ends-of-lines)
 (define-key evil-visual-state-map "mm" 'evil-mc-switch-to-cursors)
 
+
+(defun eval-and-replace-sexp ()
+  "Replace the preceding sexp with its value."
+  (interactive)
+  (backward-kill-sexp)
+  (prin1 (eval (read (current-kill 0)))
+         (current-buffer)))
+
+(define-key evil-normal-state-map ",er" 'eval-and-replace-sexp)
 
 ;; Multi web mode
 (require 'multi-web-mode)
@@ -317,3 +344,10 @@
 (global-set-key (kbd "C-0") '(lambda()(interactive)
                                (modify-frame-parameters nil `((alpha . 100)))))
 
+;;ERC
+(require 'erc)
+;;my-erc-nick should be in personal.el
+(setq erc-nick my-erc-nick)
+(add-hook 'erc-mode-hook (lambda () 
+                 (interactive)
+                 (linum-mode -1)))
