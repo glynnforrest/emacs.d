@@ -4,6 +4,8 @@ auto-save-list
 *.elc
 elpa
 eshell
+image-dired*
+personal.el
 places
 recentf
 savehist
