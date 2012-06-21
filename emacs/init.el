@@ -11,11 +11,13 @@
 (defvar required-packages '(
                             ace-jump-mode
                             auto-complete
+                            dired+
                             evil
                             js2-mode
                             magit
                             molokai-theme
                             multi-web-mode
+                            org
                             php-mode
                             projectile
                             rainbow-delimiters
@@ -84,6 +86,7 @@
 (ido-mode 1)
 (setq ido-enable-flex-matching t)
 (ido-everywhere t)
+(setq ido-max-directory-size 100000)
 
 ;; Prevent Emacs from auto-changing the working directory
 (defun find-file-keep-directory ()
@@ -121,6 +124,10 @@
 (define-key global-map (kbd "C-<left>") 'previous-buffer)
 (define-key global-map (kbd "C-<up>") 'delete-window)
 (define-key global-map (kbd "C-S-<up>") 'delete-other-windows)
+(define-key global-map (kbd "C-M-<up>") (lambda ()
+                                          (interactive)
+                                          (kill-this-buffer)
+                                          (delete-window)))
 (define-key evil-normal-state-map (kbd "C-<down>") 'kill-this-buffer)
 (define-key evil-insert-state-map (kbd "C-<right>") 'forward-word)
 (define-key evil-insert-state-map (kbd "C-<left>") 'backward-word)
@@ -147,12 +154,14 @@
 (define-key evil-normal-state-map ",S" 'split-window-and-move-below)
 (define-key evil-normal-state-map ",u" 'undo-tree-visualize)
 (define-key evil-normal-state-map ",g" 'magit-status)
+(evil-declare-key 'normal magit-log-edit-mode-map ",w" 'magit-log-edit-commit)
 (setq undo-tree-visualizer-timestamps 1)
 
 (define-key global-map (kbd "M-b") 'ido-switch-buffer)
 (define-key evil-normal-state-map " " 'evil-ex)
 (define-key evil-visual-state-map " " 'evil-ex)
-
+(define-key evil-visual-state-map "n" 'narrow-to-region)
+(define-key evil-normal-state-map ",n" 'widen)
 
 (defun open-init-file ()
   (interactive)
@@ -252,6 +261,8 @@
 (put 'narrow-to-region 'disabled nil)
 
 ;; Org mode
+(require 'org-install)
+(add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
 (mapcar (lambda (state)
     (evil-declare-key state org-mode-map
       (kbd "M-l") 'org-metaright
@@ -265,6 +276,22 @@
   '(normal insert))
 
 ;; Dired mode
+(require 'dired)
+(require 'dired+)
+(add-hook 'dired-mode-hook (lambda ()
+                             (interactive)
+                             (rename-buffer "*Dired*")
+                             ))
+
+;;Up directory fix
+(defadvice dired-up-directory (around dired-up-fix activate)
+  (interactive)
+  (rename-buffer "*Dired-old*")
+  ad-do-it
+  (previous-buffer)
+  (kill-this-buffer)
+  )
+
 (evil-declare-key 'normal dired-mode-map ",e" (lambda ()
                                                 (interactive)
                                                 (dired-toggle-read-only)
@@ -273,3 +300,20 @@
                                                 ))
 (evil-declare-key 'normal wdired-mode-map ",e" 'wdired-finish-edit)
 (evil-declare-key 'normal wdired-mode-map ",a" 'wdired-abort-changes)
+(define-key dired-mode-map (kbd "M-b") 'ido-switch-buffer)
+(toggle-diredp-find-file-reuse-dir 1)
+
+(defun djcb-opacity-modify (&optional dec)
+  "modify the transparency of the emacs frame; if DEC is t,
+    decrease the transparency, otherwise increase it in 10%-steps"
+  (let* ((alpha-or-nil (frame-parameter nil 'alpha)) ; nil before setting
+          (oldalpha (if alpha-or-nil alpha-or-nil 100))
+          (newalpha (if dec (- oldalpha 10) (+ oldalpha 10))))
+    (when (and (>= newalpha frame-alpha-lower-limit) (<= newalpha 100))
+      (modify-frame-parameters nil (list (cons 'alpha newalpha))))))
+
+(global-set-key (kbd "C-8") '(lambda()(interactive)(djcb-opacity-modify t)))
+(global-set-key (kbd "C-9") '(lambda()(interactive)(djcb-opacity-modify)))
+(global-set-key (kbd "C-0") '(lambda()(interactive)
+                               (modify-frame-parameters nil `((alpha . 100)))))
+
