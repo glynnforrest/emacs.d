@@ -1,4 +1,4 @@
- ;; set up packages
+;; set up packages
 (require 'package)
 (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/"))
 (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
@@ -37,20 +37,26 @@
 
 ;; Set path to manually installed plugins
 (setq plugins-dir (expand-file-name "plugins" emacs-dir))
-;; Load personal configurations, like usernames and passwords
-(require 'personal)
+
 
 ;; Set up load path
 (let ((default-directory plugins-dir))
   (normal-top-level-add-to-load-path '("."))
   (normal-top-level-add-subdirs-to-load-path))
 (add-to-list 'load-path emacs-dir)
+;; Load personal configurations, like usernames and passwords
+(require 'personal)
 
 (require 'evil)
 (evil-mode 1)
 (setq evil-default-cursor t)
+(require 'evil-numbers)
+(define-key evil-normal-state-map (kbd "C-a") 'evil-numbers/inc-at-pt)
+(define-key evil-normal-state-map (kbd "C-S-a") 'evil-numbers/dec-at-pt)
 
-(require 'molokai-theme)
+;(require 'molokai-theme)
+(require 'color-theme-sanityinc-tomorrow)
+(color-theme-sanityinc-tomorrow-bright)
 
 (setq hl-line-sticky-flag 1)
 (global-hl-line-mode t)
@@ -302,6 +308,7 @@
       (kbd "M-J") 'org-shiftmetadown))
   '(normal insert))
 
+(evil-declare-key 'normal org-mode-map ",t" 'org-todo)
 ;; Dired mode
 (require 'dired)
 (require 'dired+)
@@ -351,3 +358,10 @@
 (add-hook 'erc-mode-hook (lambda () 
                  (interactive)
                  (linum-mode -1)))
+
+;;Terminal
+(define-key evil-normal-state-map ",x" (lambda ()
+                                         (interactive)
+                                         (ansi-term "/bin/bash")
+                                         ))
+;;todo: override M-b for buffer switching.

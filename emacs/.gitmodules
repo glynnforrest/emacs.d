@@ -1,3 +1,6 @@
 [submodule "plugins/multiple-cursors"]
 	path = plugins/multiple-cursors
 	url = https://github.com/magnars/multiple-cursors.el.git
+[submodule "plugins/evil-numbers"]
+	path = plugins/evil-numbers
+	url = https://github.com/cofi/evil-numbers.git
