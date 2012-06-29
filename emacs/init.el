@@ -94,6 +94,7 @@
 (ido-mode 1)
 (setq ido-enable-flex-matching t)
 (ido-everywhere t)
+(setq org-completion-use-ido t)
 (setq ido-max-directory-size 100000)
 (setq confirm-nonexistent-file-or-buffer nil)
 (setq ido-create-new-buffer 'always)
@@ -303,7 +304,7 @@
 (put 'narrow-to-region 'disabled nil)
 
 ;; Org mode
-(require 'org-install)
+(require 'org)
 (add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
 (mapcar (lambda (state)
     (evil-declare-key state org-mode-map
@@ -317,7 +318,33 @@
       (kbd "M-J") 'org-shiftmetadown))
   '(normal insert))
 
-(evil-declare-key 'normal org-mode-map (kbd "C-t")'org-todo)
+(setq org-default-notes-file "~/Notes/tasks.org")
+(define-key global-map (kbd "M-m") 'org-capture)
+(define-key global-map (kbd "M-M") (lambda()
+                                     (interactive)
+                                     (find-file org-default-notes-file)
+                                     ))
+(evil-declare-key 'normal org-mode-map (kbd "C-t") 'org-todo)
+(evil-declare-key 'insert org-mode-map (kbd "C-t") 'org-todo)
+(evil-declare-key 'normal org-mode-map (kbd "C-m") 'org-refile)
+(evil-declare-key 'visual org-mode-map "m" 'org-refile)
+(evil-declare-key 'normal org-mode-map (kbd "M-<return>") (lambda()
+                                                            (interactive)
+                                                            (evil-append-line 1)
+                                                            (org-meta-return)
+                                                            ))
+(evil-declare-key 'normal org-mode-map (kbd "<return>") 'org-open-at-point)
+
+(defun my-current-line ()
+  (interactive)
+  (count-lines 1 (point)))
+
+(setq org-capture-templates
+      '(("t" "Todo" entry (file+headline org-default-notes-file "Unsorted")
+         "* TODO  %?")
+        ("l" "Linked Todo" entry (file+headline org-default-notes-file "Unsorted")
+         "* TODO  %?\n%a")))
+
 ;; Dired mode
 (require 'dired)
 (require 'dired+)
@@ -381,6 +408,8 @@
                                                  (evil-goto-line)
                                                  (evil-append-line 1)
                                                  ))
+(evil-declare-key 'normal eshell-mode-map (kbd "C-j") 'evil-window-down)
+(evil-declare-key 'insert eshell-mode-map (kbd "C-j") 'evil-window-down)
 
 ;;node REPL
 (require 'js-comint)
