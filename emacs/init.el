@@ -11,11 +11,12 @@
 (defvar required-packages '(
                             ace-jump-mode
                             auto-complete
+                            color-theme-sanityinc-tomorrow
                             dired+
                             evil
                             js2-mode
+                            js-comint
                             magit
-                            molokai-theme
                             multi-web-mode
                             org
                             php-mode
@@ -54,7 +55,6 @@
 (define-key evil-normal-state-map (kbd "C-a") 'evil-numbers/inc-at-pt)
 (define-key evil-normal-state-map (kbd "C-S-a") 'evil-numbers/dec-at-pt)
 
-;(require 'molokai-theme)
 (require 'color-theme-sanityinc-tomorrow)
 (color-theme-sanityinc-tomorrow-bright)
 
@@ -95,6 +95,11 @@
 (setq ido-enable-flex-matching t)
 (ido-everywhere t)
 (setq ido-max-directory-size 100000)
+(setq confirm-nonexistent-file-or-buffer nil)
+(setq ido-create-new-buffer 'always)
+(setq kill-buffer-query-functions
+  (remq 'process-kill-buffer-query-function
+         kill-buffer-query-functions))
 
 ;; Prevent Emacs from auto-changing the working directory
 (defun find-file-keep-directory ()
@@ -113,7 +118,7 @@
 (setq-default indent-tabs-mode nil)
 (setq inhibit-startup-message t)
 
-(fset 'yes-or-no 'y-or-n-p)
+(fset 'yes-or-no-p 'y-or-n-p)
 
 (delete-selection-mode t)
 (scroll-bar-mode -1)
@@ -132,13 +137,15 @@
 (define-key global-map (kbd "C-<left>") 'previous-buffer)
 (define-key global-map (kbd "C-<up>") 'delete-window)
 (define-key global-map (kbd "C-S-<up>") 'delete-other-windows)
-(define-key global-map (kbd "C-M-<up>") (lambda ()
+(define-key global-map (kbd "C-S-<down>") (lambda ()
                                           (interactive)
                                           (kill-this-buffer)
                                           (delete-window)))
 (define-key evil-normal-state-map (kbd "C-<down>") 'kill-this-buffer)
 (define-key evil-insert-state-map (kbd "C-<right>") 'forward-word)
 (define-key evil-insert-state-map (kbd "C-<left>") 'backward-word)
+(require 'help-mode)
+(define-key help-mode-map (kbd "C-<down>") 'kill-this-buffer)
 
 (define-key evil-normal-state-map (kbd "C-u") 'evil-scroll-up)
 (define-key evil-normal-state-map ",w" 'save-buffer)
@@ -146,7 +153,11 @@
 (define-key evil-normal-state-map ",F" 'find-file)
 (define-key evil-normal-state-map ",r" 'recentf-ido-find-file)
 (define-key evil-normal-state-map ",d" 'ido-dired)
-(define-key evil-normal-state-map ",cd" 'cd)
+
+(define-key evil-normal-state-map ",cd" (lambda ()
+                                          (interactive)
+                                          (switch-to-buffer "*scratch*")
+                                          (call-interactively 'cd)))
 
 (defun split-window-and-move-right ()
   (interactive)
@@ -170,6 +181,8 @@
                                  (interactive)
                                  (if (get-buffer "*magit-process*")
                                      (kill-buffer "*magit-process*"))
+                                 (if (get-buffer "*magit-edit-log*")
+                                     (kill-buffer "*magit-edit-log*"))
                                  (kill-this-buffer)
                                  ))
 
@@ -193,10 +206,6 @@
   (eval-buffer))
 (define-key evil-normal-state-map ",I" 'my-save-and-eval-buffer)
 
-(defun remap-lisp-c-j ()
-  (local-unset-key (kbd "C-j"))
-  (local-set-key (kbd "M-J") 'my-eval-print-last-sexp))
-
 (defun my-eval-print-last-sexp ()
   (interactive)
   (end-of-line)
@@ -214,7 +223,9 @@
 (define-key evil-normal-state-map (kbd "C-S-j") 'evil-window-decrease-height)
 (define-key evil-normal-state-map (kbd "C-S-h") 'evil-window-decrease-width)
 
-(add-hook 'lisp-interaction-mode-hook 'remap-lisp-c-j)
+(add-hook 'lisp-interaction-mode-hook (lambda()
+                                        (local-unset-key (kbd "C-j"))
+                                        (local-set-key (kbd "M-J") 'my-eval-print-last-sexp)))
 
 (defun my-move-line-up-and-indent ()
   (interactive)
@@ -277,19 +288,17 @@
   (backward-kill-sexp)
   (prin1 (eval (read (current-kill 0)))
          (current-buffer)))
-
 (define-key evil-normal-state-map ",er" 'eval-and-replace-sexp)
 
 ;; Multi web mode
 (require 'multi-web-mode)
-(setq mweb-default-major-mode 'php-mode)
-(setq mweb-tags '((php-mode "\\?php\\|<\\? \\|<\\?=" "\\?>")
-                  (html-mode "<.+>" "</.+>")
-                  (html-mode "\\?>" "<\\?")
+(setq mweb-default-major-mode 'html-mode)
+(setq mweb-tags '((php-mode "<\\?php\\|<\\? \\|<\\?=" "\\?>")
                   (js-mode "<script +\\(type=\"text/javascript\"\\|language=\"javascript\"\\)[^>]*>" "</script>")
                   (css-mode "<style +type=\"text/css\"[^>]*>" "</style>")))
 (setq mweb-filename-extensions '("php" "php4" "php5"))
-(multi-web-global-mode 1)
+(define-key evil-normal-state-map ",q" 'multi-web-global-mode)
+
 (put 'ido-exit-minibuffer 'disabled nil)
 (put 'narrow-to-region 'disabled nil)
 
@@ -308,7 +317,7 @@
       (kbd "M-J") 'org-shiftmetadown))
   '(normal insert))
 
-(evil-declare-key 'normal org-mode-map ",t" 'org-todo)
+(evil-declare-key 'normal org-mode-map (kbd "C-t")'org-todo)
 ;; Dired mode
 (require 'dired)
 (require 'dired+)
@@ -332,6 +341,7 @@
                                                 (evil-normal-state)
                                                 (evil-forward-char)
                                                 ))
+(evil-declare-key 'normal dired-mode-map "\\" 'dired-up-directory)
 (evil-declare-key 'normal wdired-mode-map ",e" 'wdired-finish-edit)
 (evil-declare-key 'normal wdired-mode-map ",a" 'wdired-abort-changes)
 (define-key dired-mode-map (kbd "M-b") 'ido-switch-buffer)
@@ -359,9 +369,21 @@
                  (interactive)
                  (linum-mode -1)))
 
-;;Terminal
+;;eshell
+(require 'eshell)
 (define-key evil-normal-state-map ",x" (lambda ()
                                          (interactive)
-                                         (ansi-term "/bin/bash")
+                                         (eshell)
                                          ))
 ;;todo: override M-b for buffer switching.
+(evil-declare-key 'normal eshell-mode-map "i" (lambda ()
+                                                 (interactive)
+                                                 (evil-goto-line)
+                                                 (evil-append-line 1)
+                                                 ))
+
+;;node REPL
+(require 'js-comint)
+(setq inferior-js-program-command "env NODE_NO_READLINE=1 node")
+
+(add-to-list 'default-frame-alist '(font . "Consolas-10"))
