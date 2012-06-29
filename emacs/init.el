@@ -318,7 +318,7 @@
       (kbd "M-J") 'org-shiftmetadown))
   '(normal insert))
 
-(setq org-default-notes-file "~/Notes/tasks.org")
+(setq org-default-notes-file "~/Notes/notes.org")
 (define-key global-map (kbd "M-m") 'org-capture)
 (define-key global-map (kbd "M-M") (lambda()
                                      (interactive)
@@ -328,22 +328,28 @@
 (evil-declare-key 'insert org-mode-map (kbd "C-t") 'org-todo)
 (evil-declare-key 'normal org-mode-map (kbd "C-m") 'org-refile)
 (evil-declare-key 'visual org-mode-map "m" 'org-refile)
+(evil-declare-key 'insert org-mode-map (kbd "M-<return>") (lambda()
+                                                            (interactive)
+                                                            (evil-append-line 1)
+                                                            (org-meta-return)
+                                                            ))
 (evil-declare-key 'normal org-mode-map (kbd "M-<return>") (lambda()
                                                             (interactive)
                                                             (evil-append-line 1)
                                                             (org-meta-return)
                                                             ))
 (evil-declare-key 'normal org-mode-map (kbd "<return>") 'org-open-at-point)
-
-(defun my-current-line ()
-  (interactive)
-  (count-lines 1 (point)))
+(define-key org-mode-map (kbd "C-S-<up>") 'delete-other-windows)
 
 (setq org-capture-templates
       '(("t" "Todo" entry (file+headline org-default-notes-file "Unsorted")
          "* TODO  %?")
         ("l" "Linked Todo" entry (file+headline org-default-notes-file "Unsorted")
-         "* TODO  %?\n%a")))
+         "* TODO  %?\n%a")
+        ("n" "Note" entry (file+headline org-default-notes-file "Unsorted")
+         "*  %?")
+        ("h" "Linked Note" entry (file+headline org-default-notes-file "Unsorted")
+         "*  %?\n%a")))
 
 ;; Dired mode
 (require 'dired)
