@@ -48,12 +48,18 @@
 ;; Load personal configurations, like usernames and passwords
 (require 'personal)
 
+;;evil
 (require 'evil)
 (evil-mode 1)
 (setq evil-default-cursor t)
 (require 'evil-numbers)
 (define-key evil-normal-state-map (kbd "C-a") 'evil-numbers/inc-at-pt)
 (define-key evil-normal-state-map (kbd "C-S-a") 'evil-numbers/dec-at-pt)
+;;Switch gj and j, gk and k
+(define-key evil-normal-state-map "j" 'evil-next-visual-line)
+(define-key evil-normal-state-map "gj" 'evil-next-line)
+(define-key evil-normal-state-map "k" 'evil-previous-visual-line)
+(define-key evil-normal-state-map "gk" 'evil-previous-line)
 
 (require 'color-theme-sanityinc-tomorrow)
 (color-theme-sanityinc-tomorrow-bright)
@@ -415,6 +421,7 @@
                                                 ))
 (evil-declare-key 'normal eshell-mode-map (kbd "C-j") 'evil-window-down)
 (evil-declare-key 'insert eshell-mode-map (kbd "C-j") 'evil-window-down)
+(evil-declare-key 'normal eshell-mode-map (kbd "C-<up>") 'delete-window)
 
 ;;node REPL
 (require 'js-comint)
