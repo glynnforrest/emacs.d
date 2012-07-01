@@ -99,8 +99,8 @@
 (setq confirm-nonexistent-file-or-buffer nil)
 (setq ido-create-new-buffer 'always)
 (setq kill-buffer-query-functions
-  (remq 'process-kill-buffer-query-function
-         kill-buffer-query-functions))
+      (remq 'process-kill-buffer-query-function
+            kill-buffer-query-functions))
 
 ;; Prevent Emacs from auto-changing the working directory
 (defun find-file-keep-directory ()
@@ -139,9 +139,9 @@
 (define-key global-map (kbd "C-<up>") 'delete-window)
 (define-key global-map (kbd "C-S-<up>") 'delete-other-windows)
 (define-key global-map (kbd "C-S-<down>") (lambda ()
-                                          (interactive)
-                                          (kill-this-buffer)
-                                          (delete-window)))
+                                            (interactive)
+                                            (kill-this-buffer)
+                                            (delete-window)))
 (define-key evil-normal-state-map (kbd "C-<down>") 'kill-this-buffer)
 (define-key evil-insert-state-map (kbd "C-<right>") 'forward-word)
 (define-key evil-insert-state-map (kbd "C-<left>") 'backward-word)
@@ -174,7 +174,7 @@
 (define-key evil-normal-state-map ",S" 'split-window-and-move-below)
 (define-key evil-normal-state-map ",u" 'undo-tree-visualize)
 
-;Magit
+;;Magit
 (require 'magit)
 (define-key evil-normal-state-map ",g" 'magit-status)
 (evil-declare-key 'normal magit-log-edit-mode-map ",w" 'magit-log-edit-commit)
@@ -307,16 +307,16 @@
 (require 'org)
 (add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
 (mapcar (lambda (state)
-    (evil-declare-key state org-mode-map
-      (kbd "M-l") 'org-metaright
-      (kbd "M-h") 'org-metaleft
-      (kbd "M-k") 'org-metaup
-      (kbd "M-j") 'org-metadown
-      (kbd "M-L") 'org-shiftmetaright
-      (kbd "M-H") 'org-shiftmetaleft
-      (kbd "M-K") 'org-shiftmetaup
-      (kbd "M-J") 'org-shiftmetadown))
-  '(normal insert))
+          (evil-declare-key state org-mode-map
+                            (kbd "M-l") 'org-metaright
+                            (kbd "M-h") 'org-metaleft
+                            (kbd "M-k") 'org-metaup
+                            (kbd "M-j") 'org-metadown
+                            (kbd "M-L") 'org-shiftmetaright
+                            (kbd "M-H") 'org-shiftmetaleft
+                            (kbd "M-K") 'org-shiftmetaup
+                            (kbd "M-J") 'org-shiftmetadown))
+        '(normal insert))
 
 (setq org-default-notes-file "~/Notes/notes.org")
 (define-key global-map (kbd "M-m") 'org-capture)
@@ -384,8 +384,8 @@
   "modify the transparency of the emacs frame; if DEC is t,
     decrease the transparency, otherwise increase it in 10%-steps"
   (let* ((alpha-or-nil (frame-parameter nil 'alpha)) ; nil before setting
-          (oldalpha (if alpha-or-nil alpha-or-nil 100))
-          (newalpha (if dec (- oldalpha 10) (+ oldalpha 10))))
+         (oldalpha (if alpha-or-nil alpha-or-nil 100))
+         (newalpha (if dec (- oldalpha 10) (+ oldalpha 10))))
     (when (and (>= newalpha frame-alpha-lower-limit) (<= newalpha 100))
       (modify-frame-parameters nil (list (cons 'alpha newalpha))))))
 
@@ -399,8 +399,8 @@
 ;;my-erc-nick should be in personal.el
 (setq erc-nick my-erc-nick)
 (add-hook 'erc-mode-hook (lambda () 
-                 (interactive)
-                 (linum-mode -1)))
+                           (interactive)
+                           (linum-mode -1)))
 
 ;;eshell
 (require 'eshell)
@@ -408,12 +408,11 @@
                                          (interactive)
                                          (eshell)
                                          ))
-;;todo: override M-b for buffer switching.
 (evil-declare-key 'normal eshell-mode-map "i" (lambda ()
-                                                 (interactive)
-                                                 (evil-goto-line)
-                                                 (evil-append-line 1)
-                                                 ))
+                                                (interactive)
+                                                (evil-goto-line)
+                                                (evil-append-line 1)
+                                                ))
 (evil-declare-key 'normal eshell-mode-map (kbd "C-j") 'evil-window-down)
 (evil-declare-key 'insert eshell-mode-map (kbd "C-j") 'evil-window-down)
 
@@ -422,3 +421,29 @@
 (setq inferior-js-program-command "env NODE_NO_READLINE=1 node")
 
 (add-to-list 'default-frame-alist '(font . "Consolas-10"))
+
+;;Write room
+(defvar writeroom-enabled nil)
+(require 'hide-mode-line)
+
+(defun toggle-writeroom ()
+  (interactive)
+  (if (not writeroom-enabled)
+      (setq writeroom-enabled t)
+    (setq writeroom-enabled nil))
+  (hide-mode-line)
+  (global-linum-mode -1)
+  (if writeroom-enabled
+      (progn
+        (fringe-mode 'both)
+        (menu-bar-mode -1)
+        (scroll-bar-mode -1)
+        (set-fringe-mode 200))
+    (progn 
+      (fringe-mode 'default)
+      (menu-bar-mode)
+      (global-linum-mode 1)
+      (scroll-bar-mode t)
+      (set-fringe-mode 8))))
+
+(define-key global-map (kbd "<f9>") 'toggle-writeroom)
