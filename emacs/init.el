@@ -444,13 +444,11 @@
       (progn
         (fringe-mode 'both)
         (menu-bar-mode -1)
-        (scroll-bar-mode -1)
         (set-fringe-mode 200))
     (progn 
       (fringe-mode 'default)
       (menu-bar-mode)
       (global-linum-mode 1)
-      (scroll-bar-mode t)
       (set-fringe-mode 8))))
 
 (define-key global-map (kbd "<f9>") 'toggle-writeroom)
