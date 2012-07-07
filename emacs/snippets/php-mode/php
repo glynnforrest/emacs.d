@@ -1,6 +1,6 @@
 # -*- mode: snippet -*-
 #name : <?php
-#key : php
+#key : ?
 # --
 <?php
 $0
