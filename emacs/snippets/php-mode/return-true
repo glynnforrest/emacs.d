@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+#name : return true
+#key : rt
+# --
+return true;
