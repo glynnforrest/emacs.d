@@ -14,6 +14,7 @@
                             color-theme-sanityinc-tomorrow
                             dired+
                             evil
+                            fuzzy
                             js2-mode
                             js-comint
                             magit
@@ -72,15 +73,6 @@
 (global-surround-mode t)
 (global-auto-revert-mode t)
 
-;;yasnippet
-(require 'yasnippet)
-;; Use only own snippets, do not use bundled ones
-(setq yas/snippet-dirs '("~/.emacs.d/snippets"))
-(yas/global-mode 1)
-;; Jump to end of snippet definition
-(setq yas/prompt-functions '(yas/ido-prompt yas/completing-prompt))
-(add-to-list 'auto-mode-alist '("\\.yasnippet$" . snippet-mode))
-
 (require 'smex)
 (smex-initialize)
 (global-set-key (kbd "<menu>") 'smex)
@@ -89,11 +81,22 @@
 (require 'projectile)
 (projectile-global-mode 1)
 
-
 (require 'auto-complete-config)
+(require 'fuzzy)
 (add-to-list 'ac-dictionary-directories "~/.emacs.d/ac-dict")
 (ac-config-default)
-;;yasnippet fix
+(setq ac-auto-start t)
+(setq ac-use-fuzzy t)
+(global-set-key (kbd "C-SPC") 'auto-complete)
+;;yasnippet
+(require 'yasnippet)
+;; Don't use bundled snippets
+(setq yas/snippet-dirs '("~/.emacs.d/snippets"))
+(yas/global-mode 1)
+(setq yas/prompt-functions '(yas/ido-prompt yas/completing-prompt))
+(add-to-list 'auto-mode-alist '("\\.yasnippet$" . snippet-mode))
+
+;;yasnippet / auto-complete fix
 (defun ac-yasnippet-candidates ()
   (with-no-warnings
     (if (fboundp 'yas/get-snippet-tables)
