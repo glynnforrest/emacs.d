@@ -24,6 +24,7 @@
                             rainbow-delimiters
                             smex
                             surround
+                            yasnippet
                             zencoding-mode
                             )
   "A list of required packages for this setup.")
@@ -67,8 +68,18 @@
 (setq hl-line-sticky-flag 1)
 (global-hl-line-mode t)
 
+(require 'surround)
 (global-surround-mode t)
 (global-auto-revert-mode t)
+
+;;yasnippet
+(require 'yasnippet)
+;; Use only own snippets, do not use bundled ones
+(setq yas/snippet-dirs '("~/.emacs.d/snippets"))
+(yas/global-mode 1)
+;; Jump to end of snippet definition
+(setq yas/prompt-functions '(yas/ido-prompt yas/completing-prompt))
+(add-to-list 'auto-mode-alist '("\\.yasnippet$" . snippet-mode))
 
 (require 'smex)
 (smex-initialize)
@@ -82,6 +93,24 @@
 (require 'auto-complete-config)
 (add-to-list 'ac-dictionary-directories "~/.emacs.d/ac-dict")
 (ac-config-default)
+;;yasnippet fix
+(defun ac-yasnippet-candidates ()
+  (with-no-warnings
+    (if (fboundp 'yas/get-snippet-tables)
+        ;; >0.6.0
+        (apply 'append (mapcar 'ac-yasnippet-candidate-1
+                               (condition-case nil
+                                   (yas/get-snippet-tables major-mode)
+                                 (wrong-number-of-arguments
+                                  (yas/get-snippet-tables)))))
+      (let ((table
+             (if (fboundp 'yas/snippet-table)
+                 ;; <0.6.0
+                 (yas/snippet-table major-mode)
+               ;; 0.6.0
+               (yas/current-snippet-table))))
+        (if table
+            (ac-yasnippet-candidate-1 table))))))
 
 (require 'ace-jump-mode)
 (define-key evil-normal-state-map ",m" 'ace-jump-mode)
@@ -115,9 +144,15 @@
   (ido-find-file)
   (setq default-directory saved-default-directory))
 
+;;Automatically create directories when creating a file
+(defadvice find-file (before make-directory-maybe (filename &optional wildcards) activate)
+  "Create parent directory if not exists while visiting file."
+  (unless (file-exists-p filename)
+    (let ((dir (file-name-directory filename)))
+      (unless (file-exists-p dir)
+        (make-directory dir)))))
 
 (global-linum-mode 1)
-
 
 (setq make-backup-files nil)
 (setq auto-save-default nil)
@@ -151,6 +186,7 @@
 (define-key evil-normal-state-map (kbd "C-<down>") 'kill-this-buffer)
 (define-key evil-insert-state-map (kbd "C-<right>") 'forward-word)
 (define-key evil-insert-state-map (kbd "C-<left>") 'backward-word)
+
 (require 'help-mode)
 (define-key help-mode-map (kbd "C-<down>") 'kill-this-buffer)
 
@@ -158,6 +194,11 @@
 (define-key evil-normal-state-map ",w" 'save-buffer)
 (define-key evil-normal-state-map ",f" 'projectile-find-file)
 (define-key evil-normal-state-map ",F" 'find-file)
+(define-key evil-normal-state-map ",e" (lambda()
+                                         (interactive)
+                                         (call-interactively 'find-file)
+                                         ;;(ido-magic-forward-char)
+                                         ))
 (define-key evil-normal-state-map ",r" 'recentf-ido-find-file)
 (define-key evil-normal-state-map ",d" 'ido-dired)
 
@@ -295,7 +336,7 @@
   (backward-kill-sexp)
   (prin1 (eval (read (current-kill 0)))
          (current-buffer)))
-(define-key evil-normal-state-map ",er" 'eval-and-replace-sexp)
+(define-key evil-normal-state-map ",E" 'eval-and-replace-sexp)
 
 ;; Multi web mode
 (require 'multi-web-mode)
@@ -381,6 +422,7 @@
                                                 (evil-forward-char)
                                                 ))
 (evil-declare-key 'normal dired-mode-map "\\" 'dired-up-directory)
+(evil-declare-key 'normal dired-mode-map "q" 'evil-record-macro)
 (evil-declare-key 'normal wdired-mode-map ",e" 'wdired-finish-edit)
 (evil-declare-key 'normal wdired-mode-map ",a" 'wdired-abort-changes)
 (define-key dired-mode-map (kbd "M-b") 'ido-switch-buffer)
