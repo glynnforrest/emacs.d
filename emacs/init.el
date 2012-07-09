@@ -25,6 +25,7 @@
                             rainbow-delimiters
                             smex
                             surround
+                            test-case-mode
                             yasnippet
                             zencoding-mode
                             )
@@ -88,6 +89,10 @@
 (setq ac-auto-start t)
 (setq ac-use-fuzzy t)
 (global-set-key (kbd "C-SPC") 'auto-complete)
+
+(require 'test-case-mode)
+(define-key evil-normal-state-map ",t" 'test-case-run)
+(define-key evil-normal-state-map ",T" 'test-case-run-all)
 
 ;;yasnippet
 (require 'yasnippet)
