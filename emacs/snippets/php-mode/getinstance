@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: getInstance
+# key: getInstance
+# --
+public static function getInstance() {
+	if(!self::$instance) {
+		self::$instance = new self();
+	}
+	return self::$instance;
+}
