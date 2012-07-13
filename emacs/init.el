@@ -86,7 +86,7 @@
 (require 'fuzzy)
 (add-to-list 'ac-dictionary-directories "~/.emacs.d/ac-dict")
 (ac-config-default)
-(setq ac-auto-start t)
+(setq ac-auto-start -1)
 (setq ac-use-fuzzy t)
 (global-set-key (kbd "C-SPC") 'auto-complete)
 
@@ -167,8 +167,10 @@
 
 (setq make-backup-files nil)
 (setq auto-save-default nil)
-(setq-default tab-width 4)
-(setq-default indent-tabs-mode nil)
+;;Use tabs
+(setq-default c-basic-offset 4
+			tab-width 4
+			indent-tabs-mode t)
 (setq inhibit-startup-message t)
 
 (fset 'yes-or-no-p 'y-or-n-p)
@@ -401,13 +403,13 @@
 
 (setq org-capture-templates
       '(("t" "Todo" entry (file+headline org-default-notes-file "Unsorted")
-         "* TODO  %?")
+         "* TODO %?")
         ("l" "Linked Todo" entry (file+headline org-default-notes-file "Unsorted")
-         "* TODO  %?\n%a")
+         "* TODO %?\n%a")
         ("n" "Note" entry (file+headline org-default-notes-file "Unsorted")
-         "*  %?")
+         "* %?")
         ("h" "Linked Note" entry (file+headline org-default-notes-file "Unsorted")
-         "*  %?\n%a")))
+         "* %?\n%a")))
 
 ;; Dired mode
 (require 'dired)
