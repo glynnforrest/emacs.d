@@ -3,5 +3,5 @@
 #key : fe
 # --
 foreach (${1:$array} as ${2:$k => $v}) {
-   $0
+	$0
 }
