@@ -37,7 +37,7 @@ alias bin='sudo pacman -Rs'
 alias pacman='pacman-color'
 alias pup='sudo pacman -Syu'
 alias porph='pacman -Qqdt' #Show package orphans
-alias pgr='pacman -Q | grep -i' #Grep installed packages
+alias pgr='pacman -Qq | grep -i' #Grep installed packages
 
 alias gst='git status'
 alias gch='git checkout'
@@ -52,6 +52,7 @@ alias gpul='git pull'
 alias gpus='git push'
 alias gme='git merge'
 alias gdi='git diff'
+alias gsu='git submodule'
 
 alias psgr='ps -A | grep -i' #Grep for a process
 alias mysq='mysql -u root -p'
@@ -95,7 +96,7 @@ PATH=$PATH:usr/include
 EDITOR=vim
 
 #Use vi mode for added pain
-set -o vi
+#set -o vi
 set visible-stats on 
 
 #Autocomplete the following
