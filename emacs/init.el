@@ -58,6 +58,8 @@
 (require 'evil-numbers)
 (define-key evil-normal-state-map (kbd "C-a") 'evil-numbers/inc-at-pt)
 (define-key evil-normal-state-map (kbd "C-S-a") 'evil-numbers/dec-at-pt)
+(define-key evil-insert-state-map (kbd "C-a") 'beginning-of-line)
+(define-key evil-insert-state-map (kbd "C-e") 'end-of-line)
 ;;Switch gj and j, gk and k
 (define-key evil-normal-state-map "j" 'evil-next-visual-line)
 (define-key evil-normal-state-map "gj" 'evil-next-line)
@@ -82,14 +84,6 @@
 (require 'projectile)
 (projectile-global-mode 1)
 
-(require 'auto-complete-config)
-(require 'fuzzy)
-(add-to-list 'ac-dictionary-directories "~/.emacs.d/ac-dict")
-(ac-config-default)
-(setq ac-auto-start -1)
-(setq ac-use-fuzzy t)
-(global-set-key (kbd "C-SPC") 'auto-complete)
-
 (require 'test-case-mode)
 (define-key evil-normal-state-map ",t" 'test-case-run)
 (define-key evil-normal-state-map ",T" 'test-case-run-all)
@@ -104,6 +98,7 @@
 ;;don't expand part of words
 (setq yas/key-syntaxes '("w_" "w_." "^ "))
 
+(require 'auto-complete-config)
 ;;yasnippet / auto-complete fix
 (defun ac-yasnippet-candidates ()
   (with-no-warnings
@@ -122,6 +117,28 @@
                (yas/current-snippet-table))))
         (if table
             (ac-yasnippet-candidate-1 table))))))
+
+(ac-define-source yasnippet-glynn
+  '((depends yasnippet)
+    (candidates . ac-yasnippet-candidates)
+    (candidate-face . ac-yasnippet-candidate-face)
+    (selection-face . ac-yasnippet-selection-face)
+    (symbol . "snip")))
+
+(defun ac-config-glynn ()
+  (setq-default ac-sources '(ac-source-yasnippet-glynn ac-source-dictionary ac-source-words-in-same-mode-buffers))
+  (add-hook 'emacs-lisp-mode-hook (lambda()
+									(setq ac-sources (append '(ac-source-features ac-source-functions ac-source-variables ac-source-symbols) ac-sources))))
+  (add-hook 'css-mode-hook (lambda ()
+							 (setq ac-sources (append '(ac-source-css-property) ac-sources))))
+(global-auto-complete-mode t))
+
+(require 'fuzzy)
+(add-to-list 'ac-dictionary-directories "~/.emacs.d/ac-dict")
+(setq ac-auto-start t)
+(setq ac-use-fuzzy t)
+(global-set-key (kbd "C-SPC") 'auto-complete)
+(ac-config-glynn)
 
 (require 'ace-jump-mode)
 (define-key evil-normal-state-map ",m" 'ace-jump-mode)
@@ -297,7 +314,8 @@
   (interactive)
   (evil-next-line 1)
   (transpose-lines 1)
-  (evil-previous-line 1))
+  (evil-previous-line 1)
+  )
 
 (define-key evil-normal-state-map (kbd "M-j") 'my-move-line-down-and-indent)
 (define-key evil-normal-state-map (kbd "M-k") 'my-move-line-up-and-indent)
