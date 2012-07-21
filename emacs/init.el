@@ -262,7 +262,9 @@
                                  (if (get-buffer "*magit-edit-log*")
                                      (kill-buffer "*magit-edit-log*"))
                                  (kill-this-buffer)
+								 (delete-window)
                                  ))
+(define-key magit-mode-map (kbd "C-<down>") 'kill-this-buffer)
 
 (setq undo-tree-visualizer-timestamps 1)
 
