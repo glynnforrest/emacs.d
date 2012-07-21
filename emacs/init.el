@@ -401,7 +401,7 @@
 
 ;;Notes are grouped by months for automatic archival.
 ;;At the start of every month move over notes that are still relevant.
-(setq org-default-notes-file (downcase (format-time-string "~/Notes/%Y-%B.org")))
+(setq org-default-notes-file (concat "~/Notes/"(downcase (format-time-string "%Y-%B.org"))))
 (define-key global-map (kbd "M-m") 'org-capture)
 (define-key global-map (kbd "M-M") (lambda()
                                      (interactive)
