@@ -305,20 +305,23 @@
                                         (local-unset-key (kbd "C-j"))
                                         (local-set-key (kbd "M-J") 'my-eval-print-last-sexp)))
 
-(defun my-move-line-up-and-indent ()
+(defun move-line-up-and-indent ()
   (interactive)
   (transpose-lines 1)
-  (evil-previous-line 2))
+  (evil-previous-line 2)
+  (indent-for-tab-command)
+  )
 
-(defun my-move-line-down-and-indent ()
+(defun move-line-down-and-indent ()
   (interactive)
   (evil-next-line 1)
   (transpose-lines 1)
   (evil-previous-line 1)
+  (indent-for-tab-command)
   )
 
-(define-key evil-normal-state-map (kbd "M-j") 'my-move-line-down-and-indent)
-(define-key evil-normal-state-map (kbd "M-k") 'my-move-line-up-and-indent)
+(define-key evil-normal-state-map (kbd "M-j") 'move-line-down-and-indent)
+(define-key evil-normal-state-map (kbd "M-k") 'move-line-up-and-indent)
 ;; nnoremap <A-l> >>
 ;; nnoremap <A-h> <<
 
@@ -522,6 +525,6 @@
       (fringe-mode 'default)
       (menu-bar-mode)
       (global-linum-mode 1)
-      (set-fringe-mode 8))))
+	  (set-fringe-mode 8))))
 
 (define-key global-map (kbd "<f9>") 'toggle-writeroom)
