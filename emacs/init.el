@@ -399,7 +399,9 @@
                             (kbd "M-J") 'org-shiftmetadown))
         '(normal insert))
 
-(setq org-default-notes-file "~/Notes/notes.org")
+;;Notes are grouped by months for automatic archival.
+;;At the start of every month move over notes that are still relevant.
+(setq org-default-notes-file (downcase (format-time-string "~/Notes/%Y-%B.org")))
 (define-key global-map (kbd "M-m") 'org-capture)
 (define-key global-map (kbd "M-M") (lambda()
                                      (interactive)
