@@ -237,6 +237,28 @@
 										 (other-window 1)
 										 ))
 
+(defun get-buffers-matching-mode (mode)
+  "Returns a list of buffers where their major-mode is equal to MODE"
+  (let ((buffer-mode-matches '()))
+	(dolist (buf (buffer-list))
+	  (with-current-buffer buf
+		(if (eq mode major-mode)
+			(add-to-list 'buffer-mode-matches buf))))
+	buffer-mode-matches))
+
+(defun multi-occur-in-this-mode ()
+  "Show all lines matching REGEXP in buffers with this major mode."
+  (interactive)
+  (multi-occur
+   (get-buffers-matching-mode major-mode)
+   (car (occur-read-primary-args))))
+
+(define-key evil-normal-state-map ",O" (lambda()
+										 (interactive)
+										 (call-interactively 'multi-occur-in-this-mode)
+										 (other-window 1)
+										 ))
+
 (define-key occur-mode-map (kbd "<return>") 'occur-mode-display-occurrence)
 (define-key occur-mode-map (kbd "<S-return>") 'occur-mode-goto-occurrence)
 (evil-declare-key 'normal occur-mode-map (kbd "<return>") 'occur-mode-display-occurrence)
