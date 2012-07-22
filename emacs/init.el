@@ -9,26 +9,25 @@
   (package-refresh-contents))
 
 (defvar required-packages '(
-                            ace-jump-mode
-                            auto-complete
-                            color-theme-sanityinc-tomorrow
-                            dired+
-                            evil
-                            fuzzy
-                            js2-mode
-                            js-comint
-                            magit
-                            multi-web-mode
-                            org
-                            php-mode
-                            projectile
-                            rainbow-delimiters
-                            smex
-                            surround
-                            test-case-mode
-                            yasnippet
-                            zencoding-mode
-                            )
+							ace-jump-mode
+							auto-complete
+							color-theme-sanityinc-tomorrow
+							dired+
+							evil
+							js2-mode
+							js-comint
+							magit
+							multi-web-mode
+							org
+							php-mode
+							projectile
+							rainbow-delimiters
+							smex
+							surround
+							test-case-mode
+							yasnippet
+							zencoding-mode
+							)
   "A list of required packages for this setup.")
 
 (dolist (p required-packages)
@@ -138,10 +137,8 @@
 (define-key ac-mode-map (kbd "C-<return>" ) 'evil-ret)
 (define-key ac-complete-mode-map (kbd "TAB") nil)
 
-(require 'fuzzy)
 (add-to-list 'ac-dictionary-directories "~/.emacs.d/ac-dict")
 (setq ac-auto-start t)
-(setq ac-use-fuzzy t)
 (global-set-key (kbd "C-SPC") 'auto-complete)
 (ac-config-glynn)
 
