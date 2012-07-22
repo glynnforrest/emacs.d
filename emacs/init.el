@@ -131,7 +131,8 @@
 									(setq ac-sources (append '(ac-source-features ac-source-functions ac-source-variables ac-source-symbols) ac-sources))))
   (add-hook 'css-mode-hook (lambda ()
 							 (setq ac-sources (append '(ac-source-css-property) ac-sources))))
-(global-auto-complete-mode t))
+  (global-auto-complete-mode t)
+  (setq ac-auto-start 2))
 
 (require 'fuzzy)
 (add-to-list 'ac-dictionary-directories "~/.emacs.d/ac-dict")
@@ -230,6 +231,19 @@
                                          ))
 (define-key evil-normal-state-map ",r" 'recentf-ido-find-file)
 (define-key evil-normal-state-map ",d" 'ido-dired)
+(define-key evil-normal-state-map ",o" (lambda()
+										 (interactive)
+										 (call-interactively 'occur)
+										 (other-window 1)
+										 ))
+
+(define-key occur-mode-map (kbd "<return>") 'occur-mode-display-occurrence)
+(define-key occur-mode-map (kbd "<S-return>") 'occur-mode-goto-occurrence)
+(evil-declare-key 'normal occur-mode-map (kbd "<return>") 'occur-mode-display-occurrence)
+(evil-declare-key 'normal occur-mode-map (kbd "<S-return>") 'occur-mode-goto-occurrence)
+(evil-declare-key 'normal occur-mode-map ",e" 'occur-edit-mode)
+(evil-declare-key 'normal occur-edit-mode-map ",e" 'occur-cease-edit)
+
 
 (define-key evil-normal-state-map ",cd" (lambda ()
                                           (interactive)
