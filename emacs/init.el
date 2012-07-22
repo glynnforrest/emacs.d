@@ -54,6 +54,9 @@
 ;; Load personal configurations, like usernames and passwords
 (require 'personal)
 
+;; Share emacs
+(server-start t)
+
 ;; evil
 (require 'evil)
 (evil-mode 1)
@@ -78,6 +81,7 @@
 
 
 ;; browse the kill ring with helm
+(require 'helm)
 (define-key evil-normal-state-map ",p" 'helm-show-kill-ring)
 (setq x-select-enable-clipboard t)
 
@@ -344,9 +348,11 @@
 (setq undo-tree-visualizer-timestamps 1)
 
 (define-key global-map (kbd "M-b") 'ido-switch-buffer)
+(define-key evil-normal-state-map ",b" 'helm-buffers-list)
+(define-key evil-normal-state-map ",B" 'kill-matching-buffers)
 (define-key evil-normal-state-map " " 'evil-ex)
 (define-key evil-visual-state-map " " 'evil-ex)
-(define-key evil-visual-state-map "n" 'narrow-to-region)
+(define-key evil-visual-state-map ",n" 'narrow-to-region)
 (define-key evil-normal-state-map ",n" 'widen)
 
 (defun open-init-file ()
@@ -449,7 +455,7 @@
          (current-buffer)))
 
 (define-key evil-normal-state-map ",E" 'eval-and-replace-sexp)
-(define-key evil-visual-state-map "e" 'eval-region)
+(define-key evil-visual-state-map ",e" 'eval-region)
 
 ;; Multi web mode
 (require 'multi-web-mode)
