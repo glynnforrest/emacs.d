@@ -12,6 +12,7 @@
 							ace-jump-mode
 							auto-complete
 							autopair
+							browse-kill-ring
 							color-theme-sanityinc-tomorrow
 							dired+
 							evil
@@ -74,6 +75,11 @@
 (define-key evil-normal-state-map ",c" 'comment-or-uncomment-line)
 
 
+;; browse the kill ring
+(require 'browse-kill-ring)
+(define-key evil-normal-state-map ",p" 'browse-kill-ring)
+(setq x-select-enable-clipboard t)
+
 (defun comment-or-uncomment-line ()
   "Comments or uncomments the current line."
   (interactive)
@@ -93,9 +99,6 @@
 (smex-initialize)
 (global-set-key (kbd "<menu>") 'smex)
 (global-set-key (kbd "M-X") 'smex-major-mode-commands)
-
-(require 'projectile)
-(projectile-global-mode 1)
 
 (require 'test-case-mode)
 (define-key evil-normal-state-map ",t" 'test-case-run)
@@ -243,6 +246,12 @@
 
 (define-key evil-normal-state-map (kbd "C-u") 'evil-scroll-up)
 (define-key evil-normal-state-map ",w" 'save-buffer)
+
+(require 'projectile)
+(projectile-global-mode 1)
+(setq projectile-enable-caching t)
+
+(define-key global-map (kbd "<f5>" ) 'projectile-invalidate-cache)
 (define-key evil-normal-state-map ",f" 'projectile-find-file)
 (define-key evil-normal-state-map ",F" 'find-file)
 (define-key evil-normal-state-map ",e" (lambda()
