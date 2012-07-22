@@ -16,6 +16,8 @@
 							color-theme-sanityinc-tomorrow
 							dired+
 							evil
+							helm
+							helm-git
 							js2-mode
 							js-comint
 							magit
@@ -75,9 +77,8 @@
 (define-key evil-normal-state-map ",c" 'comment-or-uncomment-line)
 
 
-;; browse the kill ring
-(require 'browse-kill-ring)
-(define-key evil-normal-state-map ",p" 'browse-kill-ring)
+;; browse the kill ring with helm
+(define-key evil-normal-state-map ",p" 'helm-show-kill-ring)
 (setq x-select-enable-clipboard t)
 
 (defun comment-or-uncomment-line ()
@@ -254,6 +255,15 @@
 (define-key global-map (kbd "<f5>" ) 'projectile-invalidate-cache)
 (define-key evil-normal-state-map ",f" 'projectile-find-file)
 (define-key evil-normal-state-map ",F" 'find-file)
+
+(require 'helm-git)
+(define-key evil-normal-state-map ",G" 'helm-git-find-files)
+(setq helm-display-function
+      (lambda (buf)
+        (split-window-vertically)
+        (other-window 1)
+        (switch-to-buffer buf)))
+
 (define-key evil-normal-state-map ",e" (lambda()
                                          (interactive)
                                          (call-interactively 'find-file)
