@@ -350,8 +350,8 @@
 
 ;; Cursor configuration.
 (blink-cursor-mode -1)
-(setq evil-insert-state-cursor '("#ffffff" bar))
-(setq evil-normal-state-cursor '("#ffffff" box))
+(setq evil-insert-state-cursor '("#38a2ea" bar))
+(setq evil-normal-state-cursor '("#38a2ea" box))
 (setq evil-emacs-state-cursor '("#d72626" bar))
 
 (require 'init-multiple-cursors)
