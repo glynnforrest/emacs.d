@@ -136,6 +136,7 @@
 
 ;;To make a new line instead of accepting suggested word, use C-<return>
 (define-key ac-mode-map (kbd "C-<return>" ) 'evil-ret)
+(define-key ac-complete-mode-map (kbd "TAB") nil)
 
 (require 'fuzzy)
 (add-to-list 'ac-dictionary-directories "~/.emacs.d/ac-dict")
@@ -410,7 +411,9 @@
   (backward-kill-sexp)
   (prin1 (eval (read (current-kill 0)))
          (current-buffer)))
+
 (define-key evil-normal-state-map ",E" 'eval-and-replace-sexp)
+(define-key evil-visual-state-map "e" 'eval-region)
 
 ;; Multi web mode
 (require 'multi-web-mode)
