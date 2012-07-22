@@ -134,6 +134,9 @@
   (global-auto-complete-mode t)
   (setq ac-auto-start 2))
 
+;;To make a new line instead of accepting suggested word, use C-<return>
+(define-key ac-mode-map (kbd "C-<return>" ) 'evil-ret)
+
 (require 'fuzzy)
 (add-to-list 'ac-dictionary-directories "~/.emacs.d/ac-dict")
 (setq ac-auto-start t)
