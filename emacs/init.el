@@ -136,6 +136,7 @@
 ;;To make a new line instead of accepting suggested word, use C-<return>
 (define-key ac-mode-map (kbd "C-<return>" ) 'evil-ret)
 (define-key ac-complete-mode-map (kbd "TAB") nil)
+(define-key ac-complete-mode-map [tab] nil)
 
 (add-to-list 'ac-dictionary-directories "~/.emacs.d/ac-dict")
 (setq ac-auto-start t)
