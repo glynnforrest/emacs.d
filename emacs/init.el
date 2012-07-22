@@ -11,6 +11,7 @@
 (defvar required-packages '(
 							ace-jump-mode
 							auto-complete
+							autopair
 							color-theme-sanityinc-tomorrow
 							dired+
 							evil
@@ -50,7 +51,7 @@
 ;; Load personal configurations, like usernames and passwords
 (require 'personal)
 
-;;evil
+;; evil
 (require 'evil)
 (evil-mode 1)
 (setq evil-default-cursor t)
@@ -59,11 +60,24 @@
 (define-key evil-normal-state-map (kbd "C-S-a") 'evil-numbers/dec-at-pt)
 (define-key evil-insert-state-map (kbd "C-a") 'beginning-of-line)
 (define-key evil-insert-state-map (kbd "C-e") 'end-of-line)
-;;Switch gj and j, gk and k
+;; Switch gj and j, gk and k
 (define-key evil-normal-state-map "j" 'evil-next-visual-line)
 (define-key evil-normal-state-map "gj" 'evil-next-line)
 (define-key evil-normal-state-map "k" 'evil-previous-visual-line)
 (define-key evil-normal-state-map "gk" 'evil-previous-line)
+
+;; toggle comments
+(define-key evil-visual-state-map ",c" (lambda()
+										 (interactive)
+										 (comment-or-uncomment-region (region-beginning) (region-end))
+										 (evil-visual-restore)))
+(define-key evil-normal-state-map ",c" 'comment-or-uncomment-line)
+
+
+(defun comment-or-uncomment-line ()
+  "Comments or uncomments the current line."
+  (interactive)
+  (comment-or-uncomment-region (line-beginning-position) (line-end-position)))
 
 (require 'color-theme-sanityinc-tomorrow)
 (color-theme-sanityinc-tomorrow-bright)
@@ -87,18 +101,18 @@
 (define-key evil-normal-state-map ",t" 'test-case-run)
 (define-key evil-normal-state-map ",T" 'test-case-run-all)
 
-;;yasnippet
+;; yasnippet
 (require 'yasnippet)
 ;; Don't use bundled snippets
 (setq yas/snippet-dirs '("~/.emacs.d/snippets"))
 (yas/global-mode 1)
 (setq yas/prompt-functions '(yas/ido-prompt yas/completing-prompt))
 (add-to-list 'auto-mode-alist '("\\.yasnippet$" . snippet-mode))
-;;don't expand part of words
+;; don't expand part of words
 (setq yas/key-syntaxes '("w_" "w_." "^ "))
 
 (require 'auto-complete-config)
-;;yasnippet / auto-complete fix
+;; yasnippet / auto-complete fix
 (defun ac-yasnippet-candidates ()
   (with-no-warnings
     (if (fboundp 'yas/get-snippet-tables)
@@ -133,7 +147,7 @@
   (global-auto-complete-mode t)
   (setq ac-auto-start 2))
 
-;;To make a new line instead of accepting suggested word, use C-<return>
+;; To make a new line instead of accepting suggested word, use C-<return>
 (define-key ac-mode-map (kbd "C-<return>" ) 'evil-ret)
 (define-key ac-complete-mode-map (kbd "TAB") nil)
 (define-key ac-complete-mode-map [tab] nil)
@@ -146,7 +160,12 @@
 (require 'ace-jump-mode)
 (define-key evil-normal-state-map ",m" 'ace-jump-mode)
 
-(electric-pair-mode t)
+(require 'autopair)
+(setq autopair-blink nil)
+(autopair-global-mode t)
+
+(require 'rainbow-delimiters)
+(global-rainbow-delimiters-mode t)
 
 (recentf-mode 1)
 (defun recentf-ido-find-file ()
@@ -174,7 +193,7 @@
   (ido-find-file)
   (setq default-directory saved-default-directory))
 
-;;Automatically create directories when creating a file
+;; Automatically create directories when creating a file
 (defadvice find-file (before make-directory-maybe (filename &optional wildcards) activate)
   "Create parent directory if not exists while visiting file."
   (unless (file-exists-p filename)
@@ -186,7 +205,7 @@
 
 (setq make-backup-files nil)
 (setq auto-save-default nil)
-;;Use tabs
+;; Use tabs
 (setq-default c-basic-offset 4
 			tab-width 4
 			indent-tabs-mode t)
@@ -269,7 +288,7 @@
 (evil-declare-key 'normal occur-edit-mode-map ",e" 'occur-cease-edit)
 
 
-(define-key evil-normal-state-map ",cd" (lambda ()
+(define-key evil-normal-state-map ",C" (lambda ()
                                           (interactive)
                                           (switch-to-buffer "*scratch*")
                                           (call-interactively 'cd)))
@@ -288,7 +307,7 @@
 (define-key evil-normal-state-map ",S" 'split-window-and-move-below)
 (define-key evil-normal-state-map ",u" 'undo-tree-visualize)
 
-;;Magit
+;; Magit
 (require 'magit)
 (define-key evil-normal-state-map ",g" 'magit-status)
 (evil-declare-key 'normal magit-log-edit-mode-map ",w" 'magit-log-edit-commit)
@@ -427,7 +446,7 @@
 (defun file-has-doctype ()
   (if (string= (upcase (buffer-substring-no-properties 1 10)) "<!DOCTYPE") t nil))
 
-;;enable multi-web-mode only for php files that begin with a doctype
+;; enable multi-web-mode only for php files that begin with a doctype
 (add-hook 'php-mode-hook (lambda()
 						   (if (file-has-doctype) (multi-web-mode))))
 (add-hook 'html-mode-hook 'multi-web-mode)
@@ -450,7 +469,7 @@
                              (rename-buffer "*Dired*")
                              ))
 
-;;Up directory fix
+;; Up directory fix
 (defadvice dired-up-directory (around dired-up-fix activate)
   (interactive)
   (rename-buffer "*Dired-old*")
@@ -486,15 +505,15 @@
 (global-set-key (kbd "C-0") '(lambda()(interactive)
                                (modify-frame-parameters nil `((alpha . 100)))))
 
-;;ERC
+;; ERC
 (require 'erc)
-;;my-erc-nick should be in personal.el
+;; my-erc-nick should be in personal.el
 (setq erc-nick my-erc-nick)
 (add-hook 'erc-mode-hook (lambda () 
                            (interactive)
                            (linum-mode -1)))
 
-;;eshell
+;; eshell
 (require 'eshell)
 (define-key evil-normal-state-map ",x" (lambda ()
                                          (interactive)
@@ -509,13 +528,13 @@
 (evil-declare-key 'insert eshell-mode-map (kbd "C-j") 'evil-window-down)
 (evil-declare-key 'normal eshell-mode-map (kbd "C-<up>") 'delete-window)
 
-;;node REPL
+;; node REPL
 (require 'js-comint)
 (setq inferior-js-program-command "env NODE_NO_READLINE=1 node")
 
 (add-to-list 'default-frame-alist '(font . "Consolas-10"))
 
-;;Write room
+;; Write room
 (defvar writeroom-enabled nil)
 (require 'hide-mode-line)
 
