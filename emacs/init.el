@@ -143,7 +143,6 @@
 (require 'ace-jump-mode)
 (define-key evil-normal-state-map ",m" 'ace-jump-mode)
 
-(require 'php-mode)
 (electric-pair-mode t)
 
 (recentf-mode 1)
@@ -381,7 +380,17 @@
                   (js-mode "<script +\\(type=\"text/javascript\"\\|language=\"javascript\"\\)[^>]*>" "</script>")
                   (css-mode "<style +type=\"text/css\"[^>]*>" "</style>")))
 (setq mweb-filename-extensions '("php" "php4" "php5"))
-(define-key evil-normal-state-map ",q" 'multi-web-global-mode)
+(define-key evil-normal-state-map ",q" 'multi-web-mode)
+
+(require 'php-mode)
+
+(defun file-has-doctype ()
+  (if (string= (upcase (buffer-substring-no-properties 1 10)) "<!DOCTYPE") t nil))
+
+;;enable multi-web-mode only for php files that begin with a doctype
+(add-hook 'php-mode-hook (lambda()
+						   (if (file-has-doctype) (multi-web-mode))))
+(add-hook 'html-mode-hook 'multi-web-mode)
 
 (put 'ido-exit-minibuffer 'disabled nil)
 (put 'narrow-to-region 'disabled nil)
