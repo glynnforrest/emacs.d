@@ -18,6 +18,7 @@
 							evil
 							helm
 							helm-git
+							geben
 							js2-mode
 							js-comint
 							magit
@@ -55,7 +56,7 @@
 (require 'personal)
 
 ;; Share emacs
-(server-start t)
+(server-start)
 
 ;; evil
 (require 'evil)
@@ -315,6 +316,10 @@
                                           (interactive)
                                           (switch-to-buffer "*scratch*")
                                           (call-interactively 'cd)))
+
+;; Geben for php debugging
+(require 'geben)
+(setq geben-display-window-function 'switch-to-buffer)
 
 (defun split-window-and-move-right ()
   (interactive)
