@@ -8,27 +8,27 @@
   (interactive)
   (mc/edit-beginnings-of-lines)
   (evil-insert-state)
-  (electric-pair-mode -1)
+  (auto-complete-mode -1)
   )
 
 (defun evil-mc-edit-ends-of-lines ()
   (interactive)
   (mc/edit-ends-of-lines)
   (evil-insert-state)
-  (electric-pair-mode -1)
+  (auto-complete-mode -1)
   )
 
 (defun evil-mc-switch-to-cursors ()
   (interactive)
   (evil-insert-state)
-  (electric-pair-mode -1)
+  (auto-complete-mode -1)
   (mc/switch-from-mark-multiple-to-cursors)
   )
 
 (defadvice mc/keyboard-quit (after mc-evil-cleanup activate)
   (interactive)
   (evil-normal-state)
-  (electric-pair-mode t)
+  (auto-complete-mode t)
   )
 
 (setq mc--cmds (append  mc--cmds '(
