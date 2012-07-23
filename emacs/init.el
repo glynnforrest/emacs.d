@@ -246,6 +246,9 @@
 (define-key evil-normal-state-map (kbd "C-<down>") 'kill-this-buffer)
 (define-key evil-insert-state-map (kbd "C-<right>") 'forward-word)
 (define-key evil-insert-state-map (kbd "C-<left>") 'backward-word)
+(define-key evil-insert-state-map (kbd "C-<down>") 'kill-this-buffer)
+(define-key evil-insert-state-map (kbd "C-/") 'evil-search-forward)
+(define-key evil-insert-state-map (kbd "C-?") 'evil-search-backward)
 
 (require 'help-mode)
 (define-key help-mode-map (kbd "C-<down>") 'kill-this-buffer)
