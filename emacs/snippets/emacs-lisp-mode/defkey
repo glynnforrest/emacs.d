@@ -2,4 +2,4 @@
 # name: (define-key ...)
 # key: defkey
 # --
-(define-key $1 ${2:(kbd "$3")} '$4)$0
+(define-key $1 ${2:(kbd "$3")} $4)$0
