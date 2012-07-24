@@ -200,6 +200,7 @@
 (setq kill-buffer-query-functions
       (remq 'process-kill-buffer-query-function
             kill-buffer-query-functions))
+(setq ido-ignore-buffers (append '("^\*Completions\*" "^\*Help\*" "*magit-process*") ido-ignore-buffers))
 
 ;; Prevent Emacs from auto-changing the working directory
 (defun find-file-keep-directory ()
@@ -239,11 +240,17 @@
 (define-key evil-normal-state-map (kbd "<left>") 'previous-buffer)
 (define-key global-map (kbd "C-<right>") 'next-buffer)
 (define-key global-map (kbd "C-<left>") 'previous-buffer)
-;; Goto scratch buffer quickly
-(define-key evil-normal-state-map ",z" '(lambda()
-										  (interactive)
-										  (switch-to-buffer "*scratch*")
-										  ))
+
+;; Go to scratch buffer quickly
+(define-key global-map (kbd "M-/") (lambda()
+									 (interactive)
+									 (switch-to-buffer "*scratch*")
+									 ))
+;; Go to eshell buffer quickly
+(define-key global-map (kbd "M-?") (lambda()
+									 (interactive)
+									 (eshell)
+									 ))
 
 
 (define-key global-map (kbd "C-<up>") 'delete-window)
@@ -560,10 +567,6 @@
 
 ;; eshell
 (require 'eshell)
-(define-key evil-normal-state-map ",x" (lambda ()
-                                         (interactive)
-                                         (eshell)
-                                         ))
 (evil-declare-key 'normal eshell-mode-map "i" (lambda ()
                                                 (interactive)
                                                 (evil-goto-line)
