@@ -18,7 +18,6 @@
 							evil
 							helm
 							helm-git
-							geben
 							js2-mode
 							js-comint
 							magit
@@ -55,6 +54,17 @@
 ;; Load personal configurations, like usernames and passwords
 (require 'personal)
 
+;; Disable gui elements
+(dolist (mode '(menu-bar-mode tool-bar-mode scroll-bar-mode))
+  (when (fboundp mode) (funcall mode -1)))
+
+;; Theme and font
+(set-frame-font "DejaVu Sans Mono 8")
+
+(require 'color-theme-sanityinc-tomorrow)
+(color-theme-sanityinc-tomorrow-bright)
+
+
 ;; Share emacs
 (server-start)
 
@@ -90,9 +100,6 @@
   "Comments or uncomments the current line."
   (interactive)
   (comment-or-uncomment-region (line-beginning-position) (line-end-position)))
-
-(require 'color-theme-sanityinc-tomorrow)
-(color-theme-sanityinc-tomorrow-bright)
 
 (setq hl-line-sticky-flag 1)
 (global-hl-line-mode t)
@@ -223,10 +230,6 @@
 (fset 'yes-or-no-p 'y-or-n-p)
 
 (delete-selection-mode t)
-(scroll-bar-mode -1)
-(tool-bar-mode -1)
-;; (menu-bar-mode -1)
-(blink-cursor-mode t)
 (show-paren-mode t)
 (column-number-mode t)
 (set-fringe-style -1)
@@ -249,6 +252,8 @@
 (define-key evil-insert-state-map (kbd "C-<down>") 'kill-this-buffer)
 (define-key evil-insert-state-map (kbd "C-/") 'evil-search-forward)
 (define-key evil-insert-state-map (kbd "C-?") 'evil-search-backward)
+(define-key evil-insert-state-map (kbd "C-v") 'evil-paste-after)
+
 
 (require 'help-mode)
 (define-key help-mode-map (kbd "C-<down>") 'kill-this-buffer)
@@ -319,10 +324,6 @@
                                           (interactive)
                                           (switch-to-buffer "*scratch*")
                                           (call-interactively 'cd)))
-
-;; Geben for php debugging
-(require 'geben)
-(setq geben-display-window-function 'switch-to-buffer)
 
 (defun split-window-and-move-right ()
   (interactive)
@@ -537,6 +538,7 @@
 (global-set-key (kbd "C-9") '(lambda()(interactive)(djcb-opacity-modify)))
 (global-set-key (kbd "C-0") '(lambda()(interactive)
                                (modify-frame-parameters nil `((alpha . 100)))))
+(modify-frame-parameters nil `((alpha . 90)))
 
 ;; ERC
 (require 'erc)
@@ -564,8 +566,6 @@
 ;; node REPL
 (require 'js-comint)
 (setq inferior-js-program-command "env NODE_NO_READLINE=1 node")
-
-(add-to-list 'default-frame-alist '(font . "Consolas-10"))
 
 ;; Write room
 (defvar writeroom-enabled nil)
