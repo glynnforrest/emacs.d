@@ -90,7 +90,6 @@
 										 (evil-visual-restore)))
 (define-key evil-normal-state-map ",c" 'comment-or-uncomment-line)
 
-
 ;; browse the kill ring with helm
 (require 'helm)
 (define-key evil-normal-state-map ",p" 'helm-show-kill-ring)
@@ -240,6 +239,13 @@
 (define-key evil-normal-state-map (kbd "<left>") 'previous-buffer)
 (define-key global-map (kbd "C-<right>") 'next-buffer)
 (define-key global-map (kbd "C-<left>") 'previous-buffer)
+;; Goto scratch buffer quickly
+(define-key evil-normal-state-map ",z" '(lambda()
+										  (interactive)
+										  (switch-to-buffer "*scratch*")
+										  ))
+
+
 (define-key global-map (kbd "C-<up>") 'delete-window)
 (define-key global-map (kbd "C-S-<up>") 'delete-other-windows)
 (define-key global-map (kbd "C-S-<down>") (lambda ()
@@ -357,6 +363,9 @@
 (setq undo-tree-visualizer-timestamps 1)
 
 (define-key global-map (kbd "M-b") 'ido-switch-buffer)
+;; Go back a buffer after picking one
+(define-key global-map (kbd "M-B") 'previous-buffer)
+
 (define-key evil-normal-state-map ",b" 'helm-buffers-list)
 (define-key evil-normal-state-map ",B" 'kill-matching-buffers)
 (define-key evil-normal-state-map " " 'evil-ex)
@@ -383,6 +392,11 @@
   (evil-insert 1))
 
 
+(add-hook 'lisp-interaction-mode-hook (lambda()
+                                        (local-unset-key (kbd "C-j"))
+                                        (local-set-key (kbd "M-J") 'my-eval-print-last-sexp)))
+
+
 (define-key global-map (kbd "C-l") 'evil-window-right)
 (define-key global-map (kbd "C-h") 'evil-window-left) ;; get help-map with f1
 (define-key global-map (kbd "C-k") 'evil-window-up)
@@ -392,10 +406,6 @@
 (define-key evil-normal-state-map (kbd "C-S-l") 'evil-window-increase-width)
 (define-key evil-normal-state-map (kbd "C-S-j") 'evil-window-decrease-height)
 (define-key evil-normal-state-map (kbd "C-S-h") 'evil-window-decrease-width)
-
-(add-hook 'lisp-interaction-mode-hook (lambda()
-                                        (local-unset-key (kbd "C-j"))
-                                        (local-set-key (kbd "M-J") 'my-eval-print-last-sexp)))
 
 (defun move-line-up-and-indent ()
   (interactive)
