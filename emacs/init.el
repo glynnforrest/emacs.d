@@ -13,7 +13,8 @@
 							auto-complete
 							autopair
 							browse-kill-ring
-							color-theme-sanityinc-tomorrow
+							color-theme
+							color-theme-monokai
 							dired+
 							evil
 							helm
@@ -36,11 +37,11 @@
 
 (dolist (p required-packages)
   (when (not (package-installed-p p))
-    (package-install p)))
+	(package-install p)))
 
 ;; Set path to .emacs.d
 (setq emacs-dir (file-name-directory
-                 (or (buffer-file-name) load-file-name)))
+				 (or (buffer-file-name) load-file-name)))
 
 ;; Set path to manually installed plugins
 (setq plugins-dir (expand-file-name "plugins" emacs-dir))
@@ -54,20 +55,44 @@
 ;; Load personal configurations, like usernames and passwords
 (require 'personal)
 
-;; Disable gui elements
-(dolist (mode '(menu-bar-mode tool-bar-mode scroll-bar-mode))
-  (when (fboundp mode) (funcall mode -1)))
+(defun setup-gui ()
+  "setup gui elements"
+  (dolist (mode '(menu-bar-mode tool-bar-mode scroll-bar-mode))
+	(when (fboundp mode) (funcall mode -1)))
+  )
 
-;; Theme and font
+(setup-gui)
+(modify-frame-parameters nil `((alpha . 90)))
+
+;; Make sure gui stuff is right for new frames too
+(add-hook 'after-make-frame-functions
+		  (lambda (frame)
+			(setup-gui)
+			(modify-frame-parameters frame `((alpha . 90)))))
+
+;; Fonts that work for reloading init.el and new emacsclient instances
 (set-frame-font "DejaVu Sans Mono 8")
+(setq default-frame-alist '((font . "DejaVu Sans Mono 8")))
 
-(require 'color-theme-sanityinc-tomorrow)
-(color-theme-sanityinc-tomorrow-bright)
-
+;; (require 'color-theme-sanityinc-tomorrow)
+;; (color-theme-sanityinc-tomorrow-bright)
+;; (require 'cofi-dark-theme)
+(require 'color-theme-monokai)
+(color-theme-monokai)
 
 ;; Share emacs
-(server-start)
+(require 'server)
+(unless (server-running-p)
+  (server-start))
 
+
+;;Allows launching from chrome textareas
+(require 'edit-server nil t)
+(unless (process-status "edit-server")
+  (setq edit-server-new-frame t)
+  (edit-server-start))
+
+(setq ido-default-buffer-method 'selected-window)
 ;; evil
 (require 'evil)
 (evil-mode 1)
@@ -130,28 +155,28 @@
 ;; yasnippet / auto-complete fix
 (defun ac-yasnippet-candidates ()
   (with-no-warnings
-    (if (fboundp 'yas/get-snippet-tables)
-        ;; >0.6.0
-        (apply 'append (mapcar 'ac-yasnippet-candidate-1
-                               (condition-case nil
-                                   (yas/get-snippet-tables major-mode)
-                                 (wrong-number-of-arguments
-                                  (yas/get-snippet-tables)))))
-      (let ((table
-             (if (fboundp 'yas/snippet-table)
-                 ;; <0.6.0
-                 (yas/snippet-table major-mode)
-               ;; 0.6.0
-               (yas/current-snippet-table))))
-        (if table
-            (ac-yasnippet-candidate-1 table))))))
+	(if (fboundp 'yas/get-snippet-tables)
+		;; >0.6.0
+		(apply 'append (mapcar 'ac-yasnippet-candidate-1
+							   (condition-case nil
+								   (yas/get-snippet-tables major-mode)
+								 (wrong-number-of-arguments
+								  (yas/get-snippet-tables)))))
+	  (let ((table
+			 (if (fboundp 'yas/snippet-table)
+				 ;; <0.6.0
+				 (yas/snippet-table major-mode)
+			   ;; 0.6.0
+			   (yas/current-snippet-table))))
+		(if table
+			(ac-yasnippet-candidate-1 table))))))
 
 (ac-define-source yasnippet-glynn
   '((depends yasnippet)
-    (candidates . ac-yasnippet-candidates)
-    (candidate-face . ac-yasnippet-candidate-face)
-    (selection-face . ac-yasnippet-selection-face)
-    (symbol . "snip")))
+	(candidates . ac-yasnippet-candidates)
+	(candidate-face . ac-yasnippet-candidate-face)
+	(selection-face . ac-yasnippet-selection-face)
+	(symbol . "snip")))
 
 (defun ac-config-glynn ()
   (setq-default ac-sources '(ac-source-yasnippet-glynn ac-source-dictionary ac-source-words-in-same-mode-buffers))
@@ -168,7 +193,6 @@
 (define-key ac-complete-mode-map [tab] nil)
 
 (add-to-list 'ac-dictionary-directories "~/.emacs.d/ac-dict")
-(setq ac-auto-start t)
 (global-set-key (kbd "C-SPC") 'auto-complete)
 (ac-config-glynn)
 
@@ -187,8 +211,8 @@
   "Find a recent file using Ido."
   (interactive)
   (let ((file (ido-completing-read "Open recent file: " recentf-list nil t)))
-    (when file
-      (find-file file))))
+	(when file
+	  (find-file file))))
 
 (ido-mode 1)
 (setq ido-enable-flex-matching t)
@@ -198,9 +222,9 @@
 (setq confirm-nonexistent-file-or-buffer nil)
 (setq ido-create-new-buffer 'always)
 (setq kill-buffer-query-functions
-      (remq 'process-kill-buffer-query-function
-            kill-buffer-query-functions))
-(setq ido-ignore-buffers (append '("^\*Completions\*" "^\*Help\*" "*magit-process*") ido-ignore-buffers))
+	  (remq 'process-kill-buffer-query-function
+			kill-buffer-query-functions))
+(setq ido-ignore-buffers (append '("^\*Completions\*" "^\*Help\*" "^\*magit-process\*" "^\*Compile-Log\*" "^\*vc-diff\*") ido-ignore-buffers))
 
 ;; Prevent Emacs from auto-changing the working directory
 (defun find-file-keep-directory ()
@@ -213,9 +237,9 @@
 (defadvice find-file (before make-directory-maybe (filename &optional wildcards) activate)
   "Create parent directory if not exists while visiting file."
   (unless (file-exists-p filename)
-    (let ((dir (file-name-directory filename)))
-      (unless (file-exists-p dir)
-        (make-directory dir)))))
+	(let ((dir (file-name-directory filename)))
+	  (unless (file-exists-p dir)
+		(make-directory dir)))))
 
 (global-linum-mode 1)
 
@@ -256,9 +280,9 @@
 (define-key global-map (kbd "C-<up>") 'delete-window)
 (define-key global-map (kbd "C-S-<up>") 'delete-other-windows)
 (define-key global-map (kbd "C-S-<down>") (lambda ()
-                                            (interactive)
-                                            (kill-this-buffer)
-                                            (delete-window)))
+											(interactive)
+											(kill-this-buffer)
+											(delete-window)))
 (define-key evil-normal-state-map (kbd "C-<down>") 'kill-this-buffer)
 (define-key evil-insert-state-map (kbd "C-<right>") 'forward-word)
 (define-key evil-insert-state-map (kbd "C-<left>") 'backward-word)
@@ -267,12 +291,15 @@
 (define-key evil-insert-state-map (kbd "C-?") 'evil-search-backward)
 (define-key evil-insert-state-map (kbd "C-v") 'evil-paste-after)
 
+;; Undo/redo window configuration with C-c <left>/<right>
+(winner-mode 1)
 
 (require 'help-mode)
 (define-key help-mode-map (kbd "C-<down>") 'kill-this-buffer)
 
 (define-key evil-normal-state-map (kbd "C-u") 'evil-scroll-up)
 (define-key evil-normal-state-map ",w" 'save-buffer)
+(define-key evil-insert-state-map (kbd "C-s") 'save-buffer)
 
 (require 'projectile)
 (projectile-global-mode 1)
@@ -285,16 +312,16 @@
 (require 'helm-git)
 (define-key evil-normal-state-map ",G" 'helm-git-find-files)
 (setq helm-display-function
-      (lambda (buf)
-        (split-window-vertically)
-        (other-window 1)
-        (switch-to-buffer buf)))
+	  (lambda (buf)
+		(split-window-vertically)
+		(other-window 1)
+		(switch-to-buffer buf)))
 
 (define-key evil-normal-state-map ",e" (lambda()
-                                         (interactive)
-                                         (call-interactively 'find-file)
-                                         ;;(ido-magic-forward-char)
-                                         ))
+										 (interactive)
+										 (call-interactively 'find-file)
+										 ;;(ido-magic-forward-char)
+										 ))
 (define-key evil-normal-state-map ",r" 'recentf-ido-find-file)
 (define-key evil-normal-state-map ",d" 'ido-dired)
 (define-key evil-normal-state-map ",o" (lambda()
@@ -334,9 +361,10 @@
 
 
 (define-key evil-normal-state-map ",C" (lambda ()
-                                          (interactive)
-                                          (switch-to-buffer "*scratch*")
-                                          (call-interactively 'cd)))
+										  (interactive)
+										  (switch-to-buffer "*scratch*")
+										  (call-interactively 'cd)))
+
 
 (defun split-window-and-move-right ()
   (interactive)
@@ -357,14 +385,14 @@
 (define-key evil-normal-state-map ",g" 'magit-status)
 (evil-declare-key 'normal magit-log-edit-mode-map ",w" 'magit-log-edit-commit)
 (define-key magit-mode-map "q" (lambda ()
-                                 (interactive)
-                                 (if (get-buffer "*magit-process*")
-                                     (kill-buffer "*magit-process*"))
-                                 (if (get-buffer "*magit-edit-log*")
-                                     (kill-buffer "*magit-edit-log*"))
-                                 (kill-this-buffer)
+								 (interactive)
+								 (if (get-buffer "*magit-process*")
+									 (kill-buffer "*magit-process*"))
+								 (if (get-buffer "*magit-edit-log*")
+									 (kill-buffer "*magit-edit-log*"))
+								 (kill-this-buffer)
 								 (delete-window)
-                                 ))
+								 ))
 (define-key magit-mode-map (kbd "C-<down>") 'kill-this-buffer)
 
 (setq undo-tree-visualizer-timestamps 1)
@@ -400,8 +428,8 @@
 
 
 (add-hook 'lisp-interaction-mode-hook (lambda()
-                                        (local-unset-key (kbd "C-j"))
-                                        (local-set-key (kbd "M-J") 'my-eval-print-last-sexp)))
+										(local-unset-key (kbd "C-j"))
+										(local-set-key (kbd "M-J") 'my-eval-print-last-sexp)))
 
 
 (define-key global-map (kbd "C-l") 'evil-window-right)
@@ -472,13 +500,12 @@
 (define-key evil-visual-state-map "me" 'evil-mc-edit-ends-of-lines)
 (define-key evil-visual-state-map "mm" 'evil-mc-switch-to-cursors)
 
-
 (defun eval-and-replace-sexp ()
   "Replace the preceding sexp with its value."
   (interactive)
   (backward-kill-sexp)
   (prin1 (eval (read (current-kill 0)))
-         (current-buffer)))
+		 (current-buffer)))
 
 (define-key evil-normal-state-map ",E" 'eval-and-replace-sexp)
 (define-key evil-visual-state-map ",e" 'eval-region)
@@ -487,8 +514,8 @@
 (require 'multi-web-mode)
 (setq mweb-default-major-mode 'html-mode)
 (setq mweb-tags '((php-mode "<\\?php\\|<\\? \\|<\\?=" "\\?>")
-                  (js-mode "<script +\\(type=\"text/javascript\"\\|language=\"javascript\"\\)[^>]*>" "</script>")
-                  (css-mode "<style +type=\"text/css\"[^>]*>" "</style>")))
+				  (js-mode "<script +\\(type=\"text/javascript\"\\|language=\"javascript\"\\)[^>]*>" "</script>")
+				  (css-mode "<style +type=\"text/css\"[^>]*>" "</style>")))
 (setq mweb-filename-extensions '("php" "php4" "php5"))
 (define-key evil-normal-state-map ",q" 'multi-web-mode)
 
@@ -516,9 +543,9 @@
 (require 'dired)
 (require 'dired+)
 (add-hook 'dired-mode-hook (lambda ()
-                             (interactive)
-                             (rename-buffer "*Dired*")
-                             ))
+							 (interactive)
+							 (rename-buffer "*Dired*")
+							 ))
 
 ;; Up directory fix
 (defadvice dired-up-directory (around dired-up-fix activate)
@@ -530,11 +557,11 @@
   )
 
 (evil-declare-key 'normal dired-mode-map ",e" (lambda ()
-                                                (interactive)
-                                                (dired-toggle-read-only)
-                                                (evil-normal-state)
-                                                (evil-forward-char)
-                                                ))
+												(interactive)
+												(dired-toggle-read-only)
+												(evil-normal-state)
+												(evil-forward-char)
+												))
 (evil-declare-key 'normal dired-mode-map "\\" 'dired-up-directory)
 (evil-declare-key 'normal dired-mode-map "q" 'evil-record-macro)
 (evil-declare-key 'normal wdired-mode-map ",e" 'wdired-finish-edit)
@@ -544,34 +571,33 @@
 
 (defun djcb-opacity-modify (&optional dec)
   "modify the transparency of the emacs frame; if DEC is t,
-    decrease the transparency, otherwise increase it in 10%-steps"
+	decrease the transparency, otherwise increase it in 10%-steps"
   (let* ((alpha-or-nil (frame-parameter nil 'alpha)) ; nil before setting
-         (oldalpha (if alpha-or-nil alpha-or-nil 100))
-         (newalpha (if dec (- oldalpha 10) (+ oldalpha 10))))
-    (when (and (>= newalpha frame-alpha-lower-limit) (<= newalpha 100))
-      (modify-frame-parameters nil (list (cons 'alpha newalpha))))))
+		 (oldalpha (if alpha-or-nil alpha-or-nil 100))
+		 (newalpha (if dec (- oldalpha 10) (+ oldalpha 10))))
+	(when (and (>= newalpha frame-alpha-lower-limit) (<= newalpha 100))
+	  (modify-frame-parameters nil (list (cons 'alpha newalpha))))))
 
 (global-set-key (kbd "C-8") '(lambda()(interactive)(djcb-opacity-modify t)))
 (global-set-key (kbd "C-9") '(lambda()(interactive)(djcb-opacity-modify)))
 (global-set-key (kbd "C-0") '(lambda()(interactive)
-                               (modify-frame-parameters nil `((alpha . 100)))))
-(modify-frame-parameters nil `((alpha . 90)))
+							   (modify-frame-parameters nil `((alpha . 100)))))
 
 ;; ERC
 (require 'erc)
 ;; my-erc-nick should be in personal.el
 (setq erc-nick my-erc-nick)
-(add-hook 'erc-mode-hook (lambda () 
-                           (interactive)
-                           (linum-mode -1)))
+(add-hook 'erc-mode-hook (lambda ()
+						   (interactive)
+						   (linum-mode -1)))
 
 ;; eshell
 (require 'eshell)
 (evil-declare-key 'normal eshell-mode-map "i" (lambda ()
-                                                (interactive)
-                                                (evil-goto-line)
-                                                (evil-append-line 1)
-                                                ))
+												(interactive)
+												(evil-goto-line)
+												(evil-append-line 1)
+												))
 (evil-declare-key 'normal eshell-mode-map (kbd "C-j") 'evil-window-down)
 (evil-declare-key 'insert eshell-mode-map (kbd "C-j") 'evil-window-down)
 (evil-declare-key 'normal eshell-mode-map (kbd "C-<up>") 'delete-window)
@@ -587,19 +613,19 @@
 (defun toggle-writeroom ()
   (interactive)
   (if (not writeroom-enabled)
-      (setq writeroom-enabled t)
-    (setq writeroom-enabled nil))
+	  (setq writeroom-enabled t)
+	(setq writeroom-enabled nil))
   (hide-mode-line)
   (global-linum-mode -1)
   (if writeroom-enabled
-      (progn
-        (fringe-mode 'both)
-        (menu-bar-mode -1)
-        (set-fringe-mode 200))
-    (progn 
-      (fringe-mode 'default)
-      (menu-bar-mode)
-      (global-linum-mode 1)
+	  (progn
+		(fringe-mode 'both)
+		;; (menu-bar-mode -1)
+		(set-fringe-mode 200))
+	(progn
+	  (fringe-mode 'default)
+	  ;; (menu-bar-mode)
+	  (global-linum-mode 1)
 	  (set-fringe-mode 8))))
 
 (define-key global-map (kbd "<f9>") 'toggle-writeroom)
