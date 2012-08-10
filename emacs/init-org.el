@@ -15,7 +15,14 @@
 
 ;;Notes are grouped by months for automatic archival.
 ;;At the start of every month move over notes that are still relevant.
-(setq org-default-notes-file (concat "~/Notes/dates/"(downcase (format-time-string "%Y-%B.org"))))
+(setq org-directory "~/Notes/")
+(setq org-default-notes-file (concat org-directory "dates/" (downcase (format-time-string "%Y-%B.org"))))
+(setq org-files (file-expand-wildcards (concat org-directory "*/*.org")))
+(setq org-refile-targets
+	  '((org-files :maxlevel . 1)
+		(nil :maxlevel . 1)
+		)
+	  )
 
 (define-key global-map (kbd "M-m") 'org-capture)
 (define-key global-map (kbd "M-M") (lambda()
