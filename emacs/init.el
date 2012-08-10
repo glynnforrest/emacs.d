@@ -379,6 +379,7 @@
 (define-key evil-normal-state-map ",s" 'split-window-and-move-right)
 (define-key evil-normal-state-map ",S" 'split-window-and-move-below)
 (define-key evil-normal-state-map ",u" 'undo-tree-visualize)
+(define-key undo-tree-visualizer-map (kbd "C-<down>") 'kill-this-buffer)
 
 ;; Magit
 (require 'magit)
