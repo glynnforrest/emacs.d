@@ -22,6 +22,9 @@ export TERM=konsole
 #Edit file in an emacs session
 alias e='emacsclient -n'
 
+#Edit in vim
+alias v='vim'
+
 #Load bashmarks
 source ~/.bash/bashmarks.sh
 
@@ -46,6 +49,10 @@ er () {
 }
 
 eb () {
+	e ~/.bashrc
+}
+
+vb () {
 	e ~/.bashrc
 }
 
