@@ -62,13 +62,13 @@
   )
 
 (setup-gui)
-(modify-frame-parameters nil `((alpha . 90)))
+(modify-frame-parameters nil `((alpha . 80)))
 
 ;; Make sure gui stuff is right for new frames too
 (add-hook 'after-make-frame-functions
 		  (lambda (frame)
 			(setup-gui)
-			(modify-frame-parameters frame `((alpha . 90)))))
+			(modify-frame-parameters frame `((alpha . 80)))))
 
 ;; Fonts that work for reloading init.el and new emacsclient instances
 (set-frame-font "DejaVu Sans Mono 8")
@@ -490,6 +490,10 @@
 (setq evil-insert-state-cursor '("#38a2ea" bar))
 (setq evil-normal-state-cursor '("#38a2ea" box))
 (setq evil-emacs-state-cursor '("#d72626" bar))
+
+(setq mouse-wheel-progressive-speed nil)
+(setq scroll-step 1)
+(setq scroll-conservatively 10000)
 
 (require 'init-multiple-cursors)
 
