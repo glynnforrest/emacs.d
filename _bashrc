@@ -14,6 +14,14 @@ if command_exists fortune; then
 	fortune
 fi
 
+#Use vim as the default editor (good for servers with no emacs)
+export EDITOR='vim'
+
+export TERM=konsole
+
+#Edit file in an emacs session
+alias e='emacsclient -n'
+
 #Load bashmarks
 source ~/.bash/bashmarks.sh
 
@@ -38,7 +46,7 @@ er () {
 }
 
 eb () {
-	$EDITOR ~/.bashrc
+	e ~/.bashrc
 }
 
 alias sb="source ~/.bashrc"
@@ -130,13 +138,6 @@ PS1='\[\033[36m\][\[\033[37m\]\u\[\033[36m\]@\[\033[37m\]\h\[\033[36m\]]\[\033[3
 
 #Get all the binaries
 PATH=$PATH:usr/include
-
-#Emacs client as default editor
-export EDITOR='emacsclient -n'
-
-export TERM=konsole
-
-alias e=$EDITOR
 
 set visible-stats on 
 
