@@ -8,31 +8,34 @@
 (when (not package-archive-contents)
   (package-refresh-contents))
 
-(defvar required-packages '(
-							ace-jump-mode
-							auto-complete
-							autopair
-							browse-kill-ring
-							color-theme
-							color-theme-monokai
-							dired+
-							evil
-							helm
-							helm-git
-							js2-mode
-							js-comint
-							magit
-							multi-web-mode
-							org
-							php-mode
-							projectile
-							rainbow-delimiters
-							smex
-							surround
-							test-case-mode
-							yasnippet
-							zencoding-mode
-							)
+(defvar required-packages
+  '(
+	ace-jump-mode
+	auto-complete
+	autopair
+	browse-kill-ring
+	color-theme
+	color-theme-monokai
+	dired+
+	evil
+	helm
+	helm-git
+	js2-mode
+	js-comint
+	magit
+	markdown-mode
+	multi-web-mode
+	org
+	php-mode
+	projectile
+	rainbow-mode
+	rainbow-delimiters
+	smex
+	surround
+	test-case-mode
+	yasnippet
+	zencoding-mode
+	)
   "A list of required packages for this setup.")
 
 (dolist (p required-packages)
@@ -155,21 +158,26 @@
 ;; yasnippet / auto-complete fix
 (defun ac-yasnippet-candidates ()
   (with-no-warnings
-	(if (fboundp 'yas/get-snippet-tables)
-		;; >0.6.0
-		(apply 'append (mapcar 'ac-yasnippet-candidate-1
-							   (condition-case nil
-								   (yas/get-snippet-tables major-mode)
-								 (wrong-number-of-arguments
-								  (yas/get-snippet-tables)))))
-	  (let ((table
-			 (if (fboundp 'yas/snippet-table)
-				 ;; <0.6.0
-				 (yas/snippet-table major-mode)
-			   ;; 0.6.0
-			   (yas/current-snippet-table))))
-		(if table
-			(ac-yasnippet-candidate-1 table))))))
+ (cond (;; 0.8 onwards
+           (fboundp 'yas-active-keys)
+           (all-completions ac-prefix (yas-active-keys)))
+          (;; >0.6.0
+           (fboundp 'yas/get-snippet-tables)
+           (apply 'append (mapcar 'ac-yasnippet-candidate-1
+                                  (condition-case nil
+                                      (yas/get-snippet-tables major-mode)
+                                    (wrong-number-of-arguments
+                                     (yas/get-snippet-tables)))))
+           )
+          (t
+           (let ((table
+                  (if (fboundp 'yas/snippet-table)
+                      ;; <0.6.0
+                      (yas/snippet-table major-mode)
+                    ;; 0.6.0
+                    (yas/current-snippet-table))))
+             (if table
+			(ac-yasnippet-candidate-1 table)))))))
 
 (ac-define-source yasnippet-glynn
   '((depends yasnippet)
