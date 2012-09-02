@@ -23,11 +23,23 @@
 		(nil :maxlevel . 1)))
 (setq org-agenda-files (list org-default-notes-file))
 
+(defun find-file-in-org-directory ()
+  "Find a file in `org-directory`.  This function depends on the
+projectile function `projectile-get-project-files`."
+  (interactive)
+  (let ((file (ido-completing-read "Find org file: "
+								   (projectile-get-project-files org-directory)
+								   nil t)))
+	(when file
+	  (find-file file))))
+
+
 (define-key global-map (kbd "M-n") 'org-capture)
 (define-key global-map (kbd "M-N") (lambda()
                                      (interactive)
                                      (find-file org-default-notes-file)
                                      ))
+(define-key evil-normal-state-map ",n" 'find-file-in-org-directory)
 (evil-declare-key 'normal org-mode-map (kbd "C-t") 'org-todo)
 (evil-declare-key 'insert org-mode-map (kbd "C-t") 'org-todo)
 (evil-declare-key 'normal org-mode-map (kbd "C-m") 'org-refile)
