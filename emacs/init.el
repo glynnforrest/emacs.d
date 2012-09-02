@@ -36,7 +36,7 @@
 	yasnippet
 	zencoding-mode
 	)
-  "A list of required packages for this setup.")
+  "A list of required packages for this emacs configuration.")
 
 (dolist (p required-packages)
   (when (not (package-installed-p p))
@@ -267,6 +267,8 @@
 (set-fringe-style -1)
 (tooltip-mode -1)
 
+(define-key global-map (kbd "<mouse-3>") nil)
+
 ;; Change buffers with left and right, Ctrl if not in evil-mode
 (define-key evil-normal-state-map (kbd "<right>") 'next-buffer)
 (define-key evil-normal-state-map (kbd "<left>") 'previous-buffer)
@@ -332,12 +334,8 @@
 										 ))
 (define-key evil-normal-state-map ",r" 'recentf-ido-find-file)
 (define-key evil-normal-state-map ",d" 'ido-dired)
-(define-key evil-normal-state-map ",o" (lambda()
-										 (interactive)
-										 (call-interactively 'occur)
-										 (other-window 1)
-										 ))
 
+;; Occur mode
 (defun get-buffers-matching-mode (mode)
   "Returns a list of buffers where their major-mode is equal to MODE"
   (let ((buffer-mode-matches '()))
@@ -420,6 +418,21 @@
 								 (delete-window)
 								 ))
 (define-key magit-mode-map (kbd "C-<down>") 'kill-this-buffer)
+(define-key magit-mode-map (kbd "C-p") 'magit-push)
+
+;; Preview changes without leaving the buffer
+(define-key magit-mode-map (kbd "<S-return>") (lambda()
+												(interactive)
+											  (let ((current-prefix-arg t))
+												(magit-visit-item))))
+
+(define-key magit-mode-map (kbd "<return>") (lambda()
+											  (interactive)
+											  (universal-argument)
+											  (let ((current-prefix-arg t))
+												(magit-visit-item))
+											  (other-window 1)
+											  ))
 
 (setq undo-tree-visualizer-timestamps 1)
 
