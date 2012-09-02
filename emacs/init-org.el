@@ -24,15 +24,14 @@
 (setq org-agenda-files (list org-default-notes-file))
 
 (defun find-file-in-org-directory ()
-  "Find a file in `org-directory`.  This function depends on the
-projectile function `projectile-get-project-files`."
+  "Find a file in `org-directory`. This function depends on the
+`projectile` package."
   (interactive)
-  (let ((file (ido-completing-read "Find org file: "
-								   (projectile-get-project-files org-directory)
-								   nil t)))
-	(when file
-	  (find-file file))))
-
+  (let* ((project-files (projectile-hashify-files
+                         (projectile-get-project-files org-directory)))
+         (file (ido-completing-read "File org file: "
+                                    (loop for k being the hash-keys in project-files collect k))))
+    (find-file (gethash file project-files))))
 
 (define-key global-map (kbd "M-n") 'org-capture)
 (define-key global-map (kbd "M-N") (lambda()
