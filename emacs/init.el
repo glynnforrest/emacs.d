@@ -111,6 +111,13 @@
 (define-key evil-normal-state-map "k" 'evil-previous-visual-line)
 (define-key evil-normal-state-map "gk" 'evil-previous-line)
 
+;; Start in insert mode / emacs for some modes
+(add-to-list 'evil-emacs-state-modes 'package-menu-mode)
+(evil-set-initial-state 'package-menu-mode 'normal)
+(evil-set-initial-state 'org-capture-mode 'insert)
+(evil-set-initial-state 'magit-log-edit-mode 'insert)
+(evil-set-initial-state 'occur-mode 'normal)
+
 ;; toggle comments
 (define-key evil-visual-state-map ",c" (lambda()
 										 (interactive)

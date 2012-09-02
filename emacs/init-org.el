@@ -38,7 +38,7 @@
                                      (interactive)
                                      (find-file org-default-notes-file)
                                      ))
-(define-key evil-normal-state-map ",n" 'find-file-in-org-directory)
+(define-key evil-normal-state-map (kbd "C-M-n") 'find-file-in-org-directory)
 (evil-declare-key 'normal org-mode-map (kbd "C-t") 'org-todo)
 (evil-declare-key 'insert org-mode-map (kbd "C-t") 'org-todo)
 (evil-declare-key 'normal org-mode-map (kbd "C-m") 'org-refile)
