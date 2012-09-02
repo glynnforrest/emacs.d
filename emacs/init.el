@@ -354,24 +354,41 @@
    (get-buffers-matching-mode major-mode)
    (car (occur-read-primary-args))))
 
+(define-key evil-normal-state-map ",o" (lambda()
+										 (interactive)
+										 (call-interactively 'occur)
+										 (other-window 1)
+										 ))
+
 (define-key evil-normal-state-map ",O" (lambda()
 										 (interactive)
 										 (call-interactively 'multi-occur-in-this-mode)
 										 (other-window 1)
 										 ))
 
+(evil-declare-key 'normal occur-mode-map ",e" 'occur-edit-mode)
+(evil-declare-key 'normal occur-edit-mode-map ",e" 'occur-cease-edit)
+
+;; Preview occurrences in occur and grep without leaving the buffer
 (define-key occur-mode-map (kbd "<return>") 'occur-mode-display-occurrence)
 (define-key occur-mode-map (kbd "<S-return>") 'occur-mode-goto-occurrence)
 (evil-declare-key 'normal occur-mode-map (kbd "<return>") 'occur-mode-display-occurrence)
 (evil-declare-key 'normal occur-mode-map (kbd "<S-return>") 'occur-mode-goto-occurrence)
-(evil-declare-key 'normal occur-mode-map ",e" 'occur-edit-mode)
-(evil-declare-key 'normal occur-edit-mode-map ",e" 'occur-cease-edit)
+
+(defun grep-display-occurrence ()
+  "Display in another window the grep result of the current line."
+  (interactive)
+  (compile-goto-error)
+  (other-window 1)
+  )
+
+(define-key grep-mode-map (kbd "<return>") 'grep-display-occurrence)
+(define-key grep-mode-map (kbd "<S-return>") 'compile-goto-error)
+(evil-declare-key 'normal grep-mode-map (kbd "<return>") 'grep-display-occurrence)
+(evil-declare-key 'normal grep-mode-map (kbd "<S-return>") 'compile-goto-error)
 
 
-(define-key evil-normal-state-map ",C" (lambda ()
-										  (interactive)
-										  (switch-to-buffer "*scratch*")
-										  (call-interactively 'cd)))
+(define-key evil-normal-state-map ",C" 'cd)
 
 
 (defun split-window-and-move-right ()
