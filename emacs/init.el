@@ -486,17 +486,22 @@
 ;; nnoremap <A-l> >>
 ;; nnoremap <A-h> <<
 
-(define-key evil-normal-state-map (kbd "<S-return>") 'my-evil-new-line)
-(defun my-evil-new-line ()
-  (interactive)
-  (evil-open-below 1)
-  (evil-normal-state 1))
 
-(define-key evil-normal-state-map (kbd "<C-S-return>") 'my-evil-new-line-above)
-(defun my-evil-new-line-above ()
-  (interactive)
-  (evil-open-above 1)
-  (evil-normal-state 1))
+;; Open lines above and below in normal and insert mode with <return>
+(define-key evil-normal-state-map (kbd "<S-return>") (lambda()
+													   (interactive)
+													   (evil-open-below 1)
+													   (evil-normal-state 1)))
+(define-key evil-normal-state-map (kbd "<C-S-return>") (lambda()
+														 (interactive)
+														 (evil-open-above 1)
+														 (evil-normal-state 1)))
+(define-key evil-insert-state-map (kbd "S-<return>") (lambda()
+													   (interactive)
+													   (evil-open-below 1)))
+(define-key evil-insert-state-map (kbd "C-S-<return>") (lambda()
+														 (interactive)
+														 (evil-open-above 1)))
 
 ;; universal escape key as well as C-g
 (define-key evil-normal-state-map [escape] 'keyboard-quit)
