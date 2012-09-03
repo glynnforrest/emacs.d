@@ -55,39 +55,17 @@
   (normal-top-level-add-to-load-path '("."))
   (normal-top-level-add-subdirs-to-load-path))
 (add-to-list 'load-path emacs-dir)
+
+;; Load appearance settings
+(require 'init-appearance)
+
 ;; Load personal configurations, like usernames and passwords
 (require 'personal)
-
-(defun setup-gui ()
-  "setup gui elements"
-  (dolist (mode '(menu-bar-mode tool-bar-mode scroll-bar-mode))
-	(when (fboundp mode) (funcall mode -1)))
-  )
-
-(setup-gui)
-(modify-frame-parameters nil `((alpha . 80)))
-
-;; Make sure gui stuff is right for new frames too
-(add-hook 'after-make-frame-functions
-		  (lambda (frame)
-			(setup-gui)
-			(modify-frame-parameters frame `((alpha . 80)))))
-
-;; Fonts that work for reloading init.el and new emacsclient instances
-(set-frame-font "DejaVu Sans Mono 8")
-(setq default-frame-alist '((font . "DejaVu Sans Mono 8")))
-
-;; (require 'color-theme-sanityinc-tomorrow)
-;; (color-theme-sanityinc-tomorrow-bright)
-;; (require 'cofi-dark-theme)
-(require 'color-theme-monokai)
-(color-theme-monokai)
 
 ;; Share emacs
 (require 'server)
 (unless (server-running-p)
   (server-start))
-
 
 ;;Allows launching from chrome textareas
 (require 'edit-server nil t)
@@ -529,13 +507,6 @@
 (define-key minibuffer-local-must-match-map [escape] 'minibuffer-keyboard-quit)
 (define-key minibuffer-local-isearch-map [escape] 'minibuffer-keyboard-quit)
 
-
-;; Cursor configuration.
-(blink-cursor-mode -1)
-(setq evil-insert-state-cursor '("#38a2ea" bar))
-(setq evil-normal-state-cursor '("#38a2ea" box))
-(setq evil-emacs-state-cursor '("#d72626" bar))
-
 (setq mouse-wheel-progressive-speed nil)
 (setq scroll-step 1)
 (setq scroll-conservatively 10000)
@@ -619,19 +590,12 @@
 (define-key dired-mode-map (kbd "M-b") 'ido-switch-buffer)
 (toggle-diredp-find-file-reuse-dir 1)
 
-(defun djcb-opacity-modify (&optional dec)
-  "modify the transparency of the emacs frame; if DEC is t,
-	decrease the transparency, otherwise increase it in 10%-steps"
-  (let* ((alpha-or-nil (frame-parameter nil 'alpha)) ; nil before setting
-		 (oldalpha (if alpha-or-nil alpha-or-nil 100))
-		 (newalpha (if dec (- oldalpha 10) (+ oldalpha 10))))
-	(when (and (>= newalpha frame-alpha-lower-limit) (<= newalpha 100))
-	  (modify-frame-parameters nil (list (cons 'alpha newalpha))))))
-
 (global-set-key (kbd "C-8") '(lambda()(interactive)(djcb-opacity-modify t)))
 (global-set-key (kbd "C-9") '(lambda()(interactive)(djcb-opacity-modify)))
 (global-set-key (kbd "C-0") '(lambda()(interactive)
 							   (modify-frame-parameters nil `((alpha . 100)))))
+
+(define-key global-map (kbd "<f9>") 'toggle-writeroom)
 
 ;; ERC
 (require 'erc)
@@ -655,27 +619,3 @@
 ;; node REPL
 (require 'js-comint)
 (setq inferior-js-program-command "env NODE_NO_READLINE=1 node")
-
-;; Write room
-(defvar writeroom-enabled nil)
-(require 'hide-mode-line)
-
-(defun toggle-writeroom ()
-  (interactive)
-  (if (not writeroom-enabled)
-	  (setq writeroom-enabled t)
-	(setq writeroom-enabled nil))
-  (hide-mode-line)
-  (global-linum-mode -1)
-  (if writeroom-enabled
-	  (progn
-		(fringe-mode 'both)
-		;; (menu-bar-mode -1)
-		(set-fringe-mode 200))
-	(progn
-	  (fringe-mode 'default)
-	  ;; (menu-bar-mode)
-	  (global-linum-mode 1)
-	  (set-fringe-mode 8))))
-
-(define-key global-map (kbd "<f9>") 'toggle-writeroom)
