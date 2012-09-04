@@ -487,7 +487,7 @@
 ;; nnoremap <A-h> <<
 
 
-;; Open lines above and below in normal and insert mode with <return>
+;; Create lines above and below in normal and insert mode with <return>
 (define-key evil-normal-state-map (kbd "<S-return>") (lambda()
 													   (interactive)
 													   (evil-open-below 1)
@@ -511,6 +511,20 @@
 (define-key minibuffer-local-completion-map [escape] 'minibuffer-keyboard-quit)
 (define-key minibuffer-local-must-match-map [escape] 'minibuffer-keyboard-quit)
 (define-key minibuffer-local-isearch-map [escape] 'minibuffer-keyboard-quit)
+
+;; Remove any trailing whitespace on buffer write
+(define-minor-mode remove-trailing-whitespace-mode
+  "Toggle remove trailing whitespace on save.
+When enabled trailing whitespace is removed before saving."
+  :init-value nil
+  :global t
+  :lighter " W"
+
+  (if remove-trailing-whitespace-mode
+      (add-hook 'before-save-hook 'delete-trailing-whitespace)
+    (remove-hook 'before-save-hook 'delete-trailing-whitespace)))
+
+(remove-trailing-whitespace-mode t)
 
 (setq mouse-wheel-progressive-speed nil)
 (setq scroll-step 1)
