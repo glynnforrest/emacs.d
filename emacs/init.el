@@ -560,6 +560,15 @@ When enabled trailing whitespace is removed before saving."
 
 (require 'php-mode)
 
+(add-hook 'php-mode-hook (lambda()
+						  (define-key evil-insert-state-map ";" 'electric-semicolon)))
+
+(defun electric-semicolon ()
+  (interactive)
+  (end-of-line)
+  (when (not (looking-back ";"))
+    (insert ";")))
+
 (defun file-has-doctype ()
   (if (string= (upcase (buffer-substring-no-properties 1 10)) "<!DOCTYPE") t nil))
 
