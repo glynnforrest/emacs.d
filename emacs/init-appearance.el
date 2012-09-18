@@ -25,6 +25,19 @@
 (setq evil-normal-state-cursor '("#38a2ea" box))
 (setq evil-emacs-state-cursor '("#d72626" bar))
 
+;; Setup line numbers and remove fringes
+(setq linum-format (lambda (line)
+  (propertize
+   (format (concat "%"
+                   (number-to-string
+                    (length (number-to-string
+                             (line-number-at-pos (point-max)))))
+                   "d ")
+           line)
+   'face 'linum)))
+
+(fringe-mode -1)
+
 ;; Change opacity of the frame.
 (defun djcb-opacity-modify (&optional dec)
   "modify the transparency of the emacs frame; if DEC is t,
@@ -37,12 +50,12 @@
 
 ;; Write room
 (defvar writeroom-enabled nil)
-(require 'hide-mode-line)
+(autoload 'hide-mode-line "hide-mode-line" nil t)
 (defun toggle-writeroom ()
   (interactive)
   (if (not writeroom-enabled)
 	  (setq writeroom-enabled t)
-	;; (setq writeroom-enabled nil))
+	(setq writeroom-enabled nil))
 	(hide-mode-line)
 	(global-linum-mode -1)
 	(if writeroom-enabled
@@ -51,10 +64,10 @@
 		  ;; (menu-bar-mode -1)
 		  (set-fringe-mode 200))
 	  (progn
-		(fringe-mode 'default)
+		(set-fringe-mode 0)
+		(fringe-mode -1)
 		;; (menu-bar-mode)
-		(global-linum-mode 1)
-		(set-fringe-mode 8)))))
+		(global-linum-mode 1))))
 
 ;; Fun
 (require 'nyan-mode)

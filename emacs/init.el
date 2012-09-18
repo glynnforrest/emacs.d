@@ -249,7 +249,6 @@
 (delete-selection-mode t)
 (show-paren-mode t)
 (column-number-mode t)
-(set-fringe-style -1)
 (tooltip-mode -1)
 
 (define-key global-map (kbd "<mouse-3>") nil)
@@ -521,8 +520,8 @@ When enabled trailing whitespace is removed before saving."
   :lighter " W"
 
   (if remove-trailing-whitespace-mode
-      (add-hook 'before-save-hook 'delete-trailing-whitespace)
-    (remove-hook 'before-save-hook 'delete-trailing-whitespace)))
+	  (add-hook 'before-save-hook 'delete-trailing-whitespace)
+	(remove-hook 'before-save-hook 'delete-trailing-whitespace)))
 
 (remove-trailing-whitespace-mode t)
 
@@ -607,6 +606,7 @@ When enabled trailing whitespace is removed before saving."
 (evil-declare-key 'normal wdired-mode-map ",e" 'wdired-finish-edit)
 (evil-declare-key 'normal wdired-mode-map ",a" 'wdired-abort-changes)
 (define-key dired-mode-map (kbd "M-b") 'ido-switch-buffer)
+(define-key dired-mode-map (kbd "C-h") 'evil-window-left)
 (toggle-diredp-find-file-reuse-dir 1)
 
 (global-set-key (kbd "C-8") '(lambda()(interactive)(djcb-opacity-modify t)))
