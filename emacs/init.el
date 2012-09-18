@@ -561,9 +561,18 @@ When enabled trailing whitespace is removed before saving."
 (require 'php-mode)
 
 (add-hook 'php-mode-hook (lambda()
-						  (define-key evil-insert-state-map ";" 'electric-semicolon)))
+						   (setup-electric-semicolon(php-mode-map))))
+
+(defun setup-electric-semicolon (mode-map)
+  "Adds mappings for electric semicolon to MODE-MAP.
+Press ; for electric-semicolon, C-; to insert a semicolon."
+  (evil-declare-key 'insert mode-map ";" 'electric-semicolon)
+  (evil-declare-key 'insert mode-map (kbd "C-;") (lambda()
+												   (interactive)
+												   (insert ";"))))
 
 (defun electric-semicolon ()
+  "Inserts a semicolon at the end of the current line if not already there."
   (interactive)
   (end-of-line)
   (when (not (looking-back ";"))
