@@ -56,6 +56,10 @@
   (normal-top-level-add-subdirs-to-load-path))
 (add-to-list 'load-path emacs-dir)
 
+;; Load custom settings
+(setq custom-file "~/.emacs.d/custom.el")
+(load custom-file 'noerror)
+
 ;; Load appearance settings
 (require 'init-appearance)
 
