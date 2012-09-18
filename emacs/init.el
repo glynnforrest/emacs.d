@@ -175,7 +175,7 @@
   (setq-default ac-sources '(ac-source-yasnippet-glynn ac-source-dictionary ac-source-words-in-same-mode-buffers))
   (add-hook 'emacs-lisp-mode-hook (lambda()
 									(setq ac-sources (append '(ac-source-features ac-source-functions ac-source-variables ac-source-symbols) ac-sources))))
-  (add-hook 'css-mode-hook (lambda ()
+  (add-hook 'css-mode-hook (lambda()
 							 (setq ac-sources (append '(ac-source-css-property) ac-sources))))
   (global-auto-complete-mode t)
   (setq ac-auto-start 2))
@@ -195,9 +195,6 @@
 (require 'autopair)
 (setq autopair-blink nil)
 (autopair-global-mode t)
-
-(require 'rainbow-delimiters)
-(global-rainbow-delimiters-mode t)
 
 (recentf-mode 1)
 (defun recentf-ido-find-file ()

@@ -25,6 +25,10 @@
 (setq evil-normal-state-cursor '("#38a2ea" box))
 (setq evil-emacs-state-cursor '("#d72626" bar))
 
+;; Pretty parenthesis
+(require 'rainbow-delimiters)
+(global-rainbow-delimiters-mode t)
+
 ;; Setup line numbers and remove fringes
 (setq linum-format (lambda (line)
   (propertize
