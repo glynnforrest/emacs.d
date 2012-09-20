@@ -176,7 +176,12 @@
 	(symbol . "snip")))
 
 (defun ac-config-glynn ()
-  (setq-default ac-sources '(ac-source-yasnippet-glynn ac-source-dictionary ac-source-words-in-same-mode-buffers))
+  (setq-default ac-sources '(
+							 ac-source-yasnippet-glynn
+							 ac-source-dictionary
+							 ac-source-words-in-same-mode-buffers
+							 ac-source-filename
+							 ))
   (add-hook 'emacs-lisp-mode-hook (lambda()
 									(setq ac-sources (append '(ac-source-features ac-source-functions ac-source-variables ac-source-symbols) ac-sources))))
   (add-hook 'css-mode-hook (lambda()
@@ -559,10 +564,10 @@ When enabled trailing whitespace is removed before saving."
 (setq mweb-filename-extensions '("php" "php4" "php5"))
 (define-key evil-normal-state-map ",q" 'multi-web-mode)
 
-(require 'php-mode)
+;; (require 'php-mode)
 
 (add-hook 'php-mode-hook (lambda()
-						   (setup-electric-semicolon(php-mode-map))))
+						   (setup-electric-semicolon php-mode-map)))
 
 (defun setup-electric-semicolon (mode-map)
   "Adds mappings for electric semicolon to MODE-MAP.
