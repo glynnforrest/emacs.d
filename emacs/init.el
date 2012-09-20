@@ -564,7 +564,7 @@ When enabled trailing whitespace is removed before saving."
 (setq mweb-filename-extensions '("php" "php4" "php5"))
 (define-key evil-normal-state-map ",q" 'multi-web-mode)
 
-;; (require 'php-mode)
+(require 'php-mode)
 
 (add-hook 'php-mode-hook (lambda()
 						   (setup-electric-semicolon php-mode-map)))
