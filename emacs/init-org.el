@@ -56,6 +56,13 @@
 (evil-declare-key 'normal org-mode-map (kbd "<return>") 'org-open-at-point)
 (define-key org-mode-map (kbd "C-S-<up>") 'delete-other-windows)
 
+;; Vim style navigation
+(evil-declare-key 'normal org-mode-map (kbd "C-c h") 'outline-up-heading)
+(evil-declare-key 'normal org-mode-map (kbd "C-c j") 'outline-next-visible-heading)
+(evil-declare-key 'normal org-mode-map (kbd "C-c k") 'outline-previous-visible-heading)
+(evil-declare-key 'normal org-mode-map (kbd "C-c C-j") 'org-forward-same-level)
+(evil-declare-key 'normal org-mode-map (kbd "C-c C-k") 'org-backward-same-level)
+
 (setq org-capture-templates
       '(("t" "Todo" entry (file+headline org-default-notes-file "Unsorted")
          "* TODO %?")
