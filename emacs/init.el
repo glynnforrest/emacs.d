@@ -93,6 +93,25 @@
 (define-key evil-normal-state-map "k" 'evil-previous-visual-line)
 (define-key evil-normal-state-map "gk" 'evil-previous-line)
 
+;; Centre screen around a search
+(defadvice
+    evil-search-forward
+    (after evil-search-forward-recenter activate)
+    (recenter))
+(ad-activate 'evil-search-forward)
+
+(defadvice
+    evil-search-next
+    (after evil-search-next-recenter activate)
+    (recenter))
+(ad-activate 'evil-search-next)
+
+(defadvice
+    evil-search-previous
+    (after evil-search-previous-recenter activate)
+    (recenter))
+(ad-activate 'evil-search-previous)
+
 ;; Start in insert mode / emacs for some modes
 (add-to-list 'evil-emacs-state-modes 'package-menu-mode)
 (evil-set-initial-state 'package-menu-mode 'normal)
@@ -358,22 +377,39 @@
 (evil-declare-key 'normal occur-edit-mode-map ",e" 'occur-cease-edit)
 
 ;; Preview occurrences in occur and grep without leaving the buffer
-(define-key occur-mode-map (kbd "<return>") 'occur-mode-display-occurrence)
-(define-key occur-mode-map (kbd "<S-return>") 'occur-mode-goto-occurrence)
-(evil-declare-key 'normal occur-mode-map (kbd "<return>") 'occur-mode-display-occurrence)
-(evil-declare-key 'normal occur-mode-map (kbd "<S-return>") 'occur-mode-goto-occurrence)
+(defun occur-goto-occurrence-recenter ()
+  "Go to the occurrence on the current line and recenter."
+  (interactive)
+  (occur-mode-goto-occurrence)
+  (recenter))
 
-(defun grep-display-occurrence ()
-  "Display in another window the grep result of the current line."
+(defun occur-display-occurrence-recenter ()
+  "Display the occurrence on the current line in another window and recenter."
+  (interactive)
+  (occur-goto-occurrence-recenter)
+  (other-window 1))
+
+(define-key occur-mode-map (kbd "<return>") 'occur-display-occurrence-recenter)
+(define-key occur-mode-map (kbd "<S-return>") 'occur-goto-occurrence-recenter)
+(evil-declare-key 'normal occur-mode-map (kbd "<return>") 'occur-display-occurrence-recenter)
+(evil-declare-key 'normal occur-mode-map (kbd "<S-return>") 'occur-goto-occurrence-recenter)
+
+(defun grep-goto-occurrence-recenter ()
+  "Go to the occurrence on the current line and recenter."
   (interactive)
   (compile-goto-error)
-  (other-window 1)
-  )
+  (recenter))
 
-(define-key grep-mode-map (kbd "<return>") 'grep-display-occurrence)
-(define-key grep-mode-map (kbd "<S-return>") 'compile-goto-error)
-(evil-declare-key 'normal grep-mode-map (kbd "<return>") 'grep-display-occurrence)
-(evil-declare-key 'normal grep-mode-map (kbd "<S-return>") 'compile-goto-error)
+(defun grep-display-occurrence-recenter ()
+  "Display the grep result of the current line in another window and recenter."
+  (interactive)
+  (grep-goto-occurrence-recenter)
+  (other-window 1))
+
+(define-key grep-mode-map (kbd "<return>") 'grep-display-occurrence-recenter)
+(define-key grep-mode-map (kbd "<S-return>") 'grep-goto-occurrence-recenter)
+(evil-declare-key 'normal grep-mode-map (kbd "<return>") 'grep-display-occurrence-recenter)
+(evil-declare-key 'normal grep-mode-map (kbd "<S-return>") 'grep-goto-occurrence-recenter)
 
 
 (define-key evil-normal-state-map ",C" 'cd)
