@@ -471,7 +471,12 @@
 (define-key evil-normal-state-map " " 'evil-ex)
 (define-key evil-visual-state-map " " 'evil-ex)
 (define-key evil-visual-state-map ",n" 'narrow-to-region)
-(define-key evil-normal-state-map ",n" 'widen)
+(define-key evil-normal-state-map ",N" 'narrow-to-defun)
+(evil-declare-key 'normal org-mode-map ",N" 'org-narrow-to-subtree)
+(define-key evil-normal-state-map ",n" (lambda()
+										 (interactive)
+										 (widen)
+										 (recenter)))
 
 (defun open-init-file ()
   (interactive)
