@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: lilypond babel
+# key: lily
+# --
+#+begin_src lilypond :file /tmp/$1.png
+  $0
+#+end_src
