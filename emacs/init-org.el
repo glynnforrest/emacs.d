@@ -24,8 +24,8 @@
 (setq org-agenda-files (list org-default-notes-file))
 
 (defun find-file-in-org-directory ()
-  "Find a file in `org-directory`. This function depends on the
-`projectile` package."
+  "Find a file in `org-directory`.
+This function depends on the `projectile` package."
   (interactive)
   (let* ((project-files (projectile-hashify-files
                          (projectile-get-project-files org-directory)))
@@ -63,6 +63,24 @@
 (define-key org-mode-map (kbd "C-c C-j") 'org-forward-same-level)
 (define-key org-mode-map (kbd "C-c C-k") 'org-backward-same-level)
 
+(setq org-todo-keywords
+       '((sequence "TODO" "DONE" "WAITING")))
+
+(setq org-todo-keyword-faces
+      (quote (("TODO" :foreground "#dc322f" :weight bold)
+              ("DONE" :foreground "forest green" :weight bold :strike-through t)
+              ("WAITING" :foreground "#89BDFF" :weight bold))))
+
+(evil-declare-key 'normal org-mode-map "^" (lambda()
+											 (interactive)
+											 (beginning-of-line)
+											 (evil-forward-word-begin)
+											 (if (looking-at-p "TODO\\|DONE") (evil-forward-word-begin))
+											 ))
+
+(evil-declare-key 'normal org-mode-map (kbd "M-i") 'org-display-inline-images)
+(evil-declare-key 'normal org-mode-map (kbd "M-I") 'org-remove-inline-images)
+
 (setq org-capture-templates
       '(("t" "Todo" entry (file+headline org-default-notes-file "Unsorted")
          "* TODO %?")
@@ -72,5 +90,20 @@
          "* %?")
         ("h" "Linked Note" entry (file+headline org-default-notes-file "Unsorted")
          "* %?\n%a")))
+
+;;babel
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '((emacs-lisp . t)
+   (python . t)
+   (lilypond . t)
+   (sh . t)
+   ))
+
+(setq org-confirm-babel-evaluate nil)
+(setq org-src-fontify-natively t)
+(setq org-src-tab-acts-natively t)
+
+(evil-declare-key 'normal org-mode-map ",e" 'org-ctrl-c-ctrl-c)
 
 (provide 'init-org)
