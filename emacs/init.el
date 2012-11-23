@@ -17,6 +17,7 @@
 	color-theme
 	color-theme-monokai
 	dired+
+	elscreen
 	evil
 	helm
 	helm-git
@@ -703,3 +704,13 @@ Press ; for electric-semicolon, C-; to insert a semicolon."
 ;; node REPL
 (require 'js-comint)
 (setq inferior-js-program-command "env NODE_NO_READLINE=1 node")
+
+(require 'elscreen)
+
+(define-key global-map (kbd "M-<right>") 'elscreen-next)
+(define-key global-map (kbd "M-<left>") 'elscreen-previous)
+(define-key global-map (kbd "M-<up>") (lambda()
+										(interactive)
+										(elscreen-start)
+										(elscreen-create)))
+(define-key global-map (kbd "M-<down>") 'elscreen-kill)
