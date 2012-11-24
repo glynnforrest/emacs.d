@@ -513,6 +513,12 @@
 (define-key evil-normal-state-map (kbd "C-S-j") 'evil-window-decrease-height)
 (define-key evil-normal-state-map (kbd "C-S-h") 'evil-window-decrease-width)
 
+(define-key global-map (kbd "C-+") 'text-scale-increase)
+(define-key global-map (kbd "C--") 'text-scale-decrease)
+(define-key global-map (kbd "C-'") (lambda()
+									 (interactive)
+									 (text-scale-set 0)))
+
 (defun move-line-up-and-indent ()
   (interactive)
   (transpose-lines 1)
