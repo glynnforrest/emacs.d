@@ -720,3 +720,8 @@ Press ; for electric-semicolon, C-; to insert a semicolon."
 										(elscreen-start)
 										(elscreen-create)))
 (define-key global-map (kbd "M-<down>") 'elscreen-kill)
+
+;; lilypond
+(autoload 'LilyPond-mode "lilypond-mode" "LilyPond Editing Mode" t)
+(add-to-list 'auto-mode-alist '("\\.ly$" . LilyPond-mode))
+
