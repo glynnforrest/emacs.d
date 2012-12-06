@@ -131,6 +131,7 @@
 (require 'helm)
 (define-key evil-normal-state-map ",p" 'helm-show-kill-ring)
 (setq x-select-enable-clipboard t)
+(define-key evil-normal-state-map ",z" 'helm-imenu)
 
 (defun comment-or-uncomment-line ()
   "Comments or uncomments the current line."
@@ -150,7 +151,10 @@
 (global-set-key (kbd "M-X") 'smex-major-mode-commands)
 
 (require 'test-case-mode)
-(define-key evil-normal-state-map ",t" 'test-case-run)
+(define-key evil-normal-state-map ",t" (lambda()
+										 (interactive)
+										 (save-buffer)
+										 (test-case-run)))
 (define-key evil-normal-state-map ",T" 'test-case-run-all)
 
 ;; yasnippet

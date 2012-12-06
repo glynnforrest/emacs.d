@@ -74,7 +74,7 @@ This function depends on the `projectile` package."
 (evil-declare-key 'normal org-mode-map "^" (lambda()
 											 (interactive)
 											 (beginning-of-line)
-											 (evil-forward-word-begin)
+											 (if (looking-at-p "*") (evil-forward-word-begin))
 											 (if (looking-at-p "TODO\\|DONE") (evil-forward-word-begin))
 											 ))
 
