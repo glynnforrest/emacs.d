@@ -28,7 +28,7 @@
 This function depends on the `projectile` package."
   (interactive)
   (let* ((project-files (projectile-hashify-files
-                         (projectile-get-project-files org-directory)))
+                         (projectile-project-files org-directory)))
          (file (ido-completing-read "File org file: "
                                     (loop for k being the hash-keys in project-files collect k))))
     (find-file (gethash file project-files))))
