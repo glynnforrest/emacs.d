@@ -24,8 +24,8 @@
 (setq org-agenda-files (list org-default-notes-file))
 
 (defun find-file-in-org-directory ()
-  "Find a file in `org-directory`.
-This function depends on the `projectile` package."
+  "Find a file in `org-directory`. This function depends on the
+`projectile` package."
   (interactive)
   (let* ((project-files (projectile-hashify-files
                          (projectile-project-files org-directory)))

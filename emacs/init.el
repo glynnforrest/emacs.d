@@ -694,11 +694,21 @@ Press ; for electric-semicolon, C-; to insert a semicolon."
 
 ;; ERC
 (require 'erc)
+(require 'erc-spelling)
 ;; my-erc-nick should be in personal.el
 (setq erc-nick my-erc-nick)
 (add-hook 'erc-mode-hook (lambda ()
 						   (interactive)
-						   (linum-mode -1)))
+						   (linum-mode -1)
+						   (erc-spelling-mode)))
+(evil-declare-key 'normal erc-mode-map "cc" (lambda()
+											  (interactive)
+											  (goto-line (buffer-end 1))
+											  (beginning-of-line)
+											  (evil-forward-WORD-begin)
+											  (delete-region (point) (line-end-position))
+											  (evil-insert-state)
+											  ))
 
 ;; eshell
 (require 'eshell)
