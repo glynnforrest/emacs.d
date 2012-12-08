@@ -692,6 +692,14 @@ Press ; for electric-semicolon, C-; to insert a semicolon."
 
 (define-key global-map (kbd "<f9>") 'toggle-writeroom)
 
+;; Flyspell
+(setq flyspell-issue-message-flag nil)
+(define-key evil-normal-state-map "]s" 'flyspell-goto-next-error)
+(define-key evil-normal-state-map "z=" 'ispell-word)
+
+(dolist (hook '(org-mode-hook magit-log-mode-hook))
+  (add-hook hook (lambda () (flyspell-mode 1))))
+
 ;; ERC
 (require 'erc)
 (require 'erc-spelling)
