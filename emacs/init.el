@@ -727,15 +727,17 @@ Press ; for electric-semicolon, C-; to insert a semicolon."
 
 (require 'elscreen)
 
+(elscreen-start)
+
 (define-key global-map (kbd "M-<right>") 'elscreen-next)
 (define-key global-map (kbd "M-<left>") 'elscreen-previous)
-(define-key global-map (kbd "M-<up>") (lambda()
-										(interactive)
-										(elscreen-start)
-										(elscreen-create)))
+(define-key global-map (kbd "M-<up>") 'elscreen-create)
 (define-key global-map (kbd "M-<down>") 'elscreen-kill)
+(define-key org-mode-map (kbd "M-<right>") 'elscreen-next)
+(define-key org-mode-map (kbd "M-<left>") 'elscreen-previous)
+(define-key org-mode-map (kbd "M-<up>") 'elscreen-create)
+(define-key org-mode-map (kbd "M-<down>") 'elscreen-kill)
 
 ;; lilypond
 (autoload 'LilyPond-mode "lilypond-mode" "LilyPond Editing Mode" t)
 (add-to-list 'auto-mode-alist '("\\.ly$" . LilyPond-mode))
-
