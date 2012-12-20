@@ -90,11 +90,6 @@
 (evil-mode 1)
 
 (setq evil-default-cursor t)
-(setq evil-ex-search-highlight-all nil)
-(setq evil-ex-search-vim-style-regexp t)
-(setq evil-search-module 'evil-search)
-(setq evil-want-C-u-scroll t)
-(setq evil-want-fine-undo t)
 
 (require 'evil-numbers)
 (define-key evil-normal-state-map (kbd "C-a") 'evil-numbers/inc-at-pt)
