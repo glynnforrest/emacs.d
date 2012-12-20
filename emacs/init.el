@@ -72,6 +72,12 @@
 (unless (server-running-p)
   (server-start))
 
+(defun my-kill-emacs ()
+  "Save some buffers, then exit unconditionally"
+  (interactive)
+  (save-some-buffers t)
+  (kill-emacs))
+
 ;;Allows launching from chrome textareas
 (require 'edit-server nil t)
 (unless (process-status "edit-server")
@@ -93,6 +99,10 @@
 (define-key evil-normal-state-map "gj" 'evil-next-line)
 (define-key evil-normal-state-map "k" 'evil-previous-visual-line)
 (define-key evil-normal-state-map "gk" 'evil-previous-line)
+
+;; Save point position between sessions
+(require 'saveplace)
+(setq-default save-place t)
 
 ;; Centre screen around a search
 (defadvice
