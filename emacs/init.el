@@ -281,8 +281,6 @@
 	  (unless (file-exists-p dir)
 		(make-directory dir)))))
 
-(global-linum-mode 1)
-
 (setq make-backup-files nil)
 (setq auto-save-default nil)
 ;; Use tabs
@@ -307,10 +305,21 @@
 (define-key global-map (kbd "C-<left>") 'previous-buffer)
 
 ;; Go to scratch buffer quickly
-(define-key global-map (kbd "M-/") (lambda()
-									 (interactive)
-									 (switch-to-buffer "*scratch*")
-									 ))
+(defun switch-to-scratch-buffer()
+  "Switch to the scratch buffer. If the buffer doesn't exist,
+create it and write the initial message into it."
+  (interactive)
+  (let* ((scratch-buffer-name "*scratch*")
+         (scratch-buffer (get-buffer scratch-buffer-name)))
+    (unless scratch-buffer
+      (setq scratch-buffer (get-buffer-create scratch-buffer-name))
+      (with-current-buffer scratch-buffer
+        (lisp-interaction-mode)
+        (insert initial-scratch-message)))
+    (switch-to-buffer scratch-buffer)))
+
+(define-key global-map (kbd "M-/") 'switch-to-scratch-buffer)
+
 ;; Go to eshell buffer quickly
 (define-key global-map (kbd "M-?") (lambda()
 									 (interactive)
