@@ -722,14 +722,30 @@ Press ; for electric-semicolon, C-; to insert a semicolon."
 						   (interactive)
 						   (linum-mode -1)
 						   (erc-spelling-mode)))
-(evil-declare-key 'normal erc-mode-map "cc" (lambda()
-											  (interactive)
-											  (goto-line (buffer-end 1))
-											  (beginning-of-line)
-											  (evil-forward-WORD-begin)
-											  (delete-region (point) (line-end-position))
-											  (evil-insert-state)
-											  ))
+
+(defun gf-erc-goto-and-clear-prompt ()
+  "Go to the bottom of the ERC buffer and clear the input,
+placing cursor at the start of the prompt."
+  (interactive)
+  (goto-line (buffer-end 1))
+  (beginning-of-line)
+  (evil-forward-WORD-begin)
+  (delete-region (point) (line-end-position))
+  (evil-insert-state))
+
+;; crappy hack to write and send text to a channel
+(defun gf-erc-write-and-send (text)
+  "Write `text` in the ERC buffer and send."
+  (gf-erc-goto-and-clear-prompt)
+  (insert text)
+  (erc-send-current-line))
+
+(evil-declare-key 'normal erc-mode-map "C" 'gf-erc-goto-and-clear-prompt)
+
+;; print the topic when joining a channel
+(add-hook 'erc-join-hook (lambda()
+						   (gf-erc-write-and-send "/topic")
+						   ))
 
 ;; eshell
 (require 'eshell)
@@ -762,3 +778,15 @@ Press ; for electric-semicolon, C-; to insert a semicolon."
 ;; lilypond
 (autoload 'LilyPond-mode "lilypond-mode" "LilyPond Editing Mode" t)
 (add-to-list 'auto-mode-alist '("\\.ly$" . LilyPond-mode))
+
+(defun ielm-auto-complete ()
+  "Enables `auto-complete' support in \\[ielm]."
+  (setq ac-sources '(ac-source-functions
+                     ac-source-variables
+                     ac-source-features
+                     ac-source-symbols
+                     ac-source-words-in-same-mode-buffers))
+  (add-to-list 'ac-modes 'inferior-emacs-lisp-mode)
+  (auto-complete-mode 1))
+
+(add-hook 'ielm-mode-hook 'ielm-auto-complete)
