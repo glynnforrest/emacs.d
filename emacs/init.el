@@ -88,7 +88,14 @@
 ;; evil
 (require 'evil)
 (evil-mode 1)
+
 (setq evil-default-cursor t)
+(setq evil-ex-search-highlight-all nil)
+(setq evil-ex-search-vim-style-regexp t)
+(setq evil-search-module 'evil-search)
+(setq evil-want-C-u-scroll t)
+(setq evil-want-fine-undo t)
+
 (require 'evil-numbers)
 (define-key evil-normal-state-map (kbd "C-a") 'evil-numbers/inc-at-pt)
 (define-key evil-normal-state-map (kbd "C-S-a") 'evil-numbers/dec-at-pt)
@@ -331,7 +338,6 @@
 (require 'help-mode)
 (define-key help-mode-map (kbd "C-<down>") 'kill-this-buffer)
 
-(define-key evil-normal-state-map (kbd "C-u") 'evil-scroll-up)
 (define-key evil-normal-state-map ",w" 'save-buffer)
 (define-key evil-insert-state-map (kbd "C-s") 'save-buffer)
 
