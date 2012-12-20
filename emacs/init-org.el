@@ -15,7 +15,7 @@
 
 ;;Notes are grouped by months for automatic archival.
 ;;At the start of every month move over notes that are still relevant.
-(setq org-directory "~/Notes/")
+(setq org-directory "~/notes/")
 (setq org-default-notes-file (concat org-directory "dates/" (downcase (format-time-string "%Y-%B.org"))))
 (setq org-files (file-expand-wildcards (concat org-directory "*/*.org")))
 (setq org-refile-targets
@@ -23,22 +23,14 @@
 		(nil :maxlevel . 1)))
 (setq org-agenda-files (list org-default-notes-file))
 
-(defun find-file-in-org-directory ()
-  "Find a file in `org-directory`. This function depends on the
-`projectile` package."
-  (interactive)
-  (let* ((project-files (projectile-hashify-files
-                         (projectile-project-files org-directory)))
-         (file (ido-completing-read "File org file: "
-                                    (loop for k being the hash-keys in project-files collect k))))
-    (find-file (gethash file project-files))))
-
 (define-key global-map (kbd "M-n") 'org-capture)
 (define-key global-map (kbd "M-N") (lambda()
                                      (interactive)
                                      (find-file org-default-notes-file)
                                      ))
-(define-key evil-normal-state-map (kbd "C-M-n") 'find-file-in-org-directory)
+(define-key global-map (kbd "C-M-n") (lambda ()
+									   (interactive)
+									   (gf-find-file-in-directory org-directory "Find org file: ")))
 (evil-declare-key 'normal org-mode-map (kbd "C-t") 'org-todo)
 (evil-declare-key 'insert org-mode-map (kbd "C-t") 'org-todo)
 (evil-declare-key 'normal org-mode-map (kbd "C-m") 'org-refile)
@@ -55,6 +47,8 @@
                                                             ))
 (evil-declare-key 'normal org-mode-map (kbd "<return>") 'org-open-at-point)
 (define-key org-mode-map (kbd "C-S-<up>") 'delete-other-windows)
+(define-key org-mode-map (kbd "C-j") 'evil-window-down)
+(define-key org-mode-map (kbd "C-k") 'evil-window-up)
 
 ;; Vim style navigation
 (define-key org-mode-map (kbd "C-c h") 'outline-up-heading)
@@ -74,8 +68,9 @@
 (evil-declare-key 'normal org-mode-map "^" (lambda()
 											 (interactive)
 											 (beginning-of-line)
+											 (if (looking-at-p " ") (evil-forward-word-begin))
 											 (if (looking-at-p "*") (evil-forward-word-begin))
-											 (if (looking-at-p "TODO\\|DONE") (evil-forward-word-begin))
+											 (if (looking-at-p "TODO\\|DONE\\|WAITING") (evil-forward-word-begin))
 											 ))
 
 (evil-declare-key 'normal org-mode-map (kbd "M-i") 'org-display-inline-images)

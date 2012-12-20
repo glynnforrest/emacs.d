@@ -499,6 +499,20 @@
 										 (widen)
 										 (recenter)))
 
+
+(defun gf-find-file-in-directory (directory prompt)
+  "Find a file in DIRECTORY using ido. This function depends on the
+`projectile` package."
+  (let* ((project-files (projectile-hashify-files
+                         (projectile-project-files directory)))
+         (file (ido-completing-read prompt
+                                    (loop for k being the hash-keys in project-files collect k))))
+    (find-file (gethash file project-files))))
+
+(define-key global-map (kbd "C-M-e") (lambda ()
+									   (interactive)
+									   (gf-find-file-in-directory "~/.emacs.d"
+																  "Find in emacs folder: ")))
 (defun open-init-file ()
   (interactive)
   (find-file "~/.emacs.d/init.el"))
