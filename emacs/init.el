@@ -666,9 +666,12 @@ Press ; for electric-semicolon, C-; to insert a semicolon."
 (defun electric-semicolon ()
   "Inserts a semicolon at the end of the current line if not already there."
   (interactive)
+  (let ((beg (point)))
   (end-of-line)
-  (when (not (looking-back ";"))
-    (insert ";")))
+  (if (not (looking-back ";"))
+    (insert ";")
+	(goto-char beg)
+	)))
 
 (defun file-has-doctype ()
   (if (string= (upcase (buffer-substring-no-properties 1 10)) "<!DOCTYPE") t nil))
