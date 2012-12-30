@@ -56,6 +56,10 @@
 (define-key org-mode-map (kbd "C-c k") 'outline-previous-visible-heading)
 (define-key org-mode-map (kbd "C-c C-j") 'org-forward-same-level)
 (define-key org-mode-map (kbd "C-c C-k") 'org-backward-same-level)
+(define-key org-mode-map (kbd "C-c g") (lambda ()
+										 (interactive)
+										 (org-forward-same-level 1)
+										 (previous-line 1)))
 
 (setq org-todo-keywords
        '((sequence "TODO" "DONE" "WAITING")))
