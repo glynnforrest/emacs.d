@@ -58,6 +58,7 @@
 (define-key org-mode-map (kbd "C-c C-k") 'org-backward-same-level)
 (define-key org-mode-map (kbd "C-c g") (lambda ()
 										 (interactive)
+										 (re-search-backward "^\* ")
 										 (org-forward-same-level 1)
 										 (previous-line 1)))
 
