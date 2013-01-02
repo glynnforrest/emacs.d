@@ -1,20 +1,22 @@
-#!/bin/bash
+#!/bin/sh
 
-function create_link {
-	source="${PWD}/$1"
-    target="${HOME}/${1/_/.}"
+# Absolute path to this script
+SCRIPT=`readlink -f $0`
+# Absolute path this script is in
+SCRIPTPATH=`dirname $SCRIPT`
 
-	if [ -f ${target} ]; then
-		mv ${target} ${target}.bak
-		echo "Moving existing $target to $target.bak"
-	fi
+link (){
+    FROM="$SCRIPTPATH/$1"
+    TO=$2
 
-	ln -sf ${source} ${target}
-	echo "Linking $source to $target"
+    printf "ln -s %s %s\n" $FROM $TO
 
+    rm $TO
+    ln -s $FROM $TO
 }
 
-for i in _*
-do
-	create_link $i
-done
+link . ~/.dotfiles
+link zshrc ~/.zshrc
+link gitconfig ~/.gitconfig
+link bashrc ~/.bashrc
+link xmonad ~/.xmonad

@@ -14,10 +14,15 @@ if command_exists fortune; then
 	fortune
 fi
 
+#And now for some motivation
+echo
+echo 'You have' $(grep '^\*+ TODO' -E ~/notes/dates/$(date +%Y-%B.org | tr '[A-Z]' '[a-z]') | wc -l) 'todos.'
+echo
+
 #Use vim as the default editor (good for servers with no emacs)
 export EDITOR='vim'
 
-export TERM=konsole
+export TERM=xterm-256color
 
 #Edit file in an emacs session
 alias e='emacsclient -n'
@@ -45,7 +50,7 @@ mkcd () {
 
 #restart emacs server
 er () {
-	killall emacs; emacs -daemon
+	emacsclient -e '(my-kill-emacs)'; emacs -daemon
 }
 
 eb () {
@@ -53,7 +58,7 @@ eb () {
 }
 
 vb () {
-	e ~/.bashrc
+	v ~/.bashrc
 }
 
 alias sb="source ~/.bashrc"
@@ -137,19 +142,23 @@ else
 fi
 }
 
-#[user@host] cwd $ 
+#[user@host] cwd $
 PS1='\[\033[36m\][\[\033[37m\]\u\[\033[36m\]@\[\033[37m\]\h\[\033[36m\]]\[\033[37m\] \W/\[\033[32m\] $(git_branch)\[\033[36m\]$ \[\033[0m\]'
 
-#[user] cwd $ 
+#[user] cwd $
 #PS1='\[\033[36m\][\[\033[37m\]\u\[\033[36m\]]\[\033[37m\] \W/\[\033[32m\] $(git_branch)\[\033[36m\]$ \[\033[0m\]'
 
 #Get all the binaries
 PATH=$PATH:usr/include
 
-set visible-stats on 
+set visible-stats on
 
 #Autocomplete the following
 complete -cf sudo
 complete -cf man
 complete -cf bin
 complete -cf killall
+
+alias vx="vim /home/glynn/.xmonad/xmonad.hs"
+alias re="xmonad --recompile"
+alias youtube-mp3="youtube-dl -t --extract-audio --audio-format mp3 --audio-quality 320k"
