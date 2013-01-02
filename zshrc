@@ -42,6 +42,7 @@ export PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/usr/bi
 
 # My customisations
 setopt autocd
+unsetopt correct_all
 
 #Common aliases
 alias ls='ls -h --group-directories-first --color=always'

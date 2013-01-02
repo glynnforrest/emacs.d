@@ -99,6 +99,12 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     -- state 0x0, keycode 123 (keysym 0x1008ff13, XF86AudioRaiseVolume), same_screen YES,
     -- state 0x0, keycode 121 (keysym 0x1008ff12, XF86AudioMute), same_screen YES,
 
+    -- brightness keys aren't seen with xev for some reason, so using modm instead of fn
+
+    , ((modm,				xK_F8     ), spawn "xbacklight -dec 20")
+
+    , ((modm,				xK_F9     ), spawn "xbacklight -inc 30")
+
     -- close focused window
     , ((modm .|. shiftMask, xK_c     ), kill)
 
