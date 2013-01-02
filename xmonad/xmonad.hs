@@ -7,15 +7,23 @@
 -- Normally, you'd only override those defaults you care about.
 --
 
-import XMonad
 import System.Exit
+import XMonad
 import XMonad.Hooks.DynamicLog
+import Control.Monad (liftM2)
 import XMonad.Hooks.ManageDocks
+import XMonad.Hooks.ManageHelpers
+import XMonad.Hooks.SetWMName
+import XMonad.Layout.Fullscreen
+import XMonad.Layout.NoBorders
 import XMonad.Layout.Spacing
+import XMonad.Layout.Spiral
+import XMonad.Layout.Tabbed
+import XMonad.Util.EZConfig(additionalKeys)
 import XMonad.Util.Run(spawnPipe)
 
-import qualified XMonad.StackSet as W
 import qualified Data.Map        as M
+import qualified XMonad.StackSet as W
 
 -- The preferred terminal program, which is used in a binding below and by
 -- certain contrib modules.
@@ -57,7 +65,7 @@ myNumlockMask   = mod2Mask
 --
 -- > workspaces = ["web", "irc", "code" ] ++ map show [4..9]
 --
-myWorkspaces    = ["emacs","www","term","comms","vm","calendar","mail","music"]
+myWorkspaces    = ["1:term","2:emacs","3:www","4:comms","5:vm","6:calendar","7:mail","8:music"]
 
 -- Border colors for unfocused and focused windows, respectively.
 --
@@ -80,6 +88,16 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 
     -- launch chromium
     , ((modm,				xK_z     ), spawn "chromium")
+
+    -- volume controls
+    , ((0                     , 0x1008FF11), spawn "amixer set Master 5-")
+    , ((0                     , 0x1008FF13), spawn "amixer set Master 5+")
+    , ((0                     , 0x1008FF12), spawn "amixer set Master toggle")
+
+    -- xev output
+    -- state 0x0, keycode 122 (keysym 0x1008ff11, XF86AudioLowerVolume), same_screen YES,
+    -- state 0x0, keycode 123 (keysym 0x1008ff13, XF86AudioRaiseVolume), same_screen YES,
+    -- state 0x0, keycode 121 (keysym 0x1008ff12, XF86AudioMute), same_screen YES,
 
     -- close focused window
     , ((modm .|. shiftMask, xK_c     ), kill)
@@ -129,9 +147,6 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     -- Deincrement the number of windows in the master area
     , ((modm              , xK_period), sendMessage (IncMasterN (-1)))
 
-    -- toggle the status bar gap (used with avoidStruts from Hooks.ManageDocks)
-    -- , ((modm , xK_b ), sendMessage ToggleStruts)
-
     -- Quit xmonad
     , ((modm .|. shiftMask, xK_q     ), io (exitWith ExitSuccess))
 
@@ -147,16 +162,6 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     [((m .|. modm, k), windows $ f i)
         | (i, k) <- zip (XMonad.workspaces conf) [xK_1 .. xK_9]
         , (f, m) <- [(W.greedyView, 0), (W.shift, shiftMask)]]
-    -- ++
-
-    --
-    -- mod-{w,e,r}, Switch to physical/Xinerama screens 1, 2, or 3
-    -- mod-shift-{w,e,r}, Move client to screen 1, 2, or 3
-    --
-    -- [((m .|. modm, key), screenWorkspace sc >>= flip whenJust (windows . f))
-    --     | (key, sc) <- zip [xK_w, xK_e, xK_r] [0..]
-    --     , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]]
-
 
 ------------------------------------------------------------------------
 -- Mouse bindings: default actions bound to mouse events
@@ -217,10 +222,11 @@ myLayout = avoidStruts $ tiled ||| Mirror tiled ||| Full
 -- 'className' and 'resource' are used below.
 --
 myManageHook = composeAll
-    [ className =? "MPlayer"        --> doFloat
-    , className =? "Gimp"           --> doFloat
-    , resource  =? "desktop_window" --> doIgnore
-    , resource  =? "kdesktop"       --> doIgnore ]
+    [ className =? "Chromium"  --> viewShift "3:www"
+    -- [ className =? "Chromium"  --> doIgnore
+    , className =? "VirtualBox"     --> doShift "5:vm"
+    , isFullscreen --> (doF W.focusDown <+> doFullFloat)]
+    where viewShift = doF . liftM2 (.) W.greedyView W.shift
 
 -- Whether focus follows the mouse pointer.
 myFocusFollowsMouse :: Bool
@@ -259,11 +265,21 @@ myStartupHook = do
 main = do
     xmonad =<< statusBar myBar myPP toggleStrutsKey defaults
 
+
+-- Color of current window title in xmobar.
+xmobarTitleColor = "#FFB6B0"
+
+-- Color of current workspace in xmobar.
+xmobarCurrentWorkspaceColor = "#CEFFAC"
+
 -- Command to launch the bar.
 myBar = "xmobar"
 
 -- Custom PP, configure it as you like. It determines what is being written to the bar.
-myPP = xmobarPP { ppCurrent = xmobarColor "#429942" "" . wrap "<" ">" }
+myPP = xmobarPP {
+  ppCurrent = xmobarColor xmobarCurrentWorkspaceColor "" . wrap "|" "|"
+  , ppTitle = xmobarColor xmobarTitleColor "" . shorten 100
+  }
 
 -- Key binding to toggle the gap for the bar.
 toggleStrutsKey XConfig {XMonad.modMask = modMask} = (modMask, xK_b)
@@ -291,7 +307,7 @@ defaults = defaultConfig {
 
       -- hooks, layouts
         layoutHook         = avoidStruts $ myLayout,
-        manageHook         = manageHook defaultConfig <+> manageDocks,
+        manageHook         = manageDocks <+> myManageHook,
         handleEventHook = docksEventHook,
         logHook            = myLogHook,
         startupHook        = myStartupHook

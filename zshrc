@@ -62,17 +62,10 @@ er () {
 	emacsclient -e '(my-kill-emacs)'; emacs -daemon
 }
 
-eb () {
-	e ~/.bashrc
-}
+alias sz="source ~/.zshrc"
+alias ez="e ~/.zshrc"
 
-vb () {
-	v ~/.bashrc
-}
-
-alias zz="source ~/.zshrc"
-
-alias v='gvim --remote-silent'
+alias v='vim'
 alias png='ping www.google.com -c 5'
 alias get='packer'
 alias bin='sudo pacman -Rs'
@@ -83,6 +76,7 @@ alias pgr='pacman -Qq | grep -i' #Grep installed packages
 
 alias open="xdg-open"
 
+#Git aliases
 alias gst='git status'
 alias gch='git checkout'
 alias gco='git commit'
@@ -98,10 +92,13 @@ alias gme='git merge'
 alias gdi='git diff'
 alias gsu='git submodule'
 
-alias psgr='ps -A | grep -i' #Grep for a process
+#Grep for a process
+alias psgr='ps -A | grep -i'
 alias mysq='mysql -u root -p'
 alias starwars='telnet towel.blinkenlights.nl'
 
 placeholder () {
 	wget http://placekitten.com/$1/$2 -O $1\x$2.jpg
 }
+
+alias myip='curl canihazip.com/s/'

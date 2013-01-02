@@ -9,5 +9,5 @@ if [ -z "$(pgrep xcompmgr)" ] ; then
 fi
 
 if [ -z "$(pgrep emacs)" ] ; then
-	emacs -daemon 
+	emacs -daemon
 fi
