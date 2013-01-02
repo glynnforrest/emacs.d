@@ -11,12 +11,25 @@ link (){
 
     printf "ln -s %s %s\n" $FROM $TO
 
-    rm $TO
+	rm -f $TO
     ln -s $FROM $TO
 }
 
-link . ~/.dotfiles
-link zshrc ~/.zshrc
-link gitconfig ~/.gitconfig
-link bashrc ~/.bashrc
-link xmonad ~/.xmonad
+echo -e "WARNING: This script will clobber your config files."
+
+read -p "Install terminal stuff? (y/n) " -n 1 -r
+echo -e ""
+if [[ $REPLY =~ ^[Yy]$ ]]
+then
+	link . ~/.dotfiles
+	link zshrc ~/.zshrc
+	link gitconfig ~/.gitconfig
+	link bashrc ~/.bashrc
+fi
+
+read -p "Install xmonad and X11 stuff? (y/n) " -n 1 -r
+echo -e ""
+if [[ $REPLY =~ ^[Yy]$ ]]
+then
+	link xmonad ~/.xmonad
+fi
