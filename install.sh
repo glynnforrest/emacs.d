@@ -32,5 +32,6 @@ echo -e ""
 if [[ $REPLY =~ ^[Yy]$ ]]
 then
 	link xmonad ~/.xmonad
+	link xmobarrc ~/.xmobarrc
 	link Xresources ~/.Xresources
 fi
