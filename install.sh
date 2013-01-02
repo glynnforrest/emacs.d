@@ -22,7 +22,7 @@ echo -e ""
 if [[ $REPLY =~ ^[Yy]$ ]]
 then
 	link . ~/.dotfiles
-	link zshrc ~/.zshrc
+	link zshrc.sh ~/.zshrc
 	link gitconfig ~/.gitconfig
 	link bashrc ~/.bashrc
 fi
@@ -32,6 +32,6 @@ echo -e ""
 if [[ $REPLY =~ ^[Yy]$ ]]
 then
 	link xmonad ~/.xmonad
-	link xmobarrc ~/.xmobarrc
+	link xmobarrc.hs ~/.xmobarrc
 	link Xresources ~/.Xresources
 fi
