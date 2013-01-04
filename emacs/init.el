@@ -61,8 +61,10 @@
 (setq custom-file "~/.emacs.d/custom.el")
 (load custom-file 'noerror)
 
-;; Load appearance settings
-(require 'init-appearance)
+;; Load various customisations
+(require 'appearance)
+(require 'defuns)
+(require 'keymaps)
 
 ;; Load personal configurations, like usernames and passwords
 (require 'personal)

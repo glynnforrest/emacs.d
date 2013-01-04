@@ -29,17 +29,10 @@
 (require 'rainbow-delimiters)
 (global-rainbow-delimiters-mode t)
 
-;; Setup line numbers and remove fringes
-(setq linum-format (lambda (line)
-  (propertize
-   (format (concat "%"
-                   (number-to-string
-                    (length (number-to-string
-                             (line-number-at-pos (point-max)))))
-                   "d ")
-           line)
-   'face 'linum)))
+;; View colors
+(rainbow-mode t)
 
+;; Fringes are a pain
 (fringe-mode -1)
 
 ;; Change opacity of the frame.
@@ -78,4 +71,4 @@
 (nyan-mode t)
 (nyan-start-animation)
 
-(provide 'init-appearance)
+(provide 'appearance)
