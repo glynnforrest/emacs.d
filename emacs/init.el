@@ -262,6 +262,9 @@
 	  (remq 'process-kill-buffer-query-function
 			kill-buffer-query-functions))
 (setq ido-ignore-buffers (append '("^\*Completions\*" "^\*Help\*" "^\*magit-process\*" "^\*Compile-Log\*" "^\*vc-diff\*") ido-ignore-buffers))
+(setq ido-auto-merge-delay-time 99999)
+(add-hook 'ido-setup-hook (lambda ()
+     (define-key ido-file-completion-map (kbd "C-w") 'ido-delete-backward-word-updir)))
 
 ;; Prevent Emacs from auto-changing the working directory
 (defun find-file-keep-directory ()
