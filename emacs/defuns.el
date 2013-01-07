@@ -31,4 +31,13 @@ ERC buffer."
 		(when url
 		  (browse-url url)))))
 
+(defun evil-org-beginning-of-line ()
+  "Move to the beginning of the line in an org-mode file, ignoring
+TODO keywords, stars and list indicators."
+ (interactive)
+ (beginning-of-line)
+ (if (looking-at-p " ") (evil-forward-word-begin))
+ (if (looking-at-p "*") (evil-forward-word-begin))
+ (if (looking-at-p "TODO\\|DONE\\|WAITING") (evil-forward-word-begin)))
+
 (provide 'defuns)

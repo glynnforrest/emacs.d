@@ -70,12 +70,11 @@
               ("DONE" :foreground "forest green" :weight bold :strike-through t)
               ("WAITING" :foreground "#89BDFF" :weight bold))))
 
-(evil-declare-key 'normal org-mode-map "^" (lambda()
+(evil-declare-key 'normal org-mode-map "^" 'evil-org-beginning-of-line)
+(evil-declare-key 'normal org-mode-map "I" (lambda ()
 											 (interactive)
-											 (beginning-of-line)
-											 (if (looking-at-p " ") (evil-forward-word-begin))
-											 (if (looking-at-p "*") (evil-forward-word-begin))
-											 (if (looking-at-p "TODO\\|DONE\\|WAITING") (evil-forward-word-begin))
+											 (evil-org-beginning-of-line)
+											 (evil-insert 1)
 											 ))
 
 (evil-declare-key 'normal org-mode-map (kbd "M-i") 'org-display-inline-images)
