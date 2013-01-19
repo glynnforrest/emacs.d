@@ -25,4 +25,4 @@
 											  (other-window 1)
 											  ))
 
-(provide 'init-magit)
+(provide 'setup-magit)

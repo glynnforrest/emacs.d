@@ -37,4 +37,4 @@
 (add-to-list 'ac-modes 'inferior-emacs-lisp-mode)
 (auto-complete-mode t)
 
-(provide 'init-lilypond)
+(provide 'setup-lilypond)

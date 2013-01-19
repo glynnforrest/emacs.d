@@ -53,4 +53,4 @@
 (evil-set-initial-state 'magit-log-edit-mode 'insert)
 (evil-set-initial-state 'occur-mode 'normal)
 
-(provide 'init-evil)
+(provide 'setup-evil)

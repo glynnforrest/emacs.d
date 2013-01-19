@@ -78,7 +78,7 @@
   (edit-server-start))
 
 (setq ido-default-buffer-method 'selected-window)
-(require 'init-evil)
+(require 'setup-evil)
 ;; toggle comments
 (define-key evil-visual-state-map ",c" (lambda()
 										 (interactive)
@@ -323,7 +323,7 @@ When enabled trailing whitespace is removed before saving."
 (setq scroll-step 1)
 (setq scroll-conservatively 10000)
 
-(require 'init-multiple-cursors)
+(require 'setup-multiple-cursors)
 
 (global-set-key (kbd "C-<") 'mark-previous-like-this)
 (global-set-key (kbd "C->") 'mark-next-like-this)
@@ -356,7 +356,7 @@ When enabled trailing whitespace is removed before saving."
 	  (first (split-string (file-name-nondirectory (buffer-file-name)) "\\.")))
   )
 
-(require 'init-org)
+(require 'setup-org)
 (global-set-key (kbd "C-8") '(lambda()(interactive)(djcb-opacity-modify t)))
 (global-set-key (kbd "C-9") '(lambda()(interactive)(djcb-opacity-modify)))
 (global-set-key (kbd "C-0") '(lambda()(interactive)

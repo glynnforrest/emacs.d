@@ -244,4 +244,4 @@
                                    evil-yank-line
                                    )))
 
-(provide 'init-multiple-cursors)
+(provide 'setup-multiple-cursors)

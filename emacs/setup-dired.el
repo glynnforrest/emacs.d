@@ -30,4 +30,4 @@
 (define-key dired-mode-map (kbd "C-h") 'evil-window-left)
 (define-key dired-mode-map (kbd "M-b") 'ido-switch-buffer)
 
-(provide 'init-dired)
+(provide 'setup-dired)

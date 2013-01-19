@@ -109,4 +109,4 @@
 (define-key org-mode-map (kbd "M-<right>") 'elscreen-next)
 (define-key org-mode-map (kbd "M-<left>") 'elscreen-previous)
 
-(provide 'init-org)
+(provide 'setup-org)

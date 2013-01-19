@@ -24,7 +24,7 @@
 ;; lilypond
 (autoload 'LilyPond-mode "lilypond-mode" nil t)
 (add-to-list 'auto-mode-alist '("\\.ly$" . LilyPond-mode))
-(add-hook 'LilyPond-mode-hook (lambda () (require 'init-lilypond)))
+(add-hook 'LilyPond-mode-hook (lambda () (require 'setup-lilypond)))
 
 
 ;; Apache config

@@ -62,4 +62,4 @@
 (evil-declare-key 'normal grep-mode-map (kbd "<return>") 'grep-display-occurrence-recenter)
 (evil-declare-key 'normal grep-mode-map (kbd "<S-return>") 'grep-goto-occurrence-recenter)
 
-(provide 'init-occur-grep)
+(provide 'setup-occur-grep)
