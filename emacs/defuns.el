@@ -100,6 +100,7 @@ create it and write the initial message into it."
   (end-of-line)
   (eval-print-last-sexp)
   (evil-insert 1))
+
 (defun open-init-file ()
   (interactive)
   (find-file "~/.emacs.d/init.el"))
@@ -110,13 +111,17 @@ create it and write the initial message into it."
   (backward-kill-sexp)
   (prin1 (eval (read (current-kill 0)))
 		 (current-buffer)))
+
 (defun move-line-up-and-indent ()
   (interactive)
   (transpose-lines 1)
   (evil-previous-line 2)
-  (indent-for-tab-command)
-  )
+  (indent-for-tab-command))
 
+(defun close-help-buffer ()
+  "Closes the help buffer."
+  (interactive)
+  (kill-buffer "*Help*"))
 
 (defun setup-electric-semicolon (mode-map)
   "Adds mappings for electric semicolon to MODE-MAP.
@@ -135,11 +140,12 @@ Press ; for electric-semicolon, C-; to insert a semicolon."
     (insert ";")
 	(goto-char beg)
 	)))
+
 (defun move-line-down-and-indent ()
   (interactive)
   (evil-next-line 1)
   (transpose-lines 1)
   (evil-previous-line 1)
-  (indent-for-tab-command)
-  )
+  (indent-for-tab-command))
+
 (provide 'defuns)

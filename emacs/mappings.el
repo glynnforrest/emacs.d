@@ -88,6 +88,7 @@
 											(interactive)
 											(kill-this-buffer)
 											(delete-window)))
+(define-key global-map (kbd "M-q") 'close-help-buffer)
 ;; Buffers
 (define-key global-map (kbd "C-<left>") 'previous-buffer)
 (define-key global-map (kbd "C-<right>") 'next-buffer)
