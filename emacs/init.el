@@ -61,24 +61,15 @@
 (setq custom-file "~/.emacs.d/custom.el")
 (load custom-file 'noerror)
 
-;; Load various customisations
-(require 'appearance)
-(require 'defuns)
-(require 'keymaps)
-
 ;; Load personal configurations, like usernames and passwords
 (require 'personal)
+
+(require 'modes)
 
 ;; Share emacs
 (require 'server)
 (unless (server-running-p)
   (server-start))
-
-(defun my-kill-emacs ()
-  "Save some buffers, then exit unconditionally"
-  (interactive)
-  (save-some-buffers t)
-  (kill-emacs))
 
 ;;Allows launching from chrome textareas
 (require 'edit-server nil t)
@@ -87,70 +78,17 @@
   (edit-server-start))
 
 (setq ido-default-buffer-method 'selected-window)
-;; evil
-(require 'evil)
-(evil-mode 1)
-
-(setq evil-default-cursor t)
-
-(require 'evil-numbers)
-(define-key evil-normal-state-map (kbd "C-a") 'evil-numbers/inc-at-pt)
-(define-key evil-normal-state-map (kbd "C-S-a") 'evil-numbers/dec-at-pt)
-(define-key evil-insert-state-map (kbd "C-a") 'beginning-of-line)
-(define-key evil-insert-state-map (kbd "C-e") 'end-of-line)
-;; Switch gj and j, gk and k
-(define-key evil-normal-state-map "j" 'evil-next-visual-line)
-(define-key evil-normal-state-map "gj" 'evil-next-line)
-(define-key evil-normal-state-map "k" 'evil-previous-visual-line)
-(define-key evil-normal-state-map "gk" 'evil-previous-line)
-
-;; Save point position between sessions
-(require 'saveplace)
-(setq-default save-place t)
-
-;; Centre screen around a search
-(defadvice
-    evil-search-forward
-    (after evil-search-forward-recenter activate)
-    (recenter))
-(ad-activate 'evil-search-forward)
-
-(defadvice
-    evil-search-next
-    (after evil-search-next-recenter activate)
-    (recenter))
-(ad-activate 'evil-search-next)
-
-(defadvice
-    evil-search-previous
-    (after evil-search-previous-recenter activate)
-    (recenter))
-(ad-activate 'evil-search-previous)
-
-;; Start in insert mode / emacs for some modes
-(add-to-list 'evil-emacs-state-modes 'package-menu-mode)
-(evil-set-initial-state 'package-menu-mode 'normal)
-(evil-set-initial-state 'org-capture-mode 'insert)
-(evil-set-initial-state 'magit-log-edit-mode 'insert)
-(evil-set-initial-state 'occur-mode 'normal)
-
+(require 'init-evil)
 ;; toggle comments
 (define-key evil-visual-state-map ",c" (lambda()
 										 (interactive)
 										 (comment-or-uncomment-region (region-beginning) (region-end))
 										 (evil-visual-restore)))
-(define-key evil-normal-state-map ",c" 'comment-or-uncomment-line)
 
 ;; browse the kill ring with helm
 (require 'helm)
-(define-key evil-normal-state-map ",p" 'helm-show-kill-ring)
 (setq x-select-enable-clipboard t)
-(define-key evil-normal-state-map ",z" 'helm-imenu)
 
-(defun comment-or-uncomment-line ()
-  "Comments or uncomments the current line."
-  (interactive)
-  (comment-or-uncomment-region (line-beginning-position) (line-end-position)))
 
 (setq hl-line-sticky-flag 1)
 (global-hl-line-mode t)
@@ -169,7 +107,6 @@
 										 (interactive)
 										 (save-buffer)
 										 (test-case-run)))
-(define-key evil-normal-state-map ",T" 'test-case-run-all)
 
 ;; yasnippet
 (require 'yasnippet)
@@ -228,28 +165,18 @@
   (setq ac-auto-start 2))
 
 ;; To make a new line instead of accepting suggested word, use C-<return>
-(define-key ac-mode-map (kbd "C-<return>" ) 'evil-ret)
-(define-key ac-complete-mode-map (kbd "TAB") nil)
-(define-key ac-complete-mode-map [tab] nil)
 
 (add-to-list 'ac-dictionary-directories "~/.emacs.d/ac-dict")
 (global-set-key (kbd "C-SPC") 'auto-complete)
 (ac-config-glynn)
 
 (require 'ace-jump-mode)
-(define-key evil-normal-state-map ",m" 'ace-jump-mode)
 
 (require 'autopair)
 (setq autopair-blink nil)
 (autopair-global-mode t)
 
 (recentf-mode 1)
-(defun recentf-ido-find-file ()
-  "Find a recent file using Ido."
-  (interactive)
-  (let ((file (ido-completing-read "Open recent file: " recentf-list nil t)))
-	(when file
-	  (find-file file))))
 
 (ido-mode 1)
 (setq ido-enable-flex-matching t)
@@ -296,29 +223,10 @@
 (column-number-mode t)
 (tooltip-mode -1)
 
-(define-key global-map (kbd "<mouse-3>") nil)
 
 ;; Change buffers with left and right, Ctrl if not in evil-mode
-(define-key evil-normal-state-map (kbd "<right>") 'next-buffer)
-(define-key evil-normal-state-map (kbd "<left>") 'previous-buffer)
-(define-key global-map (kbd "C-<right>") 'next-buffer)
-(define-key global-map (kbd "C-<left>") 'previous-buffer)
 
-;; Go to scratch buffer quickly
-(defun switch-to-scratch-buffer()
-  "Switch to the scratch buffer. If the buffer doesn't exist,
-create it and write the initial message into it."
-  (interactive)
-  (let* ((scratch-buffer-name "*scratch*")
-         (scratch-buffer (get-buffer scratch-buffer-name)))
-    (unless scratch-buffer
-      (setq scratch-buffer (get-buffer-create scratch-buffer-name))
-      (with-current-buffer scratch-buffer
-        (lisp-interaction-mode)
-        (insert initial-scratch-message)))
-    (switch-to-buffer scratch-buffer)))
 
-(define-key global-map (kbd "M-/") 'switch-to-scratch-buffer)
 
 ;; Go to eshell buffer quickly
 (define-key global-map (kbd "M-?") (lambda()
@@ -327,181 +235,29 @@ create it and write the initial message into it."
 									 ))
 
 
-(define-key global-map (kbd "C-<up>") 'delete-window)
-(define-key global-map (kbd "C-S-<up>") 'delete-other-windows)
-(define-key global-map (kbd "C-S-<down>") (lambda ()
-											(interactive)
-											(kill-this-buffer)
-											(delete-window)))
-(define-key evil-normal-state-map (kbd "C-<down>") 'kill-this-buffer)
-(define-key evil-insert-state-map (kbd "C-<right>") 'forward-word)
-(define-key evil-insert-state-map (kbd "C-<left>") 'backward-word)
-(define-key evil-insert-state-map (kbd "C-<down>") 'kill-this-buffer)
-(define-key evil-insert-state-map (kbd "C-/") 'evil-search-forward)
-(define-key evil-insert-state-map (kbd "C-?") 'evil-search-backward)
-(define-key evil-insert-state-map (kbd "C-v") 'evil-paste-after)
 
 ;; Undo/redo window configuration with C-c <left>/<right>
 (winner-mode 1)
 
 (require 'help-mode)
-(define-key help-mode-map (kbd "C-<down>") 'kill-this-buffer)
 
-(define-key evil-normal-state-map ",w" 'save-buffer)
-(define-key evil-insert-state-map (kbd "C-s") 'save-buffer)
 
 (require 'projectile)
 (projectile-global-mode 1)
 (setq projectile-enable-caching t)
 
-(define-key global-map (kbd "<f5>" ) 'projectile-invalidate-cache)
-(define-key evil-normal-state-map ",f" 'projectile-find-file)
-(define-key evil-normal-state-map ",F" 'find-file)
 
 (require 'helm-git)
-(define-key evil-normal-state-map ",G" 'helm-git-find-files)
 (setq helm-display-function
 	  (lambda (buf)
 		(split-window-vertically)
 		(other-window 1)
 		(switch-to-buffer buf)))
 
-(define-key evil-normal-state-map ",e" (lambda()
-										 (interactive)
-										 (call-interactively 'find-file)
-										 ;;(ido-magic-forward-char)
-										 ))
-(define-key evil-normal-state-map ",r" 'recentf-ido-find-file)
-(define-key evil-normal-state-map ",d" 'ido-dired)
-
-;; Occur mode
-(defun get-buffers-matching-mode (mode)
-  "Returns a list of buffers where their major-mode is equal to MODE"
-  (let ((buffer-mode-matches '()))
-	(dolist (buf (buffer-list))
-	  (with-current-buffer buf
-		(if (eq mode major-mode)
-			(add-to-list 'buffer-mode-matches buf))))
-	buffer-mode-matches))
-
-(defun multi-occur-in-this-mode ()
-  "Show all lines matching REGEXP in buffers with this major mode."
-  (interactive)
-  (multi-occur
-   (get-buffers-matching-mode major-mode)
-   (car (occur-read-primary-args))))
-
-(define-key evil-normal-state-map ",o" (lambda()
-										 (interactive)
-										 (call-interactively 'occur)
-										 (other-window 1)
-										 ))
-
-(define-key evil-normal-state-map ",O" (lambda()
-										 (interactive)
-										 (call-interactively 'multi-occur-in-this-mode)
-										 (other-window 1)
-										 ))
-
-(evil-declare-key 'normal occur-mode-map ",e" 'occur-edit-mode)
-(evil-declare-key 'normal occur-edit-mode-map ",e" 'occur-cease-edit)
-
-;; Preview occurrences in occur and grep without leaving the buffer
-(defun occur-goto-occurrence-recenter ()
-  "Go to the occurrence on the current line and recenter."
-  (interactive)
-  (occur-mode-goto-occurrence)
-  (recenter))
-
-(defun occur-display-occurrence-recenter ()
-  "Display the occurrence on the current line in another window and recenter."
-  (interactive)
-  (occur-goto-occurrence-recenter)
-  (other-window 1))
-
-(define-key occur-mode-map (kbd "<return>") 'occur-display-occurrence-recenter)
-(define-key occur-mode-map (kbd "<S-return>") 'occur-goto-occurrence-recenter)
-(evil-declare-key 'normal occur-mode-map (kbd "<return>") 'occur-display-occurrence-recenter)
-(evil-declare-key 'normal occur-mode-map (kbd "<S-return>") 'occur-goto-occurrence-recenter)
-
-(defun grep-goto-occurrence-recenter ()
-  "Go to the occurrence on the current line and recenter."
-  (interactive)
-  (compile-goto-error)
-  (recenter))
-
-(defun grep-display-occurrence-recenter ()
-  "Display the grep result of the current line in another window and recenter."
-  (interactive)
-  (grep-goto-occurrence-recenter)
-  (other-window 1))
-
-(define-key grep-mode-map (kbd "<return>") 'grep-display-occurrence-recenter)
-(define-key grep-mode-map (kbd "<S-return>") 'grep-goto-occurrence-recenter)
-(evil-declare-key 'normal grep-mode-map (kbd "<return>") 'grep-display-occurrence-recenter)
-(evil-declare-key 'normal grep-mode-map (kbd "<S-return>") 'grep-goto-occurrence-recenter)
-
-
-(define-key evil-normal-state-map ",C" 'cd)
-
-
-(defun split-window-and-move-right ()
-  (interactive)
-  (split-window-right)
-  (other-window 1))
-
-(defun split-window-and-move-below ()
-  (interactive)
-  (split-window-below)
-  (other-window 1))
-
-(define-key evil-normal-state-map ",s" 'split-window-and-move-right)
-(define-key evil-normal-state-map ",S" 'split-window-and-move-below)
-(define-key evil-normal-state-map ",u" 'undo-tree-visualize)
-(define-key undo-tree-visualizer-map (kbd "C-<down>") 'kill-this-buffer)
-
-;; Magit
-(require 'magit)
-(define-key evil-normal-state-map ",g" 'magit-status)
-(evil-declare-key 'normal magit-log-edit-mode-map ",w" 'magit-log-edit-commit)
-(define-key magit-mode-map "q" (lambda ()
-								 (interactive)
-								 (if (get-buffer "*magit-process*")
-									 (kill-buffer "*magit-process*"))
-								 (if (get-buffer "*magit-edit-log*")
-									 (kill-buffer "*magit-edit-log*"))
-								 (kill-this-buffer)
-								 (delete-window)
-								 ))
-(define-key magit-mode-map (kbd "C-<down>") 'kill-this-buffer)
-(define-key magit-mode-map (kbd "C-p") 'magit-push)
-
-;; Preview changes without leaving the buffer
-(define-key magit-mode-map (kbd "<S-return>") (lambda()
-												(interactive)
-											  (let ((current-prefix-arg t))
-												(magit-visit-item))))
-
-(define-key magit-mode-map (kbd "<return>") (lambda()
-											  (interactive)
-											  (universal-argument)
-											  (let ((current-prefix-arg t))
-												(magit-visit-item))
-											  (other-window 1)
-											  ))
-
 (setq undo-tree-visualizer-timestamps 1)
 
-(define-key global-map (kbd "M-b") 'ido-switch-buffer)
 ;; Go back a buffer after picking one
-(define-key global-map (kbd "M-B") 'previous-buffer)
 
-(define-key evil-normal-state-map ",b" 'helm-buffers-list)
-(define-key evil-normal-state-map ",B" 'kill-matching-buffers)
-(define-key evil-normal-state-map " " 'evil-ex)
-(define-key evil-visual-state-map " " 'evil-ex)
-(define-key evil-visual-state-map ",n" 'narrow-to-region)
-(define-key evil-normal-state-map ",N" 'narrow-to-defun)
 (evil-declare-key 'normal org-mode-map ",N" 'org-narrow-to-subtree)
 (define-key evil-normal-state-map ",n" (lambda()
 										 (interactive)
@@ -509,36 +265,11 @@ create it and write the initial message into it."
 										 (recenter)))
 
 
-(defun gf-find-file-in-directory (directory prompt)
-  "Find a file in DIRECTORY using ido. This function depends on the
-`projectile` package."
-  (let* ((project-files (projectile-hashify-files
-                         (projectile-project-files directory)))
-         (file (ido-completing-read prompt
-                                    (loop for k being the hash-keys in project-files collect k))))
-    (find-file (gethash file project-files))))
-
 (define-key global-map (kbd "C-M-e") (lambda ()
 									   (interactive)
 									   (gf-find-file-in-directory "~/.emacs.d"
 																  "Find in emacs folder: ")))
-(defun open-init-file ()
-  (interactive)
-  (find-file "~/.emacs.d/init.el"))
 
-(define-key evil-normal-state-map ",i" 'open-init-file)
-
-(defun my-save-and-eval-buffer ()
-  (interactive)
-  (save-buffer)
-  (eval-buffer))
-(define-key evil-normal-state-map ",I" 'my-save-and-eval-buffer)
-
-(defun my-eval-print-last-sexp ()
-  (interactive)
-  (end-of-line)
-  (eval-print-last-sexp)
-  (evil-insert 1))
 
 
 (add-hook 'lisp-interaction-mode-hook (lambda()
@@ -546,39 +277,12 @@ create it and write the initial message into it."
 										(local-set-key (kbd "M-J") 'my-eval-print-last-sexp)))
 
 
-(define-key global-map (kbd "C-l") 'evil-window-right)
-(define-key global-map (kbd "C-h") 'evil-window-left) ;; get help-map with f1
-(define-key global-map (kbd "C-k") 'evil-window-up)
-(define-key global-map (kbd "C-j") 'evil-window-down)
-(define-key evil-insert-state-map (kbd "C-k") 'evil-window-up)
-(define-key evil-normal-state-map (kbd "C-S-k") 'evil-window-increase-height)
-(define-key evil-normal-state-map (kbd "C-S-l") 'evil-window-increase-width)
-(define-key evil-normal-state-map (kbd "C-S-j") 'evil-window-decrease-height)
-(define-key evil-normal-state-map (kbd "C-S-h") 'evil-window-decrease-width)
 
-(define-key global-map (kbd "C-+") 'text-scale-increase)
-(define-key global-map (kbd "C--") 'text-scale-decrease)
 (define-key global-map (kbd "C-'") (lambda()
 									 (interactive)
 									 (text-scale-set 0)))
 
-(defun move-line-up-and-indent ()
-  (interactive)
-  (transpose-lines 1)
-  (evil-previous-line 2)
-  (indent-for-tab-command)
-  )
 
-(defun move-line-down-and-indent ()
-  (interactive)
-  (evil-next-line 1)
-  (transpose-lines 1)
-  (evil-previous-line 1)
-  (indent-for-tab-command)
-  )
-
-(define-key evil-normal-state-map (kbd "M-j") 'move-line-down-and-indent)
-(define-key evil-normal-state-map (kbd "M-k") 'move-line-up-and-indent)
 ;; nnoremap <A-l> >>
 ;; nnoremap <A-h> <<
 
@@ -600,13 +304,6 @@ create it and write the initial message into it."
 														 (evil-open-above 1)))
 
 ;; universal escape key as well as C-g
-(define-key evil-normal-state-map [escape] 'keyboard-quit)
-(define-key evil-visual-state-map [escape] 'keyboard-quit)
-(define-key minibuffer-local-map [escape] 'minibuffer-keyboard-quit)
-(define-key minibuffer-local-ns-map [escape] 'minibuffer-keyboard-quit)
-(define-key minibuffer-local-completion-map [escape] 'minibuffer-keyboard-quit)
-(define-key minibuffer-local-must-match-map [escape] 'minibuffer-keyboard-quit)
-(define-key minibuffer-local-isearch-map [escape] 'minibuffer-keyboard-quit)
 
 ;; Remove any trailing whitespace on buffer write
 (define-minor-mode remove-trailing-whitespace-mode
@@ -632,19 +329,7 @@ When enabled trailing whitespace is removed before saving."
 (global-set-key (kbd "C->") 'mark-next-like-this)
 (global-set-key (kbd "C-*") 'mark-all-like-this)
 
-(define-key evil-visual-state-map "mb" 'evil-mc-edit-beginnings-of-lines)
-(define-key evil-visual-state-map "me" 'evil-mc-edit-ends-of-lines)
-(define-key evil-visual-state-map "mm" 'evil-mc-switch-to-cursors)
 
-(defun eval-and-replace-sexp ()
-  "Replace the preceding sexp with its value."
-  (interactive)
-  (backward-kill-sexp)
-  (prin1 (eval (read (current-kill 0)))
-		 (current-buffer)))
-
-(define-key evil-normal-state-map ",E" 'eval-and-replace-sexp)
-(define-key evil-visual-state-map ",e" 'eval-region)
 
 ;; Multi web mode
 (require 'multi-web-mode)
@@ -653,42 +338,19 @@ When enabled trailing whitespace is removed before saving."
 				  (js-mode "<script +\\(type=\"text/javascript\"\\|language=\"javascript\"\\)[^>]*>" "</script>")
 				  (css-mode "<style +type=\"text/css\"[^>]*>" "</style>")))
 (setq mweb-filename-extensions '("php" "php4" "php5"))
-(define-key evil-normal-state-map ",q" 'multi-web-mode)
 
-(require 'php-mode)
-
-(add-hook 'php-mode-hook (lambda()
-						   (setup-electric-semicolon php-mode-map)))
-
-(defun setup-electric-semicolon (mode-map)
-  "Adds mappings for electric semicolon to MODE-MAP.
-Press ; for electric-semicolon, C-; to insert a semicolon."
-  (evil-declare-key 'insert mode-map ";" 'electric-semicolon)
-  (evil-declare-key 'insert mode-map (kbd "C-;") (lambda()
-												   (interactive)
-												   (insert ";"))))
-
-(defun electric-semicolon ()
-  "Inserts a semicolon at the end of the current line if not already there."
-  (interactive)
-  (let ((beg (point)))
-  (end-of-line)
-  (if (not (looking-back ";"))
-    (insert ";")
-	(goto-char beg)
-	)))
-
+(add-hook 'html-mode-hook 'multi-web-mode)
 (defun file-has-doctype ()
   (if (string= (upcase (buffer-substring-no-properties 1 10)) "<!DOCTYPE") t nil))
 
 ;; enable multi-web-mode only for php files that begin with a doctype
 (add-hook 'php-mode-hook (lambda()
 						   (if (file-has-doctype) (multi-web-mode))))
-(add-hook 'html-mode-hook 'multi-web-mode)
 
 (put 'ido-exit-minibuffer 'disabled nil)
 (put 'narrow-to-region 'disabled nil)
 
+;; for yasnippet
 (defun buffer-file-name-body ()
   (if (buffer-file-name)
 	  (first (split-string (file-name-nondirectory (buffer-file-name)) "\\.")))
@@ -709,41 +371,6 @@ Press ; for electric-semicolon, C-; to insert a semicolon."
 				   (flyspell-mode 1)
 				   (auto-fill-mode 1)
 				   )))
-
-;; ERC
-(require 'erc)
-(require 'erc-spelling)
-;; my-erc-nick should be in personal.el
-(setq erc-nick my-erc-nick)
-(add-hook 'erc-mode-hook (lambda ()
-						   (interactive)
-						   (linum-mode -1)
-						   (erc-spelling-mode)))
-
-(defun gf-erc-goto-and-clear-prompt ()
-  "Go to the bottom of the ERC buffer and clear the input,
-placing cursor at the start of the prompt."
-  (interactive)
-  (goto-line (buffer-end 1))
-  (beginning-of-line)
-  (evil-forward-WORD-begin)
-  (delete-region (point) (line-end-position))
-  (evil-insert-state))
-
-;; crappy hack to write and send text to a channel
-(defun gf-erc-write-and-send (text)
-  "Write `text` in the ERC buffer and send."
-  (gf-erc-goto-and-clear-prompt)
-  (insert text)
-  (erc-send-current-line))
-
-(evil-declare-key 'normal erc-mode-map "C" 'gf-erc-goto-and-clear-prompt)
-
-;; print the topic when joining a channel
-(add-hook 'erc-join-hook (lambda()
-						   (gf-erc-write-and-send "/topic")
-						   ))
-
 ;; eshell
 (require 'eshell)
 (evil-declare-key 'normal eshell-mode-map "i" (lambda ()
@@ -760,21 +387,7 @@ placing cursor at the start of the prompt."
 (setq inferior-js-program-command "env NODE_NO_READLINE=1 node")
 
 (require 'elscreen)
-
 (elscreen-start)
-
-(define-key global-map (kbd "M-<right>") 'elscreen-next)
-(define-key global-map (kbd "M-<left>") 'elscreen-previous)
-(define-key global-map (kbd "M-<up>") 'elscreen-create)
-(define-key global-map (kbd "M-<down>") 'elscreen-kill)
-(define-key org-mode-map (kbd "M-<right>") 'elscreen-next)
-(define-key org-mode-map (kbd "M-<left>") 'elscreen-previous)
-(define-key org-mode-map (kbd "M-<up>") 'elscreen-create)
-(define-key org-mode-map (kbd "M-<down>") 'elscreen-kill)
-
-;; lilypond
-(autoload 'LilyPond-mode "lilypond-mode" "LilyPond Editing Mode" t)
-(add-to-list 'auto-mode-alist '("\\.ly$" . LilyPond-mode))
 
 (defun ielm-auto-complete ()
   "Enables `auto-complete' support in \\[ielm]."
