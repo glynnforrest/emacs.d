@@ -695,49 +695,14 @@ Press ; for electric-semicolon, C-; to insert a semicolon."
   )
 
 (require 'init-org)
-
-;; Dired mode
-(require 'dired)
-(require 'dired+)
-(add-hook 'dired-mode-hook (lambda ()
-							 (interactive)
-							 (rename-buffer "*Dired*")
-							 ))
-
-;; Up directory fix
-(defadvice dired-up-directory (around dired-up-fix activate)
-  (interactive)
-  (rename-buffer "*Dired-old*")
-  ad-do-it
-  (previous-buffer)
-  (kill-this-buffer)
-  )
-
-(evil-declare-key 'normal dired-mode-map ",e" (lambda ()
-												(interactive)
-												(dired-toggle-read-only)
-												(evil-normal-state)
-												(evil-forward-char)
-												))
-(evil-declare-key 'normal dired-mode-map "\\" 'dired-up-directory)
-(evil-declare-key 'normal dired-mode-map "q" 'evil-record-macro)
-(evil-declare-key 'normal wdired-mode-map ",e" 'wdired-finish-edit)
-(evil-declare-key 'normal wdired-mode-map ",a" 'wdired-abort-changes)
-(define-key dired-mode-map (kbd "M-b") 'ido-switch-buffer)
-(define-key dired-mode-map (kbd "C-h") 'evil-window-left)
-(toggle-diredp-find-file-reuse-dir 1)
-
 (global-set-key (kbd "C-8") '(lambda()(interactive)(djcb-opacity-modify t)))
 (global-set-key (kbd "C-9") '(lambda()(interactive)(djcb-opacity-modify)))
 (global-set-key (kbd "C-0") '(lambda()(interactive)
 							   (modify-frame-parameters nil `((alpha . 100)))))
 
-(define-key global-map (kbd "<f9>") 'toggle-writeroom)
 
 ;; Flyspell
 (setq flyspell-issue-message-flag nil)
-(define-key evil-normal-state-map "]s" 'flyspell-goto-next-error)
-(define-key evil-normal-state-map "z=" 'ispell-word)
 
 (dolist (hook '(org-mode-hook magit-log-edit-mode-hook))
   (add-hook hook (lambda ()
@@ -822,3 +787,8 @@ placing cursor at the start of the prompt."
   (auto-complete-mode 1))
 
 (add-hook 'ielm-mode-hook 'ielm-auto-complete)
+
+;; Load various customisations
+(require 'appearance)
+(require 'defuns)
+(require 'mappings)
