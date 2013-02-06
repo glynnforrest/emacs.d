@@ -19,7 +19,7 @@ buffer."
   (save-excursion
 	(goto-char (point-min))
 	(let ((urls ()))
-	  (while (re-search-forward "http:\/\/[a-z0-9\.\/-_\?=%&]+" nil t)
+	  (while (re-search-forward "https?:\/\/[a-z0-9\.\/-_\?=%&]+" nil t)
 		(let ((url (match-string-no-properties 0)))
 		  (add-to-list 'urls url)
 		  ))
@@ -32,7 +32,7 @@ buffer."
 ERC buffer."
   (interactive)
   (save-excursion
-	(re-search-backward "http:\/\/[a-z0-9\.\/-_\?=%&]+" nil t)
+	(re-search-backward "http?:\/\/[a-z0-9\.\/-_\?=%&]+" nil t)
 	(let ((url (match-string-no-properties 0)))
 		(when url
 		  (browse-url url)))))
