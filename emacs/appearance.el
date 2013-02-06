@@ -11,8 +11,8 @@
 										))
 
 ;; Fonts that work for reloading init.el and new emacsclient instances
-(set-frame-font "DejaVu Sans Mono 8")
-(setq default-frame-alist '((font . "DejaVu Sans Mono 8")))
+(set-frame-font "DejaVu Sans Mono 9")
+(setq default-frame-alist '((font . "DejaVu Sans Mono 9")))
 
 
 ;; Load a theme
@@ -28,9 +28,6 @@
 ;; Pretty parenthesis
 (require 'rainbow-delimiters)
 (global-rainbow-delimiters-mode t)
-
-;; View colors
-(rainbow-mode t)
 
 ;; Fringes are a pain
 (fringe-mode -1)
@@ -67,8 +64,55 @@
 		(global-linum-mode 1))))
 
 ;; Fun
-(require 'nyan-mode)
-(nyan-mode t)
-(nyan-start-animation)
+;; (require 'nyan-mode)
+;; (nyan-mode t)
+;; (nyan-start-animation)
+
+(defun fontify-hex-colors (limit)
+  (remove-overlays (point) limit 'fontify-hex-colors t)
+  (while (re-search-forward "\\(#[[:xdigit:]]\\{6\\}\\)" limit t)
+    (let ((ov (make-overlay (match-beginning 0)
+                            (match-end 0))))
+      (overlay-put ov 'face  (list :background (match-string 1) :foreground "black"))
+      (overlay-put ov 'fontify-hex-colors t)
+      (overlay-put ov 'evaporate t)))
+  ;; return nil telling font-lock not to fontify anything from this
+  ;; function
+  nil)
+
+;; View hex colours in the following modes
+(dolist (mode '(
+				css-mode
+				emacs-lisp-mode
+				haskell-mode
+				lisp-interaction-mode
+				lisp-mode
+						  ))
+  (font-lock-add-keywords mode
+						  '((fontify-hex-colors))))
+
+;; Make autocomplete look nice
+
+(custom-set-faces
+ '(ac-completion-face ((t (:foreground "darkgray" :underline t))))
+ '(ac-candidate-face ((t (:background "gray60" :foreground "black"))))
+ '(ac-selection-face ((t (:background "deep pink" :foreground "black"))))
+ '(ac-yasnippet-candidate-face ((t (:background "gray60" :foreground "black"))))
+ '(ac-yasnippet-selection-face ((t (:background "deep pink" :foreground "black"))))
+ '(popup-isearch-match ((t (:background "black" :foreground "deep pink"))))
+ '(popup-tip-face ((t (:background "#333333" :foreground "white"))))
+ '(popup-scroll-bar-foreground-face ((t (:background "#0A0A0A"))))
+ '(popup-scroll-bar-background-face ((t (:background "#333333"))))
+ '(show-paren-match-face ((t (:background "deep pink" :foreground "black"))))
+ '(rainbow-delimiters-depth-1-face ((t (:foreground "#7cfc00"))))
+ '(rainbow-delimiters-depth-2-face ((t (:foreground "#eefd00"))))
+ '(rainbow-delimiters-depth-3-face ((t (:foreground "#268bd2"))))
+ '(rainbow-delimiters-depth-4-face ((t (:foreground "#dc322f"))))
+ '(rainbow-delimiters-depth-5-face ((t (:foreground "#ffffff"))))
+ '(rainbow-delimiters-depth-6-face ((t (:foreground "#268bd2"))))
+ '(rainbow-delimiters-depth-7-face ((t (:foreground "#859900"))))
+ '(rainbow-delimiters-depth-8-face ((t (:foreground "#dc322f"))))
+ '(rainbow-delimiters-depth-9-face ((t (:foreground "#b58900"))))
+ )
 
 (provide 'appearance)
