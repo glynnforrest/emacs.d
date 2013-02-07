@@ -5,8 +5,10 @@
   (kill-emacs))
 
 (defun convert-to-end-of-sentence ()
-  "Change the current character to a full stop and capitalise the next word."
+  "Change the next comma to a full stop and capitalise the next word."
   (interactive)
+  (if (not (looking-at-p ","))
+	(evil-find-char 1 (string-to-char ",")))
   (delete-char 1)
   (insert ".")
   (evil-forward-word-begin)
