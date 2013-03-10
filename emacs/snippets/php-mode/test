@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: PHPUnit test case
+# key: test
+# --
+<?php
+
+namespace ${1:foo};
+
+/**
+ * ${2:Foo}Test
+ * @author Glynn Forrest <me@glynnforrest.com>
+ **/
+class $2Test extends \PHP_Framework_TestCase {
+
+	  $0
+}
