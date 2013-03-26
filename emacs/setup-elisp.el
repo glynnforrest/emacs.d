@@ -1,3 +1,5 @@
+(require 'paredit)
+
 (defun setup-elisp ()
   (eldoc-mode t)
   (paredit-mode t))
@@ -31,6 +33,27 @@
                   ((setq sym (variable-at-point)) (describe-variable sym)))))
 
 (define-key lisp-mode-shared-map (kbd "M-RET") 'lisp-describe-thing-at-point)
-(define-key paredit-mode-map (kbd "M-q") 'close-help-buffer)
+(add-hook 'ielm-mode-hook (lambda()
+							(define-key ielm-map (kbd "M-RET") 'lisp-describe-thing-at-point)))
+
+(defun clever-splice-sexp-killing-backward ()
+  "Wrapper around paredit-splice-sexp-killing-backward that moves the whole symbol."
+  (interactive)
+  (evil-backward-word-begin)
+  (paredit-splice-sexp-killing-backward))
+
+(defun clever-splice-sexp-killing-forward ()
+  "Wrapper around paredit-splice-sexp-killing-forward that moves the whole symbol."
+  (interactive)
+  (evil-forward-word-begin)
+  (paredit-splice-sexp-killing-forward))
+
+(define-key paredit-mode-map (kbd "M-q") 'quit-other-window)
+(define-key paredit-mode-map (kbd "M-<up>") 'elscreen-create)
+(define-key paredit-mode-map (kbd "M-<down>") 'elscreen-kill)
+
+(define-key paredit-mode-map (kbd "<C-S-delete>") 'paredit-kill)
+(define-key paredit-mode-map (kbd "C-c <up>") 'clever-splice-sexp-killing-backward)
+(define-key paredit-mode-map (kbd "C-c <down>") 'clever-splice-sexp-killing-forward)
 
 (provide 'setup-elisp)
