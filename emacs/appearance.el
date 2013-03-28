@@ -91,28 +91,4 @@
   (font-lock-add-keywords mode
 						  '((fontify-hex-colors))))
 
-;; Make autocomplete look nice
-
-(custom-set-faces
- '(ac-completion-face ((t (:foreground "darkgray" :underline t))))
- '(ac-candidate-face ((t (:background "gray60" :foreground "black"))))
- '(ac-selection-face ((t (:background "deep pink" :foreground "black"))))
- '(ac-yasnippet-candidate-face ((t (:background "gray60" :foreground "black"))))
- '(ac-yasnippet-selection-face ((t (:background "deep pink" :foreground "black"))))
- '(popup-isearch-match ((t (:background "black" :foreground "deep pink"))))
- '(popup-tip-face ((t (:background "#333333" :foreground "white"))))
- '(popup-scroll-bar-foreground-face ((t (:background "#0A0A0A"))))
- '(popup-scroll-bar-background-face ((t (:background "#333333"))))
- '(show-paren-match-face ((t (:background "deep pink" :foreground "black"))))
- '(rainbow-delimiters-depth-1-face ((t (:foreground "#7cfc00"))))
- '(rainbow-delimiters-depth-2-face ((t (:foreground "#eefd00"))))
- '(rainbow-delimiters-depth-3-face ((t (:foreground "#268bd2"))))
- '(rainbow-delimiters-depth-4-face ((t (:foreground "#dc322f"))))
- '(rainbow-delimiters-depth-5-face ((t (:foreground "#ffffff"))))
- '(rainbow-delimiters-depth-6-face ((t (:foreground "#268bd2"))))
- '(rainbow-delimiters-depth-7-face ((t (:foreground "#859900"))))
- '(rainbow-delimiters-depth-8-face ((t (:foreground "#dc322f"))))
- '(rainbow-delimiters-depth-9-face ((t (:foreground "#b58900"))))
- )
-
 (provide 'appearance)
