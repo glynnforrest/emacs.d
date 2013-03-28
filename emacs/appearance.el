@@ -11,8 +11,10 @@
 										))
 
 ;; Fonts that work for reloading init.el and new emacsclient instances
-(set-frame-font "DejaVu Sans Mono 9")
-(setq default-frame-alist '((font . "DejaVu Sans Mono 9")))
+;; (set-frame-font "DejaVu Sans Mono 9")
+;; (setq default-frame-alist '((font . "DejaVu Sans Mono 9")))
+(set-frame-font "Ubuntu Mono 10")
+(setq default-frame-alist '((font . "Ubuntu Mono 10")))
 
 
 ;; Load a theme

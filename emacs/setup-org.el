@@ -28,7 +28,7 @@
                                      (interactive)
                                      (find-file org-default-notes-file)
                                      ))
-(define-key global-map (kbd "C-M-n") (lambda ()
+(define-key global-map (kbd "C-c n") (lambda ()
 									   (interactive)
 									   (gf-find-file-in-directory org-directory "Find org file: ")))
 (evil-declare-key 'normal org-mode-map (kbd "C-t") 'org-todo)

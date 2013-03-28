@@ -18,6 +18,7 @@
 	color-theme-monokai
 	dired+
 	elscreen
+	eproject
 	evil
 	helm
 	helm-git
@@ -29,11 +30,12 @@
 	org
 	php-mode
 	projectile
-	rainbow-mode
 	rainbow-delimiters
+	rainbow-mode
 	smex
 	surround
 	test-case-mode
+	wgrep
 	yasnippet
 	zencoding-mode
 	)
@@ -191,13 +193,6 @@
 (winner-mode 1)
 
 (require 'help-mode)
-
-
-(require 'projectile)
-(projectile-global-mode 1)
-(setq projectile-enable-caching t)
-
-
 (require 'helm-git)
 (setq helm-display-function
 	  (lambda (buf)
@@ -281,22 +276,12 @@ When enabled trailing whitespace is removed before saving."
 (global-set-key (kbd "C-*") 'mark-all-like-this)
 
 
-
-;; Multi web mode
-(require 'multi-web-mode)
-(setq mweb-default-major-mode 'html-mode)
-(setq mweb-tags '((php-mode "<\\?php\\|<\\? \\|<\\?=" "\\?>")
-				  (js-mode "<script +\\(type=\"text/javascript\"\\|language=\"javascript\"\\)[^>]*>" "</script>")
-				  (css-mode "<style +type=\"text/css\"[^>]*>" "</style>")))
-(setq mweb-filename-extensions '("php" "php4" "php5"))
-
-(add-hook 'html-mode-hook 'multi-web-mode)
 (defun file-has-doctype ()
   (if (string= (upcase (buffer-substring-no-properties 1 10)) "<!DOCTYPE") t nil))
 
-;; enable multi-web-mode only for php files that begin with a doctype
+;; enable web-mode for php files that begin with a doctype
 (add-hook 'php-mode-hook (lambda()
-						   (if (file-has-doctype) (multi-web-mode))))
+						   (if (file-has-doctype) (web-mode))))
 
 (put 'ido-exit-minibuffer 'disabled nil)
 (put 'narrow-to-region 'disabled nil)
@@ -340,19 +325,13 @@ When enabled trailing whitespace is removed before saving."
 (require 'elscreen)
 (elscreen-start)
 
-(defun ielm-auto-complete ()
-  "Enables `auto-complete' support in \\[ielm]."
-  (setq ac-sources '(ac-source-functions
-                     ac-source-variables
-                     ac-source-features
-                     ac-source-symbols
-                     ac-source-words-in-same-mode-buffers))
-  (add-to-list 'ac-modes 'inferior-emacs-lisp-mode)
-  (auto-complete-mode 1))
-
-(add-hook 'ielm-mode-hook 'ielm-auto-complete)
-
 ;; Load various customisations
 (require 'appearance)
 (require 'defuns)
+(require 'setup-occur-grep)
+(require 'git-gutter)
+(global-git-gutter-mode)
+(require 'try-code)
+(require 'setup-magit)
+(require 'setup-projects)
 (require 'mappings)

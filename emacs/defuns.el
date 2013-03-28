@@ -8,11 +8,23 @@
   "Change the next comma to a full stop and capitalise the next word."
   (interactive)
   (if (not (looking-at-p ","))
-	(evil-find-char 1 (string-to-char ",")))
+	  (evil-find-char 1 (string-to-char ",")))
   (delete-char 1)
   (insert ".")
   (evil-forward-word-begin)
-  (evil-invert-char (point) (+ 1 (point))))
+  (evil-upcase (point) (+ 1 (point))))
+
+(defun convert-end-of-sentence-to-comma ()
+  "Change the next full stop to a comma and lowercase the next word."
+  (interactive)
+  (if (not (looking-at-p "\\."))
+	  (evil-find-char 1 (string-to-char ".")))
+  (delete-char 1)
+  (insert ",")
+  (evil-forward-word-begin)
+  (if (not (looking-at-p "I"))
+	  (evil-downcase (point) (+ 1 (point)))))
+
 
 (defun open-url-from-buffer ()
   "Open a url with ido, choosing from all of the urls in the current
@@ -65,8 +77,8 @@ TODO keywords, stars and list indicators."
 `projectile` package."
   (let* ((project-files (projectile-hashify-files
                          (projectile-project-files directory)))
-         (file (ido-completing-read prompt
-                                    (loop for k being the hash-keys in project-files collect k))))
+         (file (projectile-completing-read prompt
+                                           (projectile-hash-keys project-files))))
     (find-file (gethash file project-files))))
 
 (defun split-window-and-move-right ()
@@ -120,10 +132,12 @@ create it and write the initial message into it."
   (evil-previous-line 2)
   (indent-for-tab-command))
 
-(defun close-help-buffer ()
-  "Closes the help buffer."
+(defun quit-other-window ()
+  "Closes the buffer in the other window."
   (interactive)
-  (kill-buffer "*Help*"))
+  (other-window 1)
+  (kill-buffer (current-buffer))
+  (other-window 1))
 
 (defun setup-electric-semicolon (mode-map)
   "Adds mappings for electric semicolon to MODE-MAP.
@@ -149,5 +163,51 @@ Press ; for electric-semicolon, C-; to insert a semicolon."
   (transpose-lines 1)
   (evil-previous-line 1)
   (indent-for-tab-command))
+
+(defun make-capture-frame ()
+  "Make a new frame for using org-capture."
+  (interactive)
+  (make-frame '((name . "capture") (width . 80) (height . 20)))
+  (select-frame-by-name "capture")
+  (org-capture))
+
+(defun fix-double-capital()
+  "Go back to last occurence of a 'double capital' at start of word and correct."
+  (interactive)
+  (save-excursion
+	(re-search-backward "\\b[[:upper:]]\\{2\\}"
+						nil
+						(message "No double capital found!"))
+	(forward-char)
+	(set-mark-command nil)
+	(forward-char)
+	(setq deactivate-mark nil)
+	(call-interactively 'downcase-region)))
+
+(require 'rotate-text)
+
+(defun clever-rotate-text ()
+  "Wrapper to rotate-text that will try the start of the line as well
+as the current word."
+  (interactive)
+  (if (not (condition-case nil
+		 (rotate-text 1)
+		 (error nil)))
+	  (save-excursion
+		(evil-first-non-blank)
+		(rotate-text 1)
+		)))
+
+(defun clever-rotate-text-backward ()
+  "Wrapper to rotate-text-backward that will try the start of the
+line as well as the current word."
+  (interactive)
+  (if (not (condition-case nil
+		 (rotate-text-backward 1)
+		 (error nil)))
+	  (save-excursion
+		(evil-first-non-blank)
+		(rotate-text-backward 1)
+		)))
 
 (provide 'defuns)

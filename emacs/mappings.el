@@ -13,7 +13,6 @@
 (define-key evil-insert-state-map (kbd "C-k") 'evil-window-up)
 (define-key evil-insert-state-map (kbd "C-<left>") 'backward-word)
 (define-key evil-insert-state-map (kbd "C-<right>") 'forward-word)
-(define-key evil-insert-state-map (kbd "C-s") 'save-buffer)
 (define-key evil-insert-state-map (kbd "C-v") 'evil-paste-after)
 
 ;; Normal mode
@@ -26,7 +25,7 @@
 (define-key evil-normal-state-map [escape] 'keyboard-quit)
 (define-key evil-normal-state-map " " 'evil-ex)
 (define-key evil-normal-state-map ",F" 'find-file)
-(define-key evil-normal-state-map ",f" 'projectile-find-file)
+(define-key evil-normal-state-map ",f" 'eproject-find-file)
 (define-key evil-normal-state-map ",G" 'helm-git-find-files)
 
 ;; Switch gj and j, gk and k
@@ -65,6 +64,10 @@
 (define-key evil-normal-state-map (kbd "M-k") 'move-line-up-and-indent)
 (define-key evil-normal-state-map (kbd "<right>") 'next-buffer)
 
+(define-key evil-normal-state-map ",T" 'try-code)
+(define-key evil-normal-state-map (kbd "C-t") 'clever-rotate-text)
+(define-key evil-normal-state-map (kbd "C-T") 'clever-rotate-text-backward)
+
 ;; Visual mode
 (define-key evil-visual-state-map ",e" 'eval-region)
 (define-key evil-visual-state-map [escape] 'keyboard-quit)
@@ -88,7 +91,7 @@
 											(interactive)
 											(kill-this-buffer)
 											(delete-window)))
-(define-key global-map (kbd "M-q") 'close-help-buffer)
+(define-key global-map (kbd "M-q") 'quit-other-window)
 ;; Buffers
 (define-key global-map (kbd "C-<left>") 'previous-buffer)
 (define-key global-map (kbd "C-<right>") 'next-buffer)
@@ -124,4 +127,7 @@
 (define-key occur-mode-map (kbd "<return>") 'occur-display-occurrence-recenter)
 (define-key occur-mode-map (kbd "<S-return>") 'occur-goto-occurrence-recenter)
 (define-key undo-tree-visualizer-map (kbd "C-<down>") 'kill-this-buffer)
+
+(define-key global-map (kbd "C-c f") 'fix-double-capital)
+
 (provide 'mappings)

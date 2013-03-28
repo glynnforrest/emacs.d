@@ -2,13 +2,26 @@
 
 (defun setup-elisp ()
   (eldoc-mode t)
-  (paredit-mode t))
+  (paredit-mode t)
+  )
 
 (add-hook 'emacs-lisp-mode-hook 'setup-elisp)
 (add-hook 'lisp-interaction-mode-hook 'setup-elisp)
 (add-hook 'ielm-mode-hook 'setup-elisp)
 
 (define-key lisp-mode-shared-map (kbd "RET") 'reindent-then-newline-and-indent)
+
+(defun ielm-auto-complete ()
+  "Enables `auto-complete' support in \\[ielm]."
+  (setq ac-sources '(ac-source-functions
+                     ac-source-variables
+                     ac-source-features
+                     ac-source-symbols
+                     ac-source-words-in-same-mode-buffers))
+  (add-to-list 'ac-modes 'inferior-emacs-lisp-mode)
+  (auto-complete-mode 1))
+
+(add-hook 'ielm-mode-hook 'ielm-auto-complete)
 
 (defun lisp-describe-thing-at-point ()
   "Show the documentation of the Elisp function and variable near point.
@@ -51,6 +64,8 @@
 (define-key paredit-mode-map (kbd "M-q") 'quit-other-window)
 (define-key paredit-mode-map (kbd "M-<up>") 'elscreen-create)
 (define-key paredit-mode-map (kbd "M-<down>") 'elscreen-kill)
+(define-key paredit-mode-map (kbd "M-?") 'eshell)
+(define-key paredit-mode-map (kbd "C-j") 'evil-window-down)
 
 (define-key paredit-mode-map (kbd "<C-S-delete>") 'paredit-kill)
 (define-key paredit-mode-map (kbd "C-c <up>") 'clever-splice-sexp-killing-backward)
