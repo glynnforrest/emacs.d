@@ -90,6 +90,25 @@
         ("h" "Linked Note" entry (file+headline org-default-notes-file "Unsorted")
          "* %?\n%a")))
 
+;; Behaviour for capturing notes using make-capture-frame
+ (defadvice org-capture-finalize
+  (after delete-capture-frame activate)
+   "Advise capture-finalize to close the frame"
+   (if (equal "capture" (frame-parameter nil 'name))
+       (delete-frame)))
+
+ (defadvice org-capture-destroy
+  (after delete-capture-frame activate)
+   "Advise capture-destroy to close the frame"
+   (if (equal "capture" (frame-parameter nil 'name))
+       (delete-frame)))
+
+(defadvice org-switch-to-buffer-other-window
+  (after supress-window-splitting activate)
+  "Delete the extra window if we're in a capture frame"
+  (if (equal "capture" (frame-parameter nil 'name))
+      (delete-other-windows)))
+
 ;;babel
 (org-babel-do-load-languages
  'org-babel-load-languages
