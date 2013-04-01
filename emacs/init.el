@@ -234,11 +234,11 @@
 
 
 ;; Create lines above and below in normal and insert mode with <return>
-(define-key evil-normal-state-map (kbd "<S-return>") (lambda()
+(define-key evil-normal-state-map (kbd "S-<return>") (lambda()
 													   (interactive)
 													   (evil-open-below 1)
 													   (evil-normal-state 1)))
-(define-key evil-normal-state-map (kbd "<C-S-return>") (lambda()
+(define-key evil-normal-state-map (kbd "C-S-<return>") (lambda()
 														 (interactive)
 														 (evil-open-above 1)
 														 (evil-normal-state 1)))
@@ -334,4 +334,7 @@ When enabled trailing whitespace is removed before saving."
 (require 'try-code)
 (require 'setup-magit)
 (require 'setup-projects)
+(require 'setup-js)
+(require 'setup-css)
 (require 'mappings)
+(require 'multiple-cursors)
