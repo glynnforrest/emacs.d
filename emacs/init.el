@@ -307,23 +307,11 @@ When enabled trailing whitespace is removed before saving."
 				   (flyspell-mode 1)
 				   (auto-fill-mode 1)
 				   )))
-;; eshell
-(require 'eshell)
-(evil-declare-key 'normal eshell-mode-map "i" (lambda ()
-												(interactive)
-												(evil-goto-line)
-												(evil-append-line 1)
-												))
-(evil-declare-key 'normal eshell-mode-map (kbd "C-j") 'evil-window-down)
-(evil-declare-key 'insert eshell-mode-map (kbd "C-j") 'evil-window-down)
-(evil-declare-key 'normal eshell-mode-map (kbd "C-<up>") 'delete-window)
-
-;; node REPL
-(require 'js-comint)
-(setq inferior-js-program-command "env NODE_NO_READLINE=1 node")
 
 (require 'elscreen)
 (elscreen-start)
+
+(require 'setup-eshell)
 
 ;; Load various customisations
 (require 'appearance)
