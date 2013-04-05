@@ -72,14 +72,12 @@ TODO keywords, stars and list indicators."
 	(when file
 	  (find-file file))))
 
-(defun gf-find-file-in-directory (directory prompt)
-  "Find a file in DIRECTORY using ido. This function depends on the
-`projectile` package."
-  (let* ((project-files (projectile-hashify-files
-                         (projectile-project-files directory)))
-         (file (projectile-completing-read prompt
-                                           (projectile-hash-keys project-files))))
-    (find-file (gethash file project-files))))
+(defun gf/find-file-in-directory (directory)
+  "Hacky function to find a file in DIRECTORY using ido. This depends
+on the `projectile` package."
+  (dired directory)
+  (projectile-find-file)
+  )
 
 (defun split-window-and-move-right ()
   (interactive)

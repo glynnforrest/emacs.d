@@ -95,20 +95,12 @@
 (setq hl-line-sticky-flag 1)
 (global-hl-line-mode t)
 
-(require 'surround)
-(global-surround-mode t)
-(global-auto-revert-mode t)
-
 (require 'smex)
 (smex-initialize)
 (global-set-key (kbd "<menu>") 'smex)
 (global-set-key (kbd "M-X") 'smex-major-mode-commands)
 
 (require 'test-case-mode)
-(define-key evil-normal-state-map ",t" (lambda()
-										 (interactive)
-										 (save-buffer)
-										 (test-case-run)))
 
 ;; yasnippet
 (require 'yasnippet)

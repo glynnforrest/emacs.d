@@ -27,6 +27,11 @@
 (require 'saveplace)
 (setq-default save-place t)
 
+;; To not miss surround mode
+(require 'surround)
+(global-surround-mode t)
+(global-auto-revert-mode t)
+
 ;; Centre screen around a search
 (defadvice
     evil-search-forward

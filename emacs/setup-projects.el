@@ -1,17 +1,4 @@
-(require 'eproject)
-
-;;; Eproject definitions
-
-;; Emacs config dir
-(define-project-type emacs-init (generic)
-  (look-for "init.el")
-  :relevant-files ("\.el$" "\.md$" "snippets/")
-  :irrelevant-files ("elpa/"))
-
-;; Composer PHP Project
-(define-project-type php-composer (generic)
-  (look-for "composer.json")
-  :irrelevant-files ("vendor/"))
+(require 'projectile)
 
 (setq org-projects-dir "~/notes/projects")
 
