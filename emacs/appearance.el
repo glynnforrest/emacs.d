@@ -11,8 +11,6 @@
 										))
 
 ;; Fonts that work for reloading init.el and new emacsclient instances
-;; (set-frame-font "DejaVu Sans Mono 9")
-;; (setq default-frame-alist '((font . "DejaVu Sans Mono 9")))
 (set-frame-font "Ubuntu Mono 10")
 (setq default-frame-alist '((font . "Ubuntu Mono 10")))
 
@@ -33,6 +31,10 @@
 
 ;; Fringes are a pain
 (fringe-mode -1)
+
+;; Other stuff
+(setq line-spacing 1)
+(add-to-list 'default-frame-alist '(internal-border-width . 0))
 
 ;; Change opacity of the frame.
 (defun djcb-opacity-modify (&optional dec)

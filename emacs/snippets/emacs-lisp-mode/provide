@@ -1,5 +1,5 @@
 # -*- mode: snippet -*-
 # name: (provide ...)
-# key: pro
+# key: provide
 # --
 (provide '`(buffer-file-name-body)`)$0
