@@ -205,25 +205,6 @@
 ;; nnoremap <A-l> >>
 ;; nnoremap <A-h> <<
 
-
-;; Create lines above and below in normal and insert mode with <return>
-(define-key evil-normal-state-map (kbd "S-<return>") (lambda()
-													   (interactive)
-													   (evil-open-below 1)
-													   (evil-normal-state 1)))
-(define-key evil-normal-state-map (kbd "C-S-<return>") (lambda()
-														 (interactive)
-														 (evil-open-above 1)
-														 (evil-normal-state 1)))
-(define-key evil-insert-state-map (kbd "S-<return>") (lambda()
-													   (interactive)
-													   (evil-open-below 1)))
-(define-key evil-insert-state-map (kbd "C-S-<return>") (lambda()
-														 (interactive)
-														 (evil-open-above 1)))
-
-;; universal escape key as well as C-g
-
 ;; Remove any trailing whitespace on buffer write
 (define-minor-mode remove-trailing-whitespace-mode
   "Toggle remove trailing whitespace on save.

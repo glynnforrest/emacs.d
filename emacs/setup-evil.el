@@ -51,6 +51,22 @@
     (recenter))
 (ad-activate 'evil-search-previous)
 
+;; Create lines above and below in normal and insert mode with <return>
+(define-key evil-normal-state-map (kbd "S-<return>") (lambda()
+													   (interactive)
+													   (evil-open-below 1)
+													   (evil-normal-state 1)))
+(define-key evil-normal-state-map (kbd "C-S-<return>") (lambda()
+														 (interactive)
+														 (evil-open-above 1)
+														 (evil-normal-state 1)))
+(define-key evil-insert-state-map (kbd "S-<return>") (lambda()
+													   (interactive)
+													   (evil-open-below 1)))
+(define-key evil-insert-state-map (kbd "C-S-<return>") (lambda()
+														 (interactive)
+														 (evil-open-above 1)))
+
 ;; Start in insert mode / emacs for some modes
 (add-to-list 'evil-emacs-state-modes 'package-menu-mode)
 (evil-set-initial-state 'package-menu-mode 'normal)
