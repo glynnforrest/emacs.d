@@ -77,7 +77,7 @@ TODO keywords, stars and list indicators."
 on the `projectile` package."
   (interactive)
   (dired directory)
-  (projectile-find-file)
+  (projectile-find-file nil)
   )
 
 (defun split-window-and-move-right ()
@@ -107,12 +107,6 @@ create it and write the initial message into it."
   (interactive)
   (save-buffer)
   (eval-buffer))
-
-(defun my-eval-print-last-sexp ()
-  (interactive)
-  (end-of-line)
-  (eval-print-last-sexp)
-  (evil-insert 1))
 
 (defun open-init-file ()
   (interactive)

@@ -40,7 +40,6 @@
 (define-key evil-normal-state-map ",m" 'ace-jump-mode)
 (define-key evil-normal-state-map ",N" 'narrow-to-defun)
 (define-key evil-normal-state-map ",p" 'helm-show-kill-ring)
-(define-key evil-normal-state-map ",q" 'multi-web-mode)
 (define-key evil-normal-state-map ",r" 'recentf-ido-find-file)
 (define-key evil-normal-state-map "]s" 'flyspell-goto-next-error)
 (define-key evil-normal-state-map ",S" 'split-window-and-move-below)
@@ -58,10 +57,9 @@
 (define-key evil-normal-state-map (kbd "C-S-j") 'evil-window-decrease-height)
 (define-key evil-normal-state-map (kbd "C-S-k") 'evil-window-increase-height)
 (define-key evil-normal-state-map (kbd "C-S-l") 'evil-window-increase-width)
-(define-key evil-normal-state-map (kbd "<left>") 'previous-buffer)
 (define-key evil-normal-state-map (kbd "M-j") 'move-line-down-and-indent)
 (define-key evil-normal-state-map (kbd "M-k") 'move-line-up-and-indent)
-(define-key evil-normal-state-map (kbd "<right>") 'next-buffer)
+
 
 (define-key evil-normal-state-map ",T" 'try-code)
 (define-key evil-normal-state-map (kbd "C-t") 'clever-rotate-text)
@@ -92,6 +90,9 @@
 											(delete-window)))
 (define-key global-map (kbd "M-q") 'quit-other-window)
 ;; Buffers
+;; Change buffers with left and right, Ctrl if not in evil-mode
+(define-key evil-normal-state-map (kbd "<right>") 'next-buffer)
+(define-key evil-normal-state-map (kbd "<left>") 'previous-buffer)
 (define-key global-map (kbd "C-<left>") 'previous-buffer)
 (define-key global-map (kbd "C-<right>") 'next-buffer)
 (define-key help-mode-map (kbd "C-<down>") 'kill-this-buffer)
@@ -103,14 +104,18 @@
 (define-key global-map (kbd "M-b") 'ido-switch-buffer)
 (define-key global-map (kbd "M-B") 'previous-buffer)
 (define-key global-map (kbd "<mouse-3>") nil)
+
+
+;; Go to eshell buffer quickly
 (define-key global-map (kbd "M-/") 'switch-to-scratch-buffer)
+(define-key global-map (kbd "M-?") 'eshell)
+;; C-M-/ should go to the repl for the current major mode
 
 ;; Elscreen
 (define-key global-map (kbd "M-<up>") 'elscreen-create)
 (define-key global-map (kbd "M-<down>") 'elscreen-kill)
 (define-key global-map (kbd "M-<left>") 'elscreen-previous)
 (define-key global-map (kbd "M-<right>") 'elscreen-next)
-
 
 ;; Grep
 (define-key grep-mode-map (kbd "<return>") 'grep-display-occurrence-recenter)

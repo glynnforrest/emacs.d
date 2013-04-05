@@ -17,11 +17,13 @@
 ;;At the start of every month move over notes that are still relevant.
 (setq org-directory "~/notes/")
 (setq org-default-notes-file (concat org-directory "dates/" (downcase (format-time-string "%Y-%B.org"))))
+(setq org-listen-read-watch-file (concat org-directory "topics/listen-read-watch.org"))
+
 (setq org-files (file-expand-wildcards (concat org-directory "*/*.org")))
 (setq org-refile-targets
 	  '((org-files :maxlevel . 1)
 		(nil :maxlevel . 1)))
-(setq org-agenda-files (list org-default-notes-file))
+(setq org-agenda-files (list org-default-notes-file org-listen-read-watch-file))
 
 (define-key global-map (kbd "M-n") 'org-capture)
 (define-key global-map (kbd "M-N") (lambda()
@@ -30,7 +32,7 @@
                                      ))
 (define-key global-map (kbd "C-c n") (lambda ()
 									   (interactive)
-									   (gf-find-file-in-directory org-directory "Find org file: ")))
+									   (gf/find-file-in-directory org-directory)))
 (evil-declare-key 'normal org-mode-map (kbd "C-t") 'org-todo)
 (evil-declare-key 'insert org-mode-map (kbd "C-t") 'org-todo)
 (evil-declare-key 'normal org-mode-map (kbd "C-m") 'org-refile)
@@ -49,18 +51,20 @@
 (define-key org-mode-map (kbd "C-S-<up>") 'delete-other-windows)
 (define-key org-mode-map (kbd "C-j") 'evil-window-down)
 (define-key org-mode-map (kbd "C-k") 'evil-window-up)
+(define-key global-map (kbd "C-c a") 'org-agenda)
 
 ;; Vim style navigation
 (define-key org-mode-map (kbd "C-c h") 'outline-up-heading)
 (define-key org-mode-map (kbd "C-c j") 'outline-next-visible-heading)
 (define-key org-mode-map (kbd "C-c k") 'outline-previous-visible-heading)
-(define-key org-mode-map (kbd "C-c C-j") 'org-forward-same-level)
-(define-key org-mode-map (kbd "C-c C-k") 'org-backward-same-level)
-(define-key org-mode-map (kbd "C-c g") (lambda ()
+(define-key org-mode-map (kbd "C-c g") 'gf/org-end-of-section)
+
+(defun gf/org-end-of-section ()
+  "Move to the last line of the current section."
 										 (interactive)
 										 (re-search-backward "^\* ")
-										 (org-forward-same-level 1)
-										 (previous-line 1)))
+										 (org-forward-element 1)
+										 (previous-line 1))
 
 (setq org-todo-keywords
        '((sequence "TODO" "DONE" "WAITING")))
@@ -69,6 +73,8 @@
       (quote (("TODO" :foreground "#dc322f" :weight bold)
               ("DONE" :foreground "forest green" :weight bold :strike-through t)
               ("WAITING" :foreground "#89BDFF" :weight bold))))
+
+(setq org-log-done t)
 
 (evil-declare-key 'normal org-mode-map "^" 'evil-org-beginning-of-line)
 (evil-declare-key 'normal org-mode-map "I" (lambda ()
@@ -81,8 +87,14 @@
 (evil-declare-key 'normal org-mode-map (kbd "M-I") 'org-remove-inline-images)
 
 (setq org-capture-templates
-      '(("t" "Todo" entry (file+headline org-default-notes-file "Unsorted")
-         "* TODO %?")
+      '(("t" "Todo" entry (file+headline org-default-notes-file "Tasks")
+         "* TODO %?" :prepend t)
+        ("l" "Listen" entry (file+headline org-listen-read-watch-file "Listen")
+         "* %?")
+        ("r" "Read" entry (file+headline org-listen-read-watch-file "Read")
+         "* %?")
+        ("w" "Watch" entry (file+headline org-listen-read-watch-file "Watch")
+         "* %?")
         ("l" "Linked Todo" entry (file+headline org-default-notes-file "Unsorted")
          "* TODO %?\n%a")
         ("n" "Note" entry (file+headline org-default-notes-file "Unsorted")
