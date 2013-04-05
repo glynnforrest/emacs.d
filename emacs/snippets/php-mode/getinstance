@@ -2,6 +2,11 @@
 # name: getInstance
 # key: getInstance
 # --
+protected static $instance;
+
+protected function __construct() {
+}
+
 public static function getInstance() {
 	if(!self::$instance) {
 		self::$instance = new self();
