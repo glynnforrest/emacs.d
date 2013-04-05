@@ -16,7 +16,6 @@
 (define-key evil-insert-state-map (kbd "C-v") 'evil-paste-after)
 
 ;; Normal mode
-(define-key evil-normal-state-map ",b" 'helm-buffers-list)
 (define-key evil-normal-state-map ",B" 'kill-matching-buffers)
 (define-key evil-normal-state-map ",C" 'cd)
 (define-key evil-normal-state-map ",c" 'comment-or-uncomment-line)
@@ -38,8 +37,6 @@
 (define-key evil-normal-state-map ",I" 'my-save-and-eval-buffer)
 (define-key evil-normal-state-map ",i" 'open-init-file)
 (define-key evil-normal-state-map ",m" 'ace-jump-mode)
-(define-key evil-normal-state-map ",N" 'narrow-to-defun)
-(define-key evil-normal-state-map ",p" 'helm-show-kill-ring)
 (define-key evil-normal-state-map ",r" 'recentf-ido-find-file)
 (define-key evil-normal-state-map "]s" 'flyspell-goto-next-error)
 (define-key evil-normal-state-map ",S" 'split-window-and-move-below)
@@ -47,7 +44,6 @@
 (define-key evil-normal-state-map ",T" 'test-case-run-all)
 (define-key evil-normal-state-map ",u" 'undo-tree-visualize)
 (define-key evil-normal-state-map ",w" 'save-buffer)
-(define-key evil-normal-state-map ",z" 'helm-imenu)
 (define-key evil-normal-state-map "z=" 'ispell-word)
 
 (define-key evil-normal-state-map (kbd "C-a") 'evil-numbers/inc-at-pt)
@@ -72,7 +68,14 @@
 (define-key evil-visual-state-map "mb" 'evil-mc-edit-beginnings-of-lines)
 (define-key evil-visual-state-map "me" 'evil-mc-edit-ends-of-lines)
 (define-key evil-visual-state-map "mm" 'evil-mc-switch-to-cursors)
+;; Narrowing
 (define-key evil-visual-state-map ",n" 'narrow-to-region)
+(define-key evil-normal-state-map ",N" 'narrow-to-defun)
+(define-key evil-normal-state-map ",n"
+  (lambda()
+    (interactive)
+    (widen)
+    (recenter)))
 
 
 ;; General mappings that should work in most modes
@@ -99,6 +102,9 @@
 (define-key magit-mode-map (kbd "C-<down>") 'kill-this-buffer)
 (define-key global-map (kbd "C--") 'text-scale-decrease)
 (define-key global-map (kbd "C-+") 'text-scale-increase)
+(define-key global-map (kbd "C-'") (lambda()
+									 (interactive)
+									 (text-scale-set 0)))
 (define-key global-map (kbd "<f5>" ) 'projectile-invalidate-cache)
 (define-key global-map (kbd "<f9>") 'toggle-writeroom)
 (define-key global-map (kbd "M-b") 'ido-switch-buffer)
@@ -133,5 +139,9 @@
 (define-key undo-tree-visualizer-map (kbd "C-<down>") 'kill-this-buffer)
 
 (define-key global-map (kbd "C-c f") 'fix-double-capital)
+
+(define-key global-map (kbd "C-c e") (lambda ()
+									   (interactive)
+									   (gf/find-file-in-directory "~/.emacs.d")))
 
 (provide 'mappings)

@@ -46,6 +46,13 @@
 	(when (and (>= newalpha frame-alpha-lower-limit) (<= newalpha 100))
 	  (modify-frame-parameters nil (list (cons 'alpha newalpha))))))
 
+
+
+(global-set-key (kbd "C-8") '(lambda()(interactive)(djcb-opacity-modify t)))
+(global-set-key (kbd "C-9") 'djcb-opacity-modify)
+(global-set-key (kbd "C-0") '(lambda()(interactive)
+							   (modify-frame-parameters nil `((alpha . 100)))))
+
 ;; Write room
 (defvar writeroom-enabled nil)
 (autoload 'hide-mode-line "hide-mode-line" nil t)

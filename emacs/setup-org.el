@@ -65,6 +65,14 @@
 										 (re-search-backward "^\* ")
 										 (org-forward-element 1)
 										 (previous-line 1))
+(defun gf/evil-org-beginning-of-line ()
+  "Move to the beginning of the line in an org-mode file, ignoring
+TODO keywords, stars and list indicators."
+ (interactive)
+ (beginning-of-line)
+ (if (looking-at-p " ") (evil-forward-word-begin))
+ (if (looking-at-p "*") (evil-forward-word-begin))
+ (if (looking-at-p "TODO\\|DONE\\|WAITING") (evil-forward-word-begin)))
 
 (setq org-todo-keywords
        '((sequence "TODO" "DONE" "WAITING")))
@@ -76,12 +84,15 @@
 
 (setq org-log-done t)
 
-(evil-declare-key 'normal org-mode-map "^" 'evil-org-beginning-of-line)
-(evil-declare-key 'normal org-mode-map "I" (lambda ()
-											 (interactive)
-											 (evil-org-beginning-of-line)
-											 (evil-insert 1)
-											 ))
+(evil-declare-key 'normal org-mode-map "^" 'gf/evil-org-beginning-of-line)
+(evil-declare-key 'normal org-mode-map "I"
+  (lambda ()
+    (interactive)
+    (gf/evil-org-beginning-of-line)
+    (evil-insert 1)
+    ))
+
+(evil-declare-key 'normal org-mode-map ",N" 'org-narrow-to-subtree)
 
 (evil-declare-key 'normal org-mode-map (kbd "M-i") 'org-display-inline-images)
 (evil-declare-key 'normal org-mode-map (kbd "M-I") 'org-remove-inline-images)
