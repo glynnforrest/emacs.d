@@ -4,11 +4,16 @@
 (add-hook 'php-mode-hook (lambda()
 							(setq indent-tabs-mode t)
 							(setup-electric-semicolon php-mode-map)
-							(if (file-has-doctype) (web-mode))
 							))
 
-(defun file-has-doctype ()
-  (if (string= (upcase (buffer-substring-no-properties 1 10)) "<!DOCTYPE") t nil))
+
+(defun gf/toggle-php-web-mode ()
+  "Switch between php-mode and web-mode for the current buffer."
+  (interactive)
+  (if (equal (symbol-name (buffer-local-value 'major-mode (current-buffer))) "web-mode")
+	(php-mode)
+	(web-mode)
+	))
 
 (defun test-this-or-related-php-file ()
   "Run test-case-run on the current buffer, or the related test case
@@ -29,7 +34,8 @@ file if open."
 			(other-window 1))
 	  (message (format "buffer not found: %s" b))))))
 
-(define-key evil-normal-state-map ",t" 'test-this-or-related-php-file)
-
+(define-key php-mode-map ",t" 'test-this-or-related-php-file)
+(define-key php-mode-map ",q" 'gf/toggle-php-web-mode)
+(define-key web-mode-map ",q" 'gf/toggle-php-web-mode)
 
 (provide 'setup-php)

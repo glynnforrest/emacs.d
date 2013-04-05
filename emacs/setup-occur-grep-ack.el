@@ -87,4 +87,4 @@
 (evil-declare-key 'normal wgrep-mode-map ",e" 'wgrep-finish-edit)
 (evil-declare-key 'normal wgrep-mode-map ",x" 'wgrep-abort-changes)
 
-(provide 'setup-occur-grep)
+(provide 'setup-occur-grep-ack)

@@ -184,16 +184,10 @@
 										 (recenter)))
 
 
-(define-key global-map (kbd "C-M-e") (lambda ()
+(define-key global-map (kbd "C-c e") (lambda ()
 									   (interactive)
-									   (gf-find-file-in-directory "~/.emacs.d"
-																  "Find in emacs folder: ")))
+									   (gf/find-file-in-directory "~/.emacs.d")))
 
-
-
-(add-hook 'lisp-interaction-mode-hook (lambda()
-										(local-unset-key (kbd "C-j"))
-										(local-set-key (kbd "M-J") 'my-eval-print-last-sexp)))
 
 
 
@@ -262,7 +256,7 @@ When enabled trailing whitespace is removed before saving."
 ;; Load various customisations
 (require 'appearance)
 (require 'defuns)
-(require 'setup-occur-grep)
+(require 'setup-occur-grep-ack)
 (require 'git-gutter)
 (global-git-gutter-mode)
 (require 'try-code)

@@ -75,6 +75,7 @@ TODO keywords, stars and list indicators."
 (defun gf/find-file-in-directory (directory)
   "Hacky function to find a file in DIRECTORY using ido. This depends
 on the `projectile` package."
+  (interactive)
   (dired directory)
   (projectile-find-file)
   )

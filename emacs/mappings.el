@@ -25,8 +25,7 @@
 (define-key evil-normal-state-map [escape] 'keyboard-quit)
 (define-key evil-normal-state-map " " 'evil-ex)
 (define-key evil-normal-state-map ",F" 'find-file)
-(define-key evil-normal-state-map ",f" 'eproject-find-file)
-(define-key evil-normal-state-map ",G" 'helm-git-find-files)
+(define-key evil-normal-state-map ",f" 'projectile-find-file)
 
 ;; Switch gj and j, gk and k
 (define-key evil-normal-state-map "j" 'evil-next-visual-line)

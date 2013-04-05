@@ -3,6 +3,7 @@
 (defun setup-elisp ()
   (eldoc-mode t)
   (paredit-mode t)
+  (smartparens-mode -1)
   )
 
 (add-hook 'emacs-lisp-mode-hook 'setup-elisp)
@@ -10,6 +11,16 @@
 (add-hook 'ielm-mode-hook 'setup-elisp)
 
 (define-key lisp-mode-shared-map (kbd "RET") 'reindent-then-newline-and-indent)
+
+(add-hook 'lisp-interaction-mode-hook (lambda()
+										(local-set-key (kbd "C-S-RET") 'gf/eval-print-last-sexp)))
+
+
+(defun gf/eval-print-last-sexp ()
+  (interactive)
+  (end-of-line)
+  (eval-print-last-sexp)
+  (evil-insert 1))
 
 (defun ielm-auto-complete ()
   "Enables `auto-complete' support in \\[ielm]."
