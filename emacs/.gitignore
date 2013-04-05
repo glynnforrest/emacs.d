@@ -15,4 +15,4 @@ session.*
 .smex-items
 tramp
 url
-/projectile.cache
+projectile*
