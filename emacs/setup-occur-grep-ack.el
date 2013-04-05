@@ -61,5 +61,30 @@
 
 (evil-declare-key 'normal grep-mode-map (kbd "<return>") 'grep-display-occurrence-recenter)
 (evil-declare-key 'normal grep-mode-map (kbd "<S-return>") 'grep-goto-occurrence-recenter)
+(evil-declare-key 'normal ack-and-a-half-mode-map (kbd "<return>") 'grep-display-occurrence-recenter)
+(evil-declare-key 'normal ack-and-a-half-mode-map (kbd "<S-return>") 'grep-goto-occurrence-recenter)
+
+(defun gf/narrow-grep-buffer ()
+  "Narrow the grep buffer stripping out the really long grep command."
+  (interactive)
+  (goto-line 5)
+  (narrow-to-region (point) (point-max))
+  (goto-line 1))
+
+(define-key evil-normal-state-map ",G" (lambda()
+										 (interactive)
+										 (call-interactively 'projectile-ack)
+										 (other-window 1)
+										 (gf/narrow-grep-buffer)
+										 ))
+
+(require 'wgrep)
+(require 'wgrep-ack)
+(evil-declare-key 'normal grep-mode-map ",e" 'wgrep-change-to-wgrep-mode)
+(evil-declare-key 'normal grep-mode-map ",w" 'wgrep-save-all-buffers)
+(evil-declare-key 'normal ack-and-a-half-mode-map ",e" 'wgrep-change-to-wgrep-mode)
+(evil-declare-key 'normal ack-and-a-half-mode-map ",w" 'wgrep-save-all-buffers)
+(evil-declare-key 'normal wgrep-mode-map ",e" 'wgrep-finish-edit)
+(evil-declare-key 'normal wgrep-mode-map ",x" 'wgrep-abort-changes)
 
 (provide 'setup-occur-grep)

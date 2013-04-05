@@ -11,6 +11,7 @@
 (defvar required-packages
   '(
 	ace-jump-mode
+	ack-and-a-half
 	auto-complete
 	autopair
 	browse-kill-ring
@@ -169,32 +170,12 @@
 (tooltip-mode -1)
 
 
-;; Change buffers with left and right, Ctrl if not in evil-mode
-
-
-
-;; Go to eshell buffer quickly
-(define-key global-map (kbd "M-?") (lambda()
-									 (interactive)
-									 (eshell)
-									 ))
-
-
-
 ;; Undo/redo window configuration with C-c <left>/<right>
 (winner-mode 1)
 
 (require 'help-mode)
-(require 'helm-git)
-(setq helm-display-function
-	  (lambda (buf)
-		(split-window-vertically)
-		(other-window 1)
-		(switch-to-buffer buf)))
 
 (setq undo-tree-visualizer-timestamps 1)
-
-;; Go back a buffer after picking one
 
 (evil-declare-key 'normal org-mode-map ",N" 'org-narrow-to-subtree)
 (define-key evil-normal-state-map ",n" (lambda()
