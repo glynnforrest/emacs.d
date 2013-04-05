@@ -242,19 +242,11 @@ When enabled trailing whitespace is removed before saving."
 (setq scroll-step 1)
 (setq scroll-conservatively 10000)
 
-(require 'setup-multiple-cursors)
+; (require 'setup-multiple-cursors)
 
 (global-set-key (kbd "C-<") 'mark-previous-like-this)
 (global-set-key (kbd "C->") 'mark-next-like-this)
 (global-set-key (kbd "C-*") 'mark-all-like-this)
-
-
-(defun file-has-doctype ()
-  (if (string= (upcase (buffer-substring-no-properties 1 10)) "<!DOCTYPE") t nil))
-
-;; enable web-mode for php files that begin with a doctype
-(add-hook 'php-mode-hook (lambda()
-						   (if (file-has-doctype) (web-mode))))
 
 (put 'ido-exit-minibuffer 'disabled nil)
 (put 'narrow-to-region 'disabled nil)
