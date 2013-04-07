@@ -65,15 +65,16 @@
 ;; Load personal configurations, like usernames and passwords
 (require 'personal)
 
+;; Clearly necessary
+(require 'setup-evil)
 (require 'modes)
+(require 'setup-autocomplete)
 (require 'setup-general)
+(require 'setup-programming)
 (require 'setup-projects)
 (require 'defuns)
 
-;; Clearly necessary
-(require 'setup-evil)
 
-(require 'setup-autocomplete)
 (require 'help-mode)
 ;; (require 'setup-multiple-cursors)
 (require 'multiple-cursors)
