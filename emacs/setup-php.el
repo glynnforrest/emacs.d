@@ -1,6 +1,8 @@
 (require 'php-mode)
+(require 'web-mode)
 ;; (php+-mode-setup)
 
+;; use tabs for php
 (add-hook 'php-mode-hook (lambda()
 							(setq indent-tabs-mode t)
 							(setup-electric-semicolon php-mode-map)
@@ -34,8 +36,8 @@ file if open."
 			(other-window 1))
 	  (message (format "buffer not found: %s" b))))))
 
-(define-key php-mode-map ",t" 'test-this-or-related-php-file)
-(define-key php-mode-map ",q" 'gf/toggle-php-web-mode)
-(define-key web-mode-map ",q" 'gf/toggle-php-web-mode)
+(evil-declare-key 'normal php-mode-map ",t" 'test-this-or-related-php-file)
+(evil-declare-key 'normal php-mode-map ",q" 'gf/toggle-php-web-mode)
+(evil-declare-key 'normal web-mode-map ",q" 'gf/toggle-php-web-mode)
 
 (provide 'setup-php)
