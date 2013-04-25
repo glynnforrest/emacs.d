@@ -100,18 +100,21 @@ TODO keywords, stars and list indicators."
 (setq org-capture-templates
       '(("t" "Todo" entry (file+headline org-default-notes-file "Tasks")
          "* TODO %?" :prepend t)
+        ("n" "Note" entry (file+headline org-default-notes-file "Notes")
+         "* %?")
+        ("T" "Project Todo" entry (file+headline org-current-project-file "Tasks")
+         "* TODO %?" :prepend t)
+        ("N" "Project Note" entry (file+headline org-current-project-file "Notes")
+         "* %?")
         ("l" "Listen" entry (file+headline org-listen-read-watch-file "Listen")
          "* %?")
         ("r" "Read" entry (file+headline org-listen-read-watch-file "Read")
          "* %?")
         ("w" "Watch" entry (file+headline org-listen-read-watch-file "Watch")
          "* %?")
-        ("l" "Linked Todo" entry (file+headline org-default-notes-file "Unsorted")
-         "* TODO %?\n%a")
-        ("n" "Note" entry (file+headline org-default-notes-file "Unsorted")
+        ("u" "Unsorted" entry (file+headline org-default-notes-file "Unsorted")
          "* %?")
-        ("h" "Linked Note" entry (file+headline org-default-notes-file "Unsorted")
-         "* %?\n%a")))
+        ))
 
 ;; Behaviour for capturing notes using make-capture-frame
  (defadvice org-capture-finalize
@@ -150,5 +153,8 @@ TODO keywords, stars and list indicators."
 (define-key org-mode-map (kbd "M-<down>") 'elscreen-kill)
 (define-key org-mode-map (kbd "M-<right>") 'elscreen-next)
 (define-key org-mode-map (kbd "M-<left>") 'elscreen-previous)
+
+(define-key org-mode-map (kbd "C-c C-n") 'gf/new-code-project)
+(define-key org-mode-map (kbd "C-c C-o") 'gf/open-code-project)
 
 (provide 'setup-org)

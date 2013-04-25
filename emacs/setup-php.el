@@ -34,7 +34,7 @@ file if open."
 			(save-buffer)
 			(test-case-run)
 			(other-window 1))
-	  (message (format "buffer not found: %s" b))))))
+		(message (format "buffer not found: %s" b))))))
 
 (evil-declare-key 'normal php-mode-map ",t" 'test-this-or-related-php-file)
 (evil-declare-key 'normal php-mode-map ",q" 'gf/toggle-php-web-mode)
