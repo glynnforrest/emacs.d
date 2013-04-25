@@ -195,4 +195,9 @@ line as well as the current word."
 		(rotate-text-backward 1)
 		)))
 
+(defun indent-buffer ()
+  "Indent the entire buffer."
+  (interactive)
+  (indent-region (point-min) (point-max)))
+
 (provide 'defuns)

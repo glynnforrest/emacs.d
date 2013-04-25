@@ -45,6 +45,7 @@
 (define-key evil-normal-state-map ",u" 'undo-tree-visualize)
 (define-key evil-normal-state-map ",w" 'save-buffer)
 (define-key evil-normal-state-map "z=" 'ispell-word)
+(define-key evil-normal-state-map ",=" 'indent-buffer)
 
 (define-key evil-normal-state-map (kbd "C-a") 'evil-numbers/inc-at-pt)
 (define-key evil-normal-state-map (kbd "C-<down>") 'kill-this-buffer)
