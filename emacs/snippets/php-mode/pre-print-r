@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: pre print_r
+# key: prepr
+# --
+echo '<pre>';
+print_r($1);
+echo '</pre>';$0
