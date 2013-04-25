@@ -67,7 +67,8 @@ ERC buffer."
   "Hacky function to find a file in DIRECTORY using ido. This depends
 on the `projectile` package."
   (interactive)
-  (dired directory)
+  (switch-to-scratch-buffer)
+  (cd directory)
   (projectile-find-file nil)
   )
 
