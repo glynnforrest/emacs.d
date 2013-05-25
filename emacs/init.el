@@ -15,8 +15,7 @@
     auto-complete
     autopair
     browse-kill-ring
-    color-theme
-    color-theme-monokai
+	color-theme-sanityinc-tomorrow
     dired+
     elscreen
     evil
@@ -85,6 +84,6 @@
 
 (require 'setup-org)
 (require 'setup-yasnippet)
-(require 'appearance)
 (require 'setup-occur-grep-ack)
+(require 'appearance)
 (require 'mappings)

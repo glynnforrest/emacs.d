@@ -16,8 +16,8 @@
 
 
 ;; Load a theme
-(require 'color-theme-monokai)
-(color-theme-monokai)
+(require 'sanityinc-tomorrow-eighties-theme)
+(color-theme-sanityinc-tomorrow-eighties)
 
 ;; Cursor configuration.
 (blink-cursor-mode -1)
