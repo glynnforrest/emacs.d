@@ -15,10 +15,11 @@
     auto-complete
     autopair
     browse-kill-ring
-	color-theme-sanityinc-tomorrow
+    color-theme-sanityinc-tomorrow
     dired+
     elscreen
     evil
+    flycheck
     js2-mode
     js-comint
     magit
