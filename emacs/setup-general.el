@@ -68,6 +68,10 @@
 (setq x-select-enable-clipboard t)
 (setq undo-tree-visualizer-timestamps 1)
 
+;; Uniquify
+(require 'uniquify)
+(setq uniquify-buffer-name-style 'reverse)
+
 ;;; Enable normally disabled functions
 (put 'ido-exit-minibuffer 'disabled nil)
 (put 'narrow-to-region 'disabled nil)
