@@ -19,6 +19,7 @@
     dired+
     elscreen
     evil
+	flx
     flycheck
     js2-mode
     js-comint

@@ -44,6 +44,10 @@
 (global-set-key (kbd "M-x") 'smex)
 (global-set-key (kbd "M-X") 'smex-major-mode-commands)
 
+;; Better ido matching with flx
+(require 'flx)
+(flx-ido-mode 1)
+
 ;;; General modes
 (delete-selection-mode t)
 (recentf-mode 1)
