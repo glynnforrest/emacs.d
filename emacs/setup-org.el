@@ -23,6 +23,15 @@
 (setq org-refile-targets
 	  '((org-files :maxlevel . 1)
 		(nil :maxlevel . 1)))
+
+(defun gf/org-refile-files-first ()
+  "Choose an org file to file in, then pick the node. This prevents
+  emacs opening all of the refile targets at once."
+  (interactive)
+  (let ((file (list (ido-completing-read "Refile to:" org-files))))
+	(let ((org-refile-targets `((,file :maxlevel . 1))))
+	  (org-refile))))
+
 (setq org-agenda-files (list org-default-notes-file org-listen-read-watch-file))
 
 (define-key global-map (kbd "M-n") 'org-capture)
@@ -35,8 +44,8 @@
 									   (gf/find-file-in-directory org-directory)))
 (evil-declare-key 'normal org-mode-map (kbd "C-t") 'org-todo)
 (evil-declare-key 'insert org-mode-map (kbd "C-t") 'org-todo)
-(evil-declare-key 'normal org-mode-map (kbd "C-m") 'org-refile)
-(evil-declare-key 'visual org-mode-map (kbd "C-m") 'org-refile)
+(evil-declare-key 'normal org-mode-map (kbd "C-m") 'gf/org-refile-files-first)
+(evil-declare-key 'visual org-mode-map (kbd "C-m") 'gf/org-refile-files-first)
 (evil-declare-key 'insert org-mode-map (kbd "M-<return>") (lambda()
                                                             (interactive)
                                                             (evil-append-line 1)

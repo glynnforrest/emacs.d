@@ -137,7 +137,7 @@
 (define-key minibuffer-local-ns-map [escape] 'minibuffer-keyboard-quit)
 (define-key occur-mode-map (kbd "<return>") 'occur-display-occurrence-recenter)
 (define-key occur-mode-map (kbd "<S-return>") 'occur-goto-occurrence-recenter)
-(define-key undo-tree-visualizer-map (kbd "C-<down>") 'kill-this-buffer)
+(define-key undo-tree-map (kbd "C-<down>") 'kill-this-buffer)
 
 (define-key global-map (kbd "C-c f") 'fix-double-capital)
 
