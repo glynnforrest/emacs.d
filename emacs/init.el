@@ -19,8 +19,9 @@
     dired+
     elscreen
     evil
-	flx
+    flx
     flycheck
+    git-gutter
     js2-mode
     js-comint
     magit
@@ -28,14 +29,19 @@
     multiple-cursors
     multi-web-mode
     org
-    php+-mode
+    paredit
+    php-mode
     projectile
     rainbow-delimiters
     rainbow-mode
+    rotate-text
+    smartparens
     smex
     surround
     test-case-mode
+    web-mode
     wgrep
+    wgrep-ack
     yasnippet
     zencoding-mode
     )
