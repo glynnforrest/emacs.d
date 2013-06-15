@@ -41,11 +41,12 @@ org-mode project file and a repl if available."
 (defun gf/create-org-path (path)
   "Create a name suitable for an org file from the last part of a file
 path."
-  (concat org-projects-dir "/"
-          (replace-regexp-in-string
-           "\\." "-" (if (equal (substring path 0 1) ".")
-                         (substring path 1) path))
-          ".org"))
+  (downcase
+   (concat org-projects-dir "/"
+		   (replace-regexp-in-string
+			"\\." "-" (if (equal (substring path 0 1) ".")
+						  (substring path 1) path))
+		   ".org")))
 
 (defun gf/open-code-project ()
   "Open a code project with `gf/start-code-project`, choosing from the
