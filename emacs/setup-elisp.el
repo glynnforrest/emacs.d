@@ -1,9 +1,11 @@
 (require 'paredit)
 
+;; Set up some useful modes and set spaces
 (defun setup-elisp ()
   (eldoc-mode t)
   (paredit-mode t)
   (smartparens-mode -1)
+  (setq indent-tabs-mode nil)
   )
 
 (add-hook 'emacs-lisp-mode-hook 'setup-elisp)
@@ -13,7 +15,7 @@
 (define-key lisp-mode-shared-map (kbd "RET") 'reindent-then-newline-and-indent)
 
 (add-hook 'lisp-interaction-mode-hook (lambda()
-										(local-set-key (kbd "C-S-RET") 'gf/eval-print-last-sexp)))
+                                        (local-set-key (kbd "C-S-RET") 'gf/eval-print-last-sexp)))
 
 
 (defun gf/eval-print-last-sexp ()
@@ -58,7 +60,7 @@
 
 (define-key lisp-mode-shared-map (kbd "M-RET") 'lisp-describe-thing-at-point)
 (add-hook 'ielm-mode-hook (lambda()
-							(define-key ielm-map (kbd "M-RET") 'lisp-describe-thing-at-point)))
+                            (define-key ielm-map (kbd "M-RET") 'lisp-describe-thing-at-point)))
 
 (defun clever-splice-sexp-killing-backward ()
   "Wrapper around paredit-splice-sexp-killing-backward that moves the whole symbol."

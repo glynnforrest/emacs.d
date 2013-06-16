@@ -1,18 +1,18 @@
 (defun setup-gui ()
   "setup gui elements"
   (dolist (mode '(menu-bar-mode tool-bar-mode scroll-bar-mode))
-	(when (fboundp mode) (funcall mode -1))))
+    (when (fboundp mode) (funcall mode -1))))
 
 (setup-gui)
 
 ;; Make sure gui stuff is right for new frames too
 (add-hook 'after-make-frame-functions (lambda(frame)
-										(setup-gui)
-										))
+                                        (setup-gui)
+                                        ))
 
 ;; Fonts that work for reloading init.el and new emacsclient instances
-(set-frame-font "Ubuntu Mono 10")
-(setq default-frame-alist '((font . "Ubuntu Mono 10")))
+(set-frame-font "Ubuntu Mono 11")
+(setq default-frame-alist '((font . "Ubuntu Mono 11")))
 
 
 ;; Load a theme
@@ -39,19 +39,19 @@
 ;; Change opacity of the frame.
 (defun djcb-opacity-modify (&optional dec)
   "modify the transparency of the emacs frame; if DEC is t,
-	decrease the transparency, otherwise increase it in 10%-steps"
+    decrease the transparency, otherwise increase it in 10%-steps"
   (let* ((alpha-or-nil (frame-parameter nil 'alpha)) ; nil before setting
-		 (oldalpha (if alpha-or-nil alpha-or-nil 100))
-		 (newalpha (if dec (- oldalpha 10) (+ oldalpha 10))))
-	(when (and (>= newalpha frame-alpha-lower-limit) (<= newalpha 100))
-	  (modify-frame-parameters nil (list (cons 'alpha newalpha))))))
+         (oldalpha (if alpha-or-nil alpha-or-nil 100))
+         (newalpha (if dec (- oldalpha 10) (+ oldalpha 10))))
+    (when (and (>= newalpha frame-alpha-lower-limit) (<= newalpha 100))
+      (modify-frame-parameters nil (list (cons 'alpha newalpha))))))
 
 
 
 (global-set-key (kbd "C-8") '(lambda()(interactive)(djcb-opacity-modify t)))
 (global-set-key (kbd "C-9") 'djcb-opacity-modify)
 (global-set-key (kbd "C-0") '(lambda()(interactive)
-							   (modify-frame-parameters nil `((alpha . 100)))))
+                               (modify-frame-parameters nil `((alpha . 100)))))
 
 ;; Write room
 (defvar writeroom-enabled nil)
@@ -59,20 +59,20 @@
 (defun toggle-writeroom ()
   (interactive)
   (if (not writeroom-enabled)
-	  (setq writeroom-enabled t)
-	(setq writeroom-enabled nil))
-	(hide-mode-line)
-	(global-linum-mode -1)
-	(if writeroom-enabled
-		(progn
-		  (fringe-mode 'both)
-		  ;; (menu-bar-mode -1)
-		  (set-fringe-mode 200))
-	  (progn
-		(set-fringe-mode 0)
-		(fringe-mode -1)
-		;; (menu-bar-mode)
-		(global-linum-mode 1))))
+      (setq writeroom-enabled t)
+    (setq writeroom-enabled nil))
+    (hide-mode-line)
+    (global-linum-mode -1)
+    (if writeroom-enabled
+        (progn
+          (fringe-mode 'both)
+          ;; (menu-bar-mode -1)
+          (set-fringe-mode 200))
+      (progn
+        (set-fringe-mode 0)
+        (fringe-mode -1)
+        ;; (menu-bar-mode)
+        (global-linum-mode 1))))
 
 ;; Fun
 ;; (require 'nyan-mode)
@@ -93,13 +93,13 @@
 
 ;; View hex colours in the following modes
 (dolist (mode '(
-				css-mode
-				emacs-lisp-mode
-				haskell-mode
-				lisp-interaction-mode
-				lisp-mode
-						  ))
+                css-mode
+                emacs-lisp-mode
+                haskell-mode
+                lisp-interaction-mode
+                lisp-mode
+                          ))
   (font-lock-add-keywords mode
-						  '((fontify-hex-colors))))
+                          '((fontify-hex-colors))))
 
 (provide 'appearance)

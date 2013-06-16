@@ -77,6 +77,7 @@
 (require 'modes)
 (require 'setup-autocomplete)
 (require 'setup-general)
+(require 'setup-whitespace)
 (require 'setup-programming)
 (require 'setup-projects)
 (require 'defuns)
