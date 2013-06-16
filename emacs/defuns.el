@@ -8,7 +8,7 @@
   "Change the next comma to a full stop and capitalise the next word."
   (interactive)
   (if (not (looking-at-p ","))
-	  (evil-find-char 1 (string-to-char ",")))
+      (evil-find-char 1 (string-to-char ",")))
   (delete-char 1)
   (insert ".")
   (evil-forward-word-begin)
@@ -18,12 +18,12 @@
   "Change the next full stop to a comma and lowercase the next word."
   (interactive)
   (if (not (looking-at-p "\\."))
-	  (evil-find-char 1 (string-to-char ".")))
+      (evil-find-char 1 (string-to-char ".")))
   (delete-char 1)
   (insert ",")
   (evil-forward-word-begin)
   (if (not (looking-at-p "I"))
-	  (evil-downcase (point) (+ 1 (point)))))
+      (evil-downcase (point) (+ 1 (point)))))
 
 
 (defun open-url-from-buffer ()
@@ -31,25 +31,25 @@
 buffer."
   (interactive)
   (save-excursion
-	(goto-char (point-min))
-	(let ((urls ()))
-	  (while (re-search-forward "https?:\/\/[a-z0-9\.\/-_\?=%&]+" nil t)
-		(let ((url (match-string-no-properties 0)))
-		  (add-to-list 'urls url)
-		  ))
-	  (let ((url (ido-completing-read "Open url in buffer: " urls nil t)))
-		(when url
-		  (browse-url url))))))
+    (goto-char (point-min))
+    (let ((urls ()))
+      (while (re-search-forward "https?:\/\/[a-z0-9\.\/-_\?=%&]+" nil t)
+        (let ((url (match-string-no-properties 0)))
+          (add-to-list 'urls url)
+          ))
+      (let ((url (ido-completing-read "Open url in buffer: " urls nil t)))
+        (when url
+          (browse-url url))))))
 
 (defun open-recent-url ()
   "Open the url closest behind the current point, for example in an
 ERC buffer."
   (interactive)
   (save-excursion
-	(re-search-backward "http?:\/\/[a-z0-9\.\/-_\?=%&]+" nil t)
-	(let ((url (match-string-no-properties 0)))
-		(when url
-		  (browse-url url)))))
+    (re-search-backward "http?:\/\/[a-z0-9\.\/-_\?=%&]+" nil t)
+    (let ((url (match-string-no-properties 0)))
+      (when url
+        (browse-url url)))))
 
 (defun comment-or-uncomment-line ()
   "Comments or uncomments the current line."
@@ -60,8 +60,8 @@ ERC buffer."
   "Find a recent file using Ido."
   (interactive)
   (let ((file (ido-completing-read "Open recent file: " recentf-list nil t)))
-	(when file
-	  (find-file file))))
+    (when file
+      (find-file file))))
 
 (defun gf/find-file-in-directory (directory)
   "Hacky function to find a file in DIRECTORY using ido. This depends
@@ -109,7 +109,7 @@ create it and write the initial message into it."
   (interactive)
   (backward-kill-sexp)
   (prin1 (eval (read (current-kill 0)))
-		 (current-buffer)))
+         (current-buffer)))
 
 (defun move-line-up-and-indent ()
   (interactive)
@@ -129,18 +129,18 @@ create it and write the initial message into it."
 Press ; for electric-semicolon, C-; to insert a semicolon."
   (evil-declare-key 'insert mode-map ";" 'electric-semicolon)
   (evil-declare-key 'insert mode-map (kbd "C-;") (lambda()
-												   (interactive)
-												   (insert ";"))))
+                                                   (interactive)
+                                                   (insert ";"))))
 
 (defun electric-semicolon ()
   "Inserts a semicolon at the end of the current line if not already there."
   (interactive)
   (let ((beg (point)))
-  (end-of-line)
-  (if (not (looking-back ";"))
-    (insert ";")
-	(goto-char beg)
-	)))
+    (end-of-line)
+    (if (not (looking-back ";"))
+        (insert ";")
+      (goto-char beg)
+      )))
 
 (defun move-line-down-and-indent ()
   (interactive)
@@ -176,28 +176,23 @@ Press ; for electric-semicolon, C-; to insert a semicolon."
 as the current word."
   (interactive)
   (if (not (condition-case nil
-		 (rotate-text 1)
-		 (error nil)))
-	  (save-excursion
-		(evil-first-non-blank)
-		(rotate-text 1)
-		)))
+               (rotate-text 1)
+             (error nil)))
+      (save-excursion
+        (evil-first-non-blank)
+        (rotate-text 1)
+        )))
 
 (defun clever-rotate-text-backward ()
   "Wrapper to rotate-text-backward that will try the start of the
 line as well as the current word."
   (interactive)
   (if (not (condition-case nil
-		 (rotate-text-backward 1)
-		 (error nil)))
-	  (save-excursion
-		(evil-first-non-blank)
-		(rotate-text-backward 1)
-		)))
-
-(defun indent-buffer ()
-  "Indent the entire buffer."
-  (interactive)
-  (indent-region (point-min) (point-max)))
+               (rotate-text-backward 1)
+             (error nil)))
+      (save-excursion
+        (evil-first-non-blank)
+        (rotate-text-backward 1)
+        )))
 
 (provide 'defuns)

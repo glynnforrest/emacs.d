@@ -45,7 +45,6 @@
 (define-key evil-normal-state-map ",u" 'undo-tree-visualize)
 (define-key evil-normal-state-map ",w" 'save-buffer)
 (define-key evil-normal-state-map "z=" 'ispell-word)
-(define-key evil-normal-state-map ",=" 'indent-buffer)
 
 (define-key evil-normal-state-map (kbd "C-a") 'evil-numbers/inc-at-pt)
 (define-key evil-normal-state-map (kbd "C-<down>") 'kill-this-buffer)
@@ -89,9 +88,9 @@
 (define-key global-map (kbd "C-<up>") 'delete-window)
 (define-key global-map (kbd "C-S-<up>") 'delete-other-windows)
 (define-key global-map (kbd "C-S-<down>") (lambda ()
-											(interactive)
-											(kill-this-buffer)
-											(delete-window)))
+                                            (interactive)
+                                            (kill-this-buffer)
+                                            (delete-window)))
 (define-key global-map (kbd "M-q") 'quit-other-window)
 ;; Buffers
 ;; Change buffers with left and right, Ctrl if not in evil-mode
@@ -104,8 +103,8 @@
 (define-key global-map (kbd "C--") 'text-scale-decrease)
 (define-key global-map (kbd "C-+") 'text-scale-increase)
 (define-key global-map (kbd "C-'") (lambda()
-									 (interactive)
-									 (text-scale-set 0)))
+                                     (interactive)
+                                     (text-scale-set 0)))
 (define-key global-map (kbd "<f5>" ) 'projectile-invalidate-cache)
 (define-key global-map (kbd "<f9>") 'toggle-writeroom)
 (define-key global-map (kbd "M-b") 'ido-switch-buffer)
@@ -130,6 +129,7 @@
 
 ;; Magit
 (define-key magit-mode-map (kbd "C-p") 'magit-push)
+
 (define-key minibuffer-local-completion-map [escape] 'minibuffer-keyboard-quit)
 (define-key minibuffer-local-isearch-map [escape] 'minibuffer-keyboard-quit)
 (define-key minibuffer-local-map [escape] 'minibuffer-keyboard-quit)
@@ -142,7 +142,7 @@
 (define-key global-map (kbd "C-c f") 'fix-double-capital)
 
 (define-key global-map (kbd "C-c e") (lambda ()
-									   (interactive)
-									   (gf/find-file-in-directory "~/.emacs.d")))
+                                       (interactive)
+                                       (gf/find-file-in-directory "~/.emacs.d")))
 
 (provide 'mappings)
