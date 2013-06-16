@@ -8,6 +8,7 @@ namespace ${1:foo};
 
 /**
  * ${2:Foo}Test
+ *
  * @author Glynn Forrest <me@glynnforrest.com>
  **/
 class $2Test extends \PHPUnit_Framework_TestCase {
