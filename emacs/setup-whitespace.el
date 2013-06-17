@@ -1,4 +1,6 @@
-;; use spaces by default, override in some modes with hooks
+;; Use spaces by default, override in individual modes with hooks.
+;; The general rule of thumb for this setup is tabs for c-like
+;; languages, spaces for everything else.
 (setq-default
  c-basic-offset 4
  tab-width 4

@@ -24,6 +24,7 @@
     git-gutter
     js2-mode
     js-comint
+    keychain-environment
     magit
     markdown-mode
     multiple-cursors
@@ -70,7 +71,7 @@
 (load custom-file 'noerror)
 
 ;; Load personal configurations, like usernames and passwords
-(require 'personal)
+(require 'personal nil t)
 
 ;; Clearly necessary
 (require 'setup-evil)

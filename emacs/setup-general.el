@@ -89,4 +89,10 @@
 		(make-directory dir)))))
 
 
+;; Load ssh credentials from keychain, even if keychain was called
+;; after emacs startup
+
+(require 'keychain-environment)
+(define-key evil-normal-state-map ",k" 'keychain-refresh-environment)
+
 (provide 'setup-general)
