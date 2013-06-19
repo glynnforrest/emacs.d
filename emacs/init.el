@@ -24,6 +24,7 @@
     git-gutter
     js2-mode
     js-comint
+    impatient-mode
     keychain-environment
     magit
     markdown-mode
@@ -36,6 +37,7 @@
     rainbow-delimiters
     rainbow-mode
     rotate-text
+    skewer-mode
     smartparens
     smex
     surround

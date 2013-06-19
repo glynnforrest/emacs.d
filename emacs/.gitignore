@@ -16,3 +16,4 @@ session.*
 tramp
 url
 projectile*
+/skewer-cache/
