@@ -32,6 +32,7 @@
     multi-web-mode
     org
     paredit
+    paredit-everywhere
     php-mode
     projectile
     rainbow-delimiters

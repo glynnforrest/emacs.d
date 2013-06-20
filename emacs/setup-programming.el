@@ -24,6 +24,9 @@
     (comment-or-uncomment-region (region-beginning) (region-end))
     (evil-visual-restore)))
 
+(require 'paredit-everywhere)
+(add-hook 'prog-mode-hook 'paredit-everywhere-mode)
+
 (require 'setup-magit)
 (require 'setup-js)
 (require 'setup-css)
