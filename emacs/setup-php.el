@@ -69,6 +69,23 @@ file if open."
       (insert (concat "use " file ";"))
       )))
 
+
+(defun gf/evil-open-below-docblock (count)
+  "Same as `evil-open-below`, but insert * if in a docblock."
+  (interactive "p")
+  (evil-first-non-blank)
+  (if (looking-at-p "*")
+      (progn
+        (evil-open-below count)
+        (insert "* "))
+    (evil-open-below count))
+  )
+
+(evil-declare-key 'normal php-mode-map "o" 'gf/evil-open-below-docblock)
+
+(setq php-auto-yasnippet-php-program (concat plugins-dir "/php-auto-yasnippets/Create-PHP-YASnippet.php"))
+(define-key php-mode-map (kbd "C-c C-y") 'yas/create-php-snippet)
+
 (evil-declare-key 'normal php-mode-map ",t" 'test-this-or-related-php-file)
 (evil-declare-key 'normal php-mode-map ",q" 'gf/toggle-php-web-mode)
 (evil-declare-key 'normal web-mode-map ",q" 'gf/toggle-php-web-mode)
