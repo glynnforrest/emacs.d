@@ -17,9 +17,9 @@
 
 (dolist (hook '(org-mode-hook magit-log-edit-mode-hook))
   (add-hook hook (lambda ()
-				   (flyspell-mode 1)
-				   (auto-fill-mode 1)
-				   )))
+                   (flyspell-mode 1)
+                   (auto-fill-mode 1)
+                   )))
 
 ;;; Ido
 (ido-mode 1)
@@ -30,12 +30,12 @@
 (setq confirm-nonexistent-file-or-buffer nil)
 (setq ido-create-new-buffer 'always)
 (setq kill-buffer-query-functions
-	  (remq 'process-kill-buffer-query-function
-			kill-buffer-query-functions))
+      (remq 'process-kill-buffer-query-function
+            kill-buffer-query-functions))
 (setq ido-ignore-buffers (append '("^\*Completions\*" "^\*Help\*" "^\*magit-process\*" "^\*Compile-Log\*" "^\*vc-diff\*") ido-ignore-buffers))
 (setq ido-auto-merge-delay-time 99999)
 (add-hook 'ido-setup-hook (lambda ()
-     (define-key ido-file-completion-map (kbd "C-w") 'ido-delete-backward-word-updir)))
+                            (define-key ido-file-completion-map (kbd "C-w") 'ido-delete-backward-word-updir)))
 
 ;; Ido for M-x
 (require 'smex)
@@ -84,15 +84,24 @@
 (defadvice find-file (before make-directory-maybe (filename &optional wildcards) activate)
   "Create parent directory if not exists while visiting file."
   (unless (file-exists-p filename)
-	(let ((dir (file-name-directory filename)))
-	  (unless (file-exists-p dir)
-		(make-directory dir)))))
+    (let ((dir (file-name-directory filename)))
+      (unless (file-exists-p dir)
+        (make-directory dir)))))
 
 
 ;; Load ssh credentials from keychain, even if keychain was called
 ;; after emacs startup
 
 (require 'keychain-environment)
-(define-key evil-normal-state-map ",k" 'keychain-refresh-environment)
+(define-key evil-normal-state-map ",k" (lambda ()
+                                         (interactive)
+                                         (keychain-refresh-environment)
+                                         (message "Keychain environment refreshed.")))
+
+
+;; refresh the current major mode
+(define-key global-map (kbd "<f6>") (lambda ()
+                                      (interactive)
+                                      (call-interactively major-mode)))
 
 (provide 'setup-general)
