@@ -83,6 +83,8 @@ file if open."
 
 (evil-declare-key 'normal php-mode-map "o" 'gf/evil-open-below-docblock)
 
+;; Use M-j to open a line below when in insert mode
+
 (setq php-auto-yasnippet-php-program (concat plugins-dir "/php-auto-yasnippets/Create-PHP-YASnippet.php"))
 (define-key php-mode-map (kbd "C-c C-y") 'yas/create-php-snippet)
 

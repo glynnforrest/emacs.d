@@ -57,8 +57,11 @@
 (define-key global-map (kbd "C-c n") (lambda ()
 									   (interactive)
 									   (gf/find-file-in-directory org-directory)))
-(evil-declare-key 'normal org-mode-map (kbd "C-t") 'org-todo)
-(evil-declare-key 'insert org-mode-map (kbd "C-t") 'org-todo)
+
+(define-key org-mode-map (kbd "C-t") 'org-shiftright)
+(define-key org-mode-map (kbd "C-S-t") 'org-shiftleft)
+(define-key org-mode-map (kbd "C-c t") 'org-todo)
+
 (evil-declare-key 'normal org-mode-map (kbd "C-m") 'gf/org-refile-files-first)
 (evil-declare-key 'visual org-mode-map (kbd "C-m") 'gf/org-refile-files-first)
 (evil-declare-key 'insert org-mode-map (kbd "M-<return>") (lambda()
@@ -76,6 +79,9 @@
 (define-key org-mode-map (kbd "C-j") 'evil-window-down)
 (define-key org-mode-map (kbd "C-k") 'evil-window-up)
 (define-key global-map (kbd "C-c a") 'org-agenda)
+
+(define-key global-map (kbd "C-c l") 'org-store-link)
+;;; to insert the link into an org mode buffer, use C-c C-l
 
 ;; Vim style navigation
 (define-key org-mode-map (kbd "C-c h") 'outline-up-heading)
@@ -99,12 +105,18 @@ TODO keywords, stars and list indicators."
  (if (looking-at-p "TODO\\|DONE\\|WAITING") (evil-forward-word-begin)))
 
 (setq org-todo-keywords
-       '((sequence "TODO" "DONE" "WAITING")))
+      '((sequence "TODO(t)" "DONE(d)")
+        (sequence "NEXT(n)" "WAITING(w)" "|")))
 
 (setq org-todo-keyword-faces
       (quote (("TODO" :foreground "#dc322f" :weight bold)
               ("DONE" :foreground "forest green" :weight bold :strike-through t)
               ("WAITING" :foreground "#89BDFF" :weight bold))))
+
+;;; Make it impossible to complete a task if subtasks are not done
+(setq org-enforce-todo-dependencies t)
+
+(setq org-use-fast-todo-selection t)
 
 (evil-declare-key 'normal org-mode-map "^" 'gf/evil-org-beginning-of-line)
 (evil-declare-key 'normal org-mode-map "I"
