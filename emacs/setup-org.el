@@ -102,7 +102,7 @@ TODO keywords, stars and list indicators."
  (beginning-of-line)
  (if (looking-at-p " ") (evil-forward-word-begin))
  (if (looking-at-p "*") (evil-forward-word-begin))
- (if (looking-at-p "TODO\\|DONE\\|WAITING") (evil-forward-word-begin)))
+ (if (looking-at-p "TODO\\|DONE\\|NEXT\\|WAITING") (evil-forward-word-begin)))
 
 (setq org-todo-keywords
       '((sequence "TODO(t)" "DONE(d)")
