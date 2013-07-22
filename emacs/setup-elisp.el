@@ -13,6 +13,7 @@
 (add-hook 'ielm-mode-hook 'setup-elisp)
 
 (define-key lisp-mode-shared-map (kbd "RET") 'reindent-then-newline-and-indent)
+(define-key lisp-mode-shared-map (kbd "C-c C-e") 'eval-and-replace-sexp)
 
 (add-hook 'lisp-interaction-mode-hook (lambda()
                                         (local-set-key (kbd "C-S-RET") 'gf/eval-print-last-sexp)))
@@ -59,6 +60,7 @@
                   ((setq sym (variable-at-point)) (describe-variable sym)))))
 
 (define-key lisp-mode-shared-map (kbd "M-RET") 'lisp-describe-thing-at-point)
+
 (add-hook 'ielm-mode-hook (lambda()
                             (define-key ielm-map (kbd "M-RET") 'lisp-describe-thing-at-point)))
 

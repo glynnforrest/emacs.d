@@ -1,3 +1,4 @@
+
 ;; set up packages
 (require 'package)
 (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/"))
@@ -88,12 +89,7 @@
 
 
 (require 'help-mode)
-;; (require 'setup-multiple-cursors)
-(require 'multiple-cursors)
-
-(global-set-key (kbd "C-<") 'mark-previous-like-this)
-(global-set-key (kbd "C->") 'mark-next-like-this)
-(global-set-key (kbd "C-*") 'mark-all-like-this)
+(require 'setup-multiple-cursors)
 
 (require 'setup-org)
 (require 'setup-yasnippet)
