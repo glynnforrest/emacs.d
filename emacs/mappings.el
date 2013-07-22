@@ -58,8 +58,8 @@
 
 
 (define-key evil-normal-state-map ",T" 'try-code)
-(define-key evil-normal-state-map (kbd "C-t") 'clever-rotate-text)
-(define-key evil-normal-state-map (kbd "C-T") 'clever-rotate-text-backward)
+(define-key global-map (kbd "C-t") 'clever-rotate-text)
+(define-key global-map (kbd "C-T") 'clever-rotate-text-backward)
 
 ;; Visual mode
 (define-key evil-visual-state-map ",e" 'eval-region)

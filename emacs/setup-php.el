@@ -1,6 +1,7 @@
 (require 'php-mode)
 (require 'web-mode)
 ;; (php+-mode-setup)
+(require 'php-auto-yasnippets)
 
 ;; use tabs for php
 (add-hook 'php-mode-hook (lambda()

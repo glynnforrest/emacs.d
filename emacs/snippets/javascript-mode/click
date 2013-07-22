@@ -4,6 +4,6 @@
 # group: jquery
 # contributor: David Miller <david@deadpansincerity.com>
 # --
-click( function(){
-    $0
+click(function() {
+  $0
 });
