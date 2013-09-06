@@ -125,8 +125,8 @@ TODO keywords, stars and list indicators."
   (if (looking-at-p "TODO\\|DONE\\|NEXT\\|WAITING") (evil-forward-word-begin)))
 
 (setq org-todo-keywords
-      '((sequence "TODO(t)" "DONE(d)")
-    (sequence "NEXT(n)" "WAITING(w)" "|")))
+      '((sequence "TODO(t)" "NEXT(n)" "DONE(d)")
+    (sequence "WAITING(w)" "|")))
 
 (setq org-todo-keyword-faces
       (quote (("TODO" :foreground "#dc322f" :weight bold)
@@ -196,6 +196,7 @@ TODO keywords, stars and list indicators."
    (emacs-lisp . t)
    (js . t)
    (lilypond . t)
+   (haskell . t)
    (python . t)
    (sh . t)
    ))

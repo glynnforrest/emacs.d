@@ -20,7 +20,8 @@
     dired+
     elscreen
     evil
-    flx
+    expand-region
+    flx-ido
     flycheck
     git-gutter
     js2-mode
@@ -34,6 +35,7 @@
     org
     paredit
     paredit-everywhere
+    php-eldoc
     php-mode
     projectile
     rainbow-delimiters
@@ -86,7 +88,6 @@
 (require 'setup-programming)
 (require 'setup-projects)
 (require 'defuns)
-
 
 (require 'help-mode)
 (require 'setup-multiple-cursors)

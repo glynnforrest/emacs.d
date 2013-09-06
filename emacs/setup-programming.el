@@ -27,11 +27,17 @@
 (require 'paredit-everywhere)
 (add-hook 'prog-mode-hook 'paredit-everywhere-mode)
 
+(add-hook 'prog-mode-hook
+          (progn
+            (flyspell-prog-mode)
+            (flyspell-buffer)))
+
 (require 'setup-magit)
 (require 'setup-js)
 (require 'setup-css)
 (require 'setup-php)
 (require 'setup-eshell)
+(require 'setup-web-mode)
 (require 'test-case-mode)
 (require 'setup-flycheck)
 

@@ -74,4 +74,11 @@
 (evil-set-initial-state 'magit-log-edit-mode 'insert)
 (evil-set-initial-state 'occur-mode 'normal)
 
+;; Expand region
+(require 'expand-region)
+(define-key global-map (kbd "C-S-v") 'er/expand-region)
+
+(eval-after-load "evil" '(setq expand-region-contract-fast-key "V"
+                               expand-region-reset-fast-key "r"))
+
 (provide 'setup-evil)
