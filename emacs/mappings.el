@@ -53,8 +53,8 @@
 (define-key evil-normal-state-map (kbd "C-S-j") 'evil-window-decrease-height)
 (define-key evil-normal-state-map (kbd "C-S-k") 'evil-window-increase-height)
 (define-key evil-normal-state-map (kbd "C-S-l") 'evil-window-increase-width)
-(define-key evil-normal-state-map (kbd "M-j") 'move-line-down-and-indent)
-(define-key evil-normal-state-map (kbd "M-k") 'move-line-up-and-indent)
+(define-key evil-normal-state-map (kbd "M-j") 'move-text-down)
+(define-key evil-normal-state-map (kbd "M-k") 'move-text-up)
 
 
 (define-key evil-normal-state-map ",T" 'try-code)
