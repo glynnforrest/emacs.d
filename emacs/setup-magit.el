@@ -1,6 +1,8 @@
 ;; Magit
 (require 'magit)
-(evil-declare-key 'normal magit-log-edit-mode-map ",w" 'magit-log-edit-commit)
+(require 'git-commit-mode)
+
+(evil-declare-key 'normal git-commit-mode-map ",w" 'git-commit-commit)
 (define-key magit-mode-map "q" (lambda ()
 								 (interactive)
 								 (if (get-buffer "*magit-process*")

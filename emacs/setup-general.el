@@ -15,7 +15,7 @@
 ;; Flyspell
 (setq flyspell-issue-message-flag nil)
 
-(dolist (hook '(org-mode-hook magit-log-edit-mode-hook))
+(dolist (hook '(org-mode-hook git-commit-mode-hook))
   (add-hook hook (lambda ()
                    (flyspell-mode 1)
                    (auto-fill-mode 1)
