@@ -45,8 +45,11 @@
 (global-set-key (kbd "M-X") 'smex-major-mode-commands)
 
 ;; Better ido matching with flx
-(require 'flx)
+(require 'flx-ido)
+(ido-mode 1)
 (flx-ido-mode 1)
+;; disable ido faces to see flx highlights.
+(setq ido-use-faces nil)
 
 ;;; General modes
 (delete-selection-mode t)
@@ -91,13 +94,11 @@
 
 ;; Load ssh credentials from keychain, even if keychain was called
 ;; after emacs startup
-
 (require 'keychain-environment)
 (define-key evil-normal-state-map ",k" (lambda ()
                                          (interactive)
                                          (keychain-refresh-environment)
                                          (message "Keychain environment refreshed.")))
-
 
 ;; refresh the current major mode
 (define-key global-map (kbd "<f6>") (lambda ()

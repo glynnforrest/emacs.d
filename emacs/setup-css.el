@@ -1,3 +1,5 @@
+(require 'css-mode)
+
 (defun cssEvilChangeToPX ()
   "Change text until `px` in css mode."
   (interactive)
