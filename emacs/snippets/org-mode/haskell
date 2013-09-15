@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: haskell babel
+# key: hs
+# --
+#+BEGIN_SRC haskell
+$0
+#+END_SRC
