@@ -6,7 +6,7 @@
 ;; use tabs for php
 (add-hook 'php-mode-hook (lambda()
                            (setq indent-tabs-mode t)
-                           (setup-electric-semicolon php-mode-map)
+                           (gf/setup-electric-semicolon php-mode-map)
                            ))
 
 (setq web-mode-disable-auto-pairing nil)
