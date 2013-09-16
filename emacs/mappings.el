@@ -94,7 +94,7 @@
                                             (interactive)
                                             (kill-this-buffer)
                                             (delete-window)))
-(define-key global-map (kbd "M-q") 'quit-other-window)
+(define-key global-map (kbd "M-q") 'gf/quit-other-window)
 ;; Buffers
 ;; Change buffers with left and right, Ctrl if not in evil-mode
 (define-key evil-normal-state-map (kbd "<right>") 'next-buffer)
@@ -109,7 +109,6 @@
                                      (interactive)
                                      (text-scale-set 0)))
 (define-key global-map (kbd "<f5>" ) 'projectile-invalidate-cache)
-(define-key global-map (kbd "<f9>") 'toggle-writeroom)
 (define-key global-map (kbd "M-b") 'ido-switch-buffer)
 (define-key global-map (kbd "M-B") 'previous-buffer)
 (define-key global-map (kbd "<mouse-3>") nil)

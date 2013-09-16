@@ -49,35 +49,9 @@
 
 
 (global-set-key (kbd "C-8") '(lambda()(interactive)(djcb-opacity-modify t)))
-(global-set-key (kbd "C-9") 'djcb-opacity-modify)
+(global-set-key (kbd "C-9") '(lambda()(interactive)(djcb-opacity-modify)))
 (global-set-key (kbd "C-0") '(lambda()(interactive)
                                (modify-frame-parameters nil `((alpha . 100)))))
-
-;; Write room
-(defvar writeroom-enabled nil)
-(autoload 'hide-mode-line "hide-mode-line" nil t)
-(defun toggle-writeroom ()
-  (interactive)
-  (if (not writeroom-enabled)
-      (setq writeroom-enabled t)
-    (setq writeroom-enabled nil))
-    (hide-mode-line)
-    (global-linum-mode -1)
-    (if writeroom-enabled
-        (progn
-          (fringe-mode 'both)
-          ;; (menu-bar-mode -1)
-          (set-fringe-mode 200))
-      (progn
-        (set-fringe-mode 0)
-        (fringe-mode -1)
-        ;; (menu-bar-mode)
-        (global-linum-mode 1))))
-
-;; Fun
-;; (require 'nyan-mode)
-;; (nyan-mode t)
-;; (nyan-start-animation)
 
 (defun fontify-hex-colors (limit)
   (remove-overlays (point) limit 'fontify-hex-colors t)
