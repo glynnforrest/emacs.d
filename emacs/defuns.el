@@ -1,10 +1,10 @@
-(defun my-kill-emacs ()
+(defun gf/my-kill-emacs ()
   "Save some buffers, then exit unconditionally"
   (interactive)
   (save-some-buffers t)
   (kill-emacs))
 
-(defun convert-to-end-of-sentence ()
+(defun gf/comma-to-end-of-sentence ()
   "Change the next comma to a full stop and capitalise the next word."
   (interactive)
   (if (not (looking-at-p ","))
@@ -14,7 +14,7 @@
   (evil-forward-word-begin)
   (evil-upcase (point) (+ 1 (point))))
 
-(defun convert-end-of-sentence-to-comma ()
+(defun gf/end-of-sentence-to-comma ()
   "Change the next full stop to a comma and lowercase the next word."
   (interactive)
   (if (not (looking-at-p "\\."))
@@ -26,14 +26,16 @@
       (evil-downcase (point) (+ 1 (point)))))
 
 
-(defun open-url-from-buffer ()
+(defvar gf/url-regex-string "https?:\/\/[a-z0-9\.\/-_\?=%&]+")
+
+(defun gf/open-url-from-buffer ()
   "Open a url with ido, choosing from all of the urls in the current
 buffer."
   (interactive)
   (save-excursion
     (goto-char (point-min))
     (let ((urls ()))
-      (while (re-search-forward "https?:\/\/[a-z0-9\.\/-_\?=%&]+" nil t)
+      (while (re-search-forward gf/url-regex-string nil t)
         (let ((url (match-string-no-properties 0)))
           (add-to-list 'urls url)
           ))
@@ -41,22 +43,22 @@ buffer."
         (when url
           (browse-url url))))))
 
-(defun open-recent-url ()
+(defun gf/open-recent-url ()
   "Open the url closest behind the current point, for example in an
 ERC buffer."
   (interactive)
   (save-excursion
-    (re-search-backward "http?:\/\/[a-z0-9\.\/-_\?=%&]+" nil t)
+    (re-search-backward gf/url-regex-string nil t)
     (let ((url (match-string-no-properties 0)))
       (when url
         (browse-url url)))))
 
-(defun comment-or-uncomment-line ()
+(defun gf/comment-or-uncomment-line ()
   "Comments or uncomments the current line."
   (interactive)
   (comment-or-uncomment-region (line-beginning-position) (line-end-position)))
 
-(defun recentf-ido-find-file ()
+(defun gf/recentf-ido-find-file ()
   "Find a recent file using Ido."
   (interactive)
   (let ((file (ido-completing-read "Open recent file: " recentf-list nil t)))
@@ -72,17 +74,17 @@ on the `projectile` package."
   (projectile-find-file nil)
   )
 
-(defun split-window-and-move-right ()
+(defun gf/split-window-and-move-right ()
   (interactive)
   (split-window-right)
   (other-window 1))
 
-(defun split-window-and-move-below ()
+(defun gf/split-window-and-move-below ()
   (interactive)
   (split-window-below)
   (other-window 1))
 
-(defun switch-to-scratch-buffer()
+(defun gf/switch-to-scratch-buffer()
   "Switch to the scratch buffer. If the buffer doesn't exist,
 create it and write the initial message into it."
   (interactive)
@@ -95,16 +97,16 @@ create it and write the initial message into it."
         (insert initial-scratch-message)))
     (switch-to-buffer scratch-buffer)))
 
-(defun my-save-and-eval-buffer ()
+(defun gf/save-and-eval-buffer ()
   (interactive)
   (save-buffer)
   (eval-buffer))
 
-(defun open-init-file ()
+(defun gf/open-init-file ()
   (interactive)
   (find-file "~/.emacs.d/init.el"))
 
-(defun eval-and-replace-sexp ()
+(defun gf/eval-and-replace-sexp ()
   "Replace the preceding sexp with its value."
   (interactive)
   (backward-kill-sexp)
@@ -144,14 +146,14 @@ create it and write the initial message into it."
   (interactive "*p")
   (move-text-internal arg))
 
-(defun quit-other-window ()
+(defun gf/quit-other-window ()
   "Closes the buffer in the other window."
   (interactive)
   (other-window 1)
   (kill-buffer (current-buffer))
   (other-window 1))
 
-(defun setup-electric-semicolon (mode-map)
+(defun gf/setup-electric-semicolon (mode-map)
   "Adds mappings for electric semicolon to MODE-MAP.
 Press ; for electric-semicolon, C-; to insert a semicolon."
   (evil-declare-key 'insert mode-map ";" 'electric-semicolon)
@@ -159,7 +161,7 @@ Press ; for electric-semicolon, C-; to insert a semicolon."
                                                    (interactive)
                                                    (insert ";"))))
 
-(defun electric-semicolon ()
+(defun gf/electric-semicolon ()
   "Inserts a semicolon at the end of the current line if not already there."
   (interactive)
   (let ((beg (point)))
@@ -169,25 +171,32 @@ Press ; for electric-semicolon, C-; to insert a semicolon."
       (goto-char beg)
       )))
 
-(defun make-capture-frame ()
+(defun gf/make-capture-frame ()
   "Make a new frame for using org-capture."
   (interactive)
   (make-frame '((name . "capture") (width . 80) (height . 20)))
   (select-frame-by-name "capture")
   (org-capture))
 
-(defun fix-double-capital()
-  "Go back to last occurence of a 'double capital' at start of word and correct."
+(defun gf/fix-double-capital()
+  "Go back to last occurence of a 'double capital' and correct."
   (interactive)
-  (save-excursion
-	(re-search-backward "\\b[[:upper:]]\\{2\\}"
-						nil
-						(message "No double capital found!"))
-	(forward-char)
-	(set-mark-command nil)
-	(forward-char)
-	(setq deactivate-mark nil)
-	(call-interactively 'downcase-region)))
+  ;; <<<<<<< glynn : *old code* >>>>>>>>
+  ;;   (save-excursion
+  ;;    (re-search-backward "[[:upper:]]\\{2\\}"
+  ;;                        nil
+  ;;                        (message "No double capital found!"))
+  ;;    (forward-char)
+  ;;    (set-mark-command nil)
+  ;;    (forward-char)
+  ;;    (setq deactivate-mark nil)
+  ;;    (call-interactively 'downcase-region)))
+  ;; =======  *test code* ==============
+  (re-search-backward "[[:upper:]]\\{2\\}"
+                      nil
+                      (message "No double capital found!")))
+
+;; >>>>>>> *end* <<<<<<<<<<<<<<<<<<<<<
 
 (require 'rotate-text)
 

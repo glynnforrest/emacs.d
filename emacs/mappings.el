@@ -16,15 +16,27 @@
 (define-key evil-insert-state-map (kbd "C-v") 'evil-paste-after)
 
 ;; Normal mode
-(define-key evil-normal-state-map ",B" 'kill-matching-buffers)
-(define-key evil-normal-state-map ",C" 'cd)
-(define-key evil-normal-state-map ",c" 'comment-or-uncomment-line)
-(define-key evil-normal-state-map ",d" 'ido-dired)
-(define-key evil-normal-state-map ",E" 'eval-and-replace-sexp)
 (define-key evil-normal-state-map [escape] 'keyboard-quit)
 (define-key evil-normal-state-map " " 'evil-ex)
+
+(define-key evil-normal-state-map ",B" 'kill-matching-buffers)
+(define-key evil-normal-state-map ",C" 'cd)
+(define-key evil-normal-state-map ",c" 'gf/comment-or-uncomment-line)
+(define-key evil-normal-state-map ",d" 'ido-dired)
+(define-key evil-normal-state-map ",E" 'eval-and-replace-sexp)
 (define-key evil-normal-state-map ",F" 'find-file)
 (define-key evil-normal-state-map ",f" 'projectile-find-file)
+(define-key evil-normal-state-map ",g" 'magit-status)
+(define-key evil-normal-state-map ",I" 'gf/save-and-eval-buffer)
+(define-key evil-normal-state-map ",i" 'gf/open-init-file)
+(define-key evil-normal-state-map ",m" 'ace-jump-mode)
+(define-key evil-normal-state-map ",r" 'gf/recentf-ido-find-file)
+(define-key evil-normal-state-map ",R" 'rename-current-buffer-file)
+(define-key evil-normal-state-map ",S" 'gf/split-window-and-move-below)
+(define-key evil-normal-state-map ",s" 'gf/split-window-and-move-right)
+(define-key evil-normal-state-map ",T" 'test-case-run-all)
+(define-key evil-normal-state-map ",u" 'undo-tree-visualize)
+(define-key evil-normal-state-map ",w" 'save-buffer)
 
 ;; Switch gj and j, gk and k
 (define-key evil-normal-state-map "j" 'evil-next-visual-line)
@@ -32,22 +44,12 @@
 (define-key evil-normal-state-map "gj" 'evil-next-line)
 (define-key evil-normal-state-map "gk" 'evil-previous-line)
 
-(define-key evil-normal-state-map ",g" 'magit-status)
-(define-key evil-normal-state-map "gs" 'convert-to-end-of-sentence)
-(define-key evil-normal-state-map ",I" 'my-save-and-eval-buffer)
-(define-key evil-normal-state-map ",i" 'open-init-file)
-(define-key evil-normal-state-map ",m" 'ace-jump-mode)
-(define-key evil-normal-state-map ",r" 'recentf-ido-find-file)
+(define-key evil-normal-state-map "gc" 'gf/end-of-sentence-to-comma)
+(define-key evil-normal-state-map "gs" 'gf/comma-to-end-of-sentence)
 (define-key evil-normal-state-map "]s" 'flyspell-goto-next-error)
-(define-key evil-normal-state-map ",S" 'split-window-and-move-below)
-(define-key evil-normal-state-map ",s" 'split-window-and-move-right)
-(define-key evil-normal-state-map ",T" 'test-case-run-all)
-(define-key evil-normal-state-map ",u" 'undo-tree-visualize)
-(define-key evil-normal-state-map ",w" 'save-buffer)
 (define-key evil-normal-state-map "z=" 'ispell-word)
 
 (define-key evil-normal-state-map (kbd "C-a") 'evil-numbers/inc-at-pt)
-(define-key evil-normal-state-map (kbd "C-<down>") 'kill-this-buffer)
 (define-key evil-normal-state-map (kbd "C-S-a") 'evil-numbers/dec-at-pt)
 (define-key evil-normal-state-map (kbd "C-S-h") 'evil-window-decrease-width)
 (define-key evil-normal-state-map (kbd "C-S-j") 'evil-window-decrease-height)
@@ -58,17 +60,17 @@
 
 
 (define-key evil-normal-state-map ",T" 'try-code)
-(define-key global-map (kbd "C-t") 'clever-rotate-text)
-(define-key global-map (kbd "C-T") 'clever-rotate-text-backward)
+(add-hook 'prog-mode-hook (lambda ()
+                           (progn)
+                           (define-key global-map (kbd "C-t") 'clever-rotate-text)
+                           (define-key global-map (kbd "C-T") 'clever-rotate-text-backward)))
 
 ;; Visual mode
-(define-key evil-visual-state-map ",e" 'eval-region)
 (define-key evil-visual-state-map [escape] 'keyboard-quit)
 (define-key evil-visual-state-map " " 'evil-ex)
-(define-key evil-visual-state-map "mb" 'evil-mc-edit-beginnings-of-lines)
-(define-key evil-visual-state-map "me" 'evil-mc-edit-ends-of-lines)
-(define-key evil-visual-state-map "mm" 'evil-mc-switch-to-cursors)
+
 ;; Narrowing
+(define-key evil-visual-state-map ",e" 'eval-region)
 (define-key evil-visual-state-map ",n" 'narrow-to-region)
 (define-key evil-normal-state-map ",N" 'narrow-to-defun)
 (define-key evil-normal-state-map ",n"
@@ -86,6 +88,7 @@
 ;; get help-map with f1 instead of C-h
 (define-key global-map (kbd "C-h") 'evil-window-left)
 (define-key global-map (kbd "C-<up>") 'delete-window)
+(define-key global-map (kbd "C-<down>") 'kill-this-buffer)
 (define-key global-map (kbd "C-S-<up>") 'delete-other-windows)
 (define-key global-map (kbd "C-S-<down>") (lambda ()
                                             (interactive)
@@ -140,6 +143,9 @@
 (define-key undo-tree-map (kbd "C-<down>") 'kill-this-buffer)
 
 (define-key global-map (kbd "C-c f") 'fix-double-capital)
+
+(define-key global-map (kbd "C-c u") 'gf/open-url-from-buffer)
+(define-key global-map (kbd "C-c U") 'gf/open-recent-url)
 
 (define-key global-map (kbd "C-c e") (lambda ()
                                        (interactive)
