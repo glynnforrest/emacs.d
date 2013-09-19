@@ -115,9 +115,10 @@
 
 
 ;; Go to eshell buffer quickly
-(define-key global-map (kbd "M-/") 'switch-to-scratch-buffer)
+(define-key global-map (kbd "M-/") 'gf/switch-to-scratch-buffer)
 (define-key global-map (kbd "M-?") 'eshell)
-;; C-M-/ should go to the repl for the current major mode
+(define-key global-map (kbd "C-M-/") 'gf/switch-to-current-project-file)
+;; C-/ should go to the repl for the current major mode
 
 ;; Elscreen
 (define-key global-map (kbd "M-<up>") 'elscreen-create)

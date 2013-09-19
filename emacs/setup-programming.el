@@ -1,4 +1,3 @@
-
 (require 'autopair)
 (setq autopair-blink nil)
 (autopair-global-mode t)

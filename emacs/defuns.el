@@ -156,7 +156,7 @@ create it and write the initial message into it."
 (defun gf/setup-electric-semicolon (mode-map)
   "Adds mappings for electric semicolon to MODE-MAP.
 Press ; for electric-semicolon, C-; to insert a semicolon."
-  (evil-declare-key 'insert mode-map ";" 'electric-semicolon)
+  (evil-declare-key 'insert mode-map ";" 'gf/electric-semicolon)
   (evil-declare-key 'insert mode-map (kbd "C-;") (lambda()
                                                    (interactive)
                                                    (insert ";"))))
