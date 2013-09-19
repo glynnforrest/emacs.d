@@ -114,11 +114,14 @@
 (define-key global-map (kbd "<mouse-3>") nil)
 
 
-;; Go to eshell buffer quickly
-(define-key global-map (kbd "M-/") 'gf/switch-to-scratch-buffer)
+(require 'undo-tree)
+;; When working in a project, it's useful to have quick access to the
+;; project notes, a repl, shell and scratch buffer quickly.
+(define-key undo-tree-map (kbd "C-/") 'gf/toggle-switch-to-project-org-file)
+;; M-/ should go to the repl for the current major mode
+(define-key global-map (kbd "M-/") 'ielm)
 (define-key global-map (kbd "M-?") 'eshell)
-(define-key global-map (kbd "C-M-/") 'gf/switch-to-current-project-file)
-;; C-/ should go to the repl for the current major mode
+(define-key global-map (kbd "C-M-/") 'gf/switch-to-scratch-buffer)
 
 ;; Elscreen
 (define-key global-map (kbd "M-<up>") 'elscreen-create)

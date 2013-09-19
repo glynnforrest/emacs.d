@@ -32,7 +32,8 @@ org-mode project file and a repl if available."
     (gf/switch-to-scratch-buffer)
     (cd project-root)
     (setq gf/current-project-file (gf/create-org-path project-name))
-    (gf/open-current-project-file)
+    (setq gf/previous-project-buffer nil)
+    (gf/switch-to-project-org-file)
     (split-window-right)
     (eshell)
     ))
@@ -55,12 +56,38 @@ path."
    (ido-completing-read "Open code project"
             (mapcar 'car gf/code-projects))))
 
-(defun gf/switch-to-current-project-file ()
-  "Switch to the org-file for the current project."
+(defun gf/switch-to-project-org-file ()
+  "Switch to the org file for the current project."
   (interactive)
   (if (and (boundp 'gf/current-project-file) (stringp gf/current-project-file))
       (elscreen-find-file gf/current-project-file)
     (error "No project open.")))
+
+(defun gf/toggle-switch-to-project-org-file ()
+  "Alternate between the current buffer and the org file for the
+current project."
+  (interactive)
+  (if (not (and (boundp 'gf/previous-project-buffer) (stringp gf/previous-project-buffer)))
+      ;; if prev is not defined and we're in the org file, error out
+      (if (eq (buffer-file-name) gf/current-project-file)
+          (error "No previous file in this project.")
+        ;;if prev is defined and we're not in the org file, go to it
+        ;;and set current buffer as prev
+        (progn
+          (setq gf/previous-project-buffer (buffer-name))
+          (gf/switch-to-project-org-file)
+          ))
+    ;; if the current buffer is the org file, don't set prev and go to
+    ;; the prev buffer
+    (if (equal (buffer-file-name) (file-truename gf/current-project-file))
+        (progn
+          (elscreen-find-and-goto-by-buffer gf/previous-project-buffer))
+        ;; if the current buffer isn't the org file, set prev and go
+        ;; to org file
+      (progn
+        (setq gf/previous-project-buffer (buffer-name))
+        (gf/switch-to-project-org-file)
+        ))))
 
 (define-key global-map (kbd "C-c C-n") 'gf/new-code-project)
 (define-key global-map (kbd "C-c C-o") 'gf/open-code-project)
