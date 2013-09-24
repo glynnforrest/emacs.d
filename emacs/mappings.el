@@ -19,6 +19,7 @@
 (define-key evil-normal-state-map [escape] 'keyboard-quit)
 (define-key evil-normal-state-map " " 'evil-ex)
 
+(define-key evil-normal-state-map ",a" 'ido-imenu-anywhere)
 (define-key evil-normal-state-map ",B" 'kill-matching-buffers)
 (define-key evil-normal-state-map ",C" 'cd)
 (define-key evil-normal-state-map ",c" 'gf/comment-or-uncomment-line)

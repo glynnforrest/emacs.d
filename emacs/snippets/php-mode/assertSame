@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: assertSame
+# key: ae
+# --
+$this->assertSame(${1:$expected}, ${2:$actual});$0
