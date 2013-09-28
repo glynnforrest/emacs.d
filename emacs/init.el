@@ -26,6 +26,7 @@
     git-gutter
     js2-mode
     js-comint
+    ido-vertical-mode
     impatient-mode
     keychain-environment
     magit

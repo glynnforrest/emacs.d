@@ -1,8 +1,6 @@
 (require 'projectile)
 (projectile-global-mode)
 
-(setq projectile-show-paths-function 'projectile-hashify-with-relative-paths)
-
 (setq org-projects-dir "~/notes/projects")
 
 (setq gf/code-projects '(("new" "new")))

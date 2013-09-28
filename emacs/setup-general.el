@@ -51,6 +51,10 @@
 ;; disable ido faces to see flx highlights.
 (setq ido-use-faces nil)
 
+;; Display ido vertically
+(require 'ido-vertical-mode)
+(ido-vertical-mode t)
+
 ;;; General modes
 (delete-selection-mode t)
 (recentf-mode 1)
