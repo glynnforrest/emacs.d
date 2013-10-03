@@ -76,7 +76,7 @@
   (evil-forward-word-begin)
   (paredit-splice-sexp-killing-forward))
 
-(define-key paredit-mode-map (kbd "M-q") 'quit-other-window)
+(define-key paredit-mode-map (kbd "M-q") 'gf/quit-other-window)
 (define-key paredit-mode-map (kbd "M-<up>") 'elscreen-create)
 (define-key paredit-mode-map (kbd "M-<down>") 'elscreen-kill)
 (define-key paredit-mode-map (kbd "M-?") 'eshell)

@@ -53,7 +53,12 @@
 
 ;; Display ido vertically
 (require 'ido-vertical-mode)
+
 (ido-vertical-mode t)
+(add-hook 'ido-setup-hook (lambda ()
+                            (define-key ido-completion-map (kbd "<down>") 'ido-next-match)
+                            (define-key ido-completion-map (kbd "<up>") 'ido-prev-match)
+                            ))
 
 ;;; General modes
 (delete-selection-mode t)

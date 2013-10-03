@@ -93,4 +93,6 @@ file if open."
 (evil-declare-key 'normal php-mode-map ",q" 'gf/toggle-php-web-mode)
 (evil-declare-key 'normal web-mode-map ",q" 'gf/toggle-php-web-mode)
 
+(define-key php-mode-map (kbd "M-q") 'gf/quit-other-window)
+
 (provide 'setup-php)
