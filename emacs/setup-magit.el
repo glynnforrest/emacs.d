@@ -43,4 +43,9 @@
 											  (other-window 1)
 											  ))
 
+(define-key magit-mode-map (kbd "C-p") (lambda ()
+                                         (interactive)
+                                         (keychain-refresh-environment)
+                                         (magit-push)))
+
 (provide 'setup-magit)
