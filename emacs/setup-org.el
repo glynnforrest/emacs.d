@@ -80,6 +80,7 @@
 (evil-declare-key 'normal org-mode-map (kbd "C-S-t") 'org-shiftleft)
 (evil-declare-key 'insert org-mode-map (kbd "C-S-t") 'org-shiftleft)
 
+(evil-declare-key 'normal org-mode-map (kbd "gn") 'gf/org-go-to-next-task)
 (define-key org-mode-map (kbd "C-c t") 'org-todo)
 
 (evil-declare-key 'normal org-mode-map (kbd "C-m") 'gf/org-refile-files-first)
@@ -115,6 +116,7 @@
   (re-search-backward "^\* ")
   (org-forward-element 1)
   (previous-line 1))
+
 (defun gf/evil-org-beginning-of-line ()
   "Move to the beginning of the line in an org-mode file, ignoring
 TODO keywords, stars and list indicators."
@@ -123,6 +125,13 @@ TODO keywords, stars and list indicators."
   (if (looking-at-p " ") (evil-forward-word-begin))
   (if (looking-at-p "*") (evil-forward-word-begin))
   (if (looking-at-p "TODO\\|DONE\\|NEXT\\|WAITING") (evil-forward-word-begin)))
+
+(defun gf/org-go-to-next-task ()
+  "Go to the first org item in the buffer tagged as `NEXT`."
+  (interactive)
+  (beginning-of-buffer)
+  (re-search-forward "^\\*+ NEXT")
+  (gf/evil-org-beginning-of-line))
 
 (setq org-todo-keywords
       '((sequence "TODO(t)" "NEXT(n)" "DONE(d)")
