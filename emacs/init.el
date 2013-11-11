@@ -85,10 +85,6 @@
 ;; Load personal configurations, like usernames and passwords
 (require 'personal nil t)
 
-;; Are we on a mac?
-(setq is-mac (equal system-type 'darwin))
-(when is-mac (require 'setup-mac))
-
 ;; Clearly necessary
 (require 'setup-evil)
 (require 'modes)
@@ -107,3 +103,7 @@
 (require 'setup-occur-grep-ack)
 (require 'appearance)
 (require 'mappings)
+
+;; Mac specific configuration
+(setq is-mac (equal system-type 'darwin))
+(when is-mac (require 'setup-mac))
