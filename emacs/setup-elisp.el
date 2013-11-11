@@ -1,4 +1,5 @@
 (require 'paredit)
+(require 'el-autoyas)
 
 ;; Set up some useful modes and set spaces
 (defun setup-elisp ()
@@ -6,6 +7,7 @@
   (paredit-mode t)
   (smartparens-mode -1)
   (setq indent-tabs-mode nil)
+  (el-autoyas-enable)
   )
 
 (add-hook 'emacs-lisp-mode-hook 'setup-elisp)
@@ -13,7 +15,7 @@
 (add-hook 'ielm-mode-hook 'setup-elisp)
 
 (define-key lisp-mode-shared-map (kbd "RET") 'reindent-then-newline-and-indent)
-(define-key lisp-mode-shared-map (kbd "C-c C-e") 'eval-and-replace-sexp)
+(define-key lisp-mode-shared-map (kbd "C-c C-e") 'gf/eval-and-replace-sexp)
 
 (add-hook 'lisp-interaction-mode-hook (lambda()
                                         (local-set-key (kbd "C-S-RET") 'gf/eval-print-last-sexp)))

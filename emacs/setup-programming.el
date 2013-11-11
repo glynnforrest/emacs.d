@@ -21,11 +21,6 @@
 (require 'paredit-everywhere)
 (add-hook 'prog-mode-hook 'paredit-everywhere-mode)
 
-(add-hook 'prog-mode-hook (lambda()
-                            (progn
-                              (flyspell-prog-mode)
-                              (flyspell-buffer))))
-
 (require 'setup-magit)
 (require 'setup-eshell)
 (require 'test-case-mode)

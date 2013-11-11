@@ -12,14 +12,7 @@
   (setq edit-server-new-frame t)
   (edit-server-start))
 
-;; Flyspell
-(setq flyspell-issue-message-flag nil)
-
-(dolist (hook '(org-mode-hook git-commit-mode-hook))
-  (add-hook hook (lambda ()
-                   (flyspell-mode 1)
-                   (auto-fill-mode 1)
-                   )))
+(require 'setup-flyspell)
 
 ;;; Ido
 (ido-mode 1)

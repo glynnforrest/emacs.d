@@ -18,6 +18,7 @@
     browse-kill-ring
     color-theme-sanityinc-tomorrow
     dired+
+    el-autoyas
     elscreen
     evil
     expand-region
@@ -58,6 +59,9 @@
 (dolist (p required-packages)
   (when (not (package-installed-p p))
     (package-install p)))
+
+;; Make sure stuff installed via homebrew is available
+(push "/usr/local/bin" exec-path)
 
 ;; Set path to .emacs.d
 (setq emacs-dir (file-name-directory
