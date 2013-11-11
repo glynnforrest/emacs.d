@@ -77,6 +77,9 @@
 (setq x-select-enable-clipboard t)
 (setq undo-tree-visualizer-timestamps 1)
 
+;; KILL SYSTEM BELL
+(setq ring-bell-function #'ignore)
+
 ;; Uniquify
 (require 'uniquify)
 (setq uniquify-buffer-name-style 'reverse)
