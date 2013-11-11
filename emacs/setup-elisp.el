@@ -1,6 +1,11 @@
 (require 'paredit)
 (require 'el-autoyas)
 
+;; Elisp go-to-definition with M-. and back again with M-,
+(autoload 'elisp-slime-nav-mode "elisp-slime-nav")
+
+(evil-declare-key 'normal lisp-mode-shared-map (kbd "M-.") 'elisp-slime-nav-find-elisp-thing-at-point)
+
 ;; Set up some useful modes and set spaces
 (defun setup-elisp ()
   (eldoc-mode t)
@@ -8,6 +13,7 @@
   (smartparens-mode -1)
   (setq indent-tabs-mode nil)
   (el-autoyas-enable)
+  (elisp-slime-nav-mode t)
   )
 
 (add-hook 'emacs-lisp-mode-hook 'setup-elisp)

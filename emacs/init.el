@@ -19,6 +19,7 @@
     color-theme-sanityinc-tomorrow
     dired+
     el-autoyas
+    elisp-slime-nav
     elscreen
     evil
     expand-region
