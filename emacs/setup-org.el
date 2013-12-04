@@ -30,7 +30,8 @@
   (interactive)
   (let ((file (list (ido-completing-read "Refile to:" org-files))))
     (let ((org-refile-targets `((,file :maxlevel . 1))))
-      (org-refile))))
+      (org-refile)))
+  (org-save-all-org-buffers))
 
 (defun gf/save-notes-and-push ()
   "Commit all org files to git and push."
@@ -165,9 +166,9 @@ TODO keywords, stars and list indicators."
      "* TODO %?" :prepend t)
     ("n" "Note" entry (file+headline org-default-notes-file "Notes")
      "* %?")
-    ("T" "Project Todo" entry (file+headline org-current-project-file "Tasks")
+    ("T" "Project Todo" entry (file+headline gf/current-project-file "Tasks")
      "* TODO %?" :prepend t)
-    ("N" "Project Note" entry (file+headline org-current-project-file "Notes")
+    ("N" "Project Note" entry (file+headline gf/current-project-file "Notes")
      "* %?")
     ("l" "Listen" entry (file+headline org-listen-read-watch-file "Listen")
      "* %?")
@@ -235,6 +236,7 @@ TODO keywords, stars and list indicators."
 ;; defined in the format user@host:mobile/org/dir/
 ;; see personal.el
 
+(setq org-mobile-server-address nil)
 (if org-mobile-server-address
 
     (progn

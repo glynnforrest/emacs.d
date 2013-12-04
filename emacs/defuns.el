@@ -26,7 +26,7 @@
       (evil-downcase (point) (+ 1 (point)))))
 
 
-(defvar gf/url-regex-string "https?:\/\/[a-z0-9\.\/-_\?=%&]+")
+(defvar gf/url-regex-string "https?:\/\/[-a-z0-9\.\/_\?=%&]+")
 
 (defun gf/open-url-from-buffer ()
   "Open a url with ido, choosing from all of the urls in the current
