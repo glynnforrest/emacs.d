@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: assertInstanceOf
+# key: ai
+# --
+$this->assertInstanceOf('\\${1:Class\Name}', ${2:$actual});$0
