@@ -1,12 +1,13 @@
 (require 'php-mode)
 (require 'web-mode)
-;; (php+-mode-setup)
+(require 's)
 (require 'php-auto-yasnippets)
 
 ;; use tabs for php
 (add-hook 'php-mode-hook (lambda()
                            (setq indent-tabs-mode t)
                            (gf/setup-electric-semicolon php-mode-map)
+                           (setq c-set-style "symfony")
                            ))
 
 (setq web-mode-disable-auto-pairing nil)
@@ -70,6 +71,24 @@ file if open."
       (insert (concat "use " file ";"))
       )))
 
+(defun gf/php-current-file-namespace ()
+  "Get a suitable namespace for the current file."
+  (interactive)
+
+  (if (s-contains? "src" (buffer-file-name))
+      (gf/php-namespace-from-path buffer-file-name "src")
+
+    (if (s-contains? "tests" (buffer-file-name))
+        (gf/php-namespace-from-path buffer-file-name "tests"))))
+
+(defun gf/php-namespace-from-path (path substr)
+  "Extract a namespace from a path name that contains `substr`."
+  (let ((namespace-file
+         (s-right (- (length path)
+                     (s-index-of substr path)
+                     (+ 1 (length substr)))
+                  path)))
+    (s-join "\\" (butlast (s-split "/" namespace-file)))))
 
 (defun gf/evil-open-below-docblock (count)
   "Same as `evil-open-below`, but insert * if in a docblock."
