@@ -4,14 +4,21 @@
 # --
 <?php
 
-namespace ${1:foo};
+namespace ${1:`(gf/php-current-file-namespace)`};
+
+require_once __DIR__ . '/../../../bootstrap.php';
 
 /**
- * ${2:Foo}Test
+ * ${2:`(buffer-file-name-body)`}
  *
  * @author Glynn Forrest <me@glynnforrest.com>
  **/
-class $2Test extends \PHPUnit_Framework_TestCase {
+class $2 extends \PHPUnit_Framework_TestCase {
 
-	  $0
+	public function setUp() {
+	}
+
+	public function tearDown() {
+	}
+	$0
 }
