@@ -3,9 +3,7 @@
 (require 's)
 (require 'php-auto-yasnippets)
 
-;; use tabs for php
 (add-hook 'php-mode-hook (lambda()
-                           (setq indent-tabs-mode t)
                            (gf/setup-electric-semicolon php-mode-map)
                            (setq c-set-style "symfony")
                            ))
@@ -98,10 +96,18 @@ file if open."
       (progn
         (evil-open-below count)
         (insert "* "))
-    (evil-open-below count))
-  )
+    (evil-open-below count)))
 
 (evil-declare-key 'normal php-mode-map "o" 'gf/evil-open-below-docblock)
+
+(defun gf/php-cleanup-style ()
+  "Cleanup the style of the current php file with php-cs-fixer."
+  (interactive)
+  (save-buffer)
+  (shell-command (concat "php-cs-fixer fix " (buffer-file-name)))
+  (revert-buffer t t))
+
+(evil-declare-key 'normal php-mode-map ",+" 'gf/php-cleanup-style)
 
 ;; Use M-j to open a line below when in insert mode
 

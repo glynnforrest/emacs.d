@@ -1,6 +1,6 @@
 ;; Use spaces by default, override in individual modes with hooks.
-;; The general rule of thumb for this setup is tabs for c-like
-;; languages, spaces for everything else.
+;; The general rule of thumb for this setup is 4 spaces, with some
+;; mode-specific exceptions.
 (setq-default
  c-basic-offset 4
  tab-width 4
@@ -20,10 +20,7 @@
   "Indent and cleanup the whitespace of the entire buffer."
   (interactive)
   (gf/indent-buffer)
-  (whitespace-cleanup)
-  (if indent-tabs-mode
-      (tabify (point-min) (point-max))
-    (untabify (point-min) (point-max))))
+  (whitespace-cleanup))
 
 (define-key evil-normal-state-map ",=" 'gf/indent-buffer)
 (define-key evil-normal-state-map ",+" 'gf/indent-cleanup-buffer)
