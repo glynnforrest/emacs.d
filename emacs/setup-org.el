@@ -33,14 +33,12 @@
       (org-refile)))
   (org-save-all-org-buffers))
 
-(defun gf/save-notes-and-push ()
+(defun gf/commit-notes ()
   "Commit all org files to git and push."
   (interactive)
   (let ((old-dir default-directory))
     (cd org-directory)
     (shell-command (concat "git add . && git commit -a -m \"" (format-time-string "%a %e %b %H:%M:%S\"")))
-    (keychain-refresh-environment)
-    (magit-push)
     (cd old-dir)
     ))
 
