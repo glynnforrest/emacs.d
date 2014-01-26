@@ -19,7 +19,9 @@
 (setq org-default-notes-file (concat org-directory "dates/" (downcase (format-time-string "%Y-%B.org"))))
 (setq org-listen-read-watch-file (concat org-directory "topics/listen-read-watch.org"))
 
-(setq org-files (file-expand-wildcards (concat org-directory "*/*.org")))
+(setq org-files (append (file-expand-wildcards (concat org-directory "*/*.org"))
+                        (file-expand-wildcards (concat org-directory "*/*/*.org"))))
+
 (setq org-refile-targets
       '((org-files :maxlevel . 1)
         (nil :maxlevel . 1)))
