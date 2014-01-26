@@ -133,8 +133,8 @@ TODO keywords, stars and list indicators."
   (gf/evil-org-beginning-of-line))
 
 (setq org-todo-keywords
-      '((sequence "TODO(t)" "NEXT(n)" "DONE(d)")
-    (sequence "WAITING(w)" "|")))
+      '((sequence "TODO(t)" "NEXT(n)" "|" "DONE(d)")
+    (sequence "WAITING(w)" "|" "CANCELLED(c)")))
 
 (setq org-todo-keyword-faces
       (quote (("TODO" :foreground "#dc322f" :weight bold)
