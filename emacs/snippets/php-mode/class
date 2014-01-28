@@ -11,7 +11,8 @@ namespace ${1:`(gf/php-current-file-namespace)`};
  *
  * @author Glynn Forrest <me@glynnforrest.com>
  **/
-class $2 ${3:}{
+class $2 ${3:}
+{
 
-	$0
+    $0
 }

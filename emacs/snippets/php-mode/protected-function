@@ -2,6 +2,7 @@
 #name : protected function
 #key : pro
 # --
-protected function ${1:name}(${2:$args}) {
-	$0
+protected function ${1:name}(${2:$args})
+{
+    $0
 }

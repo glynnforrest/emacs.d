@@ -2,6 +2,7 @@
 #name : public function
 #key : pub
 # --
-public function ${4:name}($5) {
-	$0
+public function ${4:name}($5)
+{
+    $0
 }
