@@ -4,12 +4,15 @@
 # --
 protected static $instance;
 
-protected function __construct() {
+protected function __construct()
+{
 }
 
-public static function getInstance() {
-	if(!self::$instance) {
-		self::$instance = new self();
-	}
-	return self::$instance;
+public static function getInstance()
+{
+    if(!self::$instance) {
+        self::$instance = new self();
+    }
+
+    return self::$instance;
 }

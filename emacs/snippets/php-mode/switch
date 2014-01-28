@@ -3,7 +3,7 @@
 #key : switch
 # --
 switch (${1:true}) {
-	case $2:
-		$0
-	default:
+    case $2:
+        $0
+    default:
 }

@@ -13,12 +13,15 @@ require_once __DIR__ . '/../../../bootstrap.php';
  *
  * @author Glynn Forrest <me@glynnforrest.com>
  **/
-class $2 extends \PHPUnit_Framework_TestCase {
+class $2 extends \PHPUnit_Framework_TestCase
+{
 
-	public function setUp() {
-	}
+    public function setUp()
+    {
+    }
 
-	public function tearDown() {
-	}
-	$0
+    public function tearDown()
+    {
+    }
+    $0
 }
