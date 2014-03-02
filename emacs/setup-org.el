@@ -16,15 +16,23 @@
 ;;Notes are grouped by months for automatic archival.
 ;;At the start of every month move over notes that are still relevant.
 (setq org-directory "~/notes/")
-(setq org-default-notes-file (concat org-directory "dates/" (downcase (format-time-string "%Y-%B.org"))))
 (setq org-listen-read-watch-file (concat org-directory "topics/listen-read-watch.org"))
 
 (setq org-files (append (file-expand-wildcards (concat org-directory "*/*.org"))
                         (file-expand-wildcards (concat org-directory "*/*/*.org"))))
 
+(defun gf/org-reload ()
+  "Reload the org file for the current month - useful for a long
+running emacs instance."
+  (interactive)
+  (setq org-default-notes-file
+        (concat org-directory "dates/"
+                (downcase (format-time-string "%Y-%B.org")))))
+
+(gf/org-reload)
+
 (setq org-refile-targets
-      '((org-files :maxlevel . 1)
-        (nil :maxlevel . 1)))
+      '((nil :maxlevel . 2)))
 
 (defun gf/org-refile-files-first ()
   "Choose an org file to file in, then pick the node. This prevents
@@ -84,8 +92,14 @@
 (evil-declare-key 'normal org-mode-map (kbd "gn") 'gf/org-go-to-next-task)
 (define-key org-mode-map (kbd "C-c t") 'org-todo)
 
-(evil-declare-key 'normal org-mode-map (kbd "C-m") 'gf/org-refile-files-first)
-(evil-declare-key 'visual org-mode-map (kbd "C-m") 'gf/org-refile-files-first)
+;; refile over files
+(evil-declare-key 'normal org-mode-map (kbd "C-c m") 'gf/org-refile-files-first)
+(evil-declare-key 'visual org-mode-map (kbd "C-c m") 'gf/org-refile-files-first)
+
+;; refile withing the same file
+(evil-declare-key 'normal org-mode-map (kbd "C-c M") 'org-refile)
+(evil-declare-key 'visual org-mode-map (kbd "C-c M") 'org-refile)
+
 (evil-declare-key 'insert org-mode-map (kbd "M-<return>") (lambda()
                                 (interactive)
                                 (evil-append-line 1)
@@ -223,6 +237,9 @@ TODO keywords, stars and list indicators."
 
 (define-key org-mode-map (kbd "C-c C-n") 'gf/new-code-project)
 (define-key org-mode-map (kbd "C-c C-o") 'gf/open-code-project)
+
+;; This gets org-cycle working in the terminal properly.
+(evil-declare-key 'normal org-mode-map (kbd "TAB") 'org-cycle)
 
 ;;; Mobile org
 (setq org-mobile-directory (concat org-directory "mobile/"))
