@@ -1,0 +1,18 @@
+# -*- mode: snippet -*-
+#name : interface definition
+#key : interface
+# --
+<?php
+
+namespace ${1:`(gf/php-current-file-namespace)`};
+
+/**
+ * ${2:`(buffer-file-name-body)`}
+ *
+ * @author Glynn Forrest <me@glynnforrest.com>
+ **/
+interface $2
+{
+
+    $0
+}
