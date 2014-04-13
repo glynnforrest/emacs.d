@@ -2,4 +2,4 @@
 # name: setExpectedException
 # key: ex
 # --
-$this->setExpectedException(${1:'\Exception'});$0
+$this->setExpectedException('${1:\Exception}');$0
