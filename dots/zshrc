@@ -45,7 +45,13 @@ setopt autocd
 unsetopt correct_all
 
 #Common aliases
-alias ls='ls -h --group-directories-first --color=always'
+uname=`uname`;
+if test "$uname" = "Darwin"; then
+    alias ls='gls -h --group-directories-first --color=always'
+else
+    alias ls='ls -h --group-directories-first --color=always'
+fi;
+
 alias ll='ls -l'
 alias la='ls -a'
 alias lla='ls -la'
