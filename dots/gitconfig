@@ -1,7 +1,7 @@
 [user]
-	name = glynnforrest
+	name = Glynn Forrest
 	email = me@glynnforrest.com
 [core]
-	editor = vi
+	editor = vim
 [push]
 	default = matching
