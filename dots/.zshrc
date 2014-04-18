@@ -44,9 +44,45 @@ export PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/usr/bi
 setopt autocd
 unsetopt correct_all
 
-#Common aliases
-uname=`uname`;
-if test "$uname" = "Darwin"; then
+#########################
+# ALIASES AND FUNCTIONS #
+#########################
+
+# HELPERS
+is_mac () {
+    test `uname` = "Darwin"
+}
+
+distro () {
+    cat /etc/*release | head -n 1 | cut -d \" -f 2
+}
+
+is_arch () {
+    test distro = "Arch Linux"
+}
+
+is_debian () {
+    test `distro | cut -d ' ' -f 1` = "Debian"
+}
+
+alias sz="source ~/.zshrc"
+alias ez="e ~/.zshrc"
+
+# DIRECTORY NAVIGATION
+alias c='cd -'
+
+# mkdir and cd into it in one command
+mkcd () {
+    mkdir $1 -p && cd $1
+}
+
+# move up directories quickly, e.g. up 3 is cd ../../../
+up() {
+    local x='';for i in $(seq ${1:-1});do x="$x../"; done;cd $x;
+}
+
+# LS
+if is_mac; then
     alias ls='gls -h --group-directories-first --color=always'
 else
     alias ls='ls -h --group-directories-first --color=always'
@@ -56,34 +92,15 @@ alias ll='ls -l'
 alias la='ls -a'
 alias lla='ls -la'
 
-alias c='cd -'
+# EDITORS
 alias e='emacsclient -n'
 
-#mkdir a cd into it in one command
-mkcd () {
-	mkdir $1 -p && cd $1
-}
-
-#restart emacs server
+# restart emacs server
 er () {
-	emacsclient -e '(my-kill-emacs)'; emacs -daemon
+    emacsclient -e '(my-kill-emacs)'; emacs -daemon
 }
 
-alias sz="source ~/.zshrc"
-alias ez="e ~/.zshrc"
-
-alias v='vim'
-alias png='ping www.google.com -c 5'
-alias get='packer'
-alias bin='sudo pacman -Rs'
-
-alias pup='sudo pacman -Syu'
-alias porph='pacman -Qqdt' #Show package orphans
-alias pgr='pacman -Qq | grep -i' #Grep installed packages
-
-alias open="xdg-open"
-
-#Git aliases
+# GIT
 alias gst='git status'
 alias gch='git checkout'
 alias gco='git commit'
@@ -99,13 +116,30 @@ alias gme='git merge'
 alias gdi='git diff'
 alias gsu='git submodule'
 
-#Grep for a process
-alias psgr='ps -A | grep -i'
+# PACKAGE MANAGEMENT
+
+# Arch
+if is_arch; then
+    alias bin='sudo pacman -Rs'
+    alias pup='sudo pacman -Syu'
+    alias porph='pacman -Qqdt' #Show package orphans
+    alias pgr='pacman -Qq | grep -i' #Grep installed packages
+fi;
+
+# NETWORK
+alias myip='curl canihazip.com/s/'
+alias png='ping www.google.com -c 5'
+
+# MISC
 alias mysq='mysql -u root -p'
-alias starwars='telnet towel.blinkenlights.nl'
 
 placeholder () {
-	wget http://placekitten.com/$1/$2 -O $1\x$2.jpg
+    wget http://placekitten.com/$1/$2 -O $1\x$2.jpg
 }
 
-alias myip='curl canihazip.com/s/'
+#Grep for a process
+alias psgr='ps -A | grep -i'
+
+# FUN
+alias starwars='telnet towel.blinkenlights.nl'
+alias youtube-mp3="youtube-dl -t --extract-audio --audio-format mp3 --audio-quality 320k"
