@@ -4,7 +4,6 @@
 (require 'php-auto-yasnippets)
 
 (add-hook 'php-mode-hook (lambda()
-                           (gf/setup-electric-semicolon php-mode-map)
                            (setq c-set-style "symfony")
                            ))
 
@@ -107,7 +106,9 @@ file if open."
   (interactive)
   (save-buffer)
   (shell-command (concat "php-cs-fixer fix " (buffer-file-name)))
-  (revert-buffer t t))
+  (let ((point (point)))
+    (revert-buffer t t)
+    (goto-char point)))
 
 (evil-declare-key 'normal php-mode-map ",+" 'gf/php-cleanup-style)
 
