@@ -9,4 +9,7 @@
 (evil-declare-key 'normal web-mode-map (kbd ",c") 'web-mode-comment-or-uncomment)
 (evil-declare-key 'visual web-mode-map (kbd ",c") 'web-mode-comment-or-uncomment)
 
+(require 'scss-mode)
+(setq scss-compile-at-save nil)
+
 (provide 'setup-web-mode)

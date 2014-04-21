@@ -45,6 +45,7 @@
     rainbow-delimiters
     rainbow-mode
     rotate-text
+    scss-mode
     skewer-mode
     smartparens
     smex
