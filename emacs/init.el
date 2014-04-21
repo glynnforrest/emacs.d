@@ -66,19 +66,14 @@
 ;; Make sure stuff installed via homebrew is available
 (push "/usr/local/bin" exec-path)
 
-;; Set path to .emacs.d
-(setq emacs-dir (file-name-directory
-                 (or (buffer-file-name) load-file-name)))
 
-;; Set path to manually installed plugins
-(setq plugins-dir (expand-file-name "plugins" emacs-dir))
+(setq site-lisp-dir (expand-file-name "site-lisp" user-emacs-directory))
+(setq plugins-dir (expand-file-name "plugins" user-emacs-directory))
 
-
-;; Set up load path
 (let ((default-directory plugins-dir))
   (normal-top-level-add-to-load-path '("."))
   (normal-top-level-add-subdirs-to-load-path))
-(add-to-list 'load-path emacs-dir)
+(add-to-list 'load-path site-lisp-dir)
 
 ;; Load custom settings
 (setq custom-file "~/.emacs.d/custom.el")
