@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: jquery document.ready
+# key: ready
+# --
+$(function () {
+  $0
+});
