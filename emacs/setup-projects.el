@@ -31,9 +31,7 @@ org-mode project file and a repl if available."
     (cd project-root)
     (setq gf/current-project-file (gf/create-org-path project-name))
     (setq gf/previous-project-buffer nil)
-    (gf/switch-to-project-org-file)
-    (split-window-right)
-    (eshell)
+    (message (concat "Switched to project '" project-name "'."))
     ))
 
 (defun gf/create-org-path (path)
@@ -58,7 +56,7 @@ path."
   "Switch to the org file for the current project."
   (interactive)
   (if (and (boundp 'gf/current-project-file) (stringp gf/current-project-file))
-      (elscreen-find-file gf/current-project-file)
+      (find-file gf/current-project-file)
     (error "No project open.")))
 
 (defun gf/toggle-switch-to-project-org-file ()

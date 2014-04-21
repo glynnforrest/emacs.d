@@ -1,6 +1,3 @@
-(require 'elscreen)
-(elscreen-start)
-
 ;; Share emacs
 (require 'server)
 (unless (server-running-p)
@@ -110,11 +107,10 @@
                                       (interactive)
                                       (call-interactively major-mode)))
 
-(provide 'setup-general)
-
 ;; emacs doesn't actually save undo history with revert-buffer
 ;; see http://lists.gnu.org/archive/html/bug-gnu-emacs/2011-04/msg00151.html
 ;; fix that.
+;; http://stackoverflow.com/questions/4924389/is-there-a-way-to-retain-the-undo-list-in-emacs-after-reverting-a-buffer-from-fi
 (defun revert-buffer-keep-history (&optional IGNORE-AUTO NOCONFIRM PRESERVE-MODES)
   (interactive)
 
@@ -126,8 +122,9 @@
   (delete-region (point-min) (point-max))
   (insert-file-contents (buffer-file-name))
 
-  ;; mark the buffer as not modified
-  (not-modified)
+  (save-buffer)
   (set-visited-file-modtime))
 
 (setq revert-buffer-function 'revert-buffer-keep-history)
+
+(provide 'setup-general)
