@@ -90,6 +90,7 @@
 (define-key global-map (kbd "C-h") 'evil-window-left)
 (define-key global-map (kbd "C-<up>") 'delete-window)
 (define-key global-map (kbd "C-<down>") 'kill-this-buffer)
+(define-key evil-normal-state-map ",x" 'kill-this-buffer)
 (define-key global-map (kbd "C-S-<up>") 'delete-other-windows)
 (define-key global-map (kbd "C-S-<down>") (lambda ()
                                             (interactive)
