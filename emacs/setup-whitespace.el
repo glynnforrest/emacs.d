@@ -39,5 +39,7 @@ When enabled trailing whitespace is removed before saving."
 
 (remove-trailing-whitespace-mode t)
 
+(require 'highlight-chars)
+(add-hook 'prog-mode-hook 'hc-highlight-tabs)
 
 (provide 'setup-whitespace)

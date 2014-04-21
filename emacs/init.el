@@ -26,15 +26,16 @@
     flx-ido
     flycheck
     git-gutter
-    js2-mode
-    js-comint
+    highlight-chars
     ido-vertical-mode
     impatient-mode
+    js-comint
+    js2-mode
     keychain-environment
     magit
     markdown-mode
-    multiple-cursors
     multi-web-mode
+    multiple-cursors
     org
     paredit
     paredit-everywhere
