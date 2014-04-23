@@ -93,7 +93,7 @@ alias la='ls -a'
 alias lla='ls -la'
 
 # EDITORS
-alias e='emacsclient -n'
+alias e='emacsclient -nw'
 
 # restart emacs server
 er () {
