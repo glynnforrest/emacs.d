@@ -130,6 +130,10 @@ fi;
 alias myip='curl canihazip.com/s/'
 alias png='ping www.google.com -c 5'
 
+if is_mac; then
+    alias reset_dns='sudo killall -HUP mDNSResponder'
+fi;
+
 # MISC
 alias mysq='mysql -u root -p'
 
