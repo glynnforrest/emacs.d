@@ -38,6 +38,7 @@
 (define-key evil-normal-state-map ",T" 'test-case-run-all)
 (define-key evil-normal-state-map ",u" 'undo-tree-visualize)
 (define-key evil-normal-state-map ",w" 'save-buffer)
+(define-key evil-normal-state-map ",p" 'gf/toggle-switch-to-project-org-file)
 
 ;; Switch gj and j, gk and k
 (define-key evil-normal-state-map "j" 'evil-next-visual-line)
@@ -119,7 +120,6 @@
 (require 'undo-tree)
 ;; When working in a project, it's useful to have quick access to the
 ;; project notes, a repl, shell and scratch buffer quickly.
-(define-key undo-tree-map (kbd "C-/") 'gf/toggle-switch-to-project-org-file)
 ;; M-/ should go to the repl for the current major mode
 (define-key global-map (kbd "M-/") 'ielm)
 (define-key global-map (kbd "M-?") 'eshell)
