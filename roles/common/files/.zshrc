@@ -128,7 +128,7 @@ fi;
 
 # NETWORK
 alias myip='curl canihazip.com/s/'
-alias png='ping www.google.com -c 5'
+alias png='ping -c 5 www.google.com'
 
 if is_mac; then
     alias reset_dns='sudo killall -HUP mDNSResponder'
