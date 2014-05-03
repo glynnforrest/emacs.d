@@ -13,6 +13,6 @@
 	  (first (split-string (file-name-nondirectory (buffer-file-name)) "\\.")))
   )
 
-(define-key yas-minor-mode-map (kbd "TAB") 'yas/expand)
+(define-key yas-minor-mode-map (kbd "TAB") 'yas-expand)
 
 (provide 'setup-yasnippet)
