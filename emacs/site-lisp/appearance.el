@@ -30,11 +30,14 @@
 (global-rainbow-delimiters-mode t)
 
 ;; Fringes are a pain
-(fringe-mode -1)
+(when (fboundp 'fringe-mode)
+  (fringe-mode -1))
 
 ;; Other stuff
 (setq line-spacing 1)
 (add-to-list 'default-frame-alist '(internal-border-width . 0))
+(set-face-attribute 'mode-line nil :box nil)
+(set-face-attribute 'mode-line-inactive nil :box nil)
 
 ;; Change opacity of the frame.
 (defun djcb-opacity-modify (&optional dec)
