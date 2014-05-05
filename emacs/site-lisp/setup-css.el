@@ -10,6 +10,7 @@
     (evil-change beg (point))))
 
 (evil-declare-key 'normal css-mode-map "gc" 'cssEvilChangeToPX)
+(evil-declare-key 'normal css-mode-map ",e" 'skewer-css-eval-current-rule)
 
 (require 'skewer-mode)
 (add-hook 'css-mode-hook 'skewer-css-mode)
