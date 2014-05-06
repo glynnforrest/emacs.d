@@ -95,7 +95,7 @@ map <leader>w :w<CR>
 vmap <leader>w <ESC>:w<CR>
 
 "Quick file open
-map <leader>e :e 
+map <leader>e :e
 
 "Quick split
 map <leader>s :vspl<CR><C-w>w
@@ -136,7 +136,7 @@ map <C-,> <C-W><
 map <C-.> <C-W>>
 
 "Quick change directory
-map <leader>cd :cd 
+map <leader>cd :cd
 
 "Change directory to current buffer
 map <leader>d :cd %:p:h<CR>
@@ -157,13 +157,13 @@ map # #zz
 set nrformats=alpha,octal,hex
 
 "Toggle line relative line numbers
-function! g:ToggleRelativeNumbers() 
-if(&rnu == 1) 
-set nu 
-else 
-set rnu 
-endif 
-endfunc 
+function! g:ToggleRelativeNumbers()
+    if(&rnu == 1)
+        set nu
+    else
+        set rnu
+    endif
+endfunc
 
 map <F2> :call g:ToggleRelativeNumbers()<CR>
 
