@@ -39,6 +39,7 @@
 (define-key evil-normal-state-map ",u" 'undo-tree-visualize)
 (define-key evil-normal-state-map ",w" 'save-buffer)
 (define-key evil-normal-state-map ",p" 'gf/toggle-switch-to-project-org-file)
+(define-key evil-normal-state-map ",q" 'evil-quit)
 
 ;; Switch gj and j, gk and k
 (define-key evil-normal-state-map "j" 'evil-next-visual-line)
