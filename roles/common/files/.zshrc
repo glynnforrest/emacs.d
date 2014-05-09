@@ -116,6 +116,9 @@ alias gme='git merge'
 alias gdi='git diff'
 alias gsu='git submodule'
 
+# TMUX
+alias code='tmux new -s'
+
 # PACKAGE MANAGEMENT
 
 # Arch
