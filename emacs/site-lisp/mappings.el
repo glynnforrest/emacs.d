@@ -24,6 +24,7 @@
 (define-key evil-normal-state-map ",C" 'cd)
 (define-key evil-normal-state-map ",c" 'gf/comment-or-uncomment-line)
 (define-key evil-normal-state-map ",d" 'ido-dired)
+(define-key evil-normal-state-map ",D" 'delete-current-buffer-file)
 (define-key evil-normal-state-map ",E" 'eval-and-replace-sexp)
 (define-key evil-normal-state-map ",F" 'find-file)
 (define-key evil-normal-state-map ",f" 'projectile-find-file)
