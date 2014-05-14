@@ -1,0 +1,6 @@
+# name: Changelog release
+# key: release
+# --
+### ${1:version} ${2:`(format-time-string "%Y-%m-%d")`}
+
+$0
