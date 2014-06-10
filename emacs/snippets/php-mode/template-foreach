@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+#name : template foreach
+#key : tfe
+# --
+<?php foreach (${1:$array} as ${2:$k => $v}): ?>
+    $0
+<?php endforeach; ?>
