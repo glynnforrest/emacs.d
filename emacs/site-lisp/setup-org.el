@@ -235,37 +235,7 @@ TODO keywords, stars and list indicators."
 (define-key org-mode-map (kbd "M-<right>") 'elscreen-next)
 (define-key org-mode-map (kbd "M-<left>") 'elscreen-previous)
 
-(define-key org-mode-map (kbd "C-c C-n") 'gf/new-code-project)
-(define-key org-mode-map (kbd "C-c C-o") 'gf/open-code-project)
-
 ;; This gets org-cycle working in the terminal properly.
 (evil-declare-key 'normal org-mode-map (kbd "TAB") 'org-cycle)
-
-;;; Mobile org
-(setq org-mobile-directory (concat org-directory "mobile/"))
-(setq org-mobile-inbox-for-pull org-default-notes-file)
-(setq org-mobile-files (append (file-expand-wildcards (concat org-directory "topics/*.org")) (list org-default-notes-file)))
-
-;;; Avoid littering files with properties
-(setq org-mobile-force-id-on-agenda-items nil)
-
-;; the following hooks expect a variable org-mobile-server-address to be
-;; defined in the format user@host:mobile/org/dir/
-;; see personal.el
-
-(setq org-mobile-server-address nil)
-(if org-mobile-server-address
-
-    (progn
-      (add-hook 'org-mobile-post-push-hook
-                (lambda () (shell-command (concat "scp -r " org-mobile-directory "* " org-mobile-server-address))))
-
-      (add-hook 'org-mobile-pre-pull-hook
-                (lambda () (shell-command (concat "scp " org-mobile-server-address "/mobileorg.org " org-mobile-directory))))
-
-      (add-hook 'org-mobile-post-pull-hook
-                (lambda () (shell-command (concat "scp " org-mobile-directory "mobileorg.org " org-mobile-server-address))))
-
-      ))
 
 (provide 'setup-org)
