@@ -230,10 +230,6 @@ TODO keywords, stars and list indicators."
 (setq org-src-tab-acts-natively t)
 
 (evil-declare-key 'normal org-mode-map ",e" 'org-ctrl-c-ctrl-c)
-(define-key org-mode-map (kbd "M-<up>") 'elscreen-create)
-(define-key org-mode-map (kbd "M-<down>") 'elscreen-kill)
-(define-key org-mode-map (kbd "M-<right>") 'elscreen-next)
-(define-key org-mode-map (kbd "M-<left>") 'elscreen-previous)
 
 ;; This gets org-cycle working in the terminal properly.
 (evil-declare-key 'normal org-mode-map (kbd "TAB") 'org-cycle)

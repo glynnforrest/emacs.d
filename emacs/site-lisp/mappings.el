@@ -128,12 +128,6 @@
 (define-key global-map (kbd "M-?") 'eshell)
 (define-key global-map (kbd "C-M-/") 'gf/switch-to-scratch-buffer)
 
-;; Elscreen
-(define-key global-map (kbd "M-<up>") 'elscreen-create)
-(define-key global-map (kbd "M-<down>") 'elscreen-kill)
-(define-key global-map (kbd "M-<left>") 'elscreen-previous)
-(define-key global-map (kbd "M-<right>") 'elscreen-next)
-
 ;; Grep
 (define-key grep-mode-map (kbd "<return>") 'grep-display-occurrence-recenter)
 (define-key grep-mode-map (kbd "<S-return>") 'grep-goto-occurrence-recenter)
