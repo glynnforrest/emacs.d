@@ -118,8 +118,8 @@ file if open."
 (define-key php-mode-map (kbd "C-c C-y") 'yas/create-php-snippet)
 
 (evil-declare-key 'normal php-mode-map ",t" 'test-this-or-related-php-file)
-(evil-declare-key 'normal php-mode-map ",q" 'gf/toggle-php-web-mode)
-(evil-declare-key 'normal web-mode-map ",q" 'gf/toggle-php-web-mode)
+(evil-declare-key 'normal php-mode-map ",z" 'gf/toggle-php-web-mode)
+(evil-declare-key 'normal web-mode-map ",z" 'gf/toggle-php-web-mode)
 
 (define-key php-mode-map (kbd "M-q") 'gf/quit-other-window)
 
