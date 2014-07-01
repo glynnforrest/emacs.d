@@ -25,6 +25,8 @@
     flx-ido
     flycheck
     git-gutter
+    helm
+    helm-projectile
     highlight-chars
     ido-vertical-mode
     impatient-mode
