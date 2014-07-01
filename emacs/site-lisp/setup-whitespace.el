@@ -42,4 +42,14 @@ When enabled trailing whitespace is removed before saving."
 (require 'highlight-chars)
 (add-hook 'prog-mode-hook 'hc-highlight-tabs)
 
+;; Change to unix line endings when loading a DOS file
+;; http://www.emacswiki.org/emacs/DosToUnix
+
+(defun dos2unix ()
+  "Not exactly but it's easier to remember"
+  (interactive)
+  (set-buffer-file-coding-system 'unix 't))
+
+(define-key evil-normal-state-map ",,=" 'dos2unix)
+
 (provide 'setup-whitespace)
