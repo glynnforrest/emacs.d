@@ -31,11 +31,7 @@
 (evil-declare-key 'normal occur-mode-map (kbd "<return>") 'occur-display-occurrence-recenter)
 (evil-declare-key 'normal occur-mode-map (kbd "<S-return>") 'occur-goto-occurrence-recenter)
 
-(define-key evil-normal-state-map ",o" (lambda()
-										 (interactive)
-										 (call-interactively 'occur)
-										 (other-window 1)
-										 ))
+(define-key evil-normal-state-map ",o" 'helm-occur)
 
 (define-key evil-normal-state-map ",O" (lambda()
 										 (interactive)

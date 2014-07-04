@@ -19,7 +19,7 @@
 (define-key evil-normal-state-map [escape] 'keyboard-quit)
 (define-key evil-normal-state-map " " 'evil-ex)
 
-(define-key evil-normal-state-map ",a" 'ido-imenu-anywhere)
+(define-key evil-normal-state-map ",a" 'helm-imenu)
 (define-key evil-normal-state-map ",B" 'kill-matching-buffers)
 (define-key evil-normal-state-map ",C" 'cd)
 (define-key evil-normal-state-map ",c" 'gf/comment-or-uncomment-line)
@@ -32,7 +32,7 @@
 (define-key evil-normal-state-map ",I" 'gf/save-and-eval-buffer)
 (define-key evil-normal-state-map ",i" 'gf/open-init-file)
 (define-key evil-normal-state-map ",m" 'ace-jump-mode)
-(define-key evil-normal-state-map ",r" 'gf/recentf-ido-find-file)
+(define-key evil-normal-state-map ",r" 'helm-recentf)
 (define-key evil-normal-state-map ",R" 'rename-current-buffer-file)
 (define-key evil-normal-state-map ",S" 'gf/split-window-and-move-below)
 (define-key evil-normal-state-map ",s" 'gf/split-window-and-move-right)
@@ -115,7 +115,7 @@
                                      (interactive)
                                      (text-scale-set 0)))
 (define-key global-map (kbd "<f5>" ) 'projectile-invalidate-cache)
-(define-key global-map (kbd "M-b") 'ido-switch-buffer)
+(define-key global-map (kbd "M-b") 'helm-mini)
 (define-key global-map (kbd "M-B") 'previous-buffer)
 (define-key global-map (kbd "<mouse-3>") nil)
 
@@ -140,8 +140,6 @@
 (define-key minibuffer-local-map [escape] 'minibuffer-keyboard-quit)
 (define-key minibuffer-local-must-match-map [escape] 'minibuffer-keyboard-quit)
 (define-key minibuffer-local-ns-map [escape] 'minibuffer-keyboard-quit)
-(define-key occur-mode-map (kbd "<return>") 'occur-display-occurrence-recenter)
-(define-key occur-mode-map (kbd "<S-return>") 'occur-goto-occurrence-recenter)
 (define-key undo-tree-map (kbd "C-<down>") 'kill-this-buffer)
 
 (define-key global-map (kbd "C-c f") 'fix-double-capital)
