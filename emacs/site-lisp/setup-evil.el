@@ -81,4 +81,29 @@
 (eval-after-load "evil" '(setq expand-region-contract-fast-key "V"
                                expand-region-reset-fast-key "r"))
 
+(require 'evil-args)
+
+;; bind evil-args text objects
+(define-key evil-inner-text-objects-map "a" 'evil-inner-arg)
+(define-key evil-outer-text-objects-map "a" 'evil-outer-arg)
+
+;; bind evil-args text objects
+(define-key evil-inner-text-objects-map "a" 'evil-inner-arg)
+(define-key evil-outer-text-objects-map "a" 'evil-outer-arg)
+
+(defun gf/evil-forward-arg (count)
+  "Small wrapper around evil-forward-arg when at the opening bracket."
+  (interactive "p")
+  (if (looking-at-p "(")
+      (forward-char))
+  (evil-forward-arg count)
+  )
+
+;; bind evil-forward/backward-args
+(define-key evil-normal-state-map "L" 'gf/evil-forward-arg)
+(define-key evil-normal-state-map "H" 'evil-backward-arg)
+
+;; bind evil-jump-out-args
+(define-key evil-normal-state-map "K" 'evil-jump-out-args)
+
 (provide 'setup-evil)

@@ -21,6 +21,7 @@
     el-autoyas
     elisp-slime-nav
     evil
+    evil-args
     expand-region
     flx-ido
     flycheck
