@@ -52,23 +52,6 @@ running emacs instance."
     (cd old-dir)
     ))
 
-(defun gf/mobile-pull ()
-  "Push to mobile org, saving all files and refreshing the ssh keychain first."
-
-  (interactive)
-  (keychain-refresh-environment)
-  (org-save-all-org-buffers)
-  (org-mobile-pull)
-  )
-
-(defun gf/mobile-push ()
-  "Pull from mobile org, saving all files and refreshing the ssh keychain first."
-  (interactive)
-  (keychain-refresh-environment)
-  (org-save-all-org-buffers)
-  (org-mobile-push)
-  )
-
 (setq org-agenda-files (list org-default-notes-file))
 
 (define-key global-map (kbd "C-x C-n") 'gf/mobile-pull)
