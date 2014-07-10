@@ -27,12 +27,10 @@
 (add-hook 'ido-setup-hook (lambda ()
                             (define-key ido-file-completion-map (kbd "C-w") 'ido-delete-backward-word-updir)))
 
-;; Ido for M-x
-(require 'smex)
-(smex-initialize)
-(global-set-key (kbd "<menu>") 'smex)
-(global-set-key (kbd "M-x") 'smex)
-(global-set-key (kbd "M-X") 'smex-major-mode-commands)
+(require 'helm)
+(helm-mode)
+(global-set-key (kbd "M-x") 'helm-M-x)
+(global-set-key (kbd "<menu>") 'helm-M-x)
 
 ;; Better ido matching with flx
 (require 'flx-ido)

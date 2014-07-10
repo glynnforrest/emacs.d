@@ -51,7 +51,6 @@
     scss-mode
     skewer-mode
     smartparens
-    smex
     surround
     test-case-mode
     web-mode
