@@ -32,6 +32,8 @@
 (global-surround-mode t)
 (global-auto-revert-mode t)
 
+(require 'evil-jumper)
+
 ;; Centre screen around a search
 (defadvice
     evil-search-forward
