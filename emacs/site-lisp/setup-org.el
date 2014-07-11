@@ -21,6 +21,16 @@
 (setq org-files (append (file-expand-wildcards (concat org-directory "*/*.org"))
                         (file-expand-wildcards (concat org-directory "*/*/*.org"))))
 
+;; Agenda files are only used for searching - my notes are designed to
+;; work without scheduling, tags etc
+(setq org-agenda-files (append
+                        (file-expand-wildcards (concat org-directory "dates/*.org"))
+                        (file-expand-wildcards (concat org-directory "topics/*.org"))
+                        (file-expand-wildcards (concat org-directory "topics/*/*.org"))))
+
+;; quick hotkey for searching notes
+(define-key global-map (kbd "C-c n") 'org-search-view)
+
 (defun gf/org-reload ()
   "Reload the org file for the current month - useful for a long
 running emacs instance."
@@ -44,28 +54,24 @@ running emacs instance."
   (org-save-all-org-buffers))
 
 (defun gf/commit-notes ()
-  "Commit all org files to git and push."
+  "Commit all org files to git with the current date and time. New files must be explicitly added - this prevents accidental committing of junk files"
   (interactive)
   (let ((old-dir default-directory))
     (cd org-directory)
-    (shell-command (concat "git add . && git commit -a -m \"" (format-time-string "%a %e %b %H:%M:%S\"")))
+    (shell-command (concat "git add -u . && git commit -m \"" (format-time-string "%a %e %b %H:%M:%S\"")))
     (cd old-dir)
     ))
 
-(setq org-agenda-files (list org-default-notes-file))
-
-(define-key global-map (kbd "C-x C-n") 'gf/mobile-pull)
-(define-key global-map (kbd "C-x C-S-n") 'gf/mobile-push)
-(define-key global-map (kbd "C-x C-M-n") 'gf/save-notes-and-push)
+(define-key global-map (kbd "C-x C-n") 'gf/commit-notes)
 
 (define-key global-map (kbd "M-n") 'org-capture)
 (define-key global-map (kbd "M-N") (lambda()
                      (interactive)
                      (find-file org-default-notes-file)
                      ))
-(define-key global-map (kbd "C-c n") (lambda ()
+(define-key global-map (kbd "C-c C-n") (lambda ()
                                        (interactive)
-                                       (gf/find-file-in-directory org-directory)))
+                                       (projectile-find-file-in-directory org-directory)))
 
 (evil-declare-key 'normal org-mode-map (kbd "C-t") 'org-shiftright)
 (evil-declare-key 'insert org-mode-map (kbd "C-t") 'org-shiftright)
