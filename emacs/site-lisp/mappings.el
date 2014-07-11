@@ -6,14 +6,13 @@
 
 ;; Insert mode
 (define-key evil-insert-state-map (kbd "C-a") 'beginning-of-line)
-(define-key evil-insert-state-map (kbd "C-<down>") 'kill-this-buffer)
 (define-key evil-insert-state-map (kbd "C-e") 'end-of-line)
-(define-key evil-insert-state-map (kbd "C-?") 'evil-search-backward)
-(define-key evil-insert-state-map (kbd "C-/") 'evil-search-forward)
 (define-key evil-insert-state-map (kbd "C-k") 'evil-window-up)
-(define-key evil-insert-state-map (kbd "C-<left>") 'backward-word)
-(define-key evil-insert-state-map (kbd "C-<right>") 'forward-word)
 (define-key evil-insert-state-map (kbd "C-v") 'evil-paste-after)
+
+(define-key global-map (kbd "C-x e") 'gf/eval-and-replace-sexp)
+(define-key global-map (kbd "C-x C-e") 'eval-last-sexp)
+(define-key global-map (kbd "C-x E") 'gf/eval-print-last-sexp)
 
 ;; Normal mode
 (define-key evil-normal-state-map [escape] 'keyboard-quit)
@@ -25,8 +24,7 @@
 (define-key evil-normal-state-map ",c" 'gf/comment-or-uncomment-line)
 (define-key evil-normal-state-map ",d" 'ido-dired)
 (define-key evil-normal-state-map ",D" 'delete-current-buffer-file)
-(define-key evil-normal-state-map ",E" 'eval-and-replace-sexp)
-(define-key evil-normal-state-map ",F" 'find-file)
+(define-key evil-normal-state-map ",F" 'helm-find-files)
 (define-key evil-normal-state-map ",f" 'helm-projectile)
 (define-key evil-normal-state-map ",g" 'magit-status)
 (define-key evil-normal-state-map ",I" 'gf/save-and-eval-buffer)
@@ -36,7 +34,6 @@
 (define-key evil-normal-state-map ",R" 'rename-current-buffer-file)
 (define-key evil-normal-state-map ",S" 'gf/split-window-and-move-below)
 (define-key evil-normal-state-map ",s" 'gf/split-window-and-move-right)
-(define-key evil-normal-state-map ",T" 'test-case-run-all)
 (define-key evil-normal-state-map ",u" 'undo-tree-visualize)
 (define-key evil-normal-state-map ",w" 'save-buffer)
 (define-key evil-normal-state-map ",p" 'gf/toggle-switch-to-project-org-file)

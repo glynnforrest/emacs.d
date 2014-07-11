@@ -76,16 +76,12 @@
 
 ;; Expand region
 (require 'expand-region)
-(define-key global-map (kbd "C-S-v") 'er/expand-region)
+(define-key evil-normal-state-map ",v" 'er/expand-region)
 
 (eval-after-load "evil" '(setq expand-region-contract-fast-key "V"
                                expand-region-reset-fast-key "r"))
 
 (require 'evil-args)
-
-;; bind evil-args text objects
-(define-key evil-inner-text-objects-map "a" 'evil-inner-arg)
-(define-key evil-outer-text-objects-map "a" 'evil-outer-arg)
 
 ;; bind evil-args text objects
 (define-key evil-inner-text-objects-map "a" 'evil-inner-arg)

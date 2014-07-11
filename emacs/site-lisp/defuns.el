@@ -109,6 +109,7 @@ create it and write the initial message into it."
 (defun gf/eval-and-replace-sexp ()
   "Replace the preceding sexp with its value."
   (interactive)
+  (if (evil-normal-state-p) (evil-append 1))
   (backward-kill-sexp)
   (prin1 (eval (read (current-kill 0)))
          (current-buffer)))
