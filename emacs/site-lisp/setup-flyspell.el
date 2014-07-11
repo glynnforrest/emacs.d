@@ -14,4 +14,6 @@
 ;; make sure spell checking works
 (setq-default ispell-program-name "aspell")
 
+(ac-flyspell-workaround)
+
 (provide 'setup-flyspell)
