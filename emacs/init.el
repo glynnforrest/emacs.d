@@ -29,6 +29,7 @@
     git-gutter
     helm
     helm-css-scss
+    helm-projectile
     highlight-chars
     ido-vertical-mode
     impatient-mode

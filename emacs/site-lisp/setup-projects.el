@@ -1,6 +1,5 @@
 (require 'projectile)
 (projectile-global-mode)
-(setq projectile-completion-system 'helm-comp-read)
 
 (setq org-projects-dir "~/notes/projects")
 
