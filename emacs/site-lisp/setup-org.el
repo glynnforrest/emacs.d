@@ -82,12 +82,12 @@ running emacs instance."
 (define-key org-mode-map (kbd "C-c t") 'org-todo)
 
 ;; refile over files
-(evil-declare-key 'normal org-mode-map (kbd "C-c m") 'gf/org-refile-files-first)
-(evil-declare-key 'visual org-mode-map (kbd "C-c m") 'gf/org-refile-files-first)
+(evil-declare-key 'normal org-mode-map (kbd "C-c r") 'gf/org-refile-files-first)
+(evil-declare-key 'visual org-mode-map (kbd "C-c r") 'gf/org-refile-files-first)
 
 ;; refile withing the same file
-(evil-declare-key 'normal org-mode-map (kbd "C-c M") 'org-refile)
-(evil-declare-key 'visual org-mode-map (kbd "C-c M") 'org-refile)
+(evil-declare-key 'normal org-mode-map (kbd "C-c R") 'org-refile)
+(evil-declare-key 'visual org-mode-map (kbd "C-c R") 'org-refile)
 
 (evil-declare-key 'insert org-mode-map (kbd "M-<return>") (lambda()
                                 (interactive)
