@@ -54,7 +54,8 @@
   (helm-occur-1 (get-point-text)))
 
 (define-key evil-normal-state-map ",o" 'bk-helm-occur)
-(define-key evil-normal-state-map ",O" 'helm-occur)
+(define-key evil-normal-state-map ",O" 'helm-multi-occur)
+(define-key evil-normal-state-map (kbd "C-c o") 'helm-occur)
 
 (evil-declare-key 'normal occur-mode-map ",e" 'occur-edit-mode)
 (evil-declare-key 'normal occur-edit-mode-map ",e" 'occur-cease-edit)
