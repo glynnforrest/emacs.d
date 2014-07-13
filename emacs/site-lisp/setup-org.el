@@ -179,8 +179,6 @@ TODO keywords, stars and list indicators."
      "* %?")
     ("w" "Watch" entry (file+headline org-listen-read-watch-file "Watch")
      "* %?")
-    ("u" "Unsorted" entry (file+headline org-default-notes-file "Unsorted")
-     "* %?")
     ))
 
 ;; Behaviour for capturing notes using make-capture-frame
