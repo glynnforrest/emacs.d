@@ -97,7 +97,7 @@ alias e='emacsclient -nw'
 
 # restart emacs server
 er () {
-    emacsclient -e '(my-kill-emacs)'; emacs -daemon
+    emacsclient -e '(gf/my-kill-emacs)'; emacs -daemon
 }
 
 # GIT
