@@ -141,6 +141,8 @@ TODO keywords, stars and list indicators."
       '((sequence "TODO(t)" "NEXT(n)" "|" "DONE(d)")
     (sequence "WAITING(w)" "|" "CANCELLED(c)")))
 
+(setq org-log-done t)
+
 (setq org-todo-keyword-faces
       (quote (("TODO" :foreground "#dc322f" :weight bold)
           ("DONE" :foreground "forest green" :weight bold :strike-through t)
