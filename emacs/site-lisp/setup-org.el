@@ -113,6 +113,8 @@ running emacs instance."
 (define-key org-mode-map (kbd "C-c j") 'outline-next-visible-heading)
 (define-key org-mode-map (kbd "C-c k") 'outline-previous-visible-heading)
 (define-key org-mode-map (kbd "C-c g") 'gf/org-end-of-section)
+(define-key org-mode-map (kbd "C-c J") 'org-forward-heading-same-level)
+(define-key org-mode-map (kbd "C-c K") 'org-backward-heading-same-level)
 
 (defun gf/org-end-of-section ()
   "Move to the last line of the current section."
