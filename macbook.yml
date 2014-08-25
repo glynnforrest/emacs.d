@@ -1,5 +1,5 @@
 ---
-- hosts: local
+- hosts: macbook
   connection: local
   roles:
     - common
