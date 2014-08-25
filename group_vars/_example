@@ -1,0 +1,11 @@
+# This file documents all configuration options for different roles.
+
+# apache
+
+virtual_hosts:
+  - { host: 'myapp.dev', directory: 'myapp', docroot: 'public'}
+
+# mysql
+
+mysql_users:
+  - { user: 'foo', password: 'foo' }
