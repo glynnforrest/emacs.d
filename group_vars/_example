@@ -9,3 +9,6 @@ virtual_hosts:
 
 mysql_users:
   - { user: 'foo', password: 'foo' }
+
+mysql_databases:
+  - { name: 'foo' }
