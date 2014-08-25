@@ -1,0 +1,9 @@
+---
+- hosts: vagrant
+  connection: local
+  sudo: yes
+  roles:
+    - apache
+    # - common
+    # - linux
+    # - emacs

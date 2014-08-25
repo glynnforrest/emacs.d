@@ -1,6 +1,0 @@
----
-- hosts: local
-  connection: local
-  roles:
-    - common
-    - linux
