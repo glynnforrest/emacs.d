@@ -32,6 +32,7 @@
 (global-surround-mode t)
 (global-auto-revert-mode t)
 
+;; Vim style jumplist
 (require 'evil-jumper)
 
 ;; Centre screen around a search
@@ -88,6 +89,10 @@
 ;; bind evil-args text objects
 (define-key evil-inner-text-objects-map "a" 'evil-inner-arg)
 (define-key evil-outer-text-objects-map "a" 'evil-outer-arg)
+
+;; exchange two regions or motions with gx. gX cancels a pending swap
+(require 'evil-exchange)
+(evil-exchange-install)
 
 (defun gf/evil-forward-arg (count)
   "Small wrapper around evil-forward-arg when at the opening bracket."

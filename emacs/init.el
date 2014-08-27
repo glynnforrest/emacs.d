@@ -22,6 +22,7 @@
     elisp-slime-nav
     evil
     evil-args
+    evil-exchange
     evil-jumper
     expand-region
     flx-ido
