@@ -4,6 +4,7 @@
   sudo: yes
   roles:
     - apache
-    # - common
-    # - linux
-    # - emacs
+    - mysql
+    - common
+    - linux
+    - emacs
