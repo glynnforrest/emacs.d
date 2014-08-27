@@ -27,11 +27,6 @@
 (add-hook 'ido-setup-hook (lambda ()
                             (define-key ido-file-completion-map (kbd "C-w") 'ido-delete-backward-word-updir)))
 
-(require 'helm)
-(helm-mode)
-(global-set-key (kbd "M-x") 'helm-M-x)
-(global-set-key (kbd "<menu>") 'helm-M-x)
-
 ;; Better ido matching with flx
 (require 'flx-ido)
 (ido-mode 1)

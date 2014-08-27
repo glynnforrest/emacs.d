@@ -30,6 +30,7 @@
     git-gutter
     helm
     helm-css-scss
+    helm-dash
     helm-projectile
     highlight-chars
     ido-vertical-mode
