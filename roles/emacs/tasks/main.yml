@@ -1,0 +1,12 @@
+---
+- name: Setup emacs snapshot apt-key
+  apt_key: url=http://emacs.naquadah.org/key.gpg state=present
+
+- name: Add emacs to apt sources list
+  lineinfile: dest=/etc/apt/sources.list regexp="^deb http://emacs" line="deb http://emacs.naquadah.org/ stable/" state=present
+
+- name: Add emacs to apt sources list
+  lineinfile: dest=/etc/apt/sources.list regexp="^deb-src http://emacs" line="deb-src http://emacs.naquadah.org/ stable/" state=present
+
+- name: Install emacs-snapshot-nox
+  apt: update_cache=no name=emacs-snapshot-nox state=installed
