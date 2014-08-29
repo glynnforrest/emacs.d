@@ -3,4 +3,4 @@
 /xmonad/xmonad.hi
 /xmonad/xmonad.o
 /group_vars/*
-!/group_vars/_example
+!/group_vars/_example.yml
