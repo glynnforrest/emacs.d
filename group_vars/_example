@@ -12,3 +12,9 @@ mysql_users:
 
 mysql_databases:
   - { name: 'foo' }
+
+# git
+
+git_user_name: Zaphod Beeblebrox
+
+git_user_email: zaphod@example.org
