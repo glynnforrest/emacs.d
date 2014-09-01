@@ -6,8 +6,6 @@
 
 namespace ${1:`(gf/php-current-file-namespace)`};
 
-require_once __DIR__ . '/../../../bootstrap.php';
-
 /**
  * ${2:`(buffer-file-name-body)`}
  *
