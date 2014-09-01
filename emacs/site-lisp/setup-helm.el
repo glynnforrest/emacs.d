@@ -5,6 +5,7 @@
 
 (require 'helm-dash)
 (define-key evil-normal-state-map ",\\" 'helm-dash)
+(define-key evil-normal-state-map ",|" 'helm-dash-at-point)
 
 
 (defvar helm-dash-required-docsets '() "A list of required helm-dash-docsets")
@@ -74,5 +75,10 @@
   (interactive)
   (setq-local helm-dash-docsets '("Bash")))
 (add-hook 'sh-mode-hook 'helm-dash-shell)
+
+(defun helm-dash-yaml ()
+  (interactive)
+  (setq-local helm-dash-docsets '("Ansible")))
+(add-hook 'yaml-mode-hook 'helm-dash-yaml)
 
 (provide 'setup-helm)

@@ -95,6 +95,7 @@
 (require 'setup-whitespace)
 (require 'setup-programming)
 (require 'setup-projects)
+(require 'setup-helm)
 (require 'defuns)
 
 (require 'help-mode)
