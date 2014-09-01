@@ -157,6 +157,8 @@ placeholder () {
     wget http://placekitten.com/$1/$2 -O $1\x$2.jpg
 }
 
+alias sy='php app/console'
+
 #Grep for a process
 alias psgr='ps -A | grep -i'
 
