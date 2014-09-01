@@ -1,5 +1,1 @@
-[vagrant]
-localhost
-
-[macbook]
-localhost
+localhost ansible_connection=local

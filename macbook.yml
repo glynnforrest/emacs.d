@@ -1,6 +1,5 @@
 ---
-- hosts: macbook
-  connection: local
+- hosts: localhost
   roles:
     - common
     - git

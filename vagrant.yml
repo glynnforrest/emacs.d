@@ -1,6 +1,5 @@
 ---
-- hosts: vagrant
-  connection: local
+- hosts: localhost
   sudo: yes
   roles:
     - apache
