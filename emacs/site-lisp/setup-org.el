@@ -28,6 +28,9 @@
                         (file-expand-wildcards (concat org-directory "topics/*.org"))
                         (file-expand-wildcards (concat org-directory "topics/*/*.org"))))
 
+;; Split up the search string on whitespace
+(setq org-agenda-search-view-always-boolean t)
+
 ;; quick hotkey for searching notes
 (define-key global-map (kbd "C-c n") 'org-search-view)
 
