@@ -103,6 +103,8 @@ running emacs instance."
                                 (org-meta-return)
                                 ))
 (evil-declare-key 'normal org-mode-map (kbd "<return>") 'org-open-at-point)
+(evil-declare-key 'normal org-mode-map (kbd "RET") 'org-open-at-point)
+
 (define-key org-mode-map (kbd "C-S-<up>") 'delete-other-windows)
 (define-key org-mode-map (kbd "C-j") 'evil-window-down)
 (define-key org-mode-map (kbd "C-k") 'evil-window-up)
