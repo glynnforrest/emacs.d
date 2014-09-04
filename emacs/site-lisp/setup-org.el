@@ -51,7 +51,7 @@ running emacs instance."
   "Choose an org file to file in, then pick the node. This prevents
   emacs opening all of the refile targets at once."
   (interactive)
-  (let ((file (list (ido-completing-read "Refile to:" org-files))))
+  (let ((file (list (completing-read "Refile to: " org-files nil t))))
     (let ((org-refile-targets `((,file :maxlevel . 1))))
       (org-refile)))
   (org-save-all-org-buffers))

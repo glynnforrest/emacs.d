@@ -24,7 +24,6 @@
     evil-exchange
     evil-jumper
     expand-region
-    flx-ido
     flycheck
     git-gutter
     helm
@@ -32,14 +31,12 @@
     helm-dash
     helm-projectile
     highlight-chars
-    ido-vertical-mode
     impatient-mode
     js-comint
     js2-mode
     keychain-environment
     magit
     markdown-mode
-    multi-web-mode
     multiple-cursors
     org
     paredit

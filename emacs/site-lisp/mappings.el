@@ -15,16 +15,15 @@
 (define-key global-map (kbd "C-x E") 'gf/eval-print-last-sexp)
 
 ;; Normal mode
-(define-key evil-normal-state-map [escape] 'keyboard-quit)
 (define-key evil-normal-state-map " " 'evil-ex)
 
 (define-key evil-normal-state-map ",a" 'helm-imenu)
 (define-key evil-normal-state-map ",B" 'kill-matching-buffers)
 (define-key evil-normal-state-map ",C" 'cd)
 (define-key evil-normal-state-map ",c" 'gf/comment-or-uncomment-line)
-(define-key evil-normal-state-map ",d" 'ido-dired)
+(define-key evil-normal-state-map ",d" 'dired)
 (define-key evil-normal-state-map ",D" 'delete-current-buffer-file)
-(define-key evil-normal-state-map ",F" 'ido-find-file)
+(define-key evil-normal-state-map ",F" 'helm-find-files)
 (define-key evil-normal-state-map ",f" 'helm-projectile)
 (define-key evil-normal-state-map ",g" 'magit-status)
 (define-key evil-normal-state-map ",G" 'git-gutter:revert-hunk)

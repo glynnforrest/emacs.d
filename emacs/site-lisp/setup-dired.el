@@ -28,6 +28,6 @@
 (toggle-diredp-find-file-reuse-dir 1)
 
 (define-key dired-mode-map (kbd "C-h") 'evil-window-left)
-(define-key dired-mode-map (kbd "M-b") 'ido-switch-buffer)
+(define-key dired-mode-map (kbd "M-b") 'helm-mini)
 
 (provide 'setup-dired)

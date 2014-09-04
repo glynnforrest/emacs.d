@@ -1,7 +1,22 @@
+;; https://tuhdo.github.io/helm-intro.html has great helm tips.
 (require 'helm)
 (helm-mode)
+
 (global-set-key (kbd "M-x") 'helm-M-x)
 (global-set-key (kbd "<menu>") 'helm-M-x)
+
+(define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action)
+(define-key helm-map (kbd "C-i") 'helm-execute-persistent-action)
+(define-key helm-map (kbd "C-z")  'helm-select-action)
+
+(setq
+ helm-move-to-line-cycle-in-source nil
+ helm-split-window-default-side 'other
+ helm-split-window-in-side-p t
+ helm-candidate-number-limit 200
+ helm-M-x-requires-pattern 0
+ helm-google-suggest-use-curl-p t
+ )
 
 (require 'helm-dash)
 (define-key evil-normal-state-map ",\\" 'helm-dash)

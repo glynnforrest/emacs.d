@@ -11,38 +11,6 @@
 
 (require 'setup-flyspell)
 
-;;; Ido
-(ido-mode 1)
-(setq ido-enable-flex-matching t)
-(ido-everywhere t)
-(setq org-completion-use-ido t)
-(setq ido-max-directory-size 100000)
-(setq confirm-nonexistent-file-or-buffer nil)
-(setq ido-create-new-buffer 'always)
-(setq kill-buffer-query-functions
-      (remq 'process-kill-buffer-query-function
-            kill-buffer-query-functions))
-(setq ido-ignore-buffers (append '("^\*Completions\*" "^\*Help\*" "^\*magit-process\*" "^\*Compile-Log\*" "^\*vc-diff\*") ido-ignore-buffers))
-(setq ido-auto-merge-delay-time 99999)
-(add-hook 'ido-setup-hook (lambda ()
-                            (define-key ido-file-completion-map (kbd "C-w") 'ido-delete-backward-word-updir)))
-
-;; Better ido matching with flx
-(require 'flx-ido)
-(ido-mode 1)
-(flx-ido-mode 1)
-;; disable ido faces to see flx highlights.
-(setq ido-use-faces nil)
-
-;; Display ido vertically
-(require 'ido-vertical-mode)
-
-(ido-vertical-mode t)
-(add-hook 'ido-setup-hook (lambda ()
-                            (define-key ido-completion-map (kbd "<down>") 'ido-next-match)
-                            (define-key ido-completion-map (kbd "<up>") 'ido-prev-match)
-                            ))
-
 ;;; General modes
 (delete-selection-mode t)
 (recentf-mode 1)
@@ -58,7 +26,6 @@
 (global-hl-line-mode t)
 (setq auto-save-default nil)
 (setq hl-line-sticky-flag 1)
-(setq ido-default-buffer-method 'selected-window)
 (setq inhibit-startup-message t)
 (setq make-backup-files nil)
 (setq mouse-wheel-progressive-speed nil)
@@ -75,7 +42,6 @@
 (setq uniquify-buffer-name-style 'reverse)
 
 ;;; Enable normally disabled functions
-(put 'ido-exit-minibuffer 'disabled nil)
 (put 'narrow-to-region 'disabled nil)
 
 ;; Automatically create directories when creating a file
