@@ -23,7 +23,6 @@
 
 (require 'setup-magit)
 (require 'setup-eshell)
-(require 'test-case-mode)
 (require 'setup-flycheck)
 
 (provide 'setup-programming)

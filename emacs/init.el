@@ -54,7 +54,6 @@
     skewer-mode
     smartparens
     surround
-    test-case-mode
     web-mode
     wgrep
     wgrep-ack
