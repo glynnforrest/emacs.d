@@ -40,11 +40,19 @@
 
 (defun helm-occur-1 (initial-value)
   "Preconfigured helm for Occur with initial input."
-  (setq helm-multi-occur-buffer-list (list (buffer-name (current-buffer))))
   (helm-occur-init-source)
+  (let ((bufs (list (buffer-name (current-buffer)))))
+    (helm-attrset 'moccur-buffers bufs helm-source-occur)
+    (helm-set-local-variable 'helm-multi-occur-buffer-list bufs)
+    (helm-set-local-variable
+     'helm-multi-occur-buffer-tick
+     (cl-loop for b in bufs
+              collect (buffer-chars-modified-tick (get-buffer b)))))
   (helm :sources 'helm-source-occur
         :buffer "*helm occur*"
         :history 'helm-grep-history
+        :preselect (and (memq 'helm-source-occur helm-sources-using-default-as-input)
+                        (format "%s:%d:" (buffer-name) (line-number-at-pos (point))))
         :truncate-lines t
         :input initial-value))
 
@@ -53,9 +61,9 @@
   (interactive)
   (helm-occur-1 (get-point-text)))
 
-(define-key evil-normal-state-map ",o" 'bk-helm-occur)
-(define-key evil-normal-state-map ",O" 'helm-multi-occur)
-(define-key evil-normal-state-map (kbd "C-c o") 'helm-occur)
+(define-key evil-normal-state-map ",o" 'helm-occur)
+(define-key evil-normal-state-map ",O" 'bk-helm-occur)
+(define-key evil-normal-state-map (kbd "C-c o") 'helm-multi-occur)
 
 (evil-declare-key 'normal occur-mode-map ",e" 'occur-edit-mode)
 (evil-declare-key 'normal occur-edit-mode-map ",e" 'occur-cease-edit)
