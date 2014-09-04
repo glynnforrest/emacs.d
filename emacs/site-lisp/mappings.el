@@ -25,6 +25,7 @@
 (define-key evil-normal-state-map ",D" 'delete-current-buffer-file)
 (define-key evil-normal-state-map ",F" 'helm-find-files)
 (define-key evil-normal-state-map ",f" 'helm-ls-git-ls)
+(define-key evil-normal-state-map ",,f" 'helm-projectile)
 (define-key evil-normal-state-map ",g" 'magit-status)
 (define-key evil-normal-state-map ",G" 'git-gutter:revert-hunk)
 (define-key evil-normal-state-map ",I" 'gf/save-and-eval-buffer)

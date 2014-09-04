@@ -35,6 +35,10 @@
 ;; finish edit ,e
 ;; save buffers ,w
 
+;; opening a file in a non-git project
+;; (helm-projectile) ,,f
+;; this is still good, but doesn't offer multiple files or grepping
+
 ;; bk-helm-occur courtesy of https://news.ycombinator.com/item?id=6873665
 (defun get-point-text ()
   "Get 'interesting' text at point; either word, or region"
