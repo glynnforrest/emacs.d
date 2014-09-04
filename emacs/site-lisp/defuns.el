@@ -29,8 +29,7 @@
 (defvar gf/url-regex-string "https?:\/\/[-a-z0-9\.\/_\?=%&]+")
 
 (defun gf/open-url-from-buffer ()
-  "Open a url with ido, choosing from all of the urls in the current
-buffer."
+  "Prompt to open one of the urls in the current buffer."
   (interactive)
   (save-excursion
     (goto-char (point-min))
@@ -39,7 +38,7 @@ buffer."
         (let ((url (match-string-no-properties 0)))
           (add-to-list 'urls url)
           ))
-      (let ((url (ido-completing-read "Open url in buffer: " urls nil t)))
+      (let ((url (completing-read "Open url in buffer: " urls nil t)))
         (when url
           (browse-url url))))))
 
@@ -58,16 +57,9 @@ ERC buffer."
   (interactive)
   (comment-or-uncomment-region (line-beginning-position) (line-end-position)))
 
-(defun gf/recentf-ido-find-file ()
-  "Find a recent file using Ido."
-  (interactive)
-  (let ((file (ido-completing-read "Open recent file: " recentf-list nil t)))
-    (when file
-      (find-file file))))
-
 (defun gf/find-file-in-directory (directory)
-  "Hacky function to find a file in DIRECTORY using ido. This depends
-on the `projectile` package."
+  "Hacky function to find a file in DIRECTORY. This depends on the
+`projectile` package."
   (interactive)
   (gf/switch-to-scratch-buffer)
   (cd directory)
@@ -232,7 +224,7 @@ line as well as the current word."
         (filename (buffer-file-name)))
     (if (not (and filename (file-exists-p filename)))
         (error "Buffer '%s' is not visiting a file!" name)
-      (let ((new-name (read-file-name "New name: " filename)))
+      (let ((new-name (read-file-name "New name: " (file-name-directory filename))))
         (if (get-buffer new-name)
             (error "A buffer named '%s' already exists!" new-name)
           (rename-file filename new-name 1)
@@ -250,7 +242,7 @@ line as well as the current word."
         (buffer (current-buffer))
         (name (buffer-name)))
     (if (not (and filename (file-exists-p filename)))
-        (ido-kill-buffer)
+        (kill-buffer)
       (when (yes-or-no-p "Are you sure you want to remove this file? ")
         (delete-file filename)
         (kill-buffer buffer)
