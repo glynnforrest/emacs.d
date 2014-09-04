@@ -1,5 +1,40 @@
 (require 'helm-regexp)
 
+;; here are some search / replace workflows
+
+;; open a project file
+;; (helm-ls-git-ls) ,f
+
+;; open many project files
+;; (helm-ls-git-ls) ,f
+;; select candidates with C-<space>
+;; select all current candidates with M-a
+;; <return>
+
+;; grep in selected project files
+;; (helm-ls-git-ls) ,f
+;; select candidates with C-<space>
+;; select all current candidates with M-a
+;; launch grep with C-s
+;; search
+;; <return>
+
+;; grep in arbitrarily selected files
+;; (helm-find-files) ,F
+;; select candidates with C-<space>
+;; select all current candidates with M-a
+;; launch grep with C-s
+;; search
+;; <return>
+
+;; ag in a project with a view to editing the content
+;; (projectile-ag) C-c g
+;; search
+;; wgrep mode ,e
+;; make changes
+;; finish edit ,e
+;; save buffers ,w
+
 ;; bk-helm-occur courtesy of https://news.ycombinator.com/item?id=6873665
 (defun get-point-text ()
   "Get 'interesting' text at point; either word, or region"
