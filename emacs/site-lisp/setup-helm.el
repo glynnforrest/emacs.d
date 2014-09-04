@@ -18,10 +18,12 @@
  helm-google-suggest-use-curl-p t
  )
 
+;; helm-ls-git can be used for grep / occur on many files at a time
+(require 'helm-ls-git)
+
 (require 'helm-dash)
 (define-key evil-normal-state-map ",\\" 'helm-dash)
 (define-key evil-normal-state-map ",|" 'helm-dash-at-point)
-
 
 (defvar helm-dash-required-docsets '() "A list of required helm-dash-docsets")
 

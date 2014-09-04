@@ -24,7 +24,7 @@
 (define-key evil-normal-state-map ",d" 'dired)
 (define-key evil-normal-state-map ",D" 'delete-current-buffer-file)
 (define-key evil-normal-state-map ",F" 'helm-find-files)
-(define-key evil-normal-state-map ",f" 'helm-projectile)
+(define-key evil-normal-state-map ",f" 'helm-ls-git-ls)
 (define-key evil-normal-state-map ",g" 'magit-status)
 (define-key evil-normal-state-map ",G" 'git-gutter:revert-hunk)
 (define-key evil-normal-state-map ",I" 'gf/save-and-eval-buffer)
@@ -126,10 +126,6 @@
 (define-key global-map (kbd "M-?") 'eshell)
 (define-key global-map (kbd "C-M-/") 'gf/switch-to-scratch-buffer)
 
-;; Grep
-(define-key grep-mode-map (kbd "<return>") 'grep-display-occurrence-recenter)
-(define-key grep-mode-map (kbd "<S-return>") 'grep-goto-occurrence-recenter)
-
 ;; Magit
 (define-key magit-mode-map (kbd "C-p") 'magit-push)
 
@@ -148,5 +144,8 @@
 (define-key global-map (kbd "C-c e") (lambda ()
                                        (interactive)
                                        (gf/find-file-in-directory "~/.emacs.d")))
+
+(define-key minibuffer-local-map (kbd "C-w") 'evil-delete-backward-word)
+;; use M-h to highlight everything
 
 (provide 'mappings)

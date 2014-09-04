@@ -29,6 +29,7 @@
     helm
     helm-css-scss
     helm-dash
+    helm-ls-git
     helm-projectile
     highlight-chars
     impatient-mode
@@ -98,7 +99,7 @@
 
 (require 'setup-org)
 (require 'setup-yasnippet)
-(require 'setup-occur-grep-ack)
+(require 'setup-search)
 (require 'appearance)
 (require 'mappings)
 
