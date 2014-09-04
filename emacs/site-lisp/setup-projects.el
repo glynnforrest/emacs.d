@@ -1,6 +1,8 @@
 (require 'projectile)
 (projectile-global-mode)
 
+(setq helm-projectile-sources-list '(helm-source-projectile-buffers-list helm-source-projectile-files-list))
+
 (defvar org-projects-dir (expand-file-name  "~/notes/projects"))
 
 (defun gf/create-org-path (path)
