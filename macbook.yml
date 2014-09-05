@@ -1,6 +1,5 @@
 ---
 - hosts: localhost
   roles:
-    - homebrew
     - common
     - git

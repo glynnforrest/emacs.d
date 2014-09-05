@@ -1,5 +1,0 @@
----
-- name: Install Homebrew
-  raw: ruby -e "$(curl -fsSL https://raw.github.com/mxcl/homebrew/go/install)"
-  register: result
-  failed_when: "result.rc != 0 and 'Homebrew is already installed' not in result.stderr"
