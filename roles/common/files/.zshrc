@@ -104,6 +104,10 @@ er () {
     emacsclient -e '(gf/my-kill-emacs)'; emacs -daemon
 }
 
+# Quote pasted URLs
+autoload -U url-quote-magic
+zle -N self-insert url-quote-magic
+
 # GIT
 alias gst='git status'
 alias gch='git checkout'
