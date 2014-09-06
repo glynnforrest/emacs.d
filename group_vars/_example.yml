@@ -1,5 +1,20 @@
 # This file documents all configuration options for different roles.
 
+# common
+
+# common/defaults/main.yml contains lists of applications
+# already. These lists are for general things only, as specific
+# applications are installed by certain roles (e.g. emacs, mysql). Set
+# the following to override these general packages:
+
+homebrew_packages:
+  - tmux
+  - etc
+
+apt_packages:
+  - tmux
+  - etc
+
 # apache
 
 virtual_hosts:

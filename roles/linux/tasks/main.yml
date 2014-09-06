@@ -2,13 +2,3 @@
 - name: Link linux dotfiles
   file: src={{ item }} dest=~/{{ item | basename }} state=link force=yes
   with_fileglob: ../files/.*
-
-- name: Ensure linux packages are installed
-  sudo: yes
-  action: >
-    {{ansible_pkg_mgr}} name={{item}} state=installed
-  with_items:
-    - vim
-    - htop
-    - tmux
-    - git
