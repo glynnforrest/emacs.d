@@ -1,12 +1,10 @@
 ---
 homebrew_packages:
-  - git
   - tmux
   - tree
   - fasd
 
 apt_packages:
-  - git
   - tmux
   - tree
   - htop
