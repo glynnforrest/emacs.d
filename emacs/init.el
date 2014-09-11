@@ -19,6 +19,7 @@
     dired+
     el-autoyas
     elisp-slime-nav
+    emmet-mode
     evil
     evil-args
     evil-exchange
@@ -56,7 +57,6 @@
     wgrep
     wgrep-ack
     yasnippet
-    zencoding-mode
     )
   "A list of required packages for this emacs configuration.")
 
