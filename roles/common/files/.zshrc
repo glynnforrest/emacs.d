@@ -145,15 +145,6 @@ if is_mac; then
     alias reset_dns='sudo killall -HUP mDNSResponder'
 fi;
 
-netscan () {
-   for i in $1{1..255}; do
-       ping -c 1 $i > /dev/null
-       if test 0 -eq $?; then
-           echo $i;
-       fi;
-   done;
-}
-
 # MISC
 alias mysq='mysql -u root -p'
 
