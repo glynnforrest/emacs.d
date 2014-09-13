@@ -34,6 +34,9 @@
 (setq x-select-enable-clipboard t)
 (setq undo-tree-visualizer-timestamps 1)
 
+;; http://robots.thoughtbot.com/no-newline-at-end-of-file
+(setq require-final-newline t)
+
 ;; KILL SYSTEM BELL
 (setq ring-bell-function #'ignore)
 
