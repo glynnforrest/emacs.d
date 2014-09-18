@@ -16,6 +16,7 @@
 (add-to-list 'auto-mode-alist '("\\.md$" . markdown-mode))
 (add-to-list 'auto-mode-alist '("\\.markdown$" . markdown-mode))
 (add-hook 'markdown-mode-hook (lambda () (define-key markdown-mode-map (kbd "<tab>") 'yas/expand)))
+(add-hook 'markdown-mode-hook 'flyspell-mode)
 
 ;; PHP
 (autoload 'php-mode "php-mode")
