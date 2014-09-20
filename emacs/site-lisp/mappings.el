@@ -41,6 +41,8 @@
 (define-key evil-normal-state-map ",q" 'evil-quit)
 (define-key evil-normal-state-map ",!" 'flycheck-next-error)
 (define-key evil-visual-state-map (kbd ", TAB") 'untabify)
+(define-key evil-normal-state-map (kbd ", TAB") 'gf/untabify-line)
+(define-key evil-normal-state-map (kbd ",, TAB") 'gf/untabify-buffer)
 
 ;; Switch gj and j, gk and k
 (define-key evil-normal-state-map "j" 'evil-next-visual-line)

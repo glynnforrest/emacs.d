@@ -248,4 +248,14 @@ line as well as the current word."
         (kill-buffer buffer)
                 (message "File '%s' successfully removed" filename)))))
 
+(defun gf/untabify-line ()
+  "Untabify the current line."
+  (interactive)
+  (untabify (point-at-bol) (point-at-eol)))
+
+(defun gf/untabify-buffer ()
+  "Untabify the whole buffer."
+  (interactive)
+  (untabify (point-min) (point-max)))
+
 (provide 'defuns)
