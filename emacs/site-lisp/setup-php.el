@@ -3,9 +3,7 @@
 (require 's)
 (require 'php-auto-yasnippets)
 
-(add-hook 'php-mode-hook (lambda()
-                           (setq c-set-style "symfony")
-                           ))
+(add-hook 'php-mode-hook 'php-enable-psr2-coding-style)
 
 (setq web-mode-disable-auto-pairing nil)
 (setq web-mode-disable-css-colorization nil)
