@@ -14,6 +14,7 @@
 ;;; General modes
 (delete-selection-mode t)
 (recentf-mode 1)
+(setq recentf-max-saved-items 2000)
 (show-paren-mode t)
 (column-number-mode t)
 (tooltip-mode -1)
