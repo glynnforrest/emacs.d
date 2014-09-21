@@ -36,6 +36,7 @@
     impatient-mode
     js-comint
     js2-mode
+    js2-refactor
     keychain-environment
     magit
     markdown-mode
