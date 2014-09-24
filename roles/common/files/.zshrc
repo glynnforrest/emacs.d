@@ -154,6 +154,8 @@ placeholder () {
 
 alias sy='php app/console'
 
+alias php53='/usr/local/Cellar/php53/*/bin/php'
+
 #Grep for a process
 alias psgr='ps -A | grep -i'
 
