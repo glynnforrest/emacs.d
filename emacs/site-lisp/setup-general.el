@@ -45,6 +45,15 @@
 (require 'uniquify)
 (setq uniquify-buffer-name-style 'reverse)
 
+;; Highlight merge conflicts
+(defun sm-try-smerge ()
+  (save-excursion
+    (goto-char (point-min))
+    (when (re-search-forward "^<<<<<<< " nil t)
+      (smerge-mode 1))))
+
+(add-hook 'find-file-hook 'sm-try-smerge t)
+
 ;;; Enable normally disabled functions
 (put 'narrow-to-region 'disabled nil)
 
