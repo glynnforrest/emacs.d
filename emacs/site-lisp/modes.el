@@ -18,6 +18,9 @@
 (add-hook 'markdown-mode-hook (lambda () (define-key markdown-mode-map (kbd "<tab>") 'yas/expand)))
 (add-hook 'markdown-mode-hook 'flyspell-mode)
 
+;; Salt
+(add-to-list 'auto-mode-alist '("\\.sls$" . yaml-mode))
+
 ;; PHP
 (autoload 'php-mode "php-mode")
 (add-to-list 'auto-mode-alist '("\\.php$" . php-mode))
