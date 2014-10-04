@@ -90,6 +90,8 @@
 (evil-declare-key 'normal ag-mode-map (kbd ",<return>") 'gf/goto-occurrence-recenter)
 (evil-declare-key 'normal ag-mode-map (kbd "RET") 'gf/display-occurrence-recenter)
 (evil-declare-key 'normal ag-mode-map (kbd ",RET") 'gf/goto-occurrence-recenter)
+(evil-declare-key 'normal ag-mode-map "k" 'evil-previous-visual-line)
+(evil-declare-key 'visual ag-mode-map "k" 'evil-previous-visual-line)
 
 (define-key evil-normal-state-map (kbd "C-c g") 'projectile-ag)
 
