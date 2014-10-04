@@ -11,13 +11,13 @@
                                         ))
 
 ;; Fonts that work for reloading init.el and new emacsclient instances
-(set-frame-font "Ubuntu Mono 11")
-(setq default-frame-alist '((font . "Ubuntu Mono 11")))
+(set-frame-font "Ubuntu Mono 13")
+(setq default-frame-alist '((f1nt . "Ubuntu Mono 13")))
 
 
 ;; Load a theme
-(require 'sanityinc-tomorrow-eighties-theme)
-(color-theme-sanityinc-tomorrow-eighties)
+(require 'sanityinc-tomorrow-night-theme)
+(color-theme-sanityinc-tomorrow-night)
 
 ;; Cursor configuration.
 (blink-cursor-mode -1)
