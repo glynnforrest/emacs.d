@@ -2,16 +2,13 @@
 - name: Link common dotfiles
   file: src={{ item }} dest=~/{{ item | basename }} state=link force=yes
   with_fileglob: ../files/.*
-  tags: common
 
 - name: Install general homebrew packages
   homebrew: name={{item}} state=present
   when: ansible_os_family == 'Darwin'
   with_items: homebrew_packages
-  tags: common
 
 - name: Install general apt packages
   apt: name={{item}} state=present
   when: ansible_os_family == 'Debian'
   with_items: apt_packages
-  tags: common

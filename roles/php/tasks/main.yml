@@ -12,7 +12,6 @@
     - php5-mysql
     - php5-xmlrpc
     - libapache2-mod-php5
-  tags: php
 
 - name: Ensure apache mod is enabled
   file:
@@ -23,27 +22,22 @@
     - php5.conf
     - php5.load
   notify: Restart apache
-  tags: php
 
 - name: Setup php.ini
   template: src=../templates/php.ini.j2 dest=/etc/php5/apache2/php.ini
   notify: Restart apache
-  tags: php
 
 - name: Install composer
   shell: curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin creates=/usr/local/bin/composer
   tags:
-    - php
     - composer
 
 - name: Rename composer.phar to composer
   shell: mv /usr/local/bin/composer.phar /usr/local/bin/composer creates=/usr/local/bin/composer
   tags:
-    - php
     - composer
 
 - name: Make composer executable
   file: path=/usr/local/bin/composer mode=0755
   tags:
-    - php
     - composer

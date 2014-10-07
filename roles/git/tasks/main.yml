@@ -2,14 +2,11 @@
 - name: Install git with homebrew
   homebrew: name=git state=present
   when: ansible_os_family == 'Darwin'
-  tags: git
 
 - name: Install git with apt
   apt: name=git state=present
   when: ansible_os_family == 'Debian'
-  tags: git
 
 - name: Setup .gitconfig
   template: src=../templates/gitconfig.j2 dest=~/.gitconfig
   sudo: no
-  tags: git
