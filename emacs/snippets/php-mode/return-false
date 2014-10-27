@@ -1,5 +1,5 @@
 # -*- mode: snippet -*-
 #name : return false
-#key : rt
+#key : rf
 # --
 return false;

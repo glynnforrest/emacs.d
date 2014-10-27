@@ -2,7 +2,7 @@
 # name: expects
 # key: expects
 # --
-$$1->expects($this->$2)
+$1->expects($this->$2)
      ->method('$3')
      ->with($4)
      ->will($this->returnValue($5));
