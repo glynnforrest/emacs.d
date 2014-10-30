@@ -3,6 +3,11 @@
 (require 's)
 (require 'php-auto-yasnippets)
 
+;; Install refactor tool with `composer global require qafoolabs/php-refactoring-browser`
+(require 'php-refactor-mode)
+(setq php-refactor-command (expand-file-name "~/.composer/vendor/bin/refactor"))
+(add-hook 'php-mode-hook 'php-refactor-mode)
+
 (add-hook 'php-mode-hook 'php-enable-psr2-coding-style)
 
 (setq web-mode-disable-auto-pairing nil)
