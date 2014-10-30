@@ -52,7 +52,7 @@
     (when (re-search-forward "^<<<<<<< " nil t)
       (smerge-mode 1))))
 
-(add-hook 'find-file-hook 'sm-try-smerge t)
+(add-hook 'find-file-hook 'sm-try-smerge)
 
 ;;; Enable normally disabled functions
 (put 'narrow-to-region 'disabled nil)
