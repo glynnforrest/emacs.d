@@ -26,7 +26,7 @@
 (define-key evil-normal-state-map ",+" 'gf/indent-cleanup-buffer)
 
 ;; Cleanup whitespace on buffer write
-(add-hook 'before-save-hook 'whitespace-cleanup)
+(add-hook 'before-save-hook 'delete-trailing-whitespace)
 
 (require 'highlight-chars)
 (add-hook 'prog-mode-hook 'hc-highlight-tabs)
