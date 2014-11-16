@@ -159,8 +159,12 @@ placeholder () {
 }
 
 alias sy='php app/console'
+alias nep='php neptune'
+
+alias tphpunit='phpunit --testsuite'
 
 alias php53='/usr/local/Cellar/php53/*/bin/php'
+alias php54='/usr/local/Cellar/php54/*/bin/php'
 
 #Grep for a process
 alias psgr='ps -A | grep -i'
