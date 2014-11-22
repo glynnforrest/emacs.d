@@ -8,3 +8,4 @@ apt_packages:
   - tmux
   - tree
   - htop
+  - vim
