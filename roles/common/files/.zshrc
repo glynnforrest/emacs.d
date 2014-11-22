@@ -158,6 +158,13 @@ placeholder () {
     wget http://placekitten.com/$1/$2 -O $1\x$2.jpg
 }
 
+# Vagrant
+
+alias vs='vagrant ssh'
+alias vu='vagrant up'
+
+# PHP
+
 alias sy='php app/console'
 alias nep='php neptune'
 
