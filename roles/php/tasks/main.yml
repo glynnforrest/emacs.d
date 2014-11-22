@@ -12,6 +12,8 @@
     - php5-mysql
     - php5-xmlrpc
     - libapache2-mod-php5
+    - php5-xdebug
+  notify: Restart apache
 
 - name: Ensure apache mod is enabled
   file:
