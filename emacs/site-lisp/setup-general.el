@@ -18,9 +18,16 @@
 (show-paren-mode t)
 (column-number-mode t)
 (tooltip-mode -1)
+(setq shift-select-mode nil)
+
 ;; Undo/redo window configuration with C-c <left>/<right>
 (winner-mode 1)
 (require 'ace-jump-mode)
+
+;;auto revert
+(global-auto-revert-mode t)
+(setq auto-revert-verbose nil)
+(setq global-auto-revert-non-file-buffers t)
 
 ;;; General settings
 (fset 'yes-or-no-p 'y-or-n-p)
@@ -34,6 +41,7 @@
 (setq scroll-step 1)
 (setq x-select-enable-clipboard t)
 (setq undo-tree-visualizer-timestamps 1)
+(setq echo-keystrokes 0.1)
 
 ;; http://robots.thoughtbot.com/no-newline-at-end-of-file
 (setq require-final-newline t)

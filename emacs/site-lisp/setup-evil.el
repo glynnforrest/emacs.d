@@ -30,7 +30,6 @@
 ;; To not miss surround mode
 (require 'surround)
 (global-surround-mode t)
-(global-auto-revert-mode t)
 
 ;; Vim style jumplist
 (require 'evil-jumper)
