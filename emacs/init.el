@@ -20,6 +20,7 @@
     el-autoyas
     elisp-slime-nav
     emmet-mode
+    ethan-wspace
     evil
     evil-args
     evil-exchange
