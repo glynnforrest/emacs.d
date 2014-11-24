@@ -32,7 +32,9 @@ path."
   "Alternate between the current buffer and the org file for the
 current project."
   (interactive)
-  (if (string-equal "org-mode" (symbol-name major-mode))
+  (if (and
+       (string-equal "org-mode" (symbol-name major-mode))
+       (s-contains-p "/notes/" (buffer-file-name)))
       (if (gethash (buffer-file-name) gf/previous-project-buffers)
           (switch-to-buffer (gethash (buffer-file-name) gf/previous-project-buffers))
         (error "Previous project buffer not found"))
