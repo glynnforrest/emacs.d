@@ -27,7 +27,7 @@
 
 ;; Pretty parenthesis
 (require 'rainbow-delimiters)
-(global-rainbow-delimiters-mode t)
+(rainbow-delimiters-mode t)
 
 ;; Fringes are a pain
 (when (fboundp 'fringe-mode)

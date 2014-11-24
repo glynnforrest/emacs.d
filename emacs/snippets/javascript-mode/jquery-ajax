@@ -3,7 +3,7 @@
 # key: $.ajax
 # --
 $.ajax({
-  url: '$1',
+  url: $1,
   type: '${2:post}',
   data: {$3},
   success: function (data) {
