@@ -61,13 +61,21 @@ file if open."
   "Add a class to the use declarations in the current file."
   (interactive)
   (save-excursion
-    (gf/php-go-to-namespace)
-    (let ((file (read-string "Class Name: ")))
+    (let ((class (helm-comp-read
+                  "Class: "
+                  (gf/php-use-class-candidates)
+                  :must-match t
+                  )))
       (gf/php-go-to-last-use-statement)
       (end-of-line)
       (newline)
-      (insert (concat "use " file ";"))
-      )))
+      (insert (concat "use " class ";")))))
+
+(defun gf/php-use-class-candidates ()
+  "Get a list of available PHP classes in the current projectile project."
+  (interactive)
+  (split-string (shell-command-to-string
+                 (concat "~/.emacs.d/bin/php_class_finder.sh " (projectile-project-root))) "\n" t))
 
 (defun gf/php-current-file-namespace ()
   "Get a suitable namespace for the current file."
@@ -119,9 +127,9 @@ file if open."
 (setq php-auto-yasnippet-php-program (concat plugins-dir "/php-auto-yasnippets/Create-PHP-YASnippet.php"))
 (define-key php-mode-map (kbd "C-c C-y") 'yas/create-php-snippet)
 
-(evil-declare-key 'normal php-mode-map ",t" 'test-this-or-related-php-file)
 (evil-declare-key 'normal php-mode-map ",z" 'gf/toggle-php-web-mode)
 (evil-declare-key 'normal web-mode-map ",z" 'gf/toggle-php-web-mode)
+(define-key php-mode-map (kbd "C-c i") 'gf/php-insert-use-class)
 
 (define-key php-mode-map (kbd "M-q") 'gf/quit-other-window)
 
