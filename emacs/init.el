@@ -25,6 +25,7 @@
     evil-args
     evil-exchange
     evil-jumper
+    emamux
     expand-region
     flycheck
     git-gutter
