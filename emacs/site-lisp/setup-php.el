@@ -57,13 +57,19 @@ file if open."
     )
   (recenter))
 
+(defun gf/php-class-candidates ()
+  "Get a list of available PHP classes in the current projectile project."
+  (interactive)
+  (split-string (shell-command-to-string
+                 (concat "~/.emacs.d/bin/php_class_finder.sh " (projectile-project-root))) "\n" t))
+
 (defun gf/php-insert-use-class ()
   "Add a class to the use declarations in the current file."
   (interactive)
   (save-excursion
     (let ((class (helm-comp-read
                   "Class: "
-                  (gf/php-use-class-candidates)
+                  (gf/php-class-candidates)
                   :must-match t
                   )))
       (gf/php-go-to-last-use-statement)
@@ -71,11 +77,15 @@ file if open."
       (newline)
       (insert (concat "use " class ";")))))
 
-(defun gf/php-use-class-candidates ()
-  "Get a list of available PHP classes in the current projectile project."
+(defun gf/php-insert-class ()
+  "Insert a class name in the current projectile project."
   (interactive)
-  (split-string (shell-command-to-string
-                 (concat "~/.emacs.d/bin/php_class_finder.sh " (projectile-project-root))) "\n" t))
+    (let ((class (helm-comp-read
+                  "Class: "
+                  (gf/php-class-candidates)
+                  :must-match t
+                  )))
+      (insert class)))
 
 (defun gf/php-current-file-namespace ()
   "Get a suitable namespace for the current file."
@@ -130,6 +140,7 @@ file if open."
 (evil-declare-key 'normal php-mode-map ",z" 'gf/toggle-php-web-mode)
 (evil-declare-key 'normal web-mode-map ",z" 'gf/toggle-php-web-mode)
 (define-key php-mode-map (kbd "C-c i") 'gf/php-insert-use-class)
+(define-key php-mode-map (kbd "C-c I") 'gf/php-insert-class)
 
 (define-key php-mode-map (kbd "M-q") 'gf/quit-other-window)
 
