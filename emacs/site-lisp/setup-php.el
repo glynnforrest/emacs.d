@@ -8,8 +8,6 @@
 (setq php-refactor-command (expand-file-name "~/.composer/vendor/bin/refactor"))
 (add-hook 'php-mode-hook 'php-refactor-mode)
 
-(add-hook 'php-mode-hook 'php-enable-psr2-coding-style)
-
 (setq web-mode-disable-auto-pairing nil)
 (setq web-mode-disable-css-colorization nil)
 
@@ -108,6 +106,7 @@ file if open."
   "Cleanup the style of the current php file with php-cs-fixer."
   (interactive)
   (save-buffer)
+  (gf/indent-cleanup-buffer)
   (shell-command (concat "php-cs-fixer fix " (buffer-file-name)))
   (let ((point (point)))
     (revert-buffer t t)
