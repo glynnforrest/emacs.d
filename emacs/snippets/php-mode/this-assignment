@@ -1,0 +1,5 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: $this assignment
+# key: t-
+# --
+$this->${1:object} = $$1;$0
