@@ -45,6 +45,7 @@
     PHP
     PHPUnit
     Symfony
+    Twig
     Vagrant
     jQuery
     ))
@@ -69,7 +70,7 @@
 
 (defun helm-dash-php ()
   (interactive)
-  (setq-local helm-dash-docsets '("PHP" "PHPUnit" "Symfony")))
+  (setq-local helm-dash-docsets '("PHP" "PHPUnit" "Symfony" "Twig")))
 (add-hook 'php-mode-hook 'helm-dash-php)
 
 (defun helm-dash-js ()
