@@ -1,1 +1,0 @@
-My emacs configuration as I make the switch from vim.
