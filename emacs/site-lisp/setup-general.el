@@ -29,6 +29,10 @@
 (setq auto-revert-verbose nil)
 (setq global-auto-revert-non-file-buffers t)
 
+;; Save minibuffer history
+(savehist-mode 1)
+(setq history-length 1000)
+
 ;;; General settings
 (fset 'yes-or-no-p 'y-or-n-p)
 (global-hl-line-mode t)
