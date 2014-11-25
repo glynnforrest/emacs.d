@@ -11,7 +11,7 @@ then
     exit 1;
 fi
 
-find $1 -type f -name '*.php' | # find php files
+find -L $1 -type f -name '*.php' | # find php files
     grep -v 'Test.php' | # excluding tests
     grep -v 'phpunit' | # and phpunit files
     xargs grep '^namespace[^;]*' | # that contain a namespace declaration
