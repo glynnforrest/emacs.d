@@ -83,7 +83,7 @@ alias c='cd -'
 
 # mkdir and cd into it in one command
 mkcd () {
-    mkdir $1 -p && cd $1
+    mkdir -p $1 && cd $1
 }
 
 # move up directories quickly, e.g. up 3 is cd ../../../
