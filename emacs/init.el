@@ -87,6 +87,9 @@
 ;; Load personal configurations, like usernames and passwords
 (require 'personal nil t)
 
+;; Load appearance early to reduce flicker of default emacs
+(require 'appearance)
+
 ;; Clearly necessary
 (require 'setup-evil)
 (require 'modes)
@@ -104,7 +107,6 @@
 (require 'setup-org)
 (require 'setup-yasnippet)
 (require 'setup-search)
-(require 'appearance)
 (require 'mappings)
 
 ;; Mac specific configuration
