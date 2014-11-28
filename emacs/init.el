@@ -12,6 +12,7 @@
   '(
     ace-jump-mode
     ack-and-a-half
+    apache-mode
     auto-complete
     autopair
     browse-kill-ring
