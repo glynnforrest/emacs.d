@@ -41,6 +41,7 @@ source $ZSH/oh-my-zsh.sh
 PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:$PATH
 PATH+=:/usr/bin/core_perl
 PATH+=:/opt/qt/bin
+PATH+=:~/.bin
 PATH+=:~/.composer/vendor/bin
 PATH+=:/usr/texbin
 PATH+=:~/.phpenv/bin
