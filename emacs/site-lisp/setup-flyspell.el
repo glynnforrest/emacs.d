@@ -13,6 +13,7 @@
 
 ;; make sure spell checking works
 (setq-default ispell-program-name "aspell")
+(ispell-change-dictionary "en_GB" t)
 
 (ac-flyspell-workaround)
 
