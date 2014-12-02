@@ -1,5 +1,9 @@
 (require 'web-mode)
 
+(setq web-mode-markup-indent-offset 2)
+(setq web-mode-css-indent-offset 2)
+(setq web-mode-code-indent-offset 4)
+
 ;; Use multiple-cursors to rename tags
 (define-key web-mode-map (kbd "C-c C-r") 'mc/mark-sgml-tag-pair)
 

@@ -1,5 +1,7 @@
 (require 'css-mode)
 
+(setq css-indent-offset 2)
+
 (defun cssEvilChangeToPX ()
   "Change text until `px` in css mode."
   (interactive)
