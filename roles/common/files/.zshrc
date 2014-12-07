@@ -106,6 +106,12 @@ alias lla='ls -la'
 # EDITORS
 alias e='emacsclient -nw'
 
+if command_exists emacs; then
+    export EDITOR='emacsclient -nw'
+else
+    export EDITOR='vim'
+fi;
+
 # restart emacs server
 er () {
     emacsclient -e '(gf/my-kill-emacs)'; emacs -daemon
