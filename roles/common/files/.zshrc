@@ -203,3 +203,6 @@ then;
 
     ee () {e `fasd -sif $1`}
 fi;
+
+# Tmuxinator completions
+source ~/.bin/tmuxinator.zsh
