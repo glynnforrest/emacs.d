@@ -227,6 +227,8 @@ TODO keywords, stars and list indicators."
 
 (evil-declare-key 'normal org-mode-map ",e" 'org-ctrl-c-ctrl-c)
 
+(evil-declare-key 'normal org-mode-map ",a" 'helm-org-headlines)
+
 ;; This gets org-cycle working in the terminal properly.
 (evil-declare-key 'normal org-mode-map (kbd "TAB") 'org-cycle)
 
