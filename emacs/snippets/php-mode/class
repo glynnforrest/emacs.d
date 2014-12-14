@@ -13,6 +13,5 @@ namespace ${1:`(gf/php-current-file-namespace)`};
  **/
 class $2 ${3:}
 {
-
     $0
 }
