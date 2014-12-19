@@ -17,6 +17,7 @@
     autopair
     browse-kill-ring
     color-theme-sanityinc-tomorrow
+    diminish
     dired+
     el-autoyas
     elisp-slime-nav
@@ -107,6 +108,7 @@
 (require 'setup-org)
 (require 'setup-yasnippet)
 (require 'setup-search)
+(require 'setup-diminish)
 (require 'mappings)
 
 ;; Mac specific configuration
