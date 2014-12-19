@@ -12,4 +12,17 @@
                          (interactive)
                          (flycheck-mode -1)))
 
+(setq flycheck-check-syntax-automatically '(save mode-enabled)
+      flycheck-standard-error-navigation nil)
+
+(setq flycheck-highlighting-mode 'lines)
+
+(set-face-attribute 'flycheck-error nil
+                    :background "red"
+                    :underline nil)
+
+(set-face-attribute 'flycheck-warning nil
+                    :foreground nil
+                    :underline t)
+
 (provide 'setup-flycheck)
