@@ -4,7 +4,6 @@
                 auto-complete-mode
                 autopair-mode
                 eldoc-mode
-                elisp-slime-nav-mode
                 flycheck-mode
                 flyspell-mode
                 git-gutter-mode
@@ -18,5 +17,8 @@
                 yas-minor-mode
                 ))
   (diminish mode))
+
+(eval-after-load 'elisp-slime-nav
+  '(diminish 'elisp-slime-nav-mode))
 
 (provide 'setup-diminish)
