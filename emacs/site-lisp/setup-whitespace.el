@@ -53,6 +53,6 @@
   (interactive)
   (set-buffer-file-coding-system 'unix 't))
 
-(define-key evil-normal-state-map ",,=" 'dos2unix)
+(define-key evil-normal-state-map ",,+" 'dos2unix)
 
 (provide 'setup-whitespace)
