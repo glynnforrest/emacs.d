@@ -3,7 +3,6 @@
 (define-key ac-complete-mode-map [tab] nil)
 (define-key ac-mode-map (kbd "C-<return>" ) 'evil-ret)
 
-
 ;; Insert mode
 (define-key evil-insert-state-map (kbd "C-a") 'beginning-of-line)
 (define-key evil-insert-state-map (kbd "C-e") 'end-of-line)
@@ -150,5 +149,28 @@
 
 (define-key minibuffer-local-map (kbd "C-w") 'evil-delete-backward-word)
 ;; use M-h to highlight everything
+
+;; Dired
+(evil-declare-key 'normal dired-mode-map "\\" 'dired-up-directory)
+(evil-declare-key 'normal dired-mode-map "q" 'evil-record-macro)
+(evil-declare-key 'normal wdired-mode-map ",e" 'wdired-finish-edit)
+(evil-declare-key 'normal wdired-mode-map ",a" 'wdired-abort-changes)
+(define-key dired-mode-map (kbd "C-h") 'evil-window-left)
+(define-key dired-mode-map (kbd "M-b") 'helm-mini)
+
+;; Lisp
+(evil-declare-key 'normal lisp-mode-shared-map (kbd "M-.") 'elisp-slime-nav-find-elisp-thing-at-point)
+(define-key lisp-mode-shared-map (kbd "RET") 'reindent-then-newline-and-indent)
+(define-key lisp-mode-shared-map (kbd "C-c C-e") 'gf/eval-and-replace-sexp)
+
+(define-key paredit-mode-map (kbd "M-q") 'gf/quit-other-window)
+(define-key paredit-mode-map (kbd "M-?") 'eshell)
+(define-key paredit-mode-map (kbd "C-j") 'evil-window-down)
+
+(define-key paredit-mode-map (kbd "<C-S-delete>") 'paredit-kill)
+(define-key paredit-mode-map (kbd "C-c <up>") 'clever-splice-sexp-killing-backward)
+(define-key paredit-mode-map (kbd "C-c <down>") 'clever-splice-sexp-killing-forward)
+
+
 
 (provide 'mappings)

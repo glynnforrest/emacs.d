@@ -4,8 +4,6 @@
 ;; Elisp go-to-definition with M-. and back again with M-,
 (autoload 'elisp-slime-nav-mode "elisp-slime-nav")
 
-(evil-declare-key 'normal lisp-mode-shared-map (kbd "M-.") 'elisp-slime-nav-find-elisp-thing-at-point)
-
 ;; Set up some useful modes and set spaces
 (defun setup-elisp ()
   (eldoc-mode t)
@@ -19,9 +17,6 @@
 (add-hook 'emacs-lisp-mode-hook 'setup-elisp)
 (add-hook 'lisp-interaction-mode-hook 'setup-elisp)
 (add-hook 'ielm-mode-hook 'setup-elisp)
-
-(define-key lisp-mode-shared-map (kbd "RET") 'reindent-then-newline-and-indent)
-(define-key lisp-mode-shared-map (kbd "C-c C-e") 'gf/eval-and-replace-sexp)
 
 (add-hook 'lisp-interaction-mode-hook (lambda()
                                         (local-set-key (kbd "C-S-RET") 'gf/eval-print-last-sexp)))
@@ -83,13 +78,5 @@
   (interactive)
   (evil-forward-word-begin)
   (paredit-splice-sexp-killing-forward))
-
-(define-key paredit-mode-map (kbd "M-q") 'gf/quit-other-window)
-(define-key paredit-mode-map (kbd "M-?") 'eshell)
-(define-key paredit-mode-map (kbd "C-j") 'evil-window-down)
-
-(define-key paredit-mode-map (kbd "<C-S-delete>") 'paredit-kill)
-(define-key paredit-mode-map (kbd "C-c <up>") 'clever-splice-sexp-killing-backward)
-(define-key paredit-mode-map (kbd "C-c <down>") 'clever-splice-sexp-killing-forward)
 
 (provide 'setup-elisp)
