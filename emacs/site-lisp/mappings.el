@@ -171,6 +171,12 @@
 (define-key paredit-mode-map (kbd "C-c <up>") 'clever-splice-sexp-killing-backward)
 (define-key paredit-mode-map (kbd "C-c <down>") 'clever-splice-sexp-killing-forward)
 
+;; Magit
+(evil-declare-key 'normal git-commit-mode-map ",w" 'git-commit-commit)
 
+(define-key magit-mode-map (kbd "C-p") (lambda ()
+                                         (interactive)
+                                         (keychain-refresh-environment)
+                                         (magit-push)))
 
 (provide 'mappings)

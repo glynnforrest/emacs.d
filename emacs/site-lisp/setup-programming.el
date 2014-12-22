@@ -27,7 +27,6 @@
 (require 'paredit-everywhere)
 (add-hook 'prog-mode-hook 'paredit-everywhere-mode)
 
-(require 'setup-magit)
 (require 'setup-eshell)
 (require 'setup-flycheck)
 
