@@ -36,6 +36,7 @@
     helm-dash
     helm-ls-git
     helm-projectile
+    helm-swoop
     highlight-chars
     impatient-mode
     js-comint

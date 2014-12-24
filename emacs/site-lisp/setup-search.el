@@ -1,5 +1,7 @@
 (require 'helm-regexp)
 
+(setq helm-swoop-split-with-multiple-windows t)
+
 ;; here are some search / replace workflows
 
 ;; open a project file
@@ -69,7 +71,7 @@
   (interactive)
   (helm-occur-1 (get-point-text)))
 
-(define-key evil-normal-state-map ",o" 'helm-occur)
+(define-key evil-normal-state-map ",o" 'helm-swoop)
 (define-key evil-normal-state-map ",O" 'bk-helm-occur)
 (define-key evil-normal-state-map (kbd "C-c o") 'helm-multi-occur)
 
