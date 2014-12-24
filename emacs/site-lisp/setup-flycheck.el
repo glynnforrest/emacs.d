@@ -15,14 +15,23 @@
 (setq flycheck-check-syntax-automatically '(save mode-enabled)
       flycheck-standard-error-navigation nil)
 
-(setq flycheck-highlighting-mode 'lines)
+(setq flycheck-highlighting-mode 'symbols)
+
+(set-face-attribute 'flycheck-fringe-error nil
+                    :background nil)
+
+(set-face-attribute 'flycheck-fringe-warning nil
+                    :background nil)
+
 
 (set-face-attribute 'flycheck-error nil
-                    :background "red"
+                    :foreground nil
+                    :background "darkred"
                     :underline nil)
 
 (set-face-attribute 'flycheck-warning nil
-                    :foreground nil
-                    :underline t)
+                    :background nil
+                    :foreground "orange"
+                    :underline nil)
 
 (provide 'setup-flycheck)
