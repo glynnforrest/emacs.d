@@ -9,6 +9,5 @@
                       (setq js2-basic-offset 2)))
 
 (require 'js2-refactor)
-(js2r-add-keybindings-with-prefix ",l")
 
 (provide 'setup-js)
