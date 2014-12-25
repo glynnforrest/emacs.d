@@ -15,6 +15,9 @@
 (setq flycheck-check-syntax-automatically '(save mode-enabled)
       flycheck-standard-error-navigation nil)
 
+;; so flycheck can check (require calls properly.
+(setq-default flycheck-emacs-lisp-load-path 'inherit)
+
 (setq flycheck-highlighting-mode 'symbols)
 
 (set-face-attribute 'flycheck-fringe-error nil
