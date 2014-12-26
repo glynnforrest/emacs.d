@@ -8,67 +8,75 @@
 (when (not package-archive-contents)
   (package-refresh-contents))
 
-(defvar required-packages
-  '(
-    ace-jump-mode
-    ack-and-a-half
-    apache-mode
-    auto-complete
-    autopair
-    browse-kill-ring
-    color-theme-sanityinc-tomorrow
-    diminish
-    dired+
-    el-autoyas
-    elisp-slime-nav
-    emmet-mode
-    ethan-wspace
-    evil
-    evil-args
-    evil-exchange
-    evil-jumper
-    emamux
-    expand-region
-    flycheck
-    git-gutter
-    helm
-    helm-css-scss
-    helm-dash
-    helm-ls-git
-    helm-projectile
-    helm-swoop
-    highlight-chars
-    impatient-mode
-    js-comint
-    js2-mode
-    js2-refactor
-    keychain-environment
-    magit
-    markdown-mode
-    multiple-cursors
-    org
-    paredit
-    paredit-everywhere
-    php-eldoc
-    php-mode
-    projectile
-    rainbow-delimiters
-    rainbow-mode
-    rotate-text
-    scss-mode
-    skewer-mode
-    smartparens
-    surround
-    web-mode
-    wgrep
-    wgrep-ack
-    yasnippet
-    )
-  "A list of required packages for this emacs configuration.")
+(defvar required-packages nil "A list of required packages for this emacs configuration.")
 
-(dolist (p required-packages)
-  (when (not (package-installed-p p))
-    (package-install p)))
+(setq required-packages
+      '(
+        ace-jump-mode
+        ack-and-a-half
+        apache-mode
+        auto-complete
+        autopair
+        browse-kill-ring
+        color-theme-sanityinc-tomorrow
+        diminish
+        dired+
+        el-autoyas
+        elisp-slime-nav
+        emamux
+        emmet-mode
+        ethan-wspace
+        evil
+        evil-args
+        evil-exchange
+        evil-jumper
+        expand-region
+        flycheck
+        git-gutter
+        helm
+        helm-css-scss
+        helm-dash
+        helm-ls-git
+        helm-projectile
+        helm-swoop
+        highlight-chars
+        impatient-mode
+        js-comint
+        js2-mode
+        js2-refactor
+        keychain-environment
+        magit
+        markdown-mode
+        multiple-cursors
+        org
+        paredit
+        paredit-everywhere
+        php-eldoc
+        php-mode
+        projectile
+        rainbow-delimiters
+        rainbow-mode
+        rotate-text
+        scss-mode
+        skewer-mode
+        smart-mode-line
+        smartparens
+        surround
+        web-mode
+        wgrep
+        wgrep-ack
+        yasnippet
+        ))
+
+(defun gf/install-required-packages ()
+  "Ensure required packages are installed."
+  (interactive)
+  (dolist (p required-packages)
+    (when (not (package-installed-p p))
+      (package-install p)))
+  (message (format "%s required packages installed." (length required-packages))))
+
+(gf/install-required-packages)
 
 ;; Make sure stuff installed via homebrew is available
 (push "/usr/local/bin" exec-path)
