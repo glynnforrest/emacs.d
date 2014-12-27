@@ -25,6 +25,7 @@
         elisp-slime-nav
         emamux
         emmet-mode
+        epl
         ethan-wspace
         evil
         evil-args
