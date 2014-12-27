@@ -13,7 +13,7 @@
 (setq required-packages
       '(
         ace-jump-mode
-        ack-and-a-half
+        ag
         apache-mode
         auto-complete
         autopair
@@ -33,13 +33,13 @@
         expand-region
         flycheck
         git-gutter
+        git-timemachine
         helm
         helm-css-scss
         helm-dash
         helm-ls-git
         helm-projectile
         helm-swoop
-        highlight-chars
         impatient-mode
         js-comint
         js2-mode
@@ -53,10 +53,10 @@
         paredit-everywhere
         php-eldoc
         php-mode
+        php-refactor-mode
         projectile
         rainbow-delimiters
         rainbow-mode
-        rotate-text
         scss-mode
         skewer-mode
         smart-mode-line
@@ -64,7 +64,7 @@
         surround
         web-mode
         wgrep
-        wgrep-ack
+        wgrep-ag
         yasnippet
         ))
 
