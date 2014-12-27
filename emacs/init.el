@@ -78,6 +78,35 @@
 
 (gf/install-required-packages)
 
+(defun gf/package-deps (package)
+  "Get the dependencies of a package."
+  (let* ((pkg (cadr (assq package package-alist)))
+         (deps (if (package-desc-p pkg)
+                     (package-desc-reqs pkg)
+                   nil)))
+    (mapcar (lambda (d) (car d)) deps)))
+
+(defun flatten (list)
+  (cond
+   ((null list) nil)
+   ((atom list) (list list))
+   (t (append (flatten (car list)) (flatten (cdr list))))))
+
+(defun gf/required-packages-and-deps ()
+  "Get the list of required packages and their dependencies."
+  (remove-duplicates
+   (append required-packages
+           (flatten (mapcar 'gf/package-deps required-packages)))))
+
+(defun gf/delete-orphan-packages ()
+  "Delete installed packages not explicitly required."
+  (interactive)
+  (let* ((installed (remove-if-not (lambda (p) (package-installed-p p)) package-activated-list))
+         (orphans (remove-duplicates (set-difference installed (gf/required-packages-and-deps)))))
+    (dolist (pkg orphans)
+        (package-delete (cadr (assq pkg package-alist))))
+    (message (format "Deleted %s orphan packages." (length orphans)))))
+
 ;; Make sure stuff installed via homebrew is available
 (push "/usr/local/bin" exec-path)
 
