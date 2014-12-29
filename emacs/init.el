@@ -31,6 +31,7 @@
         evil-args
         evil-exchange
         evil-jumper
+        exec-path-from-shell
         expand-region
         flycheck
         git-gutter
@@ -112,6 +113,8 @@
 ;; Make sure stuff installed via homebrew is available
 (push "/usr/local/bin" exec-path)
 
+(when (memq window-system '(mac ns))
+    (exec-path-from-shell-initialize))
 
 (setq site-lisp-dir (expand-file-name "site-lisp" user-emacs-directory))
 (setq plugins-dir (expand-file-name "plugins" user-emacs-directory))
