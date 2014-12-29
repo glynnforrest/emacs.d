@@ -66,6 +66,7 @@
         web-mode
         wgrep
         wgrep-ag
+        yaml-mode
         yasnippet
         ))
 
