@@ -44,6 +44,7 @@
     NodeJS
     PHP
     PHPUnit
+    SaltStack
     Symfony
     Twig
     Vagrant
@@ -96,7 +97,9 @@
 
 (defun helm-dash-yaml ()
   (interactive)
-  (setq-local helm-dash-docsets '("Ansible")))
+  (if (s-ends-with? ".sls" (buffer-file-name))
+      (setq-local helm-dash-docsets '("Saltstack"))
+    (setq-local helm-dash-docsets '("Ansible"))))
 (add-hook 'yaml-mode-hook 'helm-dash-yaml)
 
 (provide 'setup-helm)
