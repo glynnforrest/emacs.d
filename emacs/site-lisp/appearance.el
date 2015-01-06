@@ -71,6 +71,7 @@
 ;; View hex colours in the following modes
 (dolist (mode '(
                 css-mode
+                scss-mode
                 emacs-lisp-mode
                 haskell-mode
                 lisp-interaction-mode
