@@ -1,0 +1,17 @@
+# -*- mode: snippet -*-
+#name : trait definition
+#key : trait
+# --
+<?php
+
+namespace ${1:`(gf/php-current-file-namespace)`};
+
+/**
+ * ${2:`(buffer-file-name-body)`}
+ *
+ * @author Glynn Forrest <me@glynnforrest.com>
+ **/
+trait $2 ${3:}
+{
+    $0
+}
