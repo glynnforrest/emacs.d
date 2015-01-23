@@ -13,13 +13,8 @@ namespace ${1:`(gf/php-current-file-namespace)`};
  **/
 class $2 extends \PHPUnit_Framework_TestCase
 {
-
     public function setUp()
     {
+        $0
     }
-
-    public function tearDown()
-    {
-    }
-    $0
 }
