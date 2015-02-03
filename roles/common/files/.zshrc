@@ -51,6 +51,11 @@ PATH+=:~/.phpenv/bin
 setopt autocd
 unsetopt correct_all
 
+if test -f ~/.zshrc.local
+then
+    source ~/.zshrc.local
+fi
+
 #########################
 # ALIASES AND FUNCTIONS #
 #########################
