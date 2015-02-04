@@ -45,6 +45,7 @@ PATH+=:~/.bin
 PATH+=:~/.composer/vendor/bin
 PATH+=:/usr/texbin
 PATH+=:~/.phpenv/bin
+PATH+=:~/.rvm/bin
 
 
 # My customisations
