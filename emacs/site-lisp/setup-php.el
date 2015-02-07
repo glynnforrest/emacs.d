@@ -61,7 +61,13 @@ file if open."
   "Get a list of available PHP classes in the current projectile project."
   (interactive)
   (split-string (shell-command-to-string
-                 (concat "~/.emacs.d/bin/php_class_finder.sh " (projectile-project-root))) "\n" t))
+                 (concat "~/.emacs.d/bin/php_class_finder.php " (projectile-project-root))) "\n" t))
+
+(defun gf/php-refresh-class-candidates ()
+  "Refresh the list of available PHP classes in the current projectile project."
+  (interactive)
+  (start-process-shell-command "php-class-candidates" nil (concat "~/.emacs.d/bin/php_class_finder.php " (projectile-project-root) " refresh"))
+  (message (format "Refreshing class candidates for %s" (projectile-project-root))))
 
 (defun gf/php-insert-use-class ()
   "Add a class to the use declarations in the current file."
