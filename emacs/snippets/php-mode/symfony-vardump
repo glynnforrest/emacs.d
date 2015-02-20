@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: symfony-vardump
+# key: sv
+# --
+\Symfony\Component\VarDumper\VarDumper::dump($1);$0
