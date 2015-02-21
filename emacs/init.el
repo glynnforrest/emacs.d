@@ -30,6 +30,7 @@
         evil
         evil-args
         evil-exchange
+        evil-leader
         evil-jumper
         exec-path-from-shell
         expand-region
