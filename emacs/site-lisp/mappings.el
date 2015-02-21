@@ -14,34 +14,48 @@
 (define-key global-map (kbd "C-x E") 'gf/eval-print-last-sexp)
 
 ;; Normal mode
-(define-key evil-normal-state-map " " 'evil-ex)
 
-(define-key evil-normal-state-map ",a" 'helm-imenu)
-(define-key evil-normal-state-map ",B" 'kill-matching-buffers)
-(define-key evil-normal-state-map ",C" 'cd)
-(define-key evil-normal-state-map ",c" 'gf/comment-or-uncomment-line)
-(define-key evil-normal-state-map ",d" 'dired)
-(define-key evil-normal-state-map ",D" 'delete-current-buffer-file)
-(define-key evil-normal-state-map ",F" 'helm-find-files)
-(define-key evil-normal-state-map ",f" 'helm-projectile)
-(define-key evil-normal-state-map ",,f" 'helm-ls-git-ls)
-(define-key evil-normal-state-map ",g" 'magit-status)
-(define-key evil-normal-state-map ",G" 'git-gutter:revert-hunk)
-(define-key evil-normal-state-map ",I" 'gf/save-and-eval-buffer)
-(define-key evil-normal-state-map ",i" 'gf/open-init-file)
-(define-key evil-normal-state-map ",m" 'ace-jump-mode)
-(define-key evil-normal-state-map ",r" 'helm-recentf)
-(define-key evil-normal-state-map ",R" 'rename-current-buffer-file)
-(define-key evil-normal-state-map ",S" 'gf/split-window-and-move-below)
-(define-key evil-normal-state-map ",s" 'gf/split-window-and-move-right)
-(define-key evil-normal-state-map ",u" 'undo-tree-visualize)
-(define-key evil-normal-state-map ",w" 'save-buffer)
-(define-key evil-normal-state-map ",p" 'gf/toggle-switch-to-project-org-file)
-(define-key evil-normal-state-map ",q" 'evil-quit)
-(define-key evil-normal-state-map ",!" 'flycheck-next-error)
-(define-key evil-visual-state-map (kbd ", TAB") 'untabify)
-(define-key evil-normal-state-map (kbd ", TAB") 'gf/untabify-line)
-(define-key evil-normal-state-map (kbd ",, TAB") 'gf/untabify-buffer)
+(require 'evil-leader)
+
+(setq evil-leader/in-all-states t
+      evil-leader/leader " "
+      evil-leader/non-normal-prefix "C-SPC")
+
+(global-evil-leader-mode)
+
+(define-key evil-visual-state-map " " evil-leader--default-map)
+(define-key evil-motion-state-map " " evil-leader--default-map)
+
+(evil-leader/set-key
+  "u" 'universal-argument
+  "SPC" 'evil-ex
+  "a" 'helm-imenu
+  "B" 'kill-matching-buffers
+  "C" 'cd
+  "c" 'gf/comment-or-uncomment-line
+  "d" 'dired
+  "D" 'delete-current-buffer-file
+  "F" 'helm-find-files
+  "f" 'helm-projectile
+  ",f" 'helm-ls-git-ls
+  "g" 'magit-status
+  "G" 'git-gutter:revert-hunk
+  "I" 'gf/save-and-eval-buffer
+  "i" 'gf/open-init-file
+  "m" 'ace-jump-mode
+  "r" 'helm-recentf
+  "R" 'rename-current-buffer-file
+  "S" 'gf/split-window-and-move-below
+  "s" 'gf/split-window-and-move-right
+  "u" 'undo-tree-visualize
+  "w" 'save-buffer
+  "p" 'gf/toggle-switch-to-project-org-file
+  "q" 'evil-quit
+  "!" 'flycheck-next-error
+  "TAB" 'untabify
+  "TAB" 'gf/untabify-line
+  ",TAB" 'gf/untabify-buffer
+  )
 
 ;; Switch gj and j, gk and k
 (define-key evil-normal-state-map "j" 'evil-next-visual-line)
