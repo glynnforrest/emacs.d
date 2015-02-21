@@ -115,14 +115,7 @@
                                             (kill-this-buffer)
                                             (delete-window)))
 (define-key global-map (kbd "M-q") 'gf/quit-other-window)
-;; Buffers
-;; Change buffers with left and right, Ctrl if not in evil-mode
-(define-key evil-normal-state-map (kbd "<right>") 'next-buffer)
-(define-key evil-normal-state-map (kbd "<left>") 'previous-buffer)
-(define-key global-map (kbd "C-<left>") 'previous-buffer)
-(define-key global-map (kbd "C-<right>") 'next-buffer)
-(define-key help-mode-map (kbd "C-<down>") 'kill-this-buffer)
-(define-key magit-mode-map (kbd "C-<down>") 'kill-this-buffer)
+
 (define-key global-map (kbd "C--") 'text-scale-decrease)
 (define-key global-map (kbd "C-+") 'text-scale-increase)
 (define-key global-map (kbd "C-'") (lambda()
