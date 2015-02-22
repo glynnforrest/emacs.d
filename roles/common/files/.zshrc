@@ -175,6 +175,8 @@ placeholder () {
 
 alias vs='vagrant ssh'
 alias vu='vagrant up'
+alias vh='vagrant halt'
+alias vr='vagrant reload'
 
 # PHP
 
