@@ -158,3 +158,5 @@
 ;; Mac specific configuration
 (setq is-mac (equal system-type 'darwin))
 (when is-mac (require 'setup-mac))
+
+(setq tramp-default-method "ssh")
