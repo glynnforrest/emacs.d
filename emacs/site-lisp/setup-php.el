@@ -130,7 +130,6 @@ file if open."
   "Cleanup the style of the current php file with php-cs-fixer."
   (interactive)
   (save-buffer)
-  (gf/indent-cleanup-buffer)
   (shell-command (concat "php-cs-fixer fix " (buffer-file-name)))
   (let ((point (point)))
     (revert-buffer t t)
