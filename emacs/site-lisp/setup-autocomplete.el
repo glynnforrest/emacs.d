@@ -47,7 +47,7 @@
 ;; To make a new line instead of accepting suggested word, use C-<return>
 
 (add-to-list 'ac-dictionary-directories "~/.emacs.d/ac-dict")
-(global-set-key (kbd "C-SPC") 'auto-complete)
+;; (global-set-key (kbd "C-SPC") 'auto-complete)
 
 (ac-config-glynn)
 
