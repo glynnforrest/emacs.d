@@ -162,6 +162,7 @@ file if open."
 (evil-declare-key 'normal web-mode-map ",z" 'gf/toggle-php-web-mode)
 (define-key php-mode-map (kbd "C-c i") 'gf/php-insert-use-class)
 (define-key php-mode-map (kbd "C-c I") 'gf/php-insert-class)
+(define-key php-mode-map (kbd "C-c s") 'gf/php-insert-neptune-service)
 
 (define-key php-mode-map (kbd "M-q") 'gf/quit-other-window)
 
