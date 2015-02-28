@@ -135,6 +135,22 @@ file if open."
     (revert-buffer t t)
     (goto-char point)))
 
+(defun gf/php-insert-neptune-service ()
+  "Insert a service name for the current neptune php project."
+  (interactive)
+  (let ((service (helm-comp-read
+                  "Service: "
+                  (gf/php-neptune-service-candidates)
+                  :must-match t
+                  )))
+    (insert service)))
+
+(defun gf/php-neptune-service-candidates ()
+  "Get services for the current neptune php project."
+  (interactive)
+  (split-string (shell-command-to-string
+                 (concat "cd " (projectile-project-root) " && php neptune service:list -N" )) "\n" t))
+
 (evil-declare-key 'normal php-mode-map ",+" 'gf/php-cleanup-style)
 
 ;; Use M-j to open a line below when in insert mode
