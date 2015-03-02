@@ -27,6 +27,14 @@
 	  (first (split-string (file-name-nondirectory (buffer-file-name)) "\\.")))
   )
 
+(defun gf/filename-extension (filename)
+  "Get the extension from a file path."
+  (car (last (s-split "\\." filename))))
+
+(defun gf/in-twig-file ()
+  "Return t if the current buffer is editing a twig file."
+  (equal "twig" (gf/filename-extension (buffer-file-name))))
+
 (define-key yas-minor-mode-map (kbd "TAB") 'yas-expand)
 
 (provide 'setup-yasnippet)
