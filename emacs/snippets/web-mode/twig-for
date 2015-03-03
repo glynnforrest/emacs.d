@@ -1,7 +1,7 @@
 # -*- mode: snippet; require-final-newline: nil -*-
 # name: twig-for
 # key: for
-# condition: (gf/in-twig-file)
+# condition: (gf/in-file-type "twig")
 # --
 {% for ${1:item} in ${2:list} %}
    $0
