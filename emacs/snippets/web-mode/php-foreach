@@ -1,0 +1,8 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name : php foreach
+# key : fe
+# condition: (gf/in-file-type "php")
+# --
+<?php foreach (${1:$array} as ${2:$k => $v}): ?>
+    $0
+<?php endforeach; ?>
