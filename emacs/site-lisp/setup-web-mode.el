@@ -38,4 +38,6 @@
 (setq emmet-move-cursor-between-quotes t)
 (setq emmet-move-cursor-after-expanding t)
 
+(add-to-list 'auto-mode-alist '("\\.twig$" . web-mode))
+
 (provide 'setup-web-mode)
