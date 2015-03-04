@@ -135,6 +135,11 @@ file if open."
     (revert-buffer t t)
     (goto-char point)))
 
+(defun gf/php-in-template-p ()
+  "Return t if the current php file looks like a template."
+  (and (> (point-max) 5)
+       (not (equal (buffer-substring-no-properties 1 6) "<?php"))))
+
 (defun gf/php-insert-neptune-service ()
   "Insert a service name for the current neptune php project."
   (interactive)
