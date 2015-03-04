@@ -1,0 +1,18 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name : exception class definition
+# key : class
+# condition: (s-ends-with? "Exception.php" (buffer-file-name))
+# --
+<?php
+
+namespace `(gf/php-current-file-namespace)`;
+
+/**
+ * `(buffer-file-name-body)`
+ *
+ * @author Glynn Forrest <me@glynnforrest.com>
+ **/
+class `(buffer-file-name-body)` extends \Exception
+{
+    $0
+}
