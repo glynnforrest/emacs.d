@@ -1,17 +1,18 @@
-# -*- mode: snippet -*-
-#name : class definition
-#key : class
+# -*- mode: snippet; require-final-newline: nil -*-
+# name : class definition
+# key : class
+# condition: (not (s-ends-with? "Exception.php" (buffer-file-name)))
 # --
 <?php
 
-namespace ${1:`(gf/php-current-file-namespace)`};
+namespace `(gf/php-current-file-namespace)`;
 
 /**
- * ${2:`(buffer-file-name-body)`}
+ * `(buffer-file-name-body)`
  *
  * @author Glynn Forrest <me@glynnforrest.com>
  **/
-class $2 ${3:}
+class `(buffer-file-name-body)` $1
 {
     $0
 }
