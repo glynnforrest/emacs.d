@@ -1,0 +1,6 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: twig-include
+# key: inc
+# condition: (gf/in-file-type "twig")
+# --
+{% include '$1' %}
