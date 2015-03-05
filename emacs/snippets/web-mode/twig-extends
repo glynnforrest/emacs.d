@@ -1,0 +1,6 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: twig-extends
+# key: ext
+# condition: (gf/in-file-type "twig")
+# --
+{% extends '$1' %}
