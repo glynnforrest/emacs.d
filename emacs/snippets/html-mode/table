@@ -2,14 +2,14 @@
 # name: table
 # key: table
 # --
-<table class="${1:table}">
+<table>
   <thead>
-	<th>
-	</th>
+    <th>
+    </th>
   </thead>
   <tbody>
-	<tr>
-	  <td>$0</td>
-	</tr>
+    <tr>
+      <td>$0</td>
+    </tr>
   </tbody>
 </table>
