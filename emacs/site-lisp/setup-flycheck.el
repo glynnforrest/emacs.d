@@ -7,6 +7,7 @@
 
 (eval-after-load 'flycheck '(setq flycheck-checkers (delq 'php-phpmd flycheck-checkers)))
 (eval-after-load 'flycheck '(setq flycheck-checkers (delq 'php-phpcs flycheck-checkers)))
+(eval-after-load 'flycheck '(setq flycheck-checkers (delq 'scss flycheck-checkers)))
 
 (add-hook 'js-mode-hook (lambda ()
                          (interactive)
