@@ -144,6 +144,7 @@
 (require 'setup-programming)
 (require 'setup-projects)
 (require 'setup-helm)
+(require 'setup-yaml)
 (require 'defuns)
 
 (require 'help-mode)
