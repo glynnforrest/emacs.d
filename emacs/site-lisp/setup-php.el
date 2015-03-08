@@ -156,6 +156,16 @@ file if open."
   (split-string (shell-command-to-string
                  (concat "cd " (projectile-project-root) " && php neptune service:list -N" )) "\n" t))
 
+(defun gf/php-in-symfony-project-p ()
+  "Return t if the current projectile project is a symfony project."
+  (or
+   (file-exists-p (concat (projectile-project-root) "app/console"))
+   (file-exists-p (concat (projectile-project-root) "application/app/console"))))
+
+(defun gf/php-in-neptune-project-p ()
+  "Return t if the current projectile project is a neptune php project."
+  (file-exists-p (concat (projectile-project-root) "neptune")))
+
 (evil-declare-key 'normal php-mode-map ",+" 'gf/php-cleanup-style)
 
 ;; Use M-j to open a line below when in insert mode
