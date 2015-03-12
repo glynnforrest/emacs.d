@@ -48,7 +48,7 @@ set tabstop=4
 set expandtab
 set smarttab
 set lbr
-set tw=80
+set tw=0
 
 "Expand most folds
 set foldlevel=5
@@ -95,7 +95,7 @@ map <leader>w :w<CR>
 vmap <leader>w <ESC>:w<CR>
 
 "Quick file open
-map <leader>e :e
+map <leader>e :e 
 
 "Quick split
 map <leader>s :vspl<CR><C-w>w
