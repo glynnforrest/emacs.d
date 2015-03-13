@@ -108,4 +108,6 @@
 
 (setq revert-buffer-function 'revert-buffer-keep-history)
 
+(xterm-mouse-mode t)
+
 (provide 'setup-general)
