@@ -1,6 +1,0 @@
----
-- hosts: localhost
-  roles:
-    - { role: common, tags: common }
-    - { role: git, tags: git }
-    - { role: php, tags: php }
