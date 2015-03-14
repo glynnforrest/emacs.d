@@ -42,6 +42,8 @@
 (add-to-list 'auto-mode-alist '("access\\.conf\\'" . apache-mode))
 (add-to-list 'auto-mode-alist '("sites-\\(available\\|enabled\\)/" . apache-mode))
 
+(add-to-list 'auto-mode-alist '("\\.zsh$" . shell-script-mode))
+
 ;; Others
 (require 'setup-css)
 (require 'setup-web-mode)
