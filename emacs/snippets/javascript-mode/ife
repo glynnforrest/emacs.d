@@ -1,10 +1,9 @@
 # -*- coding: utf-8; mode: snippet -*-
 # name: if...else
-# key: if
+# key: ife
 # contributor: David Miller <david@deadpansincerity.com>
 # --
-if(${1:condition}){
-    $2;
-}else{
-    $0;
+if (${1:condition}) {
+    $0
+} else {
 }
