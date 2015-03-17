@@ -2,6 +2,6 @@
 # name: for
 # contributor: David Miller <david@deadpansincerity.com>
 # --
-for( var i=0; i < ${1:something}.${2:length}; i++){
+for (var i=0; i < ${1:something}.${2:length}; i++) {
     $0
 }
