@@ -65,13 +65,15 @@ running emacs instance."
     (cd old-dir)
     ))
 
+(defun gf/find-current-month-notes-file ()
+  "Find the org file for the current month"
+  (interactive)
+  (find-file org-default-notes-file))
+
 (define-key global-map (kbd "C-x C-n") 'gf/commit-notes)
 
 (define-key global-map (kbd "M-n") 'org-capture)
-(define-key global-map (kbd "M-N") (lambda()
-                     (interactive)
-                     (find-file org-default-notes-file)
-                     ))
+(define-key global-map (kbd "M-N") 'gf/find-current-month-notes-file)
 (define-key global-map (kbd "C-c C-n") (lambda ()
                                        (interactive)
                                        (projectile-find-file-in-directory org-directory)))
