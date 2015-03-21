@@ -65,10 +65,21 @@ running emacs instance."
     (cd old-dir)
     ))
 
+(defvar gf/current-month-notes-last-visited nil
+  "The last date the org file for the current month was opened.")
+
 (defun gf/find-current-month-notes-file ()
   "Find the org file for the current month"
   (interactive)
+  (setq gf/current-month-notes-last-visited (format-time-string "%D"))
   (find-file org-default-notes-file))
+
+(defun gf/check-current-month-notes-reminder ()
+  "Show a reminder message if the current notes file hasn't been visited today."
+  (if (not (equal gf/current-month-notes-last-visited (format-time-string "%D")))
+      (message (format "Check your notes for today, %s" (format-time-string "%A %e of %B")))))
+
+(add-hook 'find-file-hook 'gf/check-current-month-notes-reminder)
 
 (define-key global-map (kbd "C-x C-n") 'gf/commit-notes)
 
