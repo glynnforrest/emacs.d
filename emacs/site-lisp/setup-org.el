@@ -38,6 +38,7 @@
   "Reload the org file for the current month - useful for a long
 running emacs instance."
   (interactive)
+  (setq gf/current-month-notes-last-visited nil)
   (setq org-default-notes-file
         (concat org-directory "dates/"
                 (downcase (format-time-string "%Y-%B.org")))))
