@@ -84,7 +84,7 @@ colorscheme elflord
 """""""""""""""""""""
 
 "Map the leader to an easy key
-let g:mapleader = ","
+let g:mapleader = " "
 
 "Hotkeys to edit and reload .vimrc
 map <leader>v :e! ~/.vimrc<CR>
