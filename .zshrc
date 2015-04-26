@@ -213,4 +213,7 @@ then;
 fi;
 
 # Tmuxinator completions
-source ~/.bin/tmuxinator.zsh
+if test -f ~/.bin/tmuxinator.zsh
+then
+    source ~/.bin/tmuxinator.zsh
+fi;
