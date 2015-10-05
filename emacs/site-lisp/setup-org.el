@@ -21,12 +21,6 @@
 (setq org-files (append (file-expand-wildcards (concat org-directory "*/*.org"))
                         (file-expand-wildcards (concat org-directory "*/*/*.org"))))
 
-;; Agenda files are only used for searching - my notes are designed to
-;; work without scheduling, tags etc
-(setq org-agenda-files (append
-                        (file-expand-wildcards (concat org-directory "dates/*.org"))
-                        (file-expand-wildcards (concat org-directory "topics/*.org"))
-                        (file-expand-wildcards (concat org-directory "topics/*/*.org"))))
 
 ;; Split up the search string on whitespace
 (setq org-agenda-search-view-always-boolean t)
@@ -39,6 +33,12 @@
 running emacs instance."
   (interactive)
   (setq gf/current-month-notes-last-visited nil)
+  ;; Agenda files are only used for searching - my notes are designed to
+  ;; work without scheduling, tags etc
+  (setq org-agenda-files (append
+                          (file-expand-wildcards (concat org-directory "dates/*.org"))
+                          (file-expand-wildcards (concat org-directory "topics/*.org"))
+                          (file-expand-wildcards (concat org-directory "topics/*/*.org"))))
   (setq org-default-notes-file
         (concat org-directory "dates/"
                 (downcase (format-time-string "%Y-%B.org")))))
