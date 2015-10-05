@@ -102,11 +102,14 @@
    (append required-packages
            (flatten (mapcar 'gf/package-deps required-packages)))))
 
+(defun gf/show-orphan-packages ()
+  (let ((installed (remove-if-not (lambda (p) (package-installed-p p)) package-activated-list)))
+    (remove-duplicates (set-difference installed (gf/required-packages-and-deps)))))
+
 (defun gf/delete-orphan-packages ()
   "Delete installed packages not explicitly required."
   (interactive)
-  (let* ((installed (remove-if-not (lambda (p) (package-installed-p p)) package-activated-list))
-         (orphans (remove-duplicates (set-difference installed (gf/required-packages-and-deps)))))
+  (let ((orphans (gf/show-orphan-packages)))
     (dolist (pkg orphans)
         (package-delete (cadr (assq pkg package-alist))))
     (message (format "Deleted %s orphan packages." (length orphans)))))
