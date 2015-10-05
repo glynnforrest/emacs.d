@@ -19,6 +19,7 @@
         autopair
         browse-kill-ring
         color-theme-sanityinc-tomorrow
+        coffee-mode
         diminish
         dired+
         el-autoyas
