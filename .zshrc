@@ -191,6 +191,9 @@ alias php54='/usr/local/Cellar/php54/*/bin/php'
 #Grep for a process
 alias psgr='ps -A | grep -i'
 
+# Sometimes Chrome favicon cache needs a kick
+alias rm_chrome_favicons='rm ~/Library/Application\ Support/Google/Chrome/Default/Favicons'
+
 # FUN
 alias starwars='telnet towel.blinkenlights.nl'
 alias youtube-mp3="youtube-dl -t --extract-audio --audio-format mp3 --audio-quality 320k"
