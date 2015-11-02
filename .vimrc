@@ -145,7 +145,7 @@ map <leader>d :cd %:p:h<CR>
 map <leader>D :cd ..<CR>
 
 "Ultimate in lazy
-map <space> :
+map <leader>; :
 
 "Clearer searching
 map n nzz
