@@ -28,7 +28,7 @@
 
 (evil-leader/set-key
   "u" 'universal-argument
-  "SPC" 'evil-ex
+  ";" 'evil-ex
   "a" 'helm-imenu
   "B" 'kill-matching-buffers
   "C" 'cd
