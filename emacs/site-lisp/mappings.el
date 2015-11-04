@@ -51,6 +51,7 @@
   "S" 'gf/split-window-and-move-below
   "s" 'gf/split-window-and-move-right
   "u" 'undo-tree-visualize
+  "x" 'kill-this-buffer
   "w" 'save-buffer
   "p" 'gf/toggle-switch-to-project-org-file
   "q" 'evil-quit
@@ -58,6 +59,8 @@
   "TAB" 'untabify
   "TAB" 'gf/untabify-line
   ",TAB" 'gf/untabify-buffer
+  "1" 'gf/clever-rotate-text
+  "!" 'gf/clever-rotate-text-backward
   )
 
 (defun gf/narrow-or-widen ()
@@ -95,10 +98,6 @@
 
 
 (define-key evil-normal-state-map ",T" 'try-code)
-(add-hook 'prog-mode-hook (lambda ()
-                           (progn)
-                           (define-key global-map (kbd "C-t") 'clever-rotate-text)
-                           (define-key global-map (kbd "C-T") 'clever-rotate-text-backward)))
 
 ;; Visual mode
 (define-key evil-visual-state-map [escape] 'keyboard-quit)
@@ -112,7 +111,6 @@
 (define-key global-map (kbd "C-h") 'evil-window-left)
 (define-key global-map (kbd "C-<up>") 'delete-window)
 (define-key global-map (kbd "C-<down>") 'kill-this-buffer)
-(define-key evil-normal-state-map ",x" 'kill-this-buffer)
 (define-key global-map (kbd "C-S-<up>") 'delete-other-windows)
 (define-key global-map (kbd "C-S-<down>") (lambda ()
                                             (interactive)

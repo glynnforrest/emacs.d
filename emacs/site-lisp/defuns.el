@@ -193,7 +193,7 @@ Press ; for electric-semicolon, C-; to insert a semicolon."
 
 (require 'rotate-text)
 
-(defun clever-rotate-text ()
+(defun gf/clever-rotate-text ()
   "Wrapper to rotate-text that will try the start of the line as well
 as the current word."
   (interactive)
@@ -202,10 +202,9 @@ as the current word."
              (error nil)))
       (save-excursion
         (evil-first-non-blank)
-        (rotate-text 1)
-        )))
+        (rotate-text 1))))
 
-(defun clever-rotate-text-backward ()
+(defun gf/clever-rotate-text-backward ()
   "Wrapper to rotate-text-backward that will try the start of the
 line as well as the current word."
   (interactive)
@@ -214,8 +213,7 @@ line as well as the current word."
              (error nil)))
       (save-excursion
         (evil-first-non-blank)
-        (rotate-text-backward 1)
-        )))
+        (rotate-text-backward 1))))
 
 ;; Adapted from @magnars to support directory creation
 (defun rename-current-buffer-file ()
