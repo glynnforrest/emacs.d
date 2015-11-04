@@ -43,6 +43,8 @@
   "I" 'gf/save-and-eval-buffer
   "i" 'gf/open-init-file
   "m" 'ace-jump-mode
+  "n" 'gf/narrow-or-widen
+  "N" 'narrow-to-defun
   "r" 'helm-recentf
   "R" 'rename-current-buffer-file
   "S" 'gf/split-window-and-move-below
@@ -56,6 +58,14 @@
   "TAB" 'gf/untabify-line
   ",TAB" 'gf/untabify-buffer
   )
+
+(defun gf/narrow-or-widen ()
+  (interactive)
+  (if (region-active-p)
+      (narrow-to-region (region-beginning) (region-end))
+    (progn
+      (widen)
+      (recenter))))
 
 ;; Switch gj and j, gk and k
 (define-key evil-normal-state-map "j" 'evil-next-visual-line)
@@ -89,14 +99,6 @@
 
 ;; Narrowing
 (define-key evil-visual-state-map ",e" 'eval-region)
-(define-key evil-visual-state-map ",n" 'narrow-to-region)
-(define-key evil-normal-state-map ",N" 'narrow-to-defun)
-(define-key evil-normal-state-map ",n"
-  (lambda()
-    (interactive)
-    (widen)
-    (recenter)))
-
 
 ;; General mappings that should work in most modes
 ;; Windows
