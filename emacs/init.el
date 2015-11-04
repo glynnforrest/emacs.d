@@ -61,6 +61,7 @@
         projectile
         rainbow-delimiters
         rainbow-mode
+        salt-mode
         scss-mode
         skewer-mode
         smart-mode-line

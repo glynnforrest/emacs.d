@@ -19,7 +19,7 @@
 (add-hook 'markdown-mode-hook 'flyspell-mode)
 
 ;; Salt
-(add-to-list 'auto-mode-alist '("\\.sls$" . yaml-mode))
+(require 'salt-mode)
 
 ;; PHP
 (autoload 'php-mode "php-mode")
