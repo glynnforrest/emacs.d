@@ -35,6 +35,7 @@
   "c" 'gf/comment-or-uncomment-line
   "d" 'dired
   "D" 'delete-current-buffer-file
+  "e" 'gf/maybe-eval-region
   "F" 'helm-find-files
   "f" 'helm-projectile
   ",f" 'helm-ls-git-ls
@@ -67,6 +68,11 @@
       (widen)
       (recenter))))
 
+(defun gf/maybe-eval-region ()
+  (interactive)
+  (if (region-active-p)
+      (eval-region (region-beginning) (region-end))))
+
 ;; Switch gj and j, gk and k
 (define-key evil-normal-state-map "j" 'evil-next-visual-line)
 (define-key evil-normal-state-map "k" 'evil-previous-visual-line)
@@ -96,9 +102,6 @@
 
 ;; Visual mode
 (define-key evil-visual-state-map [escape] 'keyboard-quit)
-
-;; Narrowing
-(define-key evil-visual-state-map ",e" 'eval-region)
 
 ;; General mappings that should work in most modes
 ;; Windows
