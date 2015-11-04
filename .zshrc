@@ -38,14 +38,13 @@ plugins=(git history-substring-search)
 source $ZSH/oh-my-zsh.sh
 
 # Customize to your needs...
-PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:$PATH
+PATH=~/.rvm/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:$PATH
 PATH+=:/usr/bin/core_perl
 PATH+=:/opt/qt/bin
 PATH+=:~/.bin
 PATH+=:~/.composer/vendor/bin
 PATH+=:/usr/texbin
 PATH+=:~/.phpenv/bin
-PATH+=:~/.rvm/bin
 
 
 # My customisations
