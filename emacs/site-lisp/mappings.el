@@ -86,7 +86,6 @@
 
 ;; Visual mode
 (define-key evil-visual-state-map [escape] 'keyboard-quit)
-(define-key evil-visual-state-map " " 'evil-ex)
 
 ;; Narrowing
 (define-key evil-visual-state-map ",e" 'eval-region)
