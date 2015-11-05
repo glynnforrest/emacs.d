@@ -59,6 +59,8 @@
   "TAB" 'untabify
   "TAB" 'gf/untabify-line
   ",TAB" 'gf/untabify-buffer
+  "=" 'gf/indent-buffer
+  "+" 'gf/indent-cleanup-buffer
   "1" 'gf/clever-rotate-text
   "!" 'gf/clever-rotate-text-backward
   )

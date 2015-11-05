@@ -34,9 +34,6 @@
   (gf/indent-buffer)
   (ethan-wspace-clean-all))
 
-(define-key evil-normal-state-map ",=" 'gf/indent-buffer)
-(define-key evil-normal-state-map ",+" 'gf/indent-cleanup-buffer)
-
 ;; Unfortunately some file types use tabs. Tell ethan-wspace to go
 ;; easy on them.
 (defun tabs-are-less-evil ()
