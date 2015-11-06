@@ -183,10 +183,15 @@ alias vr='vagrant reload'
 alias sy='php app/console'
 alias nep='php neptune'
 
+alias phpunit='./vendor/bin/phpunit'
 alias tphpunit='phpunit --testsuite'
 
 alias php53='/usr/local/Cellar/php53/*/bin/php'
 alias php54='/usr/local/Cellar/php54/*/bin/php'
+
+alias comi='composer install'
+alias comu='composer update'
+alias comr='composer require'
 
 #Grep for a process
 alias psgr='ps -A | grep -i'
