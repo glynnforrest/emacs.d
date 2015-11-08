@@ -108,6 +108,8 @@ alias ll='ls -l'
 alias la='ls -a'
 alias lla='ls -la'
 
+alias ff='find . -iname'
+
 # EDITORS
 alias e='emacsclient -nw'
 
