@@ -198,6 +198,12 @@ alias comr='composer require'
 #Grep for a process
 alias psgr='ps -A | grep -i'
 
+#Copy a file to Desktop to make temporary changes, e.g. rename it
+#before sending to someone
+desk() {
+    cp -v $1 ~/Desktop/
+}
+
 # Sometimes Chrome favicon cache needs a kick
 alias rm_chrome_favicons='rm ~/Library/Application\ Support/Google/Chrome/Default/Favicons'
 
