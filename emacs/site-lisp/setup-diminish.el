@@ -8,7 +8,6 @@
                 flyspell-mode
                 git-gutter-mode
                 helm-mode
-                magit-auto-revert-mode
                 paredit-everywhere-mode
                 paredit-mode
                 projectile-mode
