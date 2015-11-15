@@ -12,7 +12,7 @@
 (define-key web-mode-map (kbd "C-c C-r") 'mc/mark-sgml-tag-pair)
 
 ;; Disable over zealous pairing
-(setq web-mode-enable-auto-pairing nil)
+(setq web-mode-enable-auto-pairing t)
 
 ;; Sort of like matchit
 (evil-declare-key 'normal web-mode-map (kbd "%") 'web-mode-navigate)
