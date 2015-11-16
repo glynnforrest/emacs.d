@@ -66,6 +66,7 @@
         skewer-mode
         smart-mode-line
         smartparens
+        sqlup-mode
         surround
         web-mode
         wgrep

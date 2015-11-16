@@ -18,6 +18,11 @@
 (add-hook 'markdown-mode-hook (lambda () (define-key markdown-mode-map (kbd "<tab>") 'yas/expand)))
 (add-hook 'markdown-mode-hook 'flyspell-mode)
 
+;; SQL
+(require 'sqlup-mode)
+(add-hook 'sql-mode-hook 'sqlup-mode)
+(add-hook 'sql-interactive-mode-hook 'sqlup-mode)
+
 ;; Salt
 (require 'salt-mode)
 
