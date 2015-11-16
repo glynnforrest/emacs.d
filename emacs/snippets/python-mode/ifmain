@@ -1,0 +1,6 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: ifmain
+# key: ifm
+# --
+if __name__ == '__main__':
+    $0

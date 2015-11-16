@@ -1,0 +1,6 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: method
+# key: d
+# --
+def ${1:method}(self$2):
+    $0
