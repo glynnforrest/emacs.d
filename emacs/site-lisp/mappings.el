@@ -32,7 +32,7 @@
   "a" 'helm-imenu
   "B" 'kill-matching-buffers
   "C" 'cd
-  "c" 'gf/comment-or-uncomment-line
+  "c" 'gf/toggle-comment
   "d" 'dired
   "D" 'delete-current-buffer-file
   "e" 'gf/maybe-eval-region
@@ -50,7 +50,7 @@
   "R" 'rename-current-buffer-file
   "S" 'gf/split-window-and-move-below
   "s" 'gf/split-window-and-move-right
-  "u" 'undo-tree-visualize
+  "U" 'undo-tree-visualize
   "x" 'kill-this-buffer
   "w" 'save-buffer
   "p" 'gf/toggle-switch-to-project-org-file
