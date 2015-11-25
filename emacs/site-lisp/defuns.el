@@ -52,10 +52,15 @@ ERC buffer."
       (when url
         (browse-url url)))))
 
-(defun gf/comment-or-uncomment-line ()
-  "Comments or uncomments the current line."
+(defun gf/toggle-comment ()
+  "Comments or uncomments the current line, or the region if active."
   (interactive)
-  (comment-or-uncomment-region (line-beginning-position) (line-end-position)))
+  (if (region-active-p)
+      (progn
+        (comment-or-uncomment-region (region-beginning) (region-end))
+        (evil-visual-restore)
+        (message "region comment"))
+    (comment-or-uncomment-region (line-beginning-position) (line-end-position))))
 
 (defun gf/find-file-in-directory (directory)
   "Hacky function to find a file in DIRECTORY. This depends on the
