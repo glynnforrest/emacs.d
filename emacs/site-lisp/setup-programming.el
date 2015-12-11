@@ -23,5 +23,7 @@
 (require 'setup-eshell)
 (require 'setup-flycheck)
 (require 'magit)
+(setq magit-log-arguments '("-n256" "--decorate"))
+(setq inhibit-magit-revert t)
 
 (provide 'setup-programming)
