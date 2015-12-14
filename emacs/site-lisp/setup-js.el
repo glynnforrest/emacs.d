@@ -14,6 +14,8 @@
     (setq js2-basic-offset 2))
   (message (format "Javascript indendation is now %s spaces" js2-basic-offset)))
 
+(setq js2-basic-offset 2)
+
 (require 'js2-refactor)
 
 (provide 'setup-js)
