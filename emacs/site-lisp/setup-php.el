@@ -140,6 +140,22 @@ file if open."
   (and (> (point-max) 5)
        (not (equal (buffer-substring-no-properties 1 6) "<?php"))))
 
+(defun gf/php-insert-symfony-service ()
+  "Insert a service name for the current symfony project."
+  (interactive)
+  (let ((service (helm-comp-read
+                  "Service: "
+                  (gf/php-symfony-service-candidates)
+                  :must-match t
+                  )))
+    (insert service)))
+
+(defun gf/php-symfony-service-candidates ()
+  "Get services for the current symfony project."
+  (interactive)
+  (split-string (shell-command-to-string
+                 (concat "cd " (projectile-project-root) " && php app/console container:debug | cut -d ' ' -f 2" )) "\n" t))
+
 (defun gf/php-insert-neptune-service ()
   "Insert a service name for the current neptune php project."
   (interactive)
