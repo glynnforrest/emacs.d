@@ -172,6 +172,15 @@ file if open."
   (split-string (shell-command-to-string
                  (concat "cd " (projectile-project-root) " && php neptune service:list -N" )) "\n" t))
 
+(defun gf/php-insert-service ()
+  "Insert a service name for the current php project"
+  (interactive)
+  (if (gf/php-in-symfony-project-p)
+      (gf/php-insert-symfony-service)
+    (if (gf/php-in-neptune-project-p)
+        (gf/php-insert-neptune-service)
+      (message "Not in a symfony or neptune project."))))
+
 (defun gf/php-in-symfony-project-p ()
   "Return t if the current projectile project is a symfony project."
   (or
@@ -193,7 +202,7 @@ file if open."
 (evil-declare-key 'normal web-mode-map ",z" 'gf/toggle-php-web-mode)
 (define-key php-mode-map (kbd "C-c i") 'gf/php-insert-use-class)
 (define-key php-mode-map (kbd "C-c I") 'gf/php-insert-class)
-(define-key php-mode-map (kbd "C-c s") 'gf/php-insert-neptune-service)
+(define-key php-mode-map (kbd "C-c s") 'gf/php-insert-service)
 
 (define-key php-mode-map (kbd "M-q") 'gf/quit-other-window)
 
