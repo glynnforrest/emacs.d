@@ -179,6 +179,7 @@ alias vs='vagrant ssh'
 alias vu='vagrant up'
 alias vh='vagrant halt'
 alias vr='vagrant reload'
+alias vg='vagrant global-status'
 
 # PHP
 
