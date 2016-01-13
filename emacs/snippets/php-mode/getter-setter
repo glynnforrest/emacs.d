@@ -5,9 +5,9 @@
 /**
  * @param ${2:$1} $${3:var}
  *
- * @return ${4:this}
+ * @return `(buffer-file-name-body)`
  */
-public function set${1:Property}(${5:$2 }$$3)
+public function set${1:Property}(${4:$2 }$$3)
 {
     $this->$3 = $$3;
 
