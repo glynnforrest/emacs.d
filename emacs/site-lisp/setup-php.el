@@ -181,6 +181,22 @@ file if open."
         (gf/php-insert-neptune-service)
       (message "Not in a symfony or neptune project."))))
 
+(defun gf/php-insert-symfony-route ()
+  "Insert a route name for the current symfony project."
+  (interactive)
+  (let ((candidate (helm-comp-read
+                  "Route: "
+                  (gf/helm-candidates-from-command "php app/console debug:router | sed -E 's/^ +//g' |  cut -d ' ' -f 1 | tail -n +3")
+                  :must-match t
+                  )))
+    (insert candidate)))
+
+(defun gf/helm-candidates-from-command (command)
+  "Get helm candidates from running a command in the projectile root."
+  (interactive)
+  (split-string (shell-command-to-string
+                 (concat "cd " (projectile-project-root) " && " command)) "\n" t))
+
 (defun gf/php-in-symfony-project-p ()
   "Return t if the current projectile project is a symfony project."
   (or
