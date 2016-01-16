@@ -145,32 +145,20 @@ file if open."
   (interactive)
   (let ((service (helm-comp-read
                   "Service: "
-                  (gf/php-symfony-service-candidates)
+                  (gf/helm-candidates-from-command "php app/console debug:container | sed -E 's/^ +//g' | cut -d ' ' -f 1")
                   :must-match t
                   )))
     (insert service)))
-
-(defun gf/php-symfony-service-candidates ()
-  "Get services for the current symfony project."
-  (interactive)
-  (split-string (shell-command-to-string
-                 (concat "cd " (projectile-project-root) " && php app/console container:debug | cut -d ' ' -f 2" )) "\n" t))
 
 (defun gf/php-insert-neptune-service ()
   "Insert a service name for the current neptune php project."
   (interactive)
   (let ((service (helm-comp-read
                   "Service: "
-                  (gf/php-neptune-service-candidates)
+                  (gf/helm-candidates-from-command "php neptune service:list -N | tail -n +2")
                   :must-match t
                   )))
     (insert service)))
-
-(defun gf/php-neptune-service-candidates ()
-  "Get services for the current neptune php project."
-  (interactive)
-  (split-string (shell-command-to-string
-                 (concat "cd " (projectile-project-root) " && php neptune service:list -N" )) "\n" t))
 
 (defun gf/php-insert-service ()
   "Insert a service name for the current php project"
