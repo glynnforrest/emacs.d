@@ -43,7 +43,8 @@
   "G" 'git-gutter:revert-hunk
   "I" 'gf/save-and-eval-buffer
   "i" 'gf/open-init-file
-  "m" 'ace-jump-mode
+  "m" 'ace-jump-line-mode
+  "M" 'ace-jump-mode
   "n" 'gf/narrow-or-widen
   "N" 'narrow-to-defun
   "r" 'helm-recentf
