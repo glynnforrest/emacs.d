@@ -189,9 +189,9 @@ alias vp='vagrant provision'
 
 sy() {
     if test -f app/console; then
-        ./app/console
+        ./app/console $*
     else
-        ./bin/console
+        ./bin/console $*
     fi;
 }
 
