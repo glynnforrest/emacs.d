@@ -180,6 +180,7 @@ alias vu='vagrant up'
 alias vh='vagrant halt'
 alias vr='vagrant reload'
 alias vg='vagrant global-status'
+alias vp='vagrant provision'
 
 # PHP
 
