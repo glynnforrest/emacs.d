@@ -183,7 +183,14 @@ alias vg='vagrant global-status'
 
 # PHP
 
-alias sy='php app/console'
+sy() {
+    if test -f app/console; then
+        ./app/console
+    else
+        ./bin/console
+    fi;
+}
+
 alias nep='php neptune'
 
 alias phpunit='./vendor/bin/phpunit'
