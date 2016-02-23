@@ -173,6 +173,9 @@ placeholder () {
     wget http://placekitten.com/$1/$2 -O $1\x$2.jpg
 }
 
+# pretty print json
+alias pjson='python -mjson.tool'
+
 # Vagrant
 
 alias vs='vagrant ssh'
