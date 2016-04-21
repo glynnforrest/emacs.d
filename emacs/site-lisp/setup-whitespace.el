@@ -41,6 +41,7 @@
 
 (add-hook 'makefile-mode-hook 'tabs-are-less-evil)
 (add-hook 'git-commit-mode-hook 'tabs-are-less-evil)
+(add-hook 'go-mode-hook 'tabs-are-less-evil)
 
 ;; Change to unix line endings when loading a DOS file
 ;; http://www.emacswiki.org/emacs/DosToUnix
