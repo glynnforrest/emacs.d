@@ -145,7 +145,7 @@ file if open."
   (interactive)
   (let ((service (helm-comp-read
                   "Service: "
-                  (gf/helm-candidates-from-command "php app/console debug:container | sed -E 's/^ +//g' | cut -d ' ' -f 1")
+                  (gf/helm-candidates-from-command "php bin/console debug:container | sed -E 's/^ +//g' | cut -d ' ' -f 1")
                   :must-match t
                   )))
     (insert service)))
@@ -174,7 +174,7 @@ file if open."
   (interactive)
   (let ((candidate (helm-comp-read
                   "Route: "
-                  (gf/helm-candidates-from-command "php app/console debug:router | sed -E 's/^ +//g' |  cut -d ' ' -f 1 | tail -n +3")
+                  (gf/helm-candidates-from-command "php bin/console debug:router | sed -E 's/^ +//g' |  cut -d ' ' -f 1 | tail -n +3")
                   :must-match t
                   )))
     (insert candidate)))
@@ -194,8 +194,6 @@ file if open."
 (defun gf/php-in-neptune-project-p ()
   "Return t if the current projectile project is a neptune php project."
   (file-exists-p (concat (projectile-project-root) "neptune")))
-
-(evil-declare-key 'normal php-mode-map ",+" 'gf/php-cleanup-style)
 
 ;; Use M-j to open a line below when in insert mode
 
