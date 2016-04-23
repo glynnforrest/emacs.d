@@ -1,5 +1,14 @@
 (require 'web-mode)
 
+;; (defun gf/web-mode-toggle-markup-offset ()
+;;   "Switch between 2 and 4 spaces for markup indentation"
+;;   (interactive)
+;;   (if (eq web-mode-markup-indent-offset 2)
+;;       (setq web-mode-markup-indent-offset 4)
+;;     (setq web-mode-markup-indent-offset 2))
+;;   (message (format "Set markup indendation to %s spaces" web-mode-markup-indent-offset))
+;;   (web-mode))
+
 (setq web-mode-markup-indent-offset 2)
 (setq web-mode-css-indent-offset 2)
 (setq web-mode-code-indent-offset 4)
