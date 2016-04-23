@@ -1,0 +1,33 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name : symfony form type
+# key : syform
+# --
+<?php
+
+namespace `(gf/php-current-file-namespace)`;
+
+use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+
+/**
+ * `(buffer-file-name-body)`
+ *
+ * @author Glynn Forrest <me@glynnforrest.com>
+ **/
+class `(buffer-file-name-body)` extends AbstractType
+{
+    public function buildForm(FormBuilderInterface $builder, array $options)
+    {
+        $builder
+            $0
+            ;
+    }
+
+    public function configureOptions(OptionsResolver $resolver)
+    {
+        $resolver->setDefaults([
+            'data_class' => '$1',
+        ]);
+    }
+}
