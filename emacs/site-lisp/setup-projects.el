@@ -5,6 +5,9 @@
 
 (defvar org-projects-dir (expand-file-name  "~/notes/projects"))
 
+(defvar gf/project-org-file-overrides '()
+  "A list of projectile directories and the specified project org file for them.")
+
 (defun gf/create-org-path (path)
   "Create a name suitable for an org file from the last part of a file
 path."
@@ -16,6 +19,12 @@ path."
               "\\." "-" (if (equal (substring last 0 1) ".")
                             (substring last 1) last)))
             ".org")))
+
+(defun gf/resolve-project-org-file ()
+  "Get the org file for a project, either using a suitable name
+automatically or fetching from gf/project-org-file-overrides."
+
+  )
 
 (defun gf/project-org-file ()
   "Get the path of the org file for the current project."
@@ -42,5 +51,10 @@ current project."
       (puthash file (current-buffer) gf/previous-project-buffers)
       (find-file file)
       )))
+
+(defun gf/create-project-branch-from-org-heading ()
+  "Create a git feature branch for the current org heading. The project is guessed from the current org file."
+
+  )
 
 (provide 'setup-projects)
