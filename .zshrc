@@ -216,6 +216,15 @@ desk() {
     cp -v $1 ~/Desktop/
 }
 
+# Combine pdfs
+# pdf-combine 1.pdf 2.pdf
+# OR
+# pdf-combine *.pdf
+# creates output.pdf
+# the input files are printed after 'from' when gs is followed by a command
+# (echo), but doesn't output anything normally. I have no idea why.
+alias pdf-combine='gs -dBATCH -dNOPAUSE -q -sDEVICE=pdfwrite -sOutputFile=output.pdf && echo "created output.pdf from"'
+
 alias clone_lib='cd ~/code/lib && git clone'
 
 # Sometimes Chrome favicon cache needs a kick
