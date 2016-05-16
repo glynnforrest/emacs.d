@@ -216,6 +216,8 @@ desk() {
     cp -v $1 ~/Desktop/
 }
 
+alias clone_lib='cd ~/code/lib && git clone'
+
 # Sometimes Chrome favicon cache needs a kick
 alias rm_chrome_favicons='rm ~/Library/Application\ Support/Google/Chrome/Default/Favicons'
 
@@ -245,3 +247,8 @@ if test -f ~/.bin/tmuxinator.zsh
 then
     source ~/.bin/tmuxinator.zsh
 fi;
+
+#GO
+
+export GOPATH=~/code/go
+PATH+=:$GOPATH/bin
