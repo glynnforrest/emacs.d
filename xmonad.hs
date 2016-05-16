@@ -7,10 +7,10 @@
 -- Normally, you'd only override those defaults you care about.
 --
 
+import Control.Monad (liftM2)
 import System.Exit
 import XMonad
 import XMonad.Hooks.DynamicLog
-import Control.Monad (liftM2)
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.ManageHelpers
 import XMonad.Hooks.SetWMName
@@ -19,6 +19,7 @@ import XMonad.Layout.NoBorders
 import XMonad.Layout.Spacing
 import XMonad.Layout.Spiral
 import XMonad.Layout.Tabbed
+import XMonad.Layout.ToggleLayouts
 import XMonad.Util.EZConfig(additionalKeys)
 import XMonad.Util.Run(spawnPipe)
 
@@ -28,7 +29,7 @@ import qualified XMonad.StackSet as W
 -- The preferred terminal program, which is used in a binding below and by
 -- certain contrib modules.
 --
-myTerminal      = "urxvt"
+myTerminal      = "termite"
 
 -- Width of the window border in pixels.
 --
@@ -69,8 +70,8 @@ myWorkspaces    = ["1:term","2:emacs","3:www","4:comms","5:vm","6:calendar","7:m
 
 -- Border colors for unfocused and focused windows, respectively.
 --
-myNormalBorderColor  = "#dddddd"
-myFocusedBorderColor = "#ff0000"
+myNormalBorderColor  = "black"
+myFocusedBorderColor = "#5f9ea0"
 
 ------------------------------------------------------------------------
 -- Key bindings. Add, modify or remove key bindings here.
@@ -80,14 +81,17 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     -- launch a terminal
     [ ((modm .|. shiftMask, xK_Return), spawn $ XMonad.terminal conf)
 
-    -- launch dmenu
-    , ((modm,               xK_p     ), spawn "exe=`dmenu_path | dmenu_run` && eval \"exec $exe\"")
+    -- yeganesh if you know what to look for
+    , ((modm,               xK_p     ), spawn "exe=`dmenu_path | yeganesh` && eval \"exec $exe\"")
+
+    -- xmenud if you don't
+    , ((modm,               xK_o     ), spawn "xmenud")
 
     -- launch emacsclient
     , ((modm,				xK_e     ), spawn "emacsclient -c")
 
     -- launch chromium
-    , ((modm,				xK_z     ), spawn "chromium")
+    , ((modm,				xK_z     ), spawn "google-chrome")
 
     -- volume controls
     , ((0                     , 0x1008FF11), spawn "amixer set Master 5-")
@@ -124,11 +128,11 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm,               xK_j     ), windows W.focusDown)
 
     -- Move focus to the previous window
-    , ((modm,               xK_k     ), windows W.focusUp  )
+    , ((modm,               xK_k     ), windows W.focusUp)
 
     -- Move focus to the master window
-    , ((modm,               xK_m     ), windows W.focusMaster  )
-
+    , ((modm,               xK_m     ), sendMessage ToggleLayout)
+-- , ((modm, xK_x), sendMessage ToggleLayout)
     -- Swap the focused window and the master window
     , ((modm,               xK_Return), windows W.swapMaster)
 
@@ -228,15 +232,16 @@ myLayout = avoidStruts $ tiled ||| Mirror tiled ||| Full
 -- 'className' and 'resource' are used below.
 --
 myManageHook = composeAll
-    [ className =? "Chromium"  --> viewShift "3:www"
-    -- [ className =? "Chromium"  --> doIgnore
-    , className =? "VirtualBox"     --> doShift "5:vm"
+    [ role =? "browser"  --> viewShift "3:www"
+    , className =? "VirtualBox"     --> viewShift "5:vm"
     , isFullscreen --> (doF W.focusDown <+> doFullFloat)]
-    where viewShift = doF . liftM2 (.) W.greedyView W.shift
+    where
+        viewShift = doF . liftM2 (.) W.greedyView W.shift
+        role    = stringProperty "WM_WINDOW_ROLE"
 
 -- Whether focus follows the mouse pointer.
 myFocusFollowsMouse :: Bool
-myFocusFollowsMouse = True
+myFocusFollowsMouse = False
 
 
 ------------------------------------------------------------------------
@@ -261,6 +266,7 @@ myLogHook = return ()
 -- By default, do nothing.
 myStartupHook = do
   spawn "~/.dotfiles/bin/xmonad-startup.sh"
+  setWMName "LG3D"
 
 ------------------------------------------------------------------------
 -- Now run xmonad with all the defaults we set up.
@@ -273,10 +279,10 @@ main = do
 
 
 -- Color of current window title in xmobar.
-xmobarTitleColor = "#FFB6B0"
+xmobarTitleColor = "#4e56e4"
 
 -- Color of current workspace in xmobar.
-xmobarCurrentWorkspaceColor = "#CEFFAC"
+xmobarCurrentWorkspaceColor = "#4e56e3"
 
 -- Command to launch the bar.
 myBar = "xmobar"
@@ -312,7 +318,7 @@ defaults = defaultConfig {
         mouseBindings      = myMouseBindings,
 
       -- hooks, layouts
-        layoutHook         = avoidStruts $ myLayout,
+        layoutHook         = avoidStruts $toggleLayouts (noBorders Full) $ smartBorders $ myLayout,
         manageHook         = manageDocks <+> myManageHook,
         handleEventHook = docksEventHook,
         logHook            = myLogHook,
