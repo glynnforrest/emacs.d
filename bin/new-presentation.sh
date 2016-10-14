@@ -52,8 +52,8 @@ EOF
 
 cat << 'EOF' > slides/02-preamble.md
 $background:images/background.png$
-$background-size:500px$
-$background-position:20px bottom$
+$background-size:20%$
+$background-position:1% bottom$
 
 ## Preamble
 
