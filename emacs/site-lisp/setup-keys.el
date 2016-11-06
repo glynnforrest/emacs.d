@@ -6,13 +6,14 @@
    :non-normal-prefix "M-m"
 
    "b" '(:ignore t :which-key "buffers")
-   "bd" 'buffer-delete
+   "bd" 'kill-this-buffer
    "bb" 'switch-to-buffer
 
    "e" '(:ignore t :which-key "emacs")
 
-   "g" '(:ignore t :which-key "files")
+   "f" '(:ignore t :which-key "files")
    "fp" 'projectile-find-file
+   "fs" 'save-buffer
 
    "g" '(:ignore t :which-key "git")
    "gs" 'magit-status
@@ -20,10 +21,11 @@
    "p" '(:ignore t :which-key "projects")
    "pk" 'projectile-kill-buffers
 
-   "s" '(:ignore t :which-key "searching")
+   "s" '(:ignore t :which-key "search")
    "so" 'swiper
 
-   "w" 'save-buffer
+   "t" '(:ignore t :which-key "toggle")
+   "tw" '(global-whitespace-mode :which-key "whitespace")
 
    "TAB" 'previous-buffer)
 
@@ -31,7 +33,6 @@
    :states '(normal visual)
    :keymaps 'org-mode-map
    "TAB" 'org-cycle)
-
   )
 
 (provide 'setup-keys)
