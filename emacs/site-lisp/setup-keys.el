@@ -3,7 +3,9 @@
   (general-define-key
    :states '(normal visual insert emacs)
    :prefix "SPC"
-   :non-normal-prefix "M-m"
+   :non-normal-prefix "M-SPC"
+
+   "a" 'counsel-imenu
 
    "b" '(:ignore t :which-key "buffers")
    "bd" 'kill-this-buffer
@@ -11,9 +13,11 @@
 
    "e" '(:ignore t :which-key "emacs/eval")
    "eb" 'eval-buffer
+   "ei" '(gf/open-init-file :which-key "open init.el")
 
    "f" '(:ignore t :which-key "files")
    "fd" 'delete-current-buffer-file
+   "fe" 'gf/find-emacs-d-file
    "ff" 'find-file
    "fp" 'projectile-find-file
    "fr" 'rename-current-buffer-file
@@ -27,6 +31,8 @@
 
    "q" '(:ignore t :which-key "quitting")
    "qq" 'save-buffers-kill-emacs
+   "qQ" 'gf/save-buffers-kill-emacs-no-prompt
+
 
    "s" '(:ignore t :which-key "search")
    "sp" 'counsel-ag
@@ -52,7 +58,6 @@
    :prefix ","
    :non-normal-prefix "M-m"
    :keymaps 'php-mode-map
-
    "c" 'gf/php-insert-use-class
    "C" 'gf/php-insert-class
    "s" 'gf/php-insert-service)

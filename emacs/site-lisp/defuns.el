@@ -1,9 +1,3 @@
-(defun gf/my-kill-emacs ()
-  "Save some buffers, then exit unconditionally"
-  (interactive)
-  (save-some-buffers t)
-  (kill-emacs))
-
 (defun gf/comma-to-end-of-sentence ()
   "Change the next comma to a full stop and capitalise the next word."
   (interactive)
@@ -98,10 +92,6 @@ create it and write the initial message into it."
   (interactive)
   (save-buffer)
   (eval-buffer))
-
-(defun gf/open-init-file ()
-  (interactive)
-  (find-file "~/.emacs.d/init.el"))
 
 (defun gf/eval-and-replace-sexp ()
   "Replace the preceding sexp with its value."
@@ -219,17 +209,5 @@ line as well as the current word."
       (save-excursion
         (evil-first-non-blank)
         (rotate-text-backward 1))))
-
-
-
-(defun gf/untabify-line ()
-  "Untabify the current line."
-  (interactive)
-  (untabify (point-at-bol) (point-at-eol)))
-
-(defun gf/untabify-buffer ()
-  "Untabify the whole buffer."
-  (interactive)
-  (untabify (point-min) (point-max)))
 
 (provide 'defuns)

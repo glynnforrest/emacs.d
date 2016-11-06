@@ -53,5 +53,18 @@ EXTENSION. Only the last extension of the file is considered."
   (split-string (shell-command-to-string
                  (concat "cd " (projectile-project-root) " && " command)) "\n" t))
 
+(defun gf/open-init-file ()
+  (interactive)
+  (find-file "~/.emacs.d/init.el"))
+
+(defun gf/find-emacs-d-file ()
+  (interactive)
+  (projectile-find-file-in-directory "~/.emacs.d"))
+
+(defun gf/save-buffers-kill-emacs-no-prompt ()
+  "Save some buffers, then exit unconditionally"
+  (interactive)
+  (save-some-buffers t)
+  (kill-emacs))
 
 (provide 'setup-defuns)
