@@ -20,6 +20,7 @@
 (setq
  auto-revert-verbose nil
  auto-save-default nil
+ create-lockfiles nil
  echo-keystrokes 0.1
  global-auto-revert-non-file-buffers t
  history-length 1000
@@ -28,13 +29,12 @@
  make-backup-files nil
  mouse-wheel-progressive-speed nil
  recentf-max-saved-items 2000
+ ring-bell-function #'ignore
  scroll-conservatively 10000
  scroll-step 1
  shift-select-mode nil
  undo-tree-visualizer-timestamps 1
  x-select-enable-clipboard t)
 
-;; KILL SYSTEM BELL
-(setq ring-bell-function #'ignore)
 
 (provide 'setup-core)
