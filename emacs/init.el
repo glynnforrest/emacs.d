@@ -23,6 +23,7 @@
 (require 'setup-defuns)
 (require 'setup-yasnippet)
 (require 'setup-css)
+(require 'setup-js)
 (require 'setup-which-key)
 
 (require 'setup-keys)
@@ -60,9 +61,6 @@
 ;;         helm-projectile
 ;;         helm-swoop
 ;;         impatient-mode
-;;         js-comint
-;;         js2-mode
-;;         js2-refactor
 ;;         keychain-environment
 ;;         magit
 ;;         markdown-mode
