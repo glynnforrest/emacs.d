@@ -161,8 +161,6 @@
 
 ;; (evil-declare-key 'normal org-mode-map ",a" 'helm-org-headlines)
 
-;; (evil-declare-key 'normal css-mode-map "gc" 'cssEvilChangeToPX)
-;; (evil-declare-key 'normal css-mode-map ",e" 'skewer-css-eval-current-rule)
 
 ;; (evil-declare-key 'normal php-mode-map ",z" 'gf/toggle-php-web-mode)
 ;; (evil-declare-key 'normal web-mode-map ",z" 'gf/toggle-php-web-mode)
