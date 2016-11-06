@@ -18,6 +18,8 @@
 (require 'setup-ivy)
 (require 'setup-org)
 (require 'setup-projects)
+(require 'setup-defuns)
+(require 'setup-yasnippet)
 
 (require 'setup-which-key)
 (require 'setup-keys)
@@ -79,7 +81,6 @@
 ;;         wgrep
 ;;         wgrep-ag
 ;;         yaml-mode
-;;         yasnippet
 ;;         ))
 
 ;; (defun gf/install-required-packages ()
@@ -162,7 +163,6 @@
 ;; (require 'help-mode)
 ;; (require 'setup-multiple-cursors)
 
-;; (require 'setup-yasnippet)
 ;; (require 'setup-search)
 ;; (require 'setup-diminish)
 ;; (require 'mappings)
