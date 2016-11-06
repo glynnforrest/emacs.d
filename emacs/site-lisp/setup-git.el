@@ -1,11 +1,13 @@
 (use-package magit :ensure t
+  :commands magit-status
   :config
   (setq magit-log-arguments '("-n256" "--decorate"))
-  (setq inhibit-magit-revert t))
+  (setq inhibit-magit-revert t)
+  (use-package evil-magit :ensure t))
 
 (use-package git-gutter :ensure t
-   :config
-   (global-git-gutter-mode t))
+  :config
+  (global-git-gutter-mode t))
 
 (use-package git-timemachine :ensure t
   :config
