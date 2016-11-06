@@ -16,6 +16,7 @@
 (require 'setup-evil)
 (require 'setup-git)
 (require 'setup-ivy)
+(require 'setup-which-key)
 (require 'setup-keys)
 
 ;; (defvar required-packages nil "A list of required packages for this emacs configuration.")
