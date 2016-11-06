@@ -20,6 +20,7 @@
 (require 'setup-projects)
 (require 'setup-defuns)
 (require 'setup-yasnippet)
+(require 'setup-css)
 
 (require 'setup-which-key)
 (require 'setup-keys)

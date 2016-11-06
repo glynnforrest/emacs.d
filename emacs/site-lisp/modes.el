@@ -50,7 +50,6 @@
 (add-to-list 'auto-mode-alist '("\\.zsh$" . shell-script-mode))
 
 ;; Others
-(require 'setup-css)
 (require 'setup-web-mode)
 
 (provide 'modes)

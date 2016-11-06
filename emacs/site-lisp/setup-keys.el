@@ -120,3 +120,6 @@
 ;; (evil-declare-key 'normal org-mode-map ",e" 'org-ctrl-c-ctrl-c)
 
 ;; (evil-declare-key 'normal org-mode-map ",a" 'helm-org-headlines)
+
+;; (evil-declare-key 'normal css-mode-map "gc" 'cssEvilChangeToPX)
+;; (evil-declare-key 'normal css-mode-map ",e" 'skewer-css-eval-current-rule)
