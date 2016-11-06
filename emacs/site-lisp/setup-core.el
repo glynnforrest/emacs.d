@@ -3,6 +3,8 @@
   (unless (server-running-p)
     (server-start)))
 
+(use-package hydra :ensure t )
+
 ;; enable/disable built-in modes
 (column-number-mode t)
 (delete-selection-mode t)

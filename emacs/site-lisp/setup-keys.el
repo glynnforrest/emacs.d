@@ -31,6 +31,7 @@
 
    "g" '(:ignore t :which-key "git")
    "gs" 'magit-status
+   "gt" '(gf/git-timemachine :which-key "git-timemachine")
 
    "m" '(:ignore t :which-key "major-mode")
 
@@ -41,6 +42,7 @@
 
    "p" '(:ignore t :which-key "projects")
    "pk" 'projectile-kill-buffers
+   "ps" 'projectile-switch-project
 
    "q" '(:ignore t :which-key "quitting")
    "qq" 'save-buffers-kill-emacs
@@ -51,6 +53,7 @@
    "so" 'org-search-view
 
    "t" '(:ignore t :which-key "toggle")
+   "tg" '(global-git-gutter-mode :which-key "git-gutter")
    "tw" '(global-whitespace-mode :which-key "whitespace")
    "tW" '(ws-butler-mode :which-key "whitespace butler")
 

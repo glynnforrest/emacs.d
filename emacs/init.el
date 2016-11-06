@@ -61,9 +61,6 @@
 ;;         helm
 ;;         helm-css-scss
 ;;         helm-dash
-;;         helm-ls-git
-;;         helm-projectile
-;;         helm-swoop
 ;;         impatient-mode
 ;;         keychain-environment
 ;;         multiple-cursors
@@ -72,7 +69,6 @@
 ;;         php-eldoc
 ;;         rainbow-delimiters
 ;;         rainbow-mode
-;;         salt-mode
 ;;         scss-mode
 ;;         smart-mode-line
 ;;         smartparens

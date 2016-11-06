@@ -5,9 +5,6 @@
 ;; (require 'smartparens)
 ;; (smartparens-mode t)
 
-(require 'git-gutter)
-(global-git-gutter-mode)
-
 (require 'emamux)
 (setq emamux:use-nearest-pane t)
 
