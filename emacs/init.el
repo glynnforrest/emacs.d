@@ -16,6 +16,8 @@
 (require 'setup-evil)
 (require 'setup-git)
 (require 'setup-ivy)
+(require 'setup-org)
+
 (require 'setup-which-key)
 (require 'setup-keys)
 
@@ -59,7 +61,6 @@
 ;;         magit
 ;;         markdown-mode
 ;;         multiple-cursors
-;;         org
 ;;         paredit
 ;;         paredit-everywhere
 ;;         php-eldoc
@@ -162,7 +163,6 @@
 ;; (require 'help-mode)
 ;; (require 'setup-multiple-cursors)
 
-;; (require 'setup-org)
 ;; (require 'setup-yasnippet)
 ;; (require 'setup-search)
 ;; (require 'setup-diminish)
