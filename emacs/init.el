@@ -28,6 +28,7 @@
 (require 'setup-js)
 (require 'setup-which-key)
 (require 'setup-php)
+(require 'setup-web-mode)
 
 
 ;; (defvar required-packages nil "A list of required packages for this emacs configuration.")
@@ -76,7 +77,6 @@
 ;;         smart-mode-line
 ;;         smartparens
 ;;         sqlup-mode
-;;         web-mode
 ;;         wgrep
 ;;         wgrep-ag
 ;;         yaml-mode

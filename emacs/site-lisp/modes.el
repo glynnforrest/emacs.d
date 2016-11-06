@@ -37,7 +37,4 @@
 
 (add-to-list 'auto-mode-alist '("\\.zsh$" . shell-script-mode))
 
-;; Others
-(require 'setup-web-mode)
-
 (provide 'modes)
