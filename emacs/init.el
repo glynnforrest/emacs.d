@@ -26,6 +26,7 @@
 (require 'setup-css)
 (require 'setup-js)
 (require 'setup-which-key)
+(require 'setup-php)
 
 (require 'setup-keys)
 

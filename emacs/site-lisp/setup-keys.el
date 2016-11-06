@@ -140,3 +140,13 @@
 
 ;; (evil-declare-key 'normal css-mode-map "gc" 'cssEvilChangeToPX)
 ;; (evil-declare-key 'normal css-mode-map ",e" 'skewer-css-eval-current-rule)
+
+;; (define-key php-mode-map (kbd "C-c C-y") 'yas/create-php-snippet)
+
+;; (evil-declare-key 'normal php-mode-map ",z" 'gf/toggle-php-web-mode)
+;; (evil-declare-key 'normal web-mode-map ",z" 'gf/toggle-php-web-mode)
+;; (define-key php-mode-map (kbd "C-c i") 'gf/php-insert-use-class)
+;; (define-key php-mode-map (kbd "C-c I") 'gf/php-insert-class)
+;; (define-key php-mode-map (kbd "C-c s") 'gf/php-insert-service)
+
+;; (define-key php-mode-map (kbd "M-q") 'gf/quit-other-window)

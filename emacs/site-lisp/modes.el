@@ -19,11 +19,6 @@
 ;; Salt
 (require 'salt-mode)
 
-;; PHP
-(autoload 'php-mode "php-mode")
-(add-to-list 'auto-mode-alist '("\\.php$" . php-mode))
-(require 'setup-php)
-
 ;; org-mode
 (add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
 

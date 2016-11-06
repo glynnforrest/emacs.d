@@ -1,43 +1,27 @@
-(require 'php-mode)
-(require 'web-mode)
-(require 's)
-(require 'php-auto-yasnippets)
+(use-package php-mode :ensure t
+  :config)
 
-;; Install refactor tool with `composer global require qafoolabs/php-refactoring-browser`
-(require 'php-refactor-mode)
-(setq php-refactor-command (expand-file-name "~/.composer/vendor/bin/refactor"))
-(add-hook 'php-mode-hook 'php-refactor-mode)
+(use-package php-auto-yasnippets :ensure t
+  :after php-mode)
 
-(setq web-mode-disable-auto-pairing nil)
-(setq web-mode-disable-css-colorization nil)
-
-
-(defun gf/toggle-php-web-mode ()
-  "Switch between php-mode and web-mode for the current buffer."
-  (interactive)
-  (if (equal (symbol-name (buffer-local-value 'major-mode (current-buffer))) "web-mode")
-      (php-mode)
-    (web-mode)
-    ))
-
-(defun test-this-or-related-php-file ()
-  "Run test-case-run on the current buffer, or the related test case
-file if open."
-  (interactive)
-  (save-buffer)
-  (if (or test-case-mode (test-case-mode))
-      (test-case-run)
-    (let ((b (concat
-              (car (split-string (buffer-name) "\\."))
-              "Test."
-              (car (cdr (split-string (buffer-name) "\\."))))))
-      (if (get-buffer b)
-          (progn
-            (switch-to-buffer-other-window b)
-            (save-buffer)
-            (test-case-run)
-            (other-window 1))
-        (message (format "buffer not found: %s" b))))))
+;; (defun test-this-or-related-php-file ()
+;;   "Run test-case-run on the current buffer, or the related test case
+;; file if open."
+;;   (interactive)
+;;   (save-buffer)
+;;   (if (or test-case-mode (test-case-mode))
+;;       (test-case-run)
+;;     (let ((b (concat
+;;               (car (split-string (buffer-name) "\\."))
+;;               "Test."
+;;               (car (cdr (split-string (buffer-name) "\\."))))))
+;;       (if (get-buffer b)
+;;           (progn
+;;             (switch-to-buffer-other-window b)
+;;             (save-buffer)
+;;             (test-case-run)
+;;             (other-window 1))
+;;         (message (format "buffer not found: %s" b))))))
 
 (defun gf/php-go-to-namespace ()
   "Go to the namespace declaration at the top of this file."
@@ -45,8 +29,7 @@ file if open."
   (beginning-of-buffer)
   (if (not (re-search-forward "^namespace" nil t))
       (error "Namespace declaration not found.")
-    (beginning-of-line)
-    ))
+    (beginning-of-line)))
 
 (defun gf/php-go-to-last-use-statement ()
   "Go to the last use statement at the top of this file."
@@ -86,12 +69,12 @@ file if open."
 (defun gf/php-insert-class ()
   "Insert a class name in the current projectile project."
   (interactive)
-    (let ((class (helm-comp-read
-                  "Class: "
-                  (gf/php-class-candidates)
-                  :must-match t
-                  )))
-      (insert class)))
+  (let ((class (helm-comp-read
+                "Class: "
+                (gf/php-class-candidates)
+                :must-match t
+                )))
+    (insert class)))
 
 (defun gf/php-current-file-namespace ()
   "Get a suitable namespace for the current file."
@@ -173,10 +156,10 @@ file if open."
   "Insert a route name for the current symfony project."
   (interactive)
   (let ((candidate (helm-comp-read
-                  "Route: "
-                  (gf/helm-candidates-from-command "php bin/console debug:router | sed -E 's/^ +//g' |  cut -d ' ' -f 1 | tail -n +3")
-                  :must-match t
-                  )))
+                    "Route: "
+                    (gf/helm-candidates-from-command "php bin/console debug:router | sed -E 's/^ +//g' |  cut -d ' ' -f 1 | tail -n +3")
+                    :must-match t
+                    )))
     (insert candidate)))
 
 (defun gf/helm-candidates-from-command (command)
@@ -195,17 +178,5 @@ file if open."
   "Return t if the current projectile project is a neptune php project."
   (file-exists-p (concat (projectile-project-root) "neptune")))
 
-;; Use M-j to open a line below when in insert mode
-
-(setq php-auto-yasnippet-php-program (concat plugins-dir "/php-auto-yasnippets/Create-PHP-YASnippet.php"))
-(define-key php-mode-map (kbd "C-c C-y") 'yas/create-php-snippet)
-
-(evil-declare-key 'normal php-mode-map ",z" 'gf/toggle-php-web-mode)
-(evil-declare-key 'normal web-mode-map ",z" 'gf/toggle-php-web-mode)
-(define-key php-mode-map (kbd "C-c i") 'gf/php-insert-use-class)
-(define-key php-mode-map (kbd "C-c I") 'gf/php-insert-class)
-(define-key php-mode-map (kbd "C-c s") 'gf/php-insert-service)
-
-(define-key php-mode-map (kbd "M-q") 'gf/quit-other-window)
 
 (provide 'setup-php)

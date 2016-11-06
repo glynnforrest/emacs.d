@@ -9,6 +9,9 @@
 ;;   (message (format "Set markup indendation to %s spaces" web-mode-markup-indent-offset))
 ;;   (web-mode))
 
+(setq web-mode-disable-auto-pairing nil)
+(setq web-mode-disable-css-colorization nil)
+
 (setq web-mode-markup-indent-offset 2)
 (setq web-mode-css-indent-offset 2)
 (setq web-mode-code-indent-offset 4)
@@ -53,5 +56,14 @@
 
 (add-to-list 'auto-mode-alist '("\\.twig$" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.html$" . web-mode))
+
+(defun gf/toggle-php-web-mode ()
+  "Switch between php-mode and web-mode for the current buffer."
+  (interactive)
+  (if (equal (symbol-name (buffer-local-value 'major-mode (current-buffer))) "web-mode")
+      (php-mode)
+    (web-mode)
+    ))
+
 
 (provide 'setup-web-mode)
