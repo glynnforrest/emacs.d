@@ -48,4 +48,10 @@ EXTENSION. Only the last extension of the file is considered."
           (message "File '%s' successfully renamed to '%s'"
                    name new-name))))))
 
+(defun gf/candidates-from-command (command)
+  "Get a list of candidates from running a command in the projectile root."
+  (split-string (shell-command-to-string
+                 (concat "cd " (projectile-project-root) " && " command)) "\n" t))
+
+
 (provide 'setup-defuns)
