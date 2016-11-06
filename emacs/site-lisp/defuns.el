@@ -220,42 +220,7 @@ line as well as the current word."
         (evil-first-non-blank)
         (rotate-text-backward 1))))
 
-;; Adapted from @magnars to support directory creation
-(defun rename-current-buffer-file ()
-  "Renames current buffer and file it is visiting."
-  (interactive)
-  (let ((name (buffer-name))
-        (filename (buffer-file-name)))
-    (if (not (and filename (file-exists-p filename)))
-        (error "Buffer '%s' is not visiting a file!" name)
-      (let* ((new-name (read-file-name "New name: " (file-name-directory filename)))
-            (new-directory (s-join "/" (butlast (s-split "/" new-name)))))
-        (if (get-buffer new-name)
-            (error "A buffer named '%s' already exists!" new-name)
-          (if (not (file-directory-p new-directory))
-              (if (file-exists-p new-directory)
-                  (error "Target directory '%s' is a file!" new-directory)
-                (mkdir new-directory t)))
-          (rename-file filename new-name 1)
-          (rename-buffer new-name)
-          (set-visited-file-name new-name)
-          (set-buffer-modified-p nil)
-          (message "File '%s' successfully renamed to '%s'"
-                   name new-name))))))
 
-;; Thank you @magnars
-(defun delete-current-buffer-file ()
-  "Removes file connected to current buffer and kills buffer."
-  (interactive)
-  (let ((filename (buffer-file-name))
-        (buffer (current-buffer))
-        (name (buffer-name)))
-    (if (not (and filename (file-exists-p filename)))
-        (kill-buffer)
-      (when (yes-or-no-p "Are you sure you want to remove this file? ")
-        (delete-file filename)
-        (kill-buffer buffer)
-                (message "File '%s' successfully removed" filename)))))
 
 (defun gf/untabify-line ()
   "Untabify the current line."

@@ -9,11 +9,14 @@
    "bd" 'kill-this-buffer
    "bb" 'switch-to-buffer
 
-   "e" '(:ignore t :which-key "emacs")
+   "e" '(:ignore t :which-key "emacs/eval")
+   "eb" 'eval-buffer
 
    "f" '(:ignore t :which-key "files")
+   "fd" 'delete-current-buffer-file
    "ff" 'find-file
    "fp" 'projectile-find-file
+   "fr" 'rename-current-buffer-file
    "fs" 'save-buffer
 
    "g" '(:ignore t :which-key "git")
@@ -21,6 +24,9 @@
 
    "p" '(:ignore t :which-key "projects")
    "pk" 'projectile-kill-buffers
+
+   "q" '(:ignore t :which-key "quitting")
+   "qq" 'save-buffers-kill-emacs
 
    "s" '(:ignore t :which-key "search")
    "sp" 'counsel-ag
@@ -30,7 +36,14 @@
    "tw" '(global-whitespace-mode :which-key "whitespace")
    "tW" '(ws-butler-mode :which-key "whitespace butler")
 
+   "w" '(:ignore t :which-key "windows")
+   "wu" 'winner-undo
+
+   "1" 'other-window
    "TAB" 'previous-buffer)
+
+  (general-define-key
+   "M-x" 'counsel-M-x)
 
   (general-define-key
    :states '(normal visual)
