@@ -4,12 +4,13 @@
 
   ;; add ‘recentf-mode’ and bookmarks to ‘ivy-switch-buffer’.
   (setq ivy-use-virtual-buffers t)
-
+  (setq ivy-virtual-abbreviate 'full)
   (setq ivy-height 10)
   (setq ivy-count-format "")
   (setq ivy-initial-inputs-alist nil)
   (setq ivy-re-builders-alist
-	        '((t   . ivy--regex-ignore-order))))
+	'((t   . ivy--regex-ignore-order)))
+  (setq projectile-completion-system 'ivy))
 
 (use-package counsel :ensure t)
 

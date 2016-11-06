@@ -17,6 +17,7 @@
 (require 'setup-git)
 (require 'setup-ivy)
 (require 'setup-org)
+(require 'setup-projects)
 
 (require 'setup-which-key)
 (require 'setup-keys)
@@ -66,7 +67,6 @@
 ;;         php-eldoc
 ;;         php-mode
 ;;         php-refactor-mode
-;;         projectile
 ;;         rainbow-delimiters
 ;;         rainbow-mode
 ;;         salt-mode
@@ -155,7 +155,6 @@
 ;; (require 'setup-general)
 ;; (require 'setup-whitespace)
 ;; (require 'setup-programming)
-;; (require 'setup-projects)
 ;; (require 'setup-helm)
 ;; (require 'setup-yaml)
 ;; (require 'defuns)

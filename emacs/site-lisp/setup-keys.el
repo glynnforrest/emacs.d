@@ -11,8 +11,14 @@
 
    "e" '(:ignore t :which-key "emacs")
 
+   "g" '(:ignore t :which-key "files")
+   "fp" 'projectile-find-file
+
    "g" '(:ignore t :which-key "git")
    "gs" 'magit-status
+
+   "p" '(:ignore t :which-key "projects")
+   "pk" 'projectile-kill-buffers
 
    "s" '(:ignore t :which-key "searching")
    "so" 'swiper
