@@ -57,6 +57,8 @@
    "tw" '(global-whitespace-mode :which-key "whitespace")
    "tW" '(ws-butler-mode :which-key "whitespace butler")
 
+   "u" 'universal-argument
+
    "w" '(:ignore t :which-key "windows")
    "wu" 'winner-undo
 

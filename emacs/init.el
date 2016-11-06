@@ -52,12 +52,8 @@
 ;;         emmet-mode
 ;;         epl
 ;;         ethan-wspace
-;;         evil-leader
 ;;         exec-path-from-shell
-;;         expand-region
 ;;         flycheck
-;;         git-gutter
-;;         git-timemachine
 ;;         helm
 ;;         helm-css-scss
 ;;         helm-dash

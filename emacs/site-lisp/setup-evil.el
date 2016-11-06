@@ -18,6 +18,11 @@
 ;;                                                                   /.-~
 
 (use-package evil :ensure t
+  :init
+  (setq
+   evil-want-C-d-scroll t
+   evil-want-C-u-scroll t)
+
   :config
   (evil-mode 1)
   (use-package evil-numbers :ensure t)
@@ -45,10 +50,7 @@
   (evil-set-initial-state 'package-menu-mode 'normal)
   (evil-set-initial-state 'org-capture-mode 'insert)
   (evil-set-initial-state 'git-commit-mode 'insert)
-  (evil-set-initial-state 'occur-mode 'normal)
-  )
-
-(setq evil-default-cursor t)
+  (evil-set-initial-state 'occur-mode 'normal))
 
 ;; Save point position between sessions
 (use-package saveplace :ensure t
@@ -80,7 +82,7 @@
 
 (use-package expand-region :ensure t)
 ;; (define-key evil-normal-state-map ",v" 'er/expand-region)
- 
+
 ;; (eval-after-load "evil" '(setq expand-region-contract-fast-key "V"
 ;;                               expand-region-reset-fast-key "r"))
 
