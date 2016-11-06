@@ -29,7 +29,7 @@
 (require 'setup-which-key)
 (require 'setup-php)
 (require 'setup-web-mode)
-
+(require 'setup-saltstack)
 
 ;; (defvar required-packages nil "A list of required packages for this emacs configuration.")
 
