@@ -1,5 +1,19 @@
 (use-package php-mode :ensure t
-  :config)
+  :config
+
+  (general-define-key
+   :states '(normal visual insert emacs)
+   :prefix gf/major-mode-leader-key
+   :non-normal-prefix gf/major-mode-non-normal-leader-key
+   :keymaps 'php-mode-map
+   "c" 'gf/php-insert-use-class
+   "C" 'gf/php-insert-class
+   "s" 'gf/php-insert-service)
+
+  (general-define-key
+   :states '(insert emacs)
+   :keymaps 'php-mode-map
+   "C-c l" 'yas/create-php-snippet))
 
 (use-package php-auto-yasnippets :ensure t
   :after php-mode)

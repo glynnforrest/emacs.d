@@ -64,23 +64,7 @@
    "TAB" 'previous-buffer)
 
   (general-define-key
-   "M-x" 'counsel-M-x)
-
-  (general-define-key
-   :states '(normal visual insert emacs)
-   :prefix ","
-   :non-normal-prefix "M-m"
-   :keymaps 'php-mode-map
-   "c" 'gf/php-insert-use-class
-   "C" 'gf/php-insert-class
-   "s" 'gf/php-insert-service)
-
-  (general-define-key
-   :states '(insert emacs)
-   :keymaps 'php-mode-map
-
-   "TAB" 'yas/create-php-snippet)
-  )
+   "M-x" 'counsel-M-x))
 
 (provide 'setup-keys)
 
