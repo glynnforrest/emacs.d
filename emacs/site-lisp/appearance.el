@@ -1,35 +1,9 @@
-(defun setup-gui ()
-  "setup gui elements"
-  (dolist (mode '(menu-bar-mode tool-bar-mode scroll-bar-mode))
-    (when (fboundp mode) (funcall mode -1))))
-
-(setup-gui)
-
-;; Make sure gui stuff is right for new frames too
-(add-hook 'after-make-frame-functions (lambda(frame)
-                                        (setup-gui)
-                                        ))
-
-;; Load a theme
-(require 'sanityinc-tomorrow-night-theme)
-(color-theme-sanityinc-tomorrow-night)
-
 ;; Cursor configuration.
-(blink-cursor-mode -1)
 (setq evil-insert-state-cursor '("#38a2ea" bar))
 (setq evil-normal-state-cursor '("#38a2ea" box))
 (setq evil-emacs-state-cursor '("#d72626" bar))
 
-;; Pretty parenthesis
-(require 'rainbow-delimiters)
-(rainbow-delimiters-mode t)
-
-;; Fringes are a pain
-(when (fboundp 'fringe-mode)
-  (fringe-mode -1))
-
 ;; Other stuff
-(setq line-spacing 1)
 (add-to-list 'default-frame-alist '(internal-border-width . 0))
 (set-face-attribute 'mode-line nil :box nil)
 (set-face-attribute 'mode-line-inactive nil :box nil)

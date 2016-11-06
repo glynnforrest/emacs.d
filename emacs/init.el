@@ -17,6 +17,7 @@
 (require 'setup-evil)
 (require 'setup-keys)
 
+(require 'setup-appearance)
 (require 'setup-git)
 (require 'setup-whitespace)
 (require 'setup-ivy)
@@ -63,9 +64,7 @@
 ;;         paredit
 ;;         paredit-everywhere
 ;;         php-eldoc
-;;         rainbow-delimiters
 ;;         rainbow-mode
-;;         scss-mode
 ;;         smart-mode-line
 ;;         smartparens
 ;;         sqlup-mode
@@ -137,9 +136,6 @@
 
 ;; Load personal configurations, like usernames and passwords
 ;; (require 'personal nil t)
-
-;; Load appearance early to reduce flicker of default emacs
-;; (require 'appearance)
 
 ;; Clearly necessary
 ;; (require 'modes)
