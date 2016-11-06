@@ -15,6 +15,7 @@
 
 (require 'setup-evil)
 (require 'setup-git)
+(require 'setup-ivy)
 (require 'setup-keys)
 
 ;; (defvar required-packages nil "A list of required packages for this emacs configuration.")
@@ -37,11 +38,7 @@
 ;;         emmet-mode
 ;;         epl
 ;;         ethan-wspace
-;;         evil
-;;         evil-args
-;;         evil-exchange
 ;;         evil-leader
-;;         evil-jumper
 ;;         exec-path-from-shell
 ;;         expand-region
 ;;         flycheck
@@ -76,7 +73,6 @@
 ;;         smart-mode-line
 ;;         smartparens
 ;;         sqlup-mode
-;;         surround
 ;;         web-mode
 ;;         wgrep
 ;;         wgrep-ag

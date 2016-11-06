@@ -8,6 +8,8 @@
    "gs" 'magit-status
    "w" 'save-buffer
 
+   "so" 'swiper
+
    "TAB" 'previous-buffer
   ))
 
