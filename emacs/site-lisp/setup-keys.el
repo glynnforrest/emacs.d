@@ -5,6 +5,7 @@
    :prefix "SPC"
    :non-normal-prefix "M-m"
 
+   "gs" 'magit-status
    "w" 'save-buffer
 
    "TAB" 'previous-buffer

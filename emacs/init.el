@@ -14,6 +14,7 @@
 (add-to-list 'load-path site-lisp-dir)
 
 (require 'setup-evil)
+(require 'setup-git)
 (require 'setup-keys)
 
 ;; (defvar required-packages nil "A list of required packages for this emacs configuration.")
