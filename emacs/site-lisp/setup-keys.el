@@ -1,5 +1,9 @@
 (use-package general :ensure t
   :config
+  (setq
+   gf/major-mode-leader-key "SPC m"
+   gf/major-mode-non-normal-leader-key "M-m")
+
   (general-define-key
    :states '(normal visual insert emacs)
    :prefix "SPC"
@@ -13,18 +17,27 @@
 
    "e" '(:ignore t :which-key "emacs/eval")
    "eb" 'eval-buffer
-   "ei" '(gf/open-init-file :which-key "open init.el")
 
    "f" '(:ignore t :which-key "files")
-   "fd" 'delete-current-buffer-file
+   "fD" 'delete-current-buffer-file
    "fe" 'gf/find-emacs-d-file
    "ff" 'find-file
+   "fi" '(gf/open-init-file :which-key "open init.el")
+   "fo" 'gf/find-notes-file
    "fp" 'projectile-find-file
-   "fr" 'rename-current-buffer-file
+   "fr" 'counsel-recentf
+   "fR" 'rename-current-buffer-file
    "fs" 'save-buffer
 
    "g" '(:ignore t :which-key "git")
    "gs" 'magit-status
+
+   "m" '(:ignore t :which-key "major-mode")
+
+   "o" '(:ignore t :which-key "org")
+   "oc" 'org-capture
+   "oN" 'gf/commit-notes
+   "om" 'gf/find-current-month-notes-file
 
    "p" '(:ignore t :which-key "projects")
    "pk" 'projectile-kill-buffers
@@ -33,10 +46,9 @@
    "qq" 'save-buffers-kill-emacs
    "qQ" 'gf/save-buffers-kill-emacs-no-prompt
 
-
    "s" '(:ignore t :which-key "search")
    "sp" 'counsel-ag
-   "so" 'swiper
+   "so" 'org-search-view
 
    "t" '(:ignore t :which-key "toggle")
    "tw" '(global-whitespace-mode :which-key "whitespace")
@@ -45,6 +57,7 @@
    "w" '(:ignore t :which-key "windows")
    "wu" 'winner-undo
 
+   "/" 'swiper
    "1" 'other-window
    "=" 'gf/indent-buffer
    "+" 'gf/indent-cleanup-buffer
@@ -67,37 +80,9 @@
    :keymaps 'php-mode-map
 
    "TAB" 'yas/create-php-snippet)
-
-  (general-define-key
-   :states '(normal visual)
-   :keymaps 'org-mode-map
-   "TAB" 'org-cycle)
   )
 
 (provide 'setup-keys)
-
-;; (mapcar (lambda (state)
-;;       (evil-declare-key state org-mode-map
-;;         (kbd "M-l") 'org-metaright
-;;         (kbd "M-h") 'org-metaleft
-;;         (kbd "M-k") 'org-metaup
-;;         (kbd "M-j") 'org-metadown
-;;         (kbd "M-L") 'org-shiftmetaright
-;;         (kbd "M-H") 'org-shiftmetaleft
-;;         (kbd "M-K") 'org-shiftmetaup
-;;         (kbd "M-J") 'org-shiftmetadown))
-;;     '(normal insert))
-
-;; ;; quick hotkey for searching notes
-;; (define-key global-map (kbd "C-c n") 'org-search-view)
-
-;; (define-key global-map (kbd "C-x C-n") 'gf/commit-notes)
-
-;; (define-key global-map (kbd "M-n") 'org-capture)
-;; (define-key global-map (kbd "M-N") 'gf/find-current-month-notes-file)
-;; (define-key global-map (kbd "C-c C-n") (lambda ()
-;;                                        (interactive)
-;;                                        (projectile-find-file-in-directory org-directory)))
 
 ;; (evil-declare-key 'normal org-mode-map (kbd "C-t") 'org-shiftright)
 ;; (evil-declare-key 'insert org-mode-map (kbd "C-t") 'org-shiftright)
@@ -106,14 +91,6 @@
 
 ;; (evil-declare-key 'normal org-mode-map (kbd "gn") 'gf/org-go-to-next-task)
 ;; (define-key org-mode-map (kbd "C-c t") 'org-todo)
-
-;; ;; refile over files
-;; (evil-declare-key 'normal org-mode-map (kbd "C-c r") 'gf/org-refile-files-first)
-;; (evil-declare-key 'visual org-mode-map (kbd "C-c r") 'gf/org-refile-files-first)
-
-;; ;; refile withing the same file
-;; (evil-declare-key 'normal org-mode-map (kbd "C-c R") 'org-refile)
-;; (evil-declare-key 'visual org-mode-map (kbd "C-c R") 'org-refile)
 
 ;; (evil-declare-key 'insert org-mode-map (kbd "M-<return>") (lambda()
 ;;                                 (interactive)

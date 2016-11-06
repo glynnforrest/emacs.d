@@ -59,7 +59,11 @@ EXTENSION. Only the last extension of the file is considered."
 
 (defun gf/find-emacs-d-file ()
   (interactive)
-  (projectile-find-file-in-directory "~/.emacs.d"))
+  (projectile-find-file-in-directory user-emacs-directory))
+
+(defun gf/find-notes-file ()
+  (interactive)
+  (projectile-find-file-in-directory org-directory))
 
 (defun gf/save-buffers-kill-emacs-no-prompt ()
   "Save some buffers, then exit unconditionally"

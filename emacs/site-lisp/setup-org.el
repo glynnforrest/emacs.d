@@ -213,6 +213,30 @@ current project."
     "Create a git feature branch for the current org heading. The project is guessed from the current org file."
 
     )
-  )
+
+  (general-define-key
+   :states '(normal visual insert emacs)
+   :keymaps 'org-mode-map
+   :prefix gf/major-mode-leader-key
+   :non-normal-prefix gf/major-mode-non-normal-leader-key
+   "r" 'gf/org-refile-files-first
+   "R" 'org-refile)
+
+  (general-define-key
+   :states '(normal visual insert)
+   :keymaps 'org-mode-map
+   "M-l" 'org-metaright
+   "M-h" 'org-metaleft
+   "M-k" 'org-metaup
+   "M-j" 'org-metadown
+   "M-L" 'org-shiftmetaright
+   "M-H" 'org-shiftmetaleft
+   "M-K" 'org-shiftmetaup
+   "M-J" 'org-shiftmetadown)
+
+  (general-define-key
+   :states '(normal visual)
+   :keymaps 'org-mode-map
+   "TAB" 'org-cycle))
 
 (provide 'setup-org)

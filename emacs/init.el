@@ -15,6 +15,7 @@
 
 (require 'setup-core)
 (require 'setup-evil)
+(require 'setup-keys)
 
 (require 'setup-git)
 (require 'setup-whitespace)
@@ -28,7 +29,6 @@
 (require 'setup-which-key)
 (require 'setup-php)
 
-(require 'setup-keys)
 
 ;; (defvar required-packages nil "A list of required packages for this emacs configuration.")
 
