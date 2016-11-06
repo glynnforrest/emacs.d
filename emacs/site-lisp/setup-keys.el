@@ -12,6 +12,7 @@
    "e" '(:ignore t :which-key "emacs")
 
    "f" '(:ignore t :which-key "files")
+   "ff" 'find-file
    "fp" 'projectile-find-file
    "fs" 'save-buffer
 
@@ -22,10 +23,12 @@
    "pk" 'projectile-kill-buffers
 
    "s" '(:ignore t :which-key "search")
+   "sp" 'counsel-ag
    "so" 'swiper
 
    "t" '(:ignore t :which-key "toggle")
    "tw" '(global-whitespace-mode :which-key "whitespace")
+   "tW" '(ws-butler-mode :which-key "whitespace butler")
 
    "TAB" 'previous-buffer)
 

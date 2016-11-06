@@ -17,6 +17,7 @@
 (require 'setup-evil)
 
 (require 'setup-git)
+(require 'setup-whitespace)
 (require 'setup-ivy)
 (require 'setup-org)
 (require 'setup-projects)
@@ -155,7 +156,6 @@
 ;; (require 'modes)
 ;; (require 'setup-autocomplete)
 ;; (require 'setup-general)
-;; (require 'setup-whitespace)
 ;; (require 'setup-programming)
 ;; (require 'setup-helm)
 ;; (require 'setup-yaml)
