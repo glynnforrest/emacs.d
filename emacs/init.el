@@ -11,9 +11,9 @@
 (require 'use-package)
 
 (setq site-lisp-dir (expand-file-name "site-lisp" user-emacs-directory))
+(add-to-list 'load-path site-lisp-dir)
 
-(require 'evil)
-(evil-mode t)
+(require 'setup-evil)
 
 ;; (defvar required-packages nil "A list of required packages for this emacs configuration.")
 
@@ -150,7 +150,6 @@
 ;; (require 'appearance)
 
 ;; Clearly necessary
-;; (require 'setup-evil)
 ;; (require 'modes)
 ;; (require 'setup-autocomplete)
 ;; (require 'setup-general)
