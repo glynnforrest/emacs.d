@@ -21,8 +21,18 @@
   (general-define-key
    :states '(normal visual)
    :keymaps 'css-mode-map
-   "s" 'gf/css-change-value
-   ",s" 'skewer-css-eval-current-rule))
+   "s" 'gf/css-change-value)
 
+  (general-define-key
+   :states '(normal visual insert emacs)
+   :keymaps 'css-mode-map
+   :prefix gf/major-mode-leader-key
+   :non-normal-prefix gf/major-mode-non-normal-leader-key
+   "e" 'skewer-css-eval-current-rule))
+
+(use-package scss-mode :ensure t
+  :mode ("\\.scss\\'" . scss-mode)
+  :config
+  (setq css-indent-offset 2))
 
 (provide 'setup-css)
