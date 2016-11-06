@@ -1,7 +1,4 @@
 ;; Share emacs
-(require 'server)
-(unless (server-running-p)
-  (server-start))
 
 ;;Allows launching from chrome textareas
 (require 'edit-server nil t)
@@ -12,43 +9,16 @@
 (require 'setup-flyspell)
 
 ;;; General modes
-(delete-selection-mode t)
-(recentf-mode 1)
-(setq recentf-max-saved-items 2000)
-(show-paren-mode t)
-(column-number-mode t)
-(tooltip-mode -1)
-(setq shift-select-mode nil)
 
 ;; Undo/redo window configuration with C-c <left>/<right>
-(winner-mode 1)
 (require 'ace-jump-mode)
 
 ;;auto revert
-(global-auto-revert-mode t)
-(setq auto-revert-verbose nil)
-(setq global-auto-revert-non-file-buffers t)
 
 ;; Save minibuffer history
-(savehist-mode 1)
-(setq history-length 1000)
 
 ;;; General settings
-(fset 'yes-or-no-p 'y-or-n-p)
-(global-hl-line-mode t)
-(setq auto-save-default nil)
-(setq hl-line-sticky-flag 1)
-(setq inhibit-startup-message t)
-(setq make-backup-files nil)
-(setq mouse-wheel-progressive-speed nil)
-(setq scroll-conservatively 10000)
-(setq scroll-step 1)
-(setq x-select-enable-clipboard t)
-(setq undo-tree-visualizer-timestamps 1)
-(setq echo-keystrokes 0.1)
 
-;; KILL SYSTEM BELL
-(setq ring-bell-function #'ignore)
 
 ;; Uniquify
 (require 'uniquify)
@@ -108,6 +78,5 @@
 
 (setq revert-buffer-function 'revert-buffer-keep-history)
 
-(xterm-mouse-mode t)
 
 (provide 'setup-general)

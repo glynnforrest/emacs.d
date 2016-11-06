@@ -13,7 +13,9 @@
 (setq site-lisp-dir (expand-file-name "site-lisp" user-emacs-directory))
 (add-to-list 'load-path site-lisp-dir)
 
+(require 'setup-core)
 (require 'setup-evil)
+
 (require 'setup-git)
 (require 'setup-ivy)
 (require 'setup-org)
@@ -21,8 +23,8 @@
 (require 'setup-defuns)
 (require 'setup-yasnippet)
 (require 'setup-css)
-
 (require 'setup-which-key)
+
 (require 'setup-keys)
 
 ;; (defvar required-packages nil "A list of required packages for this emacs configuration.")
