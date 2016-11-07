@@ -8,7 +8,8 @@
     (when (fboundp mode) (funcall mode -1))))
 
 (gf/trim-ui)
-(add-hook 'after-make-frame-functions 'gf/trim-ui)
+(add-hook 'after-make-frame-functions (lambda(frame)
+                                        (gf/trim-ui)))
 
 (blink-cursor-mode -1)
 (setq line-spacing 0)
