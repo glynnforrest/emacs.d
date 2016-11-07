@@ -237,6 +237,7 @@ current project."
   (general-define-key
    :states '(normal visual)
    :keymaps 'org-mode-map
+   "t" 'org-todo
    "TAB" 'org-cycle))
 
 (provide 'setup-org)
