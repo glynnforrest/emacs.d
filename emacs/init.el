@@ -33,6 +33,9 @@
 (require 'setup-saltstack)
 (require 'setup-markdown)
 
+;; Load personal config if available, like usernames and passwords
+(require 'setup-personal nil t)
+
 ;; (defvar required-packages nil "A list of required packages for this emacs configuration.")
 
 ;; (setq required-packages
@@ -134,8 +137,6 @@
 ;; (setq custom-file "~/.emacs.d/custom.el")
 ;; (load custom-file 'noerror)
 
-;; Load personal configurations, like usernames and passwords
-;; (require 'personal nil t)
 
 ;; Clearly necessary
 ;; (require 'modes)

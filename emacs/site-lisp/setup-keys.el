@@ -23,6 +23,7 @@
    "fe" 'gf/find-emacs-d-file
    "ff" 'find-file
    "fi" '(gf/open-init-file :which-key "open init.el")
+   "fI" '(gf/open-personal-file :which-key "open setup-personal")
    "fo" 'gf/find-notes-file
    "fp" 'projectile-find-file
    "fr" 'counsel-recentf

@@ -57,6 +57,10 @@ EXTENSION. Only the last extension of the file is considered."
   (interactive)
   (find-file "~/.emacs.d/init.el"))
 
+(defun gf/open-personal-file ()
+  (interactive)
+  (find-file "~/.emacs.d/site-lisp/setup-personal.el"))
+
 (defun gf/find-emacs-d-file ()
   (interactive)
   (projectile-find-file-in-directory user-emacs-directory))

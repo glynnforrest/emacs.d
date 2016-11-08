@@ -6,7 +6,7 @@ bookmarks
 elpa
 eshell
 image-dired*
-personal.el
+site-lisp/setup-personal.el
 places
 recentf
 savehist
