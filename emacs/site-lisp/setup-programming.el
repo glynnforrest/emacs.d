@@ -18,6 +18,5 @@
 (add-hook 'prog-mode-hook 'paredit-everywhere-mode)
 
 (require 'setup-eshell)
-(require 'setup-flycheck)
 
 (provide 'setup-programming)

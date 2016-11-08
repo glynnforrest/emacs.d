@@ -10,8 +10,7 @@
 
 (require 'use-package)
 
-(setq site-lisp-dir (expand-file-name "site-lisp" user-emacs-directory))
-(add-to-list 'load-path site-lisp-dir)
+(add-to-list 'load-path (expand-file-name "site-lisp" user-emacs-directory))
 
 (require 'setup-core)
 (require 'setup-evil)
@@ -32,6 +31,7 @@
 (require 'setup-web-mode)
 (require 'setup-saltstack)
 (require 'setup-markdown)
+(require 'setup-flycheck)
 
 ;; Load personal config if available, like usernames and passwords
 (require 'setup-personal nil t)
@@ -57,7 +57,6 @@
 ;;         epl
 ;;         ethan-wspace
 ;;         exec-path-from-shell
-;;         flycheck
 ;;         helm
 ;;         helm-css-scss
 ;;         helm-dash
