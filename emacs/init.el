@@ -32,6 +32,7 @@
 (require 'setup-saltstack)
 (require 'setup-markdown)
 (require 'setup-flycheck)
+(require 'setup-coffeescript)
 
 ;; Load personal config if available, like usernames and passwords
 (require 'setup-personal nil t)
@@ -47,7 +48,6 @@
 ;;         autopair
 ;;         browse-kill-ring
 ;;         color-theme-sanityinc-tomorrow
-;;         coffee-mode
 ;;         diminish
 ;;         dired+
 ;;         el-autoyas
@@ -55,7 +55,6 @@
 ;;         emamux
 ;;         emmet-mode
 ;;         epl
-;;         ethan-wspace
 ;;         exec-path-from-shell
 ;;         helm
 ;;         helm-css-scss
