@@ -19,7 +19,7 @@
 
 (use-package evil :ensure t
   :init
-  (setq
+  (setq-default
    evil-want-C-d-scroll t
    evil-want-C-u-scroll t)
 
