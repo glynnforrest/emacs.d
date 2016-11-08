@@ -1,38 +1,36 @@
 (use-package org :ensure t
   :config
 
-  ;;Notes are grouped by months for automatic archival.
-  ;;At the start of every month move over notes that are still relevant.
   (setq org-directory "~/notes/")
   (setq org-listen-read-watch-file (concat org-directory "topics/listen-read-watch.org"))
 
   (setq org-files (append (file-expand-wildcards (concat org-directory "*/*.org"))
-			  (file-expand-wildcards (concat org-directory "*/*/*.org"))))
-
+                          (file-expand-wildcards (concat org-directory "*/*/*.org"))))
 
   ;; Split up the search string on whitespace
   (setq org-agenda-search-view-always-boolean t)
 
+  (setq org-refile-targets '((nil :maxlevel . 2)))
 
   (defun gf/org-reload ()
     "Reload the org file for the current month - useful for a long
 running emacs instance."
     (interactive)
     (setq gf/current-month-notes-last-visited nil)
-    ;; Agenda files are only used for searching - my notes are designed to
-    ;; work without scheduling, tags etc
+    ;; Notes are grouped by month in dates/ for automatic archival.
+    ;; At the start of every month, move over notes that are still relevant.
+    ;; Agenda files are only used for searching - this setup is
+    ;; designed to work without scheduling, tags etc
     (setq org-agenda-files (append
-			    (file-expand-wildcards (concat org-directory "dates/*.org"))
-			    (file-expand-wildcards (concat org-directory "topics/*.org"))
-			    (file-expand-wildcards (concat org-directory "topics/*/*.org"))))
-    (setq org-default-notes-file
-	  (concat org-directory "dates/"
-		  (downcase (format-time-string "%Y-%B.org")))))
+                            (file-expand-wildcards (concat org-directory "dates/*.org"))
+                            (file-expand-wildcards (concat org-directory "topics/*.org"))
+                            (file-expand-wildcards (concat org-directory "topics/*/*.org"))))
+    (setq org-default-notes-file (gf/org-current-month-notes-file)))
 
-  (gf/org-reload)
-
-  (setq org-refile-targets
-	'((nil :maxlevel . 2)))
+  (defun gf/org-current-month-notes-file ()
+    "Get the path of the org file for the current month."
+    (concat org-directory "dates/"
+            (downcase (format-time-string "%Y-%B.org"))))
 
   (defun gf/org-refile-files-first ()
     "Choose an org file to file in, then pick the node. This prevents
@@ -162,35 +160,42 @@ TODO keywords, stars and list indicators."
 
   (defvar org-projects-dir (expand-file-name  "~/notes/projects"))
 
-  (defvar gf/project-org-file-overrides '()
-    "A list of projectile directories and the specified project org file for them.")
-
   (defun gf/create-org-path (path)
     "Create a name suitable for an org file from the last part of a file
 path."
     (let ((last (car (last (split-string (if (equal (substring path -1) "/")
-					     (substring path 0 -1) path) "/")))))
+                                             (substring path 0 -1) path) "/")))))
       (concat org-projects-dir "/"
-	      (downcase
-	       (replace-regexp-in-string
-		"\\." "-" (if (equal (substring last 0 1) ".")
-			      (substring last 1) last)))
-	      ".org")))
+              (downcase
+               (replace-regexp-in-string
+                "\\." "-" (if (equal (substring last 0 1) ".")
+                              (substring last 1) last)))
+              ".org")))
 
-  (defun gf/resolve-project-org-file ()
-    "Get the org file for a project, either using a suitable name
-automatically or fetching from gf/project-org-file-overrides."
+  (defvar gf/org-project-file-override-alist '()
+    "An association list of projectile directories and the project org file for them.
 
-    )
+This enables overriding the default behaviour of `gf/org-resolve-project-org-file'.
 
-  (defun gf/project-org-file ()
-    "Get the path of the org file for the current project."
-    (gf/create-org-path (projectile-project-root)))
+CAR must be an absolute path to a project, including a trailing slash.
+CDR must be a path to an org file, relative to `org-directory'.
 
-  (defun gf/switch-to-project-org-file ()
+Example:
+
+\'((\"/home/emacs/some-company/some-project\" \"projects/some-company.org\")
+(\"/home/emacs/some-company/different-project\" \"projects/some-company.org\"))")
+
+  (defun gf/org-resolve-project-org-file ()
+    "Get the path of the org file for the current project, either by creating a
+suitable name automatically or fetching from gf/org-project-file-override-alist."
+    (if (assoc (projectile-project-root) gf/org-project-file-override-alist)
+        (concat org-directory (cadr (assoc (projectile-project-root) gf/org-project-file-override-alist)))
+      (gf/create-org-path (projectile-project-root))))
+
+  (defun gf/org-switch-to-project-org-file ()
     "Switch to the org file for the current project."
     (interactive)
-    (find-file (gf/project-org-file)))
+    (find-file (gf/org-resolve-project-org-file)))
 
   (defvar gf/previous-project-buffers (make-hash-table :test 'equal))
 
@@ -199,20 +204,19 @@ automatically or fetching from gf/project-org-file-overrides."
 current project."
     (interactive)
     (if (and
-	 (string-equal "org-mode" (symbol-name major-mode))
-	 (s-contains-p "/notes/" (buffer-file-name)))
-	(if (gethash (buffer-file-name) gf/previous-project-buffers)
-	    (switch-to-buffer (gethash (buffer-file-name) gf/previous-project-buffers))
-	  (error "Previous project buffer not found"))
-      (let ((file (gf/project-org-file)))
-	(puthash file (current-buffer) gf/previous-project-buffers)
-	(find-file file)
-	)))
+         (string-equal "org-mode" (symbol-name major-mode))
+         (s-contains-p "/notes/" (buffer-file-name)))
+        (if (gethash (buffer-file-name) gf/previous-project-buffers)
+            (switch-to-buffer (gethash (buffer-file-name) gf/previous-project-buffers))
+          (error "Previous project buffer not found"))
+      (let ((file (gf/org-resolve-project-org-file)))
+        (puthash file (current-buffer) gf/previous-project-buffers)
+        (find-file file))))
 
-  (defun gf/create-project-branch-from-org-heading ()
-    "Create a git feature branch for the current org heading. The project is guessed from the current org file."
+  ;; (defun gf/create-project-branch-from-org-heading ()
+  ;;   "Create a git feature branch for the current org heading. The project is guessed from the current org file.")
 
-    )
+  (gf/org-reload)
 
   (general-define-key
    :states '(normal visual insert emacs)

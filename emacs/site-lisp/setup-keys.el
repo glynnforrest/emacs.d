@@ -40,6 +40,7 @@
    "oc" 'org-capture
    "oN" 'gf/commit-notes
    "om" 'gf/find-current-month-notes-file
+   "op" 'gf/toggle-switch-to-project-org-file
 
    "p" '(:ignore t :which-key "projects")
    "pk" 'projectile-kill-buffers
