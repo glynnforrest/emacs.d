@@ -10,6 +10,13 @@
    "C" 'gf/php-insert-class
    "s" 'gf/php-insert-service)
 
+(general-define-key
+   :states '(normal visual insert emacs)
+   :prefix "SPC"
+   :non-normal-prefix "M-SPC"
+   :keymaps 'php-mode-map
+   "+" 'gf/php-cleanup-style)
+
   (general-define-key
    :states '(insert emacs)
    :keymaps 'php-mode-map

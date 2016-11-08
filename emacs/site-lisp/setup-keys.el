@@ -61,7 +61,12 @@
    "u" 'universal-argument
 
    "w" '(:ignore t :which-key "windows")
+   "wm" '(delete-other-windows :which-key "maximise window")
    "wu" 'winner-undo
+
+   "y" '(:ignore t :which-key "yasnippet")
+   "yi" 'yas-insert-snippet
+   "yr" 'yas-reload-all
 
    "/" 'swiper
    "1" 'other-window
