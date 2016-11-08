@@ -38,7 +38,7 @@ running emacs instance."
     (interactive)
     (let ((file (list (completing-read "Refile to: " org-files nil t))))
       (let ((org-refile-targets `((,file :maxlevel . 1))))
-	(org-refile)))
+        (org-refile)))
     (org-save-all-org-buffers))
 
   (defun gf/commit-notes ()
@@ -47,8 +47,7 @@ running emacs instance."
     (let ((old-dir default-directory))
       (cd org-directory)
       (shell-command (concat "git add -u . && git commit -m \"" (format-time-string "%a %e %b %H:%M:%S\"")))
-      (cd old-dir)
-      ))
+      (cd old-dir)))
 
   (defvar gf/current-month-notes-last-visited nil
     "The last date the org file for the current month was opened.")
@@ -62,7 +61,7 @@ running emacs instance."
   (defun gf/check-current-month-notes-reminder ()
     "Show a reminder message if the current notes file hasn't been visited today."
     (if (not (equal gf/current-month-notes-last-visited (format-time-string "%D")))
-	(message (format "Check your notes for today, %s" (format-time-string "%A %e of %B")))))
+        (message (format "Check your notes for today, %s" (format-time-string "%A %e of %B")))))
 
   (add-hook 'find-file-hook 'gf/check-current-month-notes-reminder)
 
@@ -91,15 +90,15 @@ TODO keywords, stars and list indicators."
     (gf/evil-org-beginning-of-line))
 
   (setq org-todo-keywords
-	'((sequence "TODO(t)" "NEXT(n)" "|" "DONE(d)")
-	  (sequence "WAITING(w)" "|" "CANCELLED(c)")))
+        '((sequence "TODO(t)" "NEXT(n)" "|" "DONE(d)")
+          (sequence "WAITING(w)" "|" "CANCELLED(c)")))
 
   (setq org-log-done t)
 
   (setq org-todo-keyword-faces
-	(quote (("TODO" :foreground "#dc322f" :weight bold)
-		("DONE" :foreground "forest green" :weight bold :strike-through t)
-		("WAITING" :foreground "#89BDFF" :weight bold))))
+        (quote (("TODO" :foreground "#dc322f" :weight bold)
+                ("DONE" :foreground "forest green" :weight bold :strike-through t)
+                ("WAITING" :foreground "#89BDFF" :weight bold))))
 
   ;; Make it impossible to complete a task if subtasks are not done
   (setq org-enforce-todo-dependencies t)
@@ -108,40 +107,39 @@ TODO keywords, stars and list indicators."
 
 
   (setq org-capture-templates
-	'(("t" "Todo" entry (file+headline org-default-notes-file "Tasks")
-	   "* TODO %?" :prepend t)
-	  ("n" "Note" entry (file+headline org-default-notes-file "Notes")
-	   "* %?")
-	  ("T" "Project Todo" entry (file+headline gf/current-project-file "Tasks")
-	   "* TODO %?" :prepend t)
-	  ("N" "Project Note" entry (file+headline gf/current-project-file "Notes")
-	   "* %?")
-	  ("l" "Listen" entry (file+headline org-listen-read-watch-file "Listen")
-	   "* %?")
-	  ("r" "Read" entry (file+headline org-listen-read-watch-file "Read")
-	   "* %?")
-	  ("w" "Watch" entry (file+headline org-listen-read-watch-file "Watch")
-	   "* %?")
-	  ))
+        '(("t" "Todo" entry (file+headline org-default-notes-file "Tasks")
+           "* TODO %?" :prepend t)
+          ("n" "Note" entry (file+headline org-default-notes-file "Notes")
+           "* %?")
+          ("T" "Project Todo" entry (file+headline (gf/org-resolve-project-org-file) "Tasks")
+           "* TODO %?" :prepend t)
+          ("N" "Project Note" entry (file+headline (gf/org-resolve-project-org-file) "Notes")
+           "* %?")
+          ("l" "Listen" entry (file+headline org-listen-read-watch-file "Listen")
+           "* %?")
+          ("r" "Read" entry (file+headline org-listen-read-watch-file "Read")
+           "* %?")
+          ("w" "Watch" entry (file+headline org-listen-read-watch-file "Watch")
+           "* %?")))
 
   ;; Behaviour for capturing notes using make-capture-frame
   (defadvice org-capture-finalize
       (after delete-capture-frame activate)
     "Advise capture-finalize to close the frame"
     (if (equal "capture" (frame-parameter nil 'name))
-	(delete-frame)))
+        (delete-frame)))
 
   (defadvice org-capture-destroy
       (after delete-capture-frame activate)
     "Advise capture-destroy to close the frame"
     (if (equal "capture" (frame-parameter nil 'name))
-	(delete-frame)))
+        (delete-frame)))
 
   (defadvice org-switch-to-buffer-other-window
       (after supress-window-splitting activate)
     "Delete the extra window if we're in a capture frame"
     (if (equal "capture" (frame-parameter nil 'name))
-	(delete-other-windows)))
+        (delete-other-windows)))
 
   (org-babel-do-load-languages
    'org-babel-load-languages
