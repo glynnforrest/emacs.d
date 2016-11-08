@@ -88,15 +88,12 @@
 
 (defun gf/php-current-file-namespace ()
   "Get a suitable namespace for the current file."
-  (interactive)
-  (if (s-contains? "src" (buffer-file-name))
-      (gf/php-namespace-from-path buffer-file-name "src")
+  (gf/php-file-namespace buffer-file-name))
 
-    (if (s-contains? "tests" (buffer-file-name))
-        (gf/php-namespace-from-path buffer-file-name "tests")
-
-      (if (s-contains? "app" (buffer-file-name))
-          (gf/php-namespace-from-path buffer-file-name "app")))))
+(defun gf/php-file-namespace (file)
+  "Get a suitable namespace for `FILE`."
+  (shell-command-to-string
+   (concat user-emacs-directory "bin/php_resolve_namespace.php " file)))
 
 (defun gf/php-namespace-from-path (path substr)
   "Extract a namespace from a path name that contains `substr`."
