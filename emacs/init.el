@@ -33,6 +33,7 @@
 (require 'setup-markdown)
 (require 'setup-flycheck)
 (require 'setup-coffeescript)
+(require 'setup-emmet)
 
 ;; Load personal config if available, like usernames and passwords
 (require 'setup-personal nil t)
@@ -53,7 +54,6 @@
 ;;         el-autoyas
 ;;         elisp-slime-nav
 ;;         emamux
-;;         emmet-mode
 ;;         epl
 ;;         exec-path-from-shell
 ;;         helm
