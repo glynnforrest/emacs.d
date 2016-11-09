@@ -1,5 +1,3 @@
-;; Emacs lisp
-(require 'setup-elisp)
 
 ;; Snippets
 (add-to-list 'auto-mode-alist '("yasnippet/snippets" . snippet-mode))

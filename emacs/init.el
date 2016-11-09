@@ -34,6 +34,7 @@
 (require 'setup-flycheck)
 (require 'setup-coffeescript)
 (require 'setup-emmet)
+(require 'setup-elisp)
 
 ;; Load personal config if available, like usernames and passwords
 (require 'setup-personal nil t)
@@ -51,8 +52,6 @@
 ;;         color-theme-sanityinc-tomorrow
 ;;         diminish
 ;;         dired+
-;;         el-autoyas
-;;         elisp-slime-nav
 ;;         emamux
 ;;         epl
 ;;         exec-path-from-shell
