@@ -64,7 +64,6 @@
 ;;         paredit
 ;;         paredit-everywhere
 ;;         php-eldoc
-;;         rainbow-mode
 ;;         smart-mode-line
 ;;         smartparens
 ;;         sqlup-mode

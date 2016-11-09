@@ -1,4 +1,5 @@
 (use-package css-mode :ensure t
+  :mode ("\\.css\\'" . css-mode)
   :config
   (setq css-indent-offset 2)
 
@@ -14,14 +15,10 @@
       (evil-find-char 1 (string-to-char "p"))
       (evil-change beg (point))))
 
-  (use-package skewer-mode :ensure t
-    :config
-    (add-hook 'css-mode-hook 'skewer-css-mode))
-
   (general-define-key
    :states '(normal visual)
    :keymaps 'css-mode-map
-   "s" 'gf/css-change-value)
+   "S" 'gf/css-change-value)
 
   (general-define-key
    :states '(normal visual insert emacs)
@@ -34,5 +31,15 @@
   :mode ("\\.scss\\'" . scss-mode)
   :config
   (setq css-indent-offset 2))
+
+(use-package skewer-mode :ensure t
+  :defer t
+  :init
+  (add-hook 'css-mode-hook 'skewer-css-mode))
+
+(use-package rainbow-mode :ensure t
+  :defer t
+  :init
+  (add-hook 'css-mode-hook 'rainbow-mode))
 
 (provide 'setup-css)
