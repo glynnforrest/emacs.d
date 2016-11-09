@@ -13,7 +13,7 @@
     (if (eq js2-basic-offset 2)
 	(setq js2-basic-offset 4)
       (setq js2-basic-offset 2))
-    (message (format "Javascript indendation is now %s spaces" js2-basic-offset)))
+    (message (format "Javascript indentation is now %s spaces" js2-basic-offset)))
 
   (setq js2-basic-offset 2)
 

@@ -56,6 +56,7 @@
    "so" 'org-search-view
 
    "t" '(:ignore t :which-key "toggle")
+   "tr" '(rainbow-mode)
    "tg" '(global-git-gutter-mode :which-key "git-gutter")
    "tw" '(global-whitespace-mode :which-key "whitespace")
    "tW" '(ws-butler-mode :which-key "whitespace butler")

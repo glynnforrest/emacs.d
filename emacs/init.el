@@ -35,6 +35,7 @@
 (require 'setup-coffeescript)
 (require 'setup-emmet)
 (require 'setup-elisp)
+(require 'setup-yaml)
 
 ;; Load personal config if available, like usernames and passwords
 (require 'setup-personal nil t)
@@ -140,7 +141,6 @@
 ;; (require 'setup-general)
 ;; (require 'setup-programming)
 ;; (require 'setup-helm)
-;; (require 'setup-yaml)
 ;; (require 'defuns)
 
 ;; (require 'help-mode)
