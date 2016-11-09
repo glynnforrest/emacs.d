@@ -8,7 +8,8 @@
    :keymaps 'php-mode-map
    "c" 'gf/php-insert-use-class
    "C" 'gf/php-insert-class
-   "s" 'gf/php-insert-service)
+   "s" 'gf/php-insert-service
+   "r" 'gf/php-insert-symfony-route)
 
 (general-define-key
    :states '(normal visual insert emacs)
@@ -144,8 +145,7 @@
   (interactive)
   (let ((service (ivy-read
                   "Service: "
-                  (gf/candidates-from-command "php neptune service:list -N | tail -n +2")
-                  :must-match t)))
+                  (gf/candidates-from-command "php neptune service:list -N | tail -n +2"))))
     (insert service)))
 
 (defun gf/php-insert-service ()
@@ -162,9 +162,7 @@
   (interactive)
   (let ((candidate (ivy-read
                     "Route: "
-                    (gf/candidates-from-command "php bin/console debug:router | sed -E 's/^ +//g' |  cut -d ' ' -f 1 | tail -n +3")
-                    :must-match t
-                    )))
+                    (gf/candidates-from-command "php bin/console debug:router | sed -E 's/^ +//g' |  cut -d ' ' -f 1 | tail -n +3"))))
     (insert candidate)))
 
 (defun gf/php-in-symfony-project-p ()
