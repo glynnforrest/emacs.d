@@ -211,6 +211,47 @@ current project."
         (puthash file (current-buffer) gf/previous-project-buffers)
         (find-file file))))
 
+(defun gf/org-calculate-month-file-offset (filename offset)
+  "Calculate the name of the neighbouring month file to FILENAME.
+
+FILENAME is expected to be of the form <year>-<monthname>, e.g. 2016-november.
+
+OFFSET is t for next month, or nil for previous month."
+  (let* ((months '("january"
+                   "february"
+                   "march"
+                   "april"
+                   "may"
+                   "june"
+                   "july"
+                   "august"
+                   "september"
+                   "october"
+                   "november"
+                   "december"))
+         (pieces (split-string filename "-"))
+         (year (string-to-number (car pieces)))
+         (month (cadr pieces))
+         (month-number (position month months :test 'equal)))
+    (if offset
+        (if (eq month-number 11)
+            (concat (number-to-string (+ year 1)) "-january")
+          (concat (number-to-string year) "-" (nth (+ month-number 1) months)))
+      (if (eq month-number 0)
+          (concat (number-to-string (- year 1)) "-december")
+        (concat (number-to-string year) "-" (nth (- month-number 1) months))))))
+
+(defun gf/org-go-to-next-month ()
+  "Go to the next month org file."
+  (interactive)
+  (find-file (concat org-directory "dates/" (gf/org-calculate-month-file-offset (buffer-file-name-body) t) ".org")))
+
+(defun gf/org-go-to-previous-month ()
+  "Go to the previous month org file."
+  (interactive)
+  (find-file (concat org-directory "dates/" (gf/org-calculate-month-file-offset (buffer-file-name-body) nil) ".org")))
+
+
   ;; (defun gf/create-project-branch-from-org-heading ()
   ;;   "Create a git feature branch for the current org heading. The project is guessed from the current org file.")
 
@@ -222,7 +263,9 @@ current project."
    :prefix gf/major-mode-leader-key
    :non-normal-prefix gf/major-mode-non-normal-leader-key
    "r" 'gf/org-refile-files-first
-   "R" 'org-refile)
+   "R" 'org-refile
+   "." 'gf/org-go-to-next-month
+   "," 'gf/org-go-to-previous-month)
 
   (general-define-key
    :states '(normal visual insert)
