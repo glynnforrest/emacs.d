@@ -2,11 +2,6 @@
 ;; Snippets
 (add-to-list 'auto-mode-alist '("yasnippet/snippets" . snippet-mode))
 
-;; SQL
-(require 'sqlup-mode)
-(add-hook 'sql-mode-hook 'sqlup-mode)
-(add-hook 'sql-interactive-mode-hook 'sqlup-mode)
-
 ;; lilypond
 (autoload 'LilyPond-mode "lilypond-mode" nil t)
 (add-to-list 'auto-mode-alist '("\\.ly$" . LilyPond-mode))

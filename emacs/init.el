@@ -36,6 +36,7 @@
 (require 'setup-emmet)
 (require 'setup-elisp)
 (require 'setup-yaml)
+(require 'setup-sql)
 
 ;; Load personal config if available, like usernames and passwords
 (require 'setup-personal nil t)
@@ -49,8 +50,6 @@
 ;;         apache-mode
 ;;         auto-complete
 ;;         autopair
-;;         browse-kill-ring
-;;         color-theme-sanityinc-tomorrow
 ;;         diminish
 ;;         dired+
 ;;         emamux
