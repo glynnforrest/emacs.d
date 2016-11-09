@@ -44,22 +44,21 @@
 ;;             (other-window 1))
 ;;         (message (format "buffer not found: %s" b))))))
 
-(defun gf/php-go-to-namespace ()
-  "Go to the namespace declaration at the top of this file."
+(defun gf/php-add-use-class (classname)
+  "Insert CLASSNAME after the last use statement at the top of this file."
   (interactive)
-  (beginning-of-buffer)
-  (if (not (re-search-forward "^namespace" nil t))
-      (error "Namespace declaration not found.")
-    (beginning-of-line)))
-
-(defun gf/php-go-to-last-use-statement ()
-  "Go to the last use statement at the top of this file."
-  (interactive)
-  (end-of-buffer)
-  (if (not (re-search-backward "^use" nil t))
-      (gf/php-go-to-namespace)
-    )
-  (recenter))
+  (save-excursion
+    (end-of-buffer)
+    (if (not (re-search-backward "^use" nil t))
+        (progn
+          (goto-char (point-min))
+          (if (not (re-search-forward "^namespace" nil t))
+              (error "Namespace declaration not found."))
+          (end-of-line)
+          (newline)))
+    (end-of-line)
+    (newline)
+    (insert (concat "use " classname ";"))))
 
 (defun gf/php-class-candidates ()
   "Get a list of available PHP classes in the current projectile project."
@@ -76,14 +75,9 @@
 (defun gf/php-insert-use-class ()
   "Add a class to the use declarations in the current file."
   (interactive)
-  (save-excursion
-    (let ((class (ivy-read
+  (gf/php-add-use-class (ivy-read
                   "Class: "
                   (gf/php-class-candidates))))
-      (gf/php-go-to-last-use-statement)
-      (end-of-line)
-      (newline)
-      (insert (concat "use " class ";")))))
 
 (defun gf/php-insert-class ()
   "Insert a class name in the current projectile project."
