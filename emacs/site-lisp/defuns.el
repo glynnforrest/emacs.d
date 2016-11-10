@@ -46,25 +46,6 @@ ERC buffer."
       (when url
         (browse-url url)))))
 
-(defun gf/toggle-comment ()
-  "Comments or uncomments the current line, or the region if active."
-  (interactive)
-  (if (region-active-p)
-      (progn
-        (comment-or-uncomment-region (region-beginning) (region-end))
-        (evil-visual-restore)
-        (message "region comment"))
-    (comment-or-uncomment-region (line-beginning-position) (line-end-position))))
-
-(defun gf/find-file-in-directory (directory)
-  "Hacky function to find a file in DIRECTORY. This depends on the
-`projectile` package."
-  (interactive)
-  (gf/switch-to-scratch-buffer)
-  (cd directory)
-  (projectile-find-file nil)
-  )
-
 (defun gf/split-window-and-move-right ()
   (interactive)
   (split-window-right)

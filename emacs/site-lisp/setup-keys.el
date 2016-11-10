@@ -62,6 +62,8 @@
    "tp" '(smartparens-mode :which-key "smartparens")
    "tW" '(ws-butler-mode :which-key "whitespace butler")
 
+   "T" 'try-code
+
    "u" 'universal-argument
 
    "w" '(:ignore t :which-key "windows")

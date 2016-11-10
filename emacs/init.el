@@ -11,6 +11,7 @@
 (require 'use-package)
 
 (add-to-list 'load-path (expand-file-name "site-lisp" user-emacs-directory))
+(add-to-list 'load-path (expand-file-name "plugins" user-emacs-directory))
 
 (require 'setup-core)
 (require 'setup-evil)
@@ -41,6 +42,7 @@
 (require 'setup-apache)
 (require 'setup-comments)
 (require 'setup-smartparens)
+(require 'setup-try-code)
 
 ;; Load personal config if available, like usernames and passwords
 (require 'setup-personal nil t)

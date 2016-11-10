@@ -100,8 +100,6 @@
 (define-key evil-normal-state-map (kbd "M-k") 'move-text-up)
 
 
-(define-key evil-normal-state-map ",T" 'try-code)
-
 ;; Visual mode
 (define-key evil-visual-state-map [escape] 'keyboard-quit)
 
