@@ -75,6 +75,7 @@
    "1" 'other-window
    "=" 'gf/indent-buffer
    "+" 'gf/indent-cleanup-buffer
+   ";" 'evilnc-comment-or-uncomment-lines
    "TAB" 'previous-buffer)
 
   (general-define-key

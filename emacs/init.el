@@ -39,6 +39,7 @@
 (require 'setup-yaml)
 (require 'setup-sql)
 (require 'setup-apache)
+(require 'setup-comments)
 
 ;; Load personal config if available, like usernames and passwords
 (require 'setup-personal nil t)
