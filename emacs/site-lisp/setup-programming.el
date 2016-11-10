@@ -7,9 +7,6 @@
 ;;; Bound to ,T
 (require 'try-code)
 
-(require 'paredit-everywhere)
-(add-hook 'prog-mode-hook 'paredit-everywhere-mode)
-
 (require 'setup-eshell)
 
 (provide 'setup-programming)

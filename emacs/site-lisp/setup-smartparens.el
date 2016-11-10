@@ -3,6 +3,7 @@
   :config
   (progn
     ;; settings
+    (require 'smartparens-config)
     (setq sp-show-pair-delay 0.2
           ;; fix paren highlighting in normal mode
           sp-show-pair-from-inside t
