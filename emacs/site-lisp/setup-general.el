@@ -1,11 +1,5 @@
 ;; Share emacs
 
-;;Allows launching from chrome textareas
-(require 'edit-server nil t)
-(unless (process-status "edit-server")
-  (setq edit-server-new-frame t)
-  (edit-server-start))
-
 (require 'setup-flyspell)
 
 ;;; General modes

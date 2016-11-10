@@ -47,6 +47,7 @@
 (require 'setup-lilypond)
 (require 'setup-shell-script)
 (require 'setup-os)
+(require 'setup-edit-server)
 
 ;; Load personal config if available, like usernames and passwords
 (require 'setup-personal nil t)
