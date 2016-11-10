@@ -75,4 +75,11 @@ EXTENSION. Only the last extension of the file is considered."
   (save-some-buffers t)
   (kill-emacs))
 
+(defun gf/close-buffer-other-window ()
+  "Closes the buffer in the other window."
+  (interactive)
+  (other-window 1)
+  (kill-buffer (current-buffer))
+  (other-window 1))
+
 (provide 'setup-defuns)

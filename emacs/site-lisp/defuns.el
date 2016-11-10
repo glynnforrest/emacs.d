@@ -134,13 +134,6 @@ create it and write the initial message into it."
   (interactive "*p")
   (move-text-internal arg))
 
-(defun gf/quit-other-window ()
-  "Closes the buffer in the other window."
-  (interactive)
-  (other-window 1)
-  (kill-buffer (current-buffer))
-  (other-window 1))
-
 (defun gf/setup-electric-semicolon (mode-map)
   "Adds mappings for electric semicolon to MODE-MAP.
 Press ; for electric-semicolon, C-; to insert a semicolon."

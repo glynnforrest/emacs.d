@@ -80,6 +80,7 @@
    "TAB" 'previous-buffer)
 
   (general-define-key
+   "M-q" 'gf/close-buffer-other-window
    "M-x" 'counsel-M-x))
 
 (provide 'setup-keys)

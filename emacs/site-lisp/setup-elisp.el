@@ -3,10 +3,7 @@
   (general-define-key
    :states '(normal visual insert emacs)
    :keymaps 'lisp-mode-shared-map
-   :prefix "SPC"
-   :non-normal-prefix "M-SPC"
-   "RET" 'lisp-describe-thing-at-point
-   "RET" 'lisp-describe-thing-at-point))
+   "M-RET" 'lisp-describe-thing-at-point))
 
 (use-package el-autoyas
   :defer t
