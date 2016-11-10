@@ -15,6 +15,7 @@
 
 (use-package eldoc
   :defer t
+  :diminish ""
   :commands (eldoc-mode)
   :init
   (add-hook 'emacs-lisp-mode-hook 'eldoc-mode)
@@ -25,6 +26,7 @@
 
 (use-package elisp-slime-nav :ensure t
   :defer t
+  :diminish ""
   :init
   (add-hook 'emacs-lisp-mode-hook 'elisp-slime-nav-mode)
   (add-hook 'lisp-interaction-mode-hook 'elisp-slime-nav-mode)
@@ -39,8 +41,6 @@
                      ac-source-words-in-same-mode-buffers))
   (add-to-list 'ac-modes 'inferior-emacs-lisp-mode)
   (auto-complete-mode 1))
-
-(add-hook 'ielm-mode-hook 'ielm-auto-complete)
 
 (defun lisp-describe-thing-at-point ()
   "Show the documentation of the Elisp function and variable near point.

@@ -62,6 +62,9 @@
   :config
   (global-surround-mode t))
 
+(use-package undo-tree
+  :diminish "")
+
 (use-package evil-lisp-state :ensure t
   :init (setq evil-lisp-state-global t
               evil-lisp-state-enter-lisp-state-on-command nil))

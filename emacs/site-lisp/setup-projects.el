@@ -1,5 +1,6 @@
 (use-package projectile :ensure t
+  :diminish ""
   :config
-  (projectile-global-mode))
+  (projectile-mode))
 
 (provide 'setup-projects)

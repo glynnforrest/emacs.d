@@ -6,6 +6,7 @@
   (use-package evil-magit :ensure t))
 
 (use-package git-gutter :ensure t
+  :diminish ""
   :config
   (global-git-gutter-mode t))
 

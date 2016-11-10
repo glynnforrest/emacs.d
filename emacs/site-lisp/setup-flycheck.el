@@ -1,4 +1,5 @@
 (use-package flycheck :ensure t
+  :diminish ""
   :config
   (setq-default flycheck-disabled-checkers '(emacs-lisp-checkdoc
                                              php-phpmd
