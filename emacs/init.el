@@ -45,6 +45,7 @@
 (require 'setup-try-code)
 (require 'setup-rotate-text)
 (require 'setup-lilypond)
+(require 'setup-shell-script)
 
 ;; Load personal config if available, like usernames and passwords
 (require 'setup-personal nil t)
@@ -135,7 +136,6 @@
 
 
 ;; Clearly necessary
-;; (require 'modes)
 ;; (require 'setup-autocomplete)
 ;; (require 'setup-general)
 ;; (require 'setup-programming)
