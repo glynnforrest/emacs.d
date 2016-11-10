@@ -1,10 +1,3 @@
-(require 'autopair)
-(setq autopair-blink nil)
-(autopair-global-mode t)
-
-;; (require 'smartparens)
-;; (smartparens-mode t)
-
 (require 'emamux)
 (setq emamux:use-nearest-pane t)
 

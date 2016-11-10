@@ -40,6 +40,7 @@
 (require 'setup-sql)
 (require 'setup-apache)
 (require 'setup-comments)
+(require 'setup-smartparens)
 
 ;; Load personal config if available, like usernames and passwords
 (require 'setup-personal nil t)
@@ -51,7 +52,6 @@
 ;;         ace-jump-mode
 ;;         ag
 ;;         auto-complete
-;;         autopair
 ;;         diminish
 ;;         dired+
 ;;         emamux
@@ -67,7 +67,6 @@
 ;;         paredit-everywhere
 ;;         php-eldoc
 ;;         smart-mode-line
-;;         smartparens
 ;;         wgrep
 ;;         wgrep-ag
 ;;         ))

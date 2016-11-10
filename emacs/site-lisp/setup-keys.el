@@ -59,6 +59,7 @@
    "tr" '(rainbow-mode)
    "tg" '(global-git-gutter-mode :which-key "git-gutter")
    "tw" '(global-whitespace-mode :which-key "whitespace")
+   "tp" '(smartparens-mode :which-key "smartparens")
    "tW" '(ws-butler-mode :which-key "whitespace butler")
 
    "u" 'universal-argument
