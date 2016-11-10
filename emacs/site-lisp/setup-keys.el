@@ -34,6 +34,8 @@
    "gs" 'magit-status
    "gt" '(gf/git-timemachine :which-key "git-timemachine")
 
+   "l" 'evil-lisp-state
+
    "m" '(:ignore t :which-key "major-mode")
 
    "o" '(:ignore t :which-key "org")

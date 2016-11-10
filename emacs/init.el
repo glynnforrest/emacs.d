@@ -66,8 +66,6 @@
 ;;         impatient-mode
 ;;         keychain-environment
 ;;         multiple-cursors
-;;         paredit
-;;         paredit-everywhere
 ;;         php-eldoc
 ;;         smart-mode-line
 ;;         wgrep
