@@ -52,6 +52,7 @@
    "qf" 'delete-frame
    "qq" 'save-buffers-kill-emacs
    "qQ" 'gf/save-buffers-kill-emacs-no-prompt
+   "qr" 'restart-emacs
 
    "R" '(hydra-rotate-text/body :which-key "rotate text")
 
