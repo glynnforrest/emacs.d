@@ -46,6 +46,7 @@
 (require 'setup-rotate-text)
 (require 'setup-lilypond)
 (require 'setup-shell-script)
+(require 'setup-os)
 
 ;; Load personal config if available, like usernames and passwords
 (require 'setup-personal nil t)
@@ -57,11 +58,9 @@
 ;;         ace-jump-mode
 ;;         ag
 ;;         auto-complete
-;;         diminish
 ;;         dired+
 ;;         emamux
 ;;         epl
-;;         exec-path-from-shell
 ;;         helm
 ;;         helm-css-scss
 ;;         helm-dash
@@ -116,20 +115,6 @@
 ;;         (package-delete (cadr (assq pkg package-alist))))
 ;;     (message (format "Deleted %s orphan packages." (length orphans)))))
 
-;; ;; Make sure stuff installed via homebrew is available
-;; (push "/usr/local/bin" exec-path)
-
-;; (when (memq window-system '(mac ns))
-;;     (exec-path-from-shell-initialize))
-
-
-;; (setq plugins-dir (expand-file-name "plugins" user-emacs-directory))
-
-;; (let ((default-directory plugins-dir))
-;;   (normal-top-level-add-to-load-path '("."))
-;;   (normal-top-level-add-subdirs-to-load-path))
-;; (add-to-list 'load-path site-lisp-dir)
-
 ;; Load custom settings
 ;; (setq custom-file "~/.emacs.d/custom.el")
 ;; (load custom-file 'noerror)
@@ -142,15 +127,9 @@
 ;; (require 'setup-helm)
 ;; (require 'defuns)
 
-;; (require 'help-mode)
 ;; (require 'setup-multiple-cursors)
 
 ;; (require 'setup-search)
-;; (require 'setup-diminish)
 ;; (require 'mappings)
-
-;; Mac specific configuration
-;; (setq is-mac (equal system-type 'darwin))
-;; (when is-mac (require 'setup-mac))
 
 ;; (setq tramp-default-method "ssh")
