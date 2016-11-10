@@ -37,6 +37,7 @@
 (require 'setup-elisp)
 (require 'setup-yaml)
 (require 'setup-sql)
+(require 'setup-apache)
 
 ;; Load personal config if available, like usernames and passwords
 (require 'setup-personal nil t)
@@ -47,7 +48,6 @@
 ;;       '(
 ;;         ace-jump-mode
 ;;         ag
-;;         apache-mode
 ;;         auto-complete
 ;;         autopair
 ;;         diminish
