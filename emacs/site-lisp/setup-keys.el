@@ -51,6 +51,8 @@
    "qq" 'save-buffers-kill-emacs
    "qQ" 'gf/save-buffers-kill-emacs-no-prompt
 
+   "R" '(hydra-rotate-text/body :which-key "rotate text")
+
    "s" '(:ignore t :which-key "search")
    "sp" 'counsel-ag
    "so" 'org-search-view

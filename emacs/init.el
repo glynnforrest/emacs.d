@@ -43,6 +43,7 @@
 (require 'setup-comments)
 (require 'setup-smartparens)
 (require 'setup-try-code)
+(require 'setup-rotate-text)
 
 ;; Load personal config if available, like usernames and passwords
 (require 'setup-personal nil t)
