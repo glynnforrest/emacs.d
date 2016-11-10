@@ -33,6 +33,7 @@
 (require 'setup-markdown)
 (require 'setup-flycheck)
 (require 'setup-coffeescript)
+(require 'setup-ace-link)
 (require 'setup-emmet)
 (require 'setup-elisp)
 (require 'setup-yaml)
@@ -66,10 +67,8 @@
 ;;         php-eldoc
 ;;         smart-mode-line
 ;;         smartparens
-;;         sqlup-mode
 ;;         wgrep
 ;;         wgrep-ag
-;;         yaml-mode
 ;;         ))
 
 ;; (defun gf/install-required-packages ()
