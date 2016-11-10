@@ -67,7 +67,6 @@
 ;;         keychain-environment
 ;;         multiple-cursors
 ;;         php-eldoc
-;;         smart-mode-line
 ;;         wgrep
 ;;         wgrep-ag
 ;;         ))

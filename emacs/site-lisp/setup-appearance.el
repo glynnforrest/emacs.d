@@ -18,4 +18,17 @@
   :config
   (add-hook 'prog-mode-hook 'rainbow-delimiters-mode))
 
+(use-package spaceline-config
+  :ensure spaceline
+  :config
+
+  (setq spaceline-highlight-face-func 'spaceline-highlight-face-evil-state
+        spaceline-evil-state-faces (append spaceline-evil-state-faces
+                                           '((lisp . spaceline-evil-motion))))
+
+  (spaceline-toggle-flycheck-info-off)
+  (spaceline-toggle-flycheck-error-off)
+  (spaceline-toggle-flycheck-warning-off)
+  (spaceline-spacemacs-theme))
+
 (provide 'setup-appearance)

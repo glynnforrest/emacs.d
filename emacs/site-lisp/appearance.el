@@ -5,8 +5,6 @@
 
 ;; Other stuff
 (add-to-list 'default-frame-alist '(internal-border-width . 0))
-(set-face-attribute 'mode-line nil :box nil)
-(set-face-attribute 'mode-line-inactive nil :box nil)
 
 ;; Change opacity of the frame.
 (defun djcb-opacity-modify (&optional dec)
@@ -24,18 +22,6 @@
 (global-set-key (kbd "C-9") '(lambda()(interactive)(djcb-opacity-modify)))
 (global-set-key (kbd "C-0") '(lambda()(interactive)
                                (modify-frame-parameters nil `((alpha . 100)))))
-
-(defun fontify-hex-colors (limit)
-  (remove-overlays (point) limit 'fontify-hex-colors t)
-  (while (re-search-forward "\\(#[[:xdigit:]]\\{6\\}\\)" limit t)
-    (let ((ov (make-overlay (match-beginning 0)
-                            (match-end 0))))
-      (overlay-put ov 'face  (list :background (match-string 1) :foreground "black"))
-      (overlay-put ov 'fontify-hex-colors t)
-      (overlay-put ov 'evaporate t)))
-  ;; return nil telling font-lock not to fontify anything from this
-  ;; function
-  nil)
 
 ;; View hex colours in the following modes
 (dolist (mode '(
