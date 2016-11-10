@@ -16,4 +16,6 @@
 
 (use-package swiper :ensure t)
 
+(use-package smex :ensure t)
+
 (provide 'setup-ivy)
