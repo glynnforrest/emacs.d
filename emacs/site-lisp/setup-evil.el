@@ -69,11 +69,11 @@
   :init (setq evil-lisp-state-global t
               evil-lisp-state-enter-lisp-state-on-command nil))
 
-(use-package expand-region :ensure t)
-;; (define-key evil-normal-state-map ",v" 'er/expand-region)
-
-;; (eval-after-load "evil" '(setq expand-region-contract-fast-key "V"
-;;                               expand-region-reset-fast-key "r"))
+(use-package expand-region :ensure t
+  :commands er/expand-region
+  :config
+  (setq expand-region-contract-fast-key "V"
+        expand-region-reset-fast-key "0"))
 
 (use-package evil-args :ensure t)
 

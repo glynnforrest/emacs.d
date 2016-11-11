@@ -70,6 +70,7 @@
    "T" 'try-code
 
    "u" 'universal-argument
+   "v" '(er/expand-region :which-key "expand-region")
 
    "w" '(:ignore t :which-key "windows")
    "wm" '(delete-other-windows :which-key "maximise window")
