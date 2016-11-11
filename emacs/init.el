@@ -48,6 +48,7 @@
 (require 'setup-shell-script)
 (require 'setup-os)
 (require 'setup-edit-server)
+(require 'setup-multiple-cursors)
 
 ;; Load personal config if available, like usernames and passwords
 (require 'setup-personal nil t)
@@ -67,7 +68,6 @@
 ;;         helm-dash
 ;;         impatient-mode
 ;;         keychain-environment
-;;         multiple-cursors
 ;;         php-eldoc
 ;;         wgrep
 ;;         wgrep-ag
@@ -127,8 +127,6 @@
 ;; (require 'setup-programming)
 ;; (require 'setup-helm)
 ;; (require 'defuns)
-
-;; (require 'setup-multiple-cursors)
 
 ;; (require 'setup-search)
 ;; (require 'mappings)
