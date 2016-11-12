@@ -73,16 +73,6 @@
 ;;         wgrep-ag
 ;;         ))
 
-;; (defun gf/install-required-packages ()
-;;   "Ensure required packages are installed."
-;;   (interactive)
-;;   (dolist (p required-packages)
-;;     (when (not (package-installed-p p))
-;;       (package-install p)))
-;;   (message (format "%s required packages installed." (length required-packages))))
-
-;; (gf/install-required-packages)
-
 ;; (defun gf/package-deps (package)
 ;;   "Get the dependencies of a package."
 ;;   (let* ((pkg (cadr (assq package package-alist)))

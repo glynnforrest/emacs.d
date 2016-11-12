@@ -38,6 +38,9 @@
  undo-tree-visualizer-timestamps 1
  x-select-enable-clipboard t)
 
+;; enable normally disabled functions
+(put 'narrow-to-region 'disabled nil)
+
 (use-package restart-emacs :ensure t)
 
 (provide 'setup-core)
