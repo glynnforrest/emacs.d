@@ -75,11 +75,10 @@
   (setq expand-region-contract-fast-key "V"
         expand-region-reset-fast-key "0"))
 
-(use-package evil-args :ensure t)
-
-;; bind evil-args text objects
-;; (define-key evil-inner-text-objects-map "a" 'evil-inner-arg)
-;; (define-key evil-outer-text-objects-map "a" 'evil-outer-arg)
+(use-package evil-args :ensure t
+  :config
+  (define-key evil-inner-text-objects-map "a" 'evil-inner-arg)
+  (define-key evil-outer-text-objects-map "a" 'evil-outer-arg))
 
 ;; exchange two regions or motions with gx. gX cancels a pending swap
 (use-package evil-exchange :ensure t
