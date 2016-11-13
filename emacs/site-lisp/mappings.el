@@ -79,12 +79,6 @@
   (if (region-active-p)
       (eval-region (region-beginning) (region-end))))
 
-;; Switch gj and j, gk and k
-(define-key evil-normal-state-map "j" 'evil-next-visual-line)
-(define-key evil-normal-state-map "k" 'evil-previous-visual-line)
-(define-key evil-normal-state-map "gj" 'evil-next-line)
-(define-key evil-normal-state-map "gk" 'evil-previous-line)
-
 (define-key evil-normal-state-map "gc" 'gf/end-of-sentence-to-comma)
 (define-key evil-normal-state-map "gs" 'gf/comma-to-end-of-sentence)
 (define-key evil-normal-state-map "]s" 'flyspell-goto-next-error)

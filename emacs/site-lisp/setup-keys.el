@@ -88,6 +88,13 @@
    "TAB" 'previous-buffer)
 
   (general-define-key
+   :states '(normal visual)
+   "j" 'evil-next-visual-line
+   "k" 'evil-previous-visual-line
+   "gj" 'evil-next-line
+   "gk" 'evil-previous-line)
+
+  (general-define-key
    "M-q" 'gf/close-buffer-other-window
    "M-x" 'counsel-M-x))
 
