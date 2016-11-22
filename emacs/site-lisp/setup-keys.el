@@ -48,6 +48,7 @@
    "p" '(:ignore t :which-key "projects")
    "pk" 'projectile-kill-buffers
    "ps" 'projectile-switch-project
+   "pr" 'projectile-replace
 
    "q" '(:ignore t :which-key "quitting")
    "qf" 'delete-frame
@@ -74,6 +75,7 @@
    "v" '(er/expand-region :which-key "expand-region")
 
    "w" '(:ignore t :which-key "windows")
+   "wd" 'delete-window
    "wm" '(delete-other-windows :which-key "maximise window")
    "wu" 'winner-undo
 
