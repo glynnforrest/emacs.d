@@ -3,6 +3,15 @@
   :config
   (setq magit-log-arguments '("-n256" "--decorate"))
   (setq inhibit-magit-revert t)
+
+  (general-define-key
+   :states '(normal)
+   :keymaps 'magit-blame-mode-map
+   "b" 'magit-blame
+   "j" 'magit-blame-next-chunk
+   "k" 'magit-blame-previous-chunk
+   "y" 'magit-blame-copy-hash)
+
   (use-package evil-magit :ensure t))
 
 (use-package git-gutter :ensure t

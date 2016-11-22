@@ -31,6 +31,7 @@
    "fs" 'save-buffer
 
    "g" '(:ignore t :which-key "git")
+   "gb" 'magit-blame
    "gs" 'magit-status
    "gt" '(gf/git-timemachine :which-key "git-timemachine")
 
