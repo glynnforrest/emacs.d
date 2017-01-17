@@ -251,6 +251,10 @@ OFFSET is t for next month, or nil for previous month."
   (interactive)
   (find-file (concat org-directory "dates/" (gf/org-calculate-month-file-offset (buffer-file-name-body) nil) ".org")))
 
+(defun gf/find-org-info-file ()
+  "Open info.org, full of delicious secrets."
+  (interactive)
+  (find-file (concat org-directory "topics/info.org")))
 
   ;; (defun gf/create-project-branch-from-org-heading ()
   ;;   "Create a git feature branch for the current org heading. The project is guessed from the current org file.")

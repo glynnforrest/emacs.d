@@ -41,6 +41,7 @@
 
    "o" '(:ignore t :which-key "org")
    "oc" 'org-capture
+   "oi" '(gf/find-org-info-file :which-key "open info file")
    "oN" 'gf/commit-notes
    "om" 'gf/find-current-month-notes-file
    "op" 'gf/toggle-switch-to-project-org-file
