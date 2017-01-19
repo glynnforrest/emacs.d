@@ -2,4 +2,4 @@
 # name: assertInstanceOf
 # key: ai
 # --
-$this->assertInstanceOf('${1:Class\Name}', ${2:$actual});$0
+$this->assertInstanceOf(${1:Class\Name}::class, ${2:$actual});$0
