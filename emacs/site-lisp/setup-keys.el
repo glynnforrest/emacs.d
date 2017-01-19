@@ -12,8 +12,9 @@
    "a" 'counsel-imenu
 
    "b" '(:ignore t :which-key "buffers")
-   "bd" 'kill-this-buffer
    "bb" 'switch-to-buffer
+   "bd" 'kill-this-buffer
+   "bD" 'kill-matching-buffers
 
    "e" '(:ignore t :which-key "emacs/eval")
    "eb" 'eval-buffer
@@ -34,6 +35,8 @@
    "gb" 'magit-blame
    "gs" 'magit-status
    "gt" '(gf/git-timemachine :which-key "git-timemachine")
+
+   "G" 'git-gutter:revert-hunk
 
    "l" 'evil-lisp-state
 
@@ -73,6 +76,8 @@
    "T" 'try-code
 
    "u" 'universal-argument
+   "U" 'undo-tree-visualize
+
    "v" '(er/expand-region :which-key "expand-region")
 
    "w" '(:ignore t :which-key "windows")
@@ -97,6 +102,11 @@
    "k" 'evil-previous-visual-line
    "gj" 'evil-next-line
    "gk" 'evil-previous-line)
+
+  (general-define-key
+   :states '(insert)
+   "C-a" 'beginning-of-line
+   "C-e" 'end-of-line)
 
   (general-define-key
    "M-q" 'gf/close-buffer-other-window
