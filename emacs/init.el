@@ -49,6 +49,7 @@
 (require 'setup-os)
 (require 'setup-edit-server)
 (require 'setup-multiple-cursors)
+(require 'setup-tmux)
 
 ;; Load personal config if available, like usernames and passwords
 (require 'setup-personal nil t)

@@ -60,6 +60,8 @@
    "qQ" 'gf/save-buffers-kill-emacs-no-prompt
    "qr" 'restart-emacs
 
+   "r" 'gf/tmux-execute-last-command
+
    "R" '(hydra-rotate-text/body :which-key "rotate text")
 
    "s" '(:ignore t :which-key "search")
