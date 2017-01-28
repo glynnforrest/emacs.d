@@ -76,14 +76,14 @@
 (defun gf/php-insert-use-class ()
   "Add a class to the use declarations in the current file."
   (interactive)
-  (gf/php-add-use-class (ivy-read
+  (gf/php-add-use-class (helm-comp-read
                   "Class: "
                   (gf/php-class-candidates))))
 
 (defun gf/php-insert-class ()
   "Insert a class name in the current projectile project."
   (interactive)
-  (let ((class (ivy-read
+  (let ((class (helm-comp-read
                 "Class: "
                 (gf/php-class-candidates))))
     (insert class)))
@@ -135,7 +135,7 @@
 (defun gf/php-insert-symfony-service ()
   "Insert a service name for the current symfony project."
   (interactive)
-  (let ((service (ivy-read
+  (let ((service (helm-comp-read
                   "Service: "
                   (gf/candidates-from-command "php bin/console debug:container | sed -E 's/^ +//g' | cut -d ' ' -f 1"))))
     (insert service)))
@@ -143,7 +143,7 @@
 (defun gf/php-insert-neptune-service ()
   "Insert a service name for the current neptune php project."
   (interactive)
-  (let ((service (ivy-read
+  (let ((service (helm-comp-read
                   "Service: "
                   (gf/candidates-from-command "php neptune service:list -N | tail -n +2"))))
     (insert service)))
@@ -160,7 +160,7 @@
 (defun gf/php-insert-symfony-route ()
   "Insert a route name for the current symfony project."
   (interactive)
-  (let ((candidate (ivy-read
+  (let ((candidate (helm-comp-read
                     "Route: "
                     (gf/candidates-from-command "php bin/console debug:router | sed -E 's/^ +//g' |  cut -d ' ' -f 1 | tail -n +3"))))
     (insert candidate)))
