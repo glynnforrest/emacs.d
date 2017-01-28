@@ -12,7 +12,7 @@
    "a" 'helm-imenu
 
    "b" '(:ignore t :which-key "buffers")
-   "bb" 'switch-to-buffer
+   "bb" 'helm-mini
    "bd" 'kill-this-buffer
    "bD" 'kill-matching-buffers
 

@@ -5,11 +5,18 @@
   (setq helm-move-to-line-cycle-in-source nil
         helm-split-window-default-side 'other
         helm-split-window-in-side-p t
+        helm-display-header-line nil
         helm-candidate-number-limit 200
         helm-M-x-requires-pattern 0
-        helm-google-suggest-use-curl-p t)
+        helm-net-prefer-curl-p t
+        helm-buffer-max-length nil
+        helm-autoresize-max-height 30
+        helm-autoresize-min-height 30)
+
+  (set-face-attribute 'helm-source-header nil :height 0.1)
 
   (helm-mode)
+  (helm-autoresize-mode t)
 
 
   (general-define-key
