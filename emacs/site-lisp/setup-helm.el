@@ -1,5 +1,6 @@
 ;; https://tuhdo.github.io/helm-intro.html has great helm tips.
 (use-package helm :ensure t
+  :diminish ""
   :config
 
   (setq helm-move-to-line-cycle-in-source nil
