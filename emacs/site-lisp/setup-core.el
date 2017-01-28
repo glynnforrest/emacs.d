@@ -8,7 +8,6 @@
 ;; enable/disable built-in modes
 (column-number-mode t)
 (delete-selection-mode t)
-(global-auto-revert-mode t)
 (global-hl-line-mode t)
 (recentf-mode t)
 (savehist-mode t)
@@ -16,6 +15,11 @@
 (tooltip-mode nil)
 (winner-mode t)
 (xterm-mouse-mode t)
+
+(use-package autorevert
+  :diminish ""
+  :config
+  (global-auto-revert-mode t))
 
 ;; sensible defaults 
 (fset 'yes-or-no-p 'y-or-n-p)
