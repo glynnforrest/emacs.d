@@ -11,8 +11,8 @@
 
   ;; Final newline is important
   ;; http://robots.thoughtbot.com/no-newline-at-end-of-file
-  (setq require-final-newline nil)
-  (setq mode-require-final-newline nil)
+  (setq require-final-newline t)
+  (setq mode-require-final-newline t)
   (ws-butler-global-mode t))
 
 (defun gf/indent-buffer ()
