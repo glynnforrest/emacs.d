@@ -27,7 +27,7 @@ class `(buffer-file-name-body)` extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => '$1',
+            'data_class' => ${1:Class\Name}::class,
         ]);
     }
 }

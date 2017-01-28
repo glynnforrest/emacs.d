@@ -4,14 +4,14 @@
 # --
 <?php
 
-namespace ${1:`(gf/php-current-file-namespace)`};
+namespace `(gf/php-current-file-namespace)`;
 
 /**
- * ${2:`(buffer-file-name-body)`}
+ * `(buffer-file-name-body)`
  *
  * @author Glynn Forrest <me@glynnforrest.com>
  **/
-class $2 extends \PHPUnit_Framework_TestCase
+class `(buffer-file-name-body)` extends \PHPUnit_Framework_TestCase
 {
     public function setUp()
     {
