@@ -9,7 +9,7 @@
    :prefix "SPC"
    :non-normal-prefix "M-SPC"
 
-   "a" 'counsel-imenu
+   "a" 'helm-imenu
 
    "b" '(:ignore t :which-key "buffers")
    "bb" 'switch-to-buffer
@@ -22,12 +22,12 @@
    "f" '(:ignore t :which-key "files")
    "fD" 'delete-current-buffer-file
    "fe" 'gf/find-emacs-d-file
-   "ff" 'find-file
+   "ff" 'helm-find-files
    "fi" '(gf/open-init-file :which-key "open init.el")
-   "fI" '(gf/open-personal-file :which-key "open setup-personal")
+   "fI" '(gf/open-personal-file :which-key "open setup-personal.el")
    "fo" 'gf/find-notes-file
    "fp" 'projectile-find-file
-   "fr" 'counsel-recentf
+   "fr" 'helm-recentf
    "fR" 'rename-current-buffer-file
    "fs" 'save-buffer
 
@@ -110,7 +110,7 @@
 
   (general-define-key
    "M-q" 'gf/close-buffer-other-window
-   "M-x" 'counsel-M-x))
+   "M-x" 'helm-M-x))
 
 (provide 'setup-keys)
 

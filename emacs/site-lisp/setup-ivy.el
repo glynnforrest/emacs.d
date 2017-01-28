@@ -10,8 +10,7 @@
   (setq ivy-count-format "")
   (setq ivy-initial-inputs-alist nil)
   (setq ivy-re-builders-alist
-	'((t   . ivy--regex-ignore-order)))
-  (setq projectile-completion-system 'ivy))
+    '((t   . ivy--regex-ignore-order))))
 
 (use-package counsel :ensure t)
 

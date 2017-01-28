@@ -10,18 +10,15 @@
 ;; Normal mode
 
 (evil-leader/set-key
-  "a" 'helm-imenu
   "C" 'cd
   "d" 'dired
   "e" 'gf/maybe-eval-region
-  "F" 'helm-find-files
   "f" 'helm-projectile
   ",f" 'helm-ls-git-ls
   "m" 'ace-jump-line-mode
   "M" 'ace-jump-mode
   "n" 'gf/narrow-or-widen
   "N" 'narrow-to-defun
-  "r" 'helm-recentf
   "S" 'gf/split-window-and-move-below
   "s" 'gf/split-window-and-move-right
   "q" 'evil-quit

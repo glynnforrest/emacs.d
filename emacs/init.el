@@ -20,7 +20,7 @@
 (require 'setup-appearance)
 (require 'setup-git)
 (require 'setup-whitespace)
-(require 'setup-ivy)
+(require 'setup-helm)
 (require 'setup-org)
 (require 'setup-projects)
 (require 'setup-defuns)
