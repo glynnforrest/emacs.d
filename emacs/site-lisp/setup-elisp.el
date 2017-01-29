@@ -5,7 +5,7 @@
    :keymaps 'lisp-mode-shared-map
    "M-RET" 'lisp-describe-thing-at-point))
 
-(use-package el-autoyas
+(use-package el-autoyas :ensure t
   :defer t
   :commands (el-autoyas-enable)
   :init
