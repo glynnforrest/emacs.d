@@ -25,7 +25,14 @@
    :keymaps 'css-mode-map
    :prefix gf/major-mode-leader-key
    :non-normal-prefix gf/major-mode-non-normal-leader-key
-   "e" 'skewer-css-eval-current-rule))
+   "e" 'skewer-css-eval-current-rule)
+
+  (general-define-key
+   :states '(normal visual insert emacs)
+   :keymaps 'css-mode-map
+   :prefix "SPC"
+   :non-normal-prefix "M-SPC"
+   "a" 'helm-css-scss))
 
 (use-package scss-mode :ensure t
   :mode ("\\.scss\\'" . scss-mode)

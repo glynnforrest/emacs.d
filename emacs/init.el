@@ -62,10 +62,7 @@
 ;;         ag
 ;;         auto-complete
 ;;         dired+
-;;         emamux
 ;;         epl
-;;         helm
-;;         helm-css-scss
 ;;         helm-dash
 ;;         impatient-mode
 ;;         keychain-environment

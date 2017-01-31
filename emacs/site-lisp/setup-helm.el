@@ -34,6 +34,10 @@
      "C-l" 'helm-execute-persistent-action
      "C-h" 'helm-find-files-up-one-level)))
 
+(use-package helm-css-scss :ensure t
+  :config
+  (setq helm-css-scss-split-with-multiple-windows nil))
+
 ;; helm-ls-git can be used for grep / occur on many files at a time
 ;; (require 'helm-ls-git)
 
