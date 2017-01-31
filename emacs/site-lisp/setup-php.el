@@ -11,7 +11,7 @@
    "s" 'gf/php-insert-service
    "r" 'gf/php-insert-symfony-route)
 
-(general-define-key
+  (general-define-key
    :states '(normal visual insert emacs)
    :prefix "SPC"
    :non-normal-prefix "M-SPC"
@@ -21,10 +21,9 @@
   (general-define-key
    :states '(insert emacs)
    :keymaps 'php-mode-map
-   "C-c l" 'yas/create-php-snippet))
+   "C-c l" 'yas/create-php-snippet)
 
-(use-package php-auto-yasnippets :ensure t
-  :after php-mode)
+  (use-package php-auto-yasnippets :ensure t))
 
 ;; (defun test-this-or-related-php-file ()
 ;;   "Run test-case-run on the current buffer, or the related test case
@@ -77,8 +76,8 @@
   "Add a class to the use declarations in the current file."
   (interactive)
   (gf/php-add-use-class (helm-comp-read
-                  "Class: "
-                  (gf/php-class-candidates))))
+                         "Class: "
+                         (gf/php-class-candidates))))
 
 (defun gf/php-insert-class ()
   "Insert a class name in the current projectile project."
