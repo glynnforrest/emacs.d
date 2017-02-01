@@ -116,13 +116,7 @@
 
 (provide 'setup-keys)
 
-;; (evil-declare-key 'normal org-mode-map (kbd "C-t") 'org-shiftright)
-;; (evil-declare-key 'insert org-mode-map (kbd "C-t") 'org-shiftright)
-;; (evil-declare-key 'normal org-mode-map (kbd "C-S-t") 'org-shiftleft)
-;; (evil-declare-key 'insert org-mode-map (kbd "C-S-t") 'org-shiftleft)
-
 ;; (evil-declare-key 'normal org-mode-map (kbd "gn") 'gf/org-go-to-next-task)
-;; (define-key org-mode-map (kbd "C-c t") 'org-todo)
 
 ;; (evil-declare-key 'insert org-mode-map (kbd "M-<return>") (lambda()
 ;;                                 (interactive)
@@ -152,14 +146,6 @@
 ;; (define-key org-mode-map (kbd "C-c g") 'gf/org-end-of-section)
 ;; (define-key org-mode-map (kbd "C-c J") 'org-forward-heading-same-level)
 ;; (define-key org-mode-map (kbd "C-c K") 'org-backward-heading-same-level)
-
-;; (evil-declare-key 'normal org-mode-map "^" 'gf/evil-org-beginning-of-line)
-;; (evil-declare-key 'normal org-mode-map "I"
-;;   (lambda ()
-;;     (interactive)
-;;     (gf/evil-org-beginning-of-line)
-;;     (evil-insert 1)
-;;     ))
 
 ;; (evil-declare-key 'normal org-mode-map ",N" 'org-narrow-to-subtree)
 

@@ -73,14 +73,29 @@ running emacs instance."
     (org-forward-element 1)
     (previous-line 1))
 
-  (defun gf/evil-org-beginning-of-line ()
+  (defun gf/org-beginning-of-line ()
     "Move to the beginning of the line in an org-mode file, ignoring
 TODO keywords, stars and list indicators."
     (interactive)
     (beginning-of-line)
     (if (looking-at-p " ") (evil-forward-word-begin))
     (if (looking-at-p "*") (evil-forward-word-begin))
-    (if (looking-at-p "TODO\\|DONE\\|NEXT\\|WAITING") (evil-forward-word-begin)))
+    (if (looking-at-p "TODO\\|DONE\\|NEXT\\|WAITING\\|CANCELLED") (evil-forward-word-begin)))
+
+  (defun gf/org-insert-beginning-of-line ()
+    "Run `gf/org-beginning-of-line` and change to insert state."
+    (interactive)
+    (gf/org-beginning-of-line)
+    (evil-insert-state t))
+
+  (defun gf/org-change-line ()
+    "Change the current line, keeping any org headers and todo titles."
+    (interactive)
+    (org-show-subtree)
+    (end-of-line)
+    (let ((eol (point)))
+      (gf/org-beginning-of-line)
+      (evil-change (point) eol)))
 
   (defun gf/org-go-to-next-task ()
     "Go to the first org item in the buffer tagged as `NEXT`."
@@ -286,6 +301,9 @@ OFFSET is t for next month, or nil for previous month."
   (general-define-key
    :states '(normal visual)
    :keymaps 'org-mode-map
+   "^" 'gf/org-beginning-of-line
+   "I" 'gf/org-insert-beginning-of-line
+   "S" 'gf/org-change-line
    "t" 'org-todo
    "TAB" 'org-cycle))
 
