@@ -48,6 +48,7 @@
    "oN" 'gf/commit-notes
    "om" 'gf/find-current-month-notes-file
    "op" 'gf/toggle-switch-to-project-org-file
+   "os" 'org-search-view
 
    "p" '(:ignore t :which-key "projects")
    "pk" 'projectile-kill-buffers
@@ -66,7 +67,6 @@
 
    "s" '(:ignore t :which-key "search")
    "sp" 'counsel-ag
-   "so" 'org-search-view
 
    "t" '(:ignore t :which-key "toggle")
    "tr" '(rainbow-mode)
@@ -131,9 +131,6 @@
 ;; (evil-declare-key 'normal org-mode-map (kbd "<return>") 'org-open-at-point)
 ;; (evil-declare-key 'normal org-mode-map (kbd "RET") 'org-open-at-point)
 
-;; (define-key org-mode-map (kbd "C-S-<up>") 'delete-other-windows)
-;; (define-key org-mode-map (kbd "C-j") 'evil-window-down)
-;; (define-key org-mode-map (kbd "C-k") 'evil-window-up)
 ;; (define-key global-map (kbd "C-c a") 'org-agenda)
 
 ;; (define-key global-map (kbd "C-c l") 'org-store-link)
