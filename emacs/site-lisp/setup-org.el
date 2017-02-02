@@ -226,35 +226,25 @@ current project."
         (puthash file (current-buffer) gf/previous-project-buffers)
         (find-file file))))
 
+(defvar gf/org-months '("january" "february" "march" "april" "may" "june" "july" "august" "september" "october" "november" "december"))
+
 (defun gf/org-calculate-month-file-offset (filename offset)
   "Calculate the name of the neighbouring month file to FILENAME.
 
 FILENAME is expected to be of the form <year>-<monthname>, e.g. 2016-november.
 
 OFFSET is t for next month, or nil for previous month."
-  (let* ((months '("january"
-                   "february"
-                   "march"
-                   "april"
-                   "may"
-                   "june"
-                   "july"
-                   "august"
-                   "september"
-                   "october"
-                   "november"
-                   "december"))
-         (pieces (split-string filename "-"))
+  (let* ((pieces (split-string filename "-"))
          (year (string-to-number (car pieces)))
          (month (cadr pieces))
-         (month-number (position month months :test 'equal)))
+         (month-number (position month gf/org-months :test 'equal)))
     (if offset
         (if (eq month-number 11)
             (concat (number-to-string (+ year 1)) "-january")
-          (concat (number-to-string year) "-" (nth (+ month-number 1) months)))
+          (concat (number-to-string year) "-" (nth (+ month-number 1) gf/org-months)))
       (if (eq month-number 0)
           (concat (number-to-string (- year 1)) "-december")
-        (concat (number-to-string year) "-" (nth (- month-number 1) months))))))
+        (concat (number-to-string year) "-" (nth (- month-number 1) gf/org-months))))))
 
 (defun gf/org-go-to-next-month ()
   "Go to the next month org file."
