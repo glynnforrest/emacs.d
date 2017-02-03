@@ -256,6 +256,70 @@ OFFSET is t for next month, or nil for previous month."
   (interactive)
   (find-file (concat org-directory "dates/" (gf/org-calculate-month-file-offset (buffer-file-name-body) nil) ".org")))
 
+(use-package time-ext :ensure t)
+
+(defun gf/org-previous-month-name-from-filename (filename)
+  (when (stringp filename)
+    (let ((index (position (cadr (split-string filename "-")) gf/org-months :test 'equal)))
+      (capitalize
+       (if (eq 0 index) "december" (nth (- index 1) gf/org-months))))))
+
+(defun gf/org-generate-weekly-reviews (filename)
+  "Generate org task headers for weekly reviews for the given notes file FILENAME.
+
+FILENAME is expected to be of the form <year>-<monthname>, e.g. 2016-november."
+  (when (stringp filename)
+    (string-join
+     (mapcar
+      (lambda(i)
+        (concat
+         "** TODO Review of week beginning " i "\n"
+         "*** TODO Write up notes from notebook\n"
+         "*** TODO Import notes from email\n"
+         "*** TODO Log work, timesheets, goal tracking\n"
+         "*** TODO Cleanup downloads folder and home directory\n"
+         "*** TODO Backups\n"
+         "*** TODO Record taxable income and expenses, save 30% of income"
+         ))
+      (mapcar (lambda (date)
+                (format "%d%s of %s" (nth 3 date) (ordinal-suffix (nth 3 date)) (capitalize (nth (- (nth 4 date) 1) gf/org-months))))
+              (gf/org-week-starts filename)))
+     "\n")))
+
+(defun gf/org-week-starts (filename)
+  "Get the mondays from weeks that intersect a given month for notes file FILENAME.
+
+This will also include a monday from the previous month, if the week
+intersects with the current month.
+
+Dates are returned in the style from `decode-time'."
+  (when (stringp filename)
+    (let* ((pieces (split-string filename "-"))
+           (year (string-to-number (car pieces)))
+           (month (cadr pieces))
+           (month-number (+ 1 (position month gf/org-months :test 'equal)))
+           (dates '()))
+      (progn
+        ;; get all sundays in the month
+        (let ((date (decode-time (next-nweek 0 (parse-time-string (format "1:00:00 %d %s %d" 1 month year))))))
+          (while (eq month-number (nth 4 date))
+            (setq dates (append dates (list date)))
+            (setq date (decode-time (time-add-day date 7)))))
+
+        ;; account for the 1st being a Sunday, and skipped by next-nweek (first will be 8th)
+        (when (eq 8 (nth 3 (car dates)))
+          (push (decode-time (time-add-day (car dates) -7)) dates))
+
+        ;; subtract 6 days to get the week beginning for every sunday
+        (mapcar (lambda (date) (decode-time (time-add-day date -6))) dates)))))
+
+;; from `diary.el' (`diary-ordinal-suffix')
+(defun ordinal-suffix (n)
+  "Ordinal suffix for N. That is, `st', `nd', `rd', or `th', as appropriate."
+  (if (or (memq (% n 100) '(11 12 13)) (< 3 (% n 10)))
+      "th"
+    (aref ["th" "st" "nd" "rd"] (% n 10))))
+
 (defun gf/find-org-info-file ()
   "Open info.org, full of delicious secrets."
   (interactive)

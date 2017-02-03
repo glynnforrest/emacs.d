@@ -3,36 +3,9 @@
 # key: monthly-file
 # --
 * Tasks
-** NEXT Review of ${1:month}
+** NEXT Review of `(gf/org-previous-month-name-from-filename (buffer-file-name-body))`$0
 *** TODO Import uncompleted tasks
 *** TODO Update someday file
 *** TODO Review goals set at the start of the year
-** TODO Review of week beginning $2
-*** TODO Write up notes from notebook
-*** TODO Import notes from email
-*** TODO Log work, timesheets, goal tracking
-*** TODO Cleanup downloads folder and home directory
-*** TODO Backups
-*** TODO Record taxable income and expenses, save 30% of income
-** TODO Review of week beginning $3
-*** TODO Write up notes from notebook
-*** TODO Import notes from email
-*** TODO Log work, timesheets, goal tracking
-*** TODO Cleanup downloads folder and home directory
-*** TODO Backups
-*** TODO Record taxable income and expenses, save 30% of income
-** TODO Review of week beginning $4
-*** TODO Write up notes from notebook
-*** TODO Import notes from email
-*** TODO Log work, timesheets, goal tracking
-*** TODO Cleanup downloads folder and home directory
-*** TODO Backups
-*** TODO Record taxable income and expenses, save 30% of income
-** TODO Review of week beginning $5
-*** TODO Write up notes from notebook
-*** TODO Import notes from email
-*** TODO Log work, timesheets, goal tracking
-*** TODO Cleanup downloads folder and home directory
-*** TODO Backups
-*** TODO Record taxable income and expenses, save 30% of income
+`(gf/org-generate-weekly-reviews (buffer-file-name-body))`
 * Notes
