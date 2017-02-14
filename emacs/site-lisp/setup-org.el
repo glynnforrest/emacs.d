@@ -278,8 +278,8 @@ FILENAME is expected to be of the form <year>-<monthname>, e.g. 2016-november."
          "*** TODO Import notes from email\n"
          "*** TODO Log work, timesheets, goal tracking\n"
          "*** TODO Cleanup downloads folder and home directory\n"
-         "*** TODO Backups\n"
-         "*** TODO Record taxable income and expenses, save 30% of income"
+         "*** TODO Record taxable income and expenses, save 30% of income\n"
+         "*** TODO Backups"
          ))
       (mapcar (lambda (date)
                 (format "%d%s of %s" (nth 3 date) (ordinal-suffix (nth 3 date)) (capitalize (nth (- (nth 4 date) 1) gf/org-months))))
