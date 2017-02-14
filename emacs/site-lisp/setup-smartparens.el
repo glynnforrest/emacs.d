@@ -2,8 +2,8 @@
   :commands (sp-split-sexp sp-newline sp-up-sexp)
 
   :init
-  (add-hook 'prog-mode-hook 'smartparens-strict-mode)
-  (add-hook 'comint-mode-hook 'smartparens-strict-mode)
+  (add-hook 'prog-mode-hook 'smartparens-mode)
+  (add-hook 'comint-mode-hook 'smartparens-mode)
 
   :config
   (progn
