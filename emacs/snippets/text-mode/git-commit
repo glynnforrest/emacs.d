@@ -2,4 +2,4 @@
 # name: git commit
 # key: g
 # --
-${1:$$(yas-choose-value '("feat" "fix" "docs" "style" "refactor" "test" "chore"))}(${2:context}): $0
+`(yas-choose-value '("feat" "fix" "docs" "style" "refactor" "test" "chore"))`(${1:scope}): $0
