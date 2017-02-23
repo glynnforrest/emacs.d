@@ -2,6 +2,6 @@
 # name: salt-if
 # key: if
 # --
-{% if ${1:True} %}
+{%- if ${1:True} %}
 $0
-{% endif %}
+{%- endif %}

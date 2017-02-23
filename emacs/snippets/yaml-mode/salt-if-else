@@ -2,7 +2,7 @@
 # name: salt-if-else
 # key: ife
 # --
-{% if ${1:True} %}
+{%- if ${1:True} %}
 $0
-{% else %}
-{% endif %}
+{%- else %}
+{%- endif %}
