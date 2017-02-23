@@ -55,6 +55,8 @@
    "ps" 'projectile-switch-project
    "pr" 'projectile-replace
 
+   "P" 'helm-show-kill-ring
+
    "q" '(:ignore t :which-key "quitting")
    "qf" 'delete-frame
    "qq" 'save-buffers-kill-emacs
@@ -96,6 +98,7 @@
    "=" 'gf/indent-buffer
    "+" 'gf/indent-cleanup-buffer
    ";" 'evilnc-comment-or-uncomment-lines
+   "\\" 'align-regexp
    "TAB" 'previous-buffer)
 
   (general-define-key
