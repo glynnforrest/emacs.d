@@ -42,6 +42,7 @@
 (require 'setup-apache)
 (require 'setup-comments)
 (require 'setup-smartparens)
+(require 'setup-company)
 (require 'setup-try-code)
 (require 'setup-rotate-text)
 (require 'setup-lilypond)
