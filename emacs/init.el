@@ -21,6 +21,7 @@
 (require 'setup-git)
 (require 'setup-whitespace)
 (require 'setup-helm)
+(require 'setup-helm-dash)
 (require 'setup-org)
 (require 'setup-projects)
 (require 'setup-defuns)
@@ -64,7 +65,6 @@
 ;;         auto-complete
 ;;         dired+
 ;;         epl
-;;         helm-dash
 ;;         impatient-mode
 ;;         keychain-environment
 ;;         php-eldoc
