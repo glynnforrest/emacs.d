@@ -11,6 +11,13 @@
       (setq yaml-indent-offset 4))
     (message "Yaml indentation is now %s spaces" yaml-indent-offset))
 
+  (defun gf/helm-dash-yaml ()
+    (interactive)
+    (if (s-ends-with? ".sls" (buffer-file-name))
+        (setq-local helm-dash-docsets '("Saltstack"))
+      (setq-local helm-dash-docsets '("Ansible"))))
+  (add-hook 'yaml-mode-hook 'gf/helm-dash-yaml)
+
   (general-define-key
    :states '(normal visual insert emacs)
    :prefix gf/major-mode-leader-key

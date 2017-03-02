@@ -23,6 +23,11 @@
    :keymaps 'php-mode-map
    "C-c l" 'yas/create-php-snippet)
 
+  (defun gf/helm-dash-php ()
+    (interactive)
+    (setq-local helm-dash-docsets '("PHP" "PHPUnit" "Symfony")))
+  (add-hook 'php-mode-hook 'gf/helm-dash-php)
+
   (use-package php-auto-yasnippets :ensure t))
 
 ;; (defun test-this-or-related-php-file ()

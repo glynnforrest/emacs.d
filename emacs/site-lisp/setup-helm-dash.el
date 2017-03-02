@@ -47,11 +47,6 @@
 
 (provide 'setup-helm-dash)
 
-;; (defun helm-dash-php ()
-;;   (interactive)
-;;   (setq-local helm-dash-docsets '("PHP" "PHPUnit" "Symfony" "Twig")))
-;; (add-hook 'php-mode-hook 'helm-dash-php)
-
 ;; (defun helm-dash-js ()
 ;;   (interactive)
 ;;   (setq-local helm-dash-docsets '("JavaScript" "BackboneJS" "jQuery")))
@@ -72,10 +67,3 @@
 ;;   (interactive)
 ;;   (setq-local helm-dash-docsets '("Bash")))
 ;; (add-hook 'sh-mode-hook 'helm-dash-shell)
-
-;; (defun helm-dash-yaml ()
-;;   (interactive)
-;;   (if (s-ends-with? ".sls" (buffer-file-name))
-;;       (setq-local helm-dash-docsets '("Saltstack"))
-;;     (setq-local helm-dash-docsets '("Ansible"))))
-;; (add-hook 'yaml-mode-hook 'helm-dash-yaml)
