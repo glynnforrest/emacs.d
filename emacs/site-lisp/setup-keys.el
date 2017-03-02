@@ -66,9 +66,8 @@
    "qQ" 'gf/save-buffers-kill-emacs-no-prompt
    "qr" 'restart-emacs
 
-   "r" 'gf/tmux-execute-last-command
-
-   "R" '(hydra-rotate-text/body :which-key "rotate text")
+   "r" 'gf/tmux-run-last
+   "R" 'gf/tmux-run
 
    "s" '(:ignore t :which-key "search")
    "sp" 'counsel-ag
@@ -101,6 +100,7 @@
    "=" 'gf/indent-buffer
    "+" 'gf/indent-cleanup-buffer
    ";" 'evilnc-comment-or-uncomment-lines
+   "*" '(hydra-rotate-text/body :which-key "rotate text")
    "\\" 'align-regexp
    "TAB" 'previous-buffer)
 
