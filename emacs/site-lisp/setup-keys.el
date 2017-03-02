@@ -16,6 +16,9 @@
    "bd" 'kill-this-buffer
    "bD" 'kill-matching-buffers
 
+   "d" 'helm-dash
+   "D" 'helm-dash-at-point
+
    "e" '(:ignore t :which-key "emacs/eval")
    "eb" 'eval-buffer
 
