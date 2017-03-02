@@ -212,8 +212,14 @@ alias psgr='ps -A | grep -i'
 
 #Copy a file to Desktop to make temporary changes, e.g. rename it
 #before sending to someone
+#with no args, just go to desktop
 desk() {
+if test $# -ne 1
+then
+    cd ~/Desktop/
+else
     cp -v $1 ~/Desktop/
+fi;
 }
 
 # Combine pdfs
