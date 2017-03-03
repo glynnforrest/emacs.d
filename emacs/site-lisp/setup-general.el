@@ -2,15 +2,6 @@
 
 (require 'ace-jump-mode)
 
-;; Highlight merge conflicts
-(defun sm-try-smerge ()
-  (save-excursion
-    (goto-char (point-min))
-    (when (re-search-forward "^<<<<<<< " nil t)
-      (smerge-mode 1))))
-
-(add-hook 'find-file-hook 'sm-try-smerge)
-
 ;; Automatically create directories when creating a file
 (defadvice find-file (before make-directory-maybe (filename &optional wildcards) activate)
   "Create parent directory if not exists while visiting file."
