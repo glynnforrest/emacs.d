@@ -4,9 +4,6 @@
   (setq org-directory "~/notes/")
   (setq org-listen-read-watch-file (concat org-directory "topics/listen-read-watch.org"))
 
-  (setq org-files (append (file-expand-wildcards (concat org-directory "*/*.org"))
-                          (file-expand-wildcards (concat org-directory "*/*/*.org"))))
-
   ;; Split up the search string on whitespace
   (setq org-agenda-search-view-always-boolean t)
 
@@ -17,6 +14,9 @@
 running emacs instance."
     (interactive)
     (setq gf/current-month-notes-last-visited nil)
+    (setq org-files (append (file-expand-wildcards (concat org-directory "*/*.org"))
+                            (file-expand-wildcards (concat org-directory "*/*/*.org"))))
+
     ;; Notes are grouped by month in dates/ for automatic archival.
     ;; At the start of every month, move over notes that are still relevant.
     ;; Agenda files are only used for searching - this setup is
