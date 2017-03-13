@@ -145,6 +145,14 @@ alias gme='git merge'
 alias gdi='git diff'
 alias gsu='git submodule'
 
+git-since () {
+    git log --oneline --pretty=format:"%h - %an, %ad : %s" --since="$1"
+}
+
+git-between () {
+    git log --oneline --pretty=format:"%h - %an, %ad : %s" --since="$1" --until="$2"
+}
+
 # TMUX
 alias code='tmux new -s'
 
