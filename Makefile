@@ -6,7 +6,9 @@ base: prepare
 	stow -v -t ~ zsh
 	stow -v -t ~ tmux
 
+linux: base
+	stow -v -t ~ xorg
+	stow -v -t ~ xmonad
+
 clean:
-	stow -v -t ~ -D vim
-	stow -v -t ~ -D zsh
-	stow -v -t ~ -D tmux
+	for i in $$(find . -type d -maxdepth 1); do stow -v -t ~ -D $$(basename $$i); done
