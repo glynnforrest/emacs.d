@@ -8,7 +8,6 @@
     ("q" nil "Quit"))
 
   :config
-  (require 'rotate-text)
   (defun gf/clever-rotate-text ()
     "Wrapper to rotate-text that will try the start of the line as well
 as the current word."

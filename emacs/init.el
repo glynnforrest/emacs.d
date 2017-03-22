@@ -62,7 +62,6 @@
 ;;       '(
 ;;         ace-jump-mode
 ;;         ag
-;;         auto-complete
 ;;         dired+
 ;;         epl
 ;;         impatient-mode
