@@ -14,7 +14,7 @@
 (show-paren-mode t)
 (tooltip-mode nil)
 (winner-mode t)
-(xterm-mouse-mode t)
+(xterm-mouse-mode nil)
 
 (use-package autorevert
   :diminish ""
@@ -30,7 +30,7 @@
  echo-keystrokes 0.1
  global-auto-revert-non-file-buffers t
  history-length 1000
- hl-line-sticky-flag 1
+ hl-line-sticky-flag t
  inhibit-startup-message t
  make-backup-files nil
  mouse-wheel-progressive-speed nil
@@ -40,7 +40,7 @@
  scroll-step 1
  shift-select-mode nil
  undo-tree-visualizer-timestamps 1
- x-select-enable-clipboard t)
+ select-enable-clipboard t)
 
 ;; enable normally disabled functions
 (put 'narrow-to-region 'disabled nil)
