@@ -126,7 +126,7 @@
   "Cleanup the style of the current php file with php-cs-fixer."
   (interactive)
   (save-buffer)
-  (shell-command (concat "php-cs-fixer fix " (buffer-file-name)))
+  (shell-command (concat "php-cs-fixer fix --rules=@Symfony --using-cache=false " (buffer-file-name)))
   (let ((point (point)))
     (revert-buffer t t)
     (goto-char point)))
