@@ -6,7 +6,12 @@ base: prepare
 	stow -v -t ~ zsh
 	stow -v -t ~ tmux
 
-linux: base
+media:
+	stow -v -t ~ vimpc
+
+mac: base media
+
+linux: base media
 	stow -v -t ~ xorg
 	stow -v -t ~ xmonad
 
