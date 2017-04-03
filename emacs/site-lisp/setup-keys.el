@@ -33,6 +33,8 @@
    "fr" 'helm-recentf
    "fR" 'rename-current-buffer-file
    "fs" 'save-buffer
+   "fz" '(gf/open-zshrc :which-key "open .zshrc")
+   "fZ" '(gf/open-zshrc-local :which-key "open .zshrc.local")
 
    "g" '(:ignore t :which-key "git")
    "gb" 'magit-blame

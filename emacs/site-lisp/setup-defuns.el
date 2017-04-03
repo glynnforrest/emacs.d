@@ -65,6 +65,14 @@ EXTENSION. Only the last extension of the file is considered."
   (interactive)
   (projectile-find-file-in-directory user-emacs-directory))
 
+(defun gf/open-zshrc ()
+  (interactive)
+  (find-file "~/.zshrc"))
+
+(defun gf/open-zshrc-local ()
+  (interactive)
+  (find-file "~/.zshrc.local"))
+
 (defun gf/find-notes-file ()
   (interactive)
   (projectile-find-file-in-directory org-directory))
