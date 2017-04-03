@@ -341,6 +341,13 @@ Dates are returned in the style from `decode-time'."
    "," 'gf/org-go-to-previous-month)
 
   (general-define-key
+   :states '(normal visual insert emacs)
+   :prefix "SPC"
+   :non-normal-prefix "M-SPC"
+   :keymaps 'org-mode-map
+   "a" 'helm-org-in-buffer-headings)
+
+  (general-define-key
    :states '(normal visual insert)
    :keymaps 'org-mode-map
    "M-l" 'org-metaright
