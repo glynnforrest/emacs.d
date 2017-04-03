@@ -12,9 +12,9 @@
 (recentf-mode t)
 (savehist-mode t)
 (show-paren-mode t)
-(tooltip-mode nil)
+(tooltip-mode -1)
 (winner-mode t)
-(xterm-mouse-mode nil)
+(xterm-mouse-mode -1)
 
 (use-package autorevert
   :diminish ""
