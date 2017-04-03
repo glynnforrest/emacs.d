@@ -97,7 +97,7 @@
    "yi" 'yas-insert-snippet
    "yr" 'yas-reload-all
 
-   "/" 'helm-swoop
+   "/" 'helm-swoop-without-pre-input
    "1" 'other-window
    "=" 'gf/indent-buffer
    "+" 'gf/indent-cleanup-buffer

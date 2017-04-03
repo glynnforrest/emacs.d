@@ -38,7 +38,11 @@
   :config
   (setq helm-css-scss-split-with-multiple-windows nil))
 
-(use-package helm-swoop :ensure t)
+(use-package helm-swoop :ensure t
+  :config
+  (setq helm-swoop-speed-or-color t
+        helm-swoop-split-direction 'split-window-horizontally
+        helm-swoop-use-line-number-face t))
 
 ;; helm-ls-git can be used for grep / occur on many files at a time
 ;; (require 'helm-ls-git)
