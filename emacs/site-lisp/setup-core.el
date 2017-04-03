@@ -38,9 +38,10 @@
  ring-bell-function #'ignore
  scroll-conservatively 10000
  scroll-step 1
+ select-enable-clipboard t
  shift-select-mode nil
  undo-tree-visualizer-timestamps 1
- select-enable-clipboard t)
+ vc-follow-symlinks t)
 
 ;; enable normally disabled functions
 (put 'narrow-to-region 'disabled nil)
