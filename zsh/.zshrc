@@ -239,6 +239,11 @@ else
 fi;
 }
 
+# Download stuff
+dl() {
+    (cd ~/Downloads/; curl -L -O $1)
+}
+
 # Combine pdfs
 # pdf-combine 1.pdf 2.pdf
 # OR
