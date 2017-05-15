@@ -37,20 +37,18 @@ plugins=(git history-substring-search)
 
 source $ZSH/oh-my-zsh.sh
 
+PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
+
 export GOPATH=~/code/go
 
-# Don't mmodify PATH twice when in tmux (it launches another zsh session)
-if test -z $TMUX
-then
-    PATH+=:~/.rvm/bin
-    PATH+=:/usr/bin/core_perl
-    PATH+=:/opt/qt/bin
-    PATH+=:~/.bin
-    PATH+=:~/.composer/vendor/bin
-    PATH+=:/usr/texbin
-    PATH+=:~/.phpenv/bin
-    PATH+=:$GOPATH/bin
-fi
+PATH+=:~/.rvm/bin
+PATH+=:/usr/bin/core_perl
+PATH+=:/opt/qt/bin
+PATH+=:~/.bin
+PATH+=:~/.composer/vendor/bin
+PATH+=:/usr/texbin
+PATH+=:~/.phpenv/bin
+PATH+=:$GOPATH/bin
 
 path () {
     echo $PATH | tr -s ':' '\n'
