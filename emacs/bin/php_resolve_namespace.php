@@ -29,9 +29,10 @@ foreach (getAutoloadPaths($file) as $namespace => $path) {
 }
 
 function getAutoloadPaths($file) {
-    while ($file !== '/') {
-        $file = rtrim(dirname($file), '/'). '/';
-        $composerJson = $file.'composer.json';
+    $dir = $file;
+    while ($dir !== '/') {
+        $dir = rtrim(dirname($dir), '/'). '/';
+        $composerJson = $dir.'composer.json';
         if (!file_exists($composerJson)) {
             continue;
         }
@@ -39,7 +40,20 @@ function getAutoloadPaths($file) {
         if (!isset($config['autoload']['psr-4'])) {
             continue;
         }
-        return $config['autoload']['psr-4'];
+        $paths = $config['autoload']['psr-4'];
+        foreach ($paths as $namespace => $path) {
+            if ($path === '') {
+                //e.g. 'Vendor\FooBundle' => ''
+                // file is src/FooBundle/Entity/Something.php
+                // we want Vendor => 'src'
+                $pieces = explode('\\', trim($namespace, '\\'));
+                $lastNamespaceSegment = end($pieces);
+                $pos = strpos($file, $lastNamespaceSegment);
+                $paths[$namespace] = substr(dirname($file), strlen($path), $pos + strlen($lastNamespaceSegment));
+            }
+        }
+
+        return $paths;
     }
 
     return [];
