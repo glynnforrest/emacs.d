@@ -50,6 +50,10 @@ PATH+=:/usr/texbin
 PATH+=:~/.phpenv/bin
 PATH+=:$GOPATH/bin
 
+if is_mac; then
+    PATH+=:/usr/local/texlive/2016/bin/x86_64-darwin
+fi;
+
 path () {
     echo $PATH | tr -s ':' '\n'
 }
