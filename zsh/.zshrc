@@ -33,9 +33,30 @@ ZSH_THEME="steeef"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git history-substring-search)
+plugins=(git)
 
 source $ZSH/oh-my-zsh.sh
+
+# HELPERS
+is_mac () {
+    test `uname` = "Darwin"
+}
+
+distro () {
+    cat /etc/*release | head -n 1 | cut -d \" -f 2
+}
+
+is_arch () {
+    test distro = "Arch Linux"
+}
+
+is_debian () {
+    test `distro | cut -d ' ' -f 1` = "Debian"
+}
+
+command_exists () {
+    type "$1" &> /dev/null;
+}
 
 PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
 
@@ -70,27 +91,6 @@ fi
 #########################
 # ALIASES AND FUNCTIONS #
 #########################
-
-# HELPERS
-is_mac () {
-    test `uname` = "Darwin"
-}
-
-distro () {
-    cat /etc/*release | head -n 1 | cut -d \" -f 2
-}
-
-is_arch () {
-    test distro = "Arch Linux"
-}
-
-is_debian () {
-    test `distro | cut -d ' ' -f 1` = "Debian"
-}
-
-command_exists () {
-    type "$1" &> /dev/null;
-}
 
 alias sz="source ~/.zshrc"
 alias ez="e ~/.zshrc"
