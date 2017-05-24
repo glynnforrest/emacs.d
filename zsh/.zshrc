@@ -260,6 +260,8 @@ alias clone_lib='cd ~/code/lib && git clone'
 # Sometimes Chrome favicon cache needs a kick
 alias rm_chrome_favicons='rm ~/Library/Application\ Support/Google/Chrome/Default/Favicons'
 
+alias pygment-styles='python -c "from pygments.styles import get_all_styles; print(list(get_all_styles()))"'
+
 # FUN
 alias starwars='telnet towel.blinkenlights.nl'
 alias youtube-mp3="youtube-dl -t --extract-audio --audio-format mp3 --audio-quality 320k"
