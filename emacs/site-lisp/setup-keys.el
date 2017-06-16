@@ -119,6 +119,11 @@
    "C-e" 'end-of-line)
 
   (general-define-key
+   :states '(visual)
+   "<" 'gf/visual-shift-left
+   ">" 'gf/visual-shift-right)
+
+  (general-define-key
    "M-q" 'gf/close-buffer-other-window
    "M-x" 'helm-M-x))
 

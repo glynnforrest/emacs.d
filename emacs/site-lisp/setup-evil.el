@@ -46,6 +46,20 @@
     (recenter))
   (ad-activate 'evil-search-previous)
 
+  (defun gf/visual-shift-left ()
+    "Shift left and keep the region active."
+    (interactive)
+    (call-interactively 'evil-shift-left)
+    (evil-normal-state)
+    (evil-visual-restore))
+
+  (defun gf/visual-shift-right ()
+    "Shift right and keep the region active."
+    (interactive)
+    (call-interactively 'evil-shift-right)
+    (evil-normal-state)
+    (evil-visual-restore))
+
   (add-to-list 'evil-emacs-state-modes 'package-menu-mode)
   (evil-set-initial-state 'package-menu-mode 'normal)
   (evil-set-initial-state 'org-capture-mode 'insert)
