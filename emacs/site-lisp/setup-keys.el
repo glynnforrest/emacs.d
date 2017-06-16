@@ -111,7 +111,10 @@
    "j" 'evil-next-visual-line
    "k" 'evil-previous-visual-line
    "gj" 'evil-next-line
-   "gk" 'evil-previous-line)
+   "gk" 'evil-previous-line
+
+   "M-j" 'move-text-down
+   "M-k" 'move-text-up)
 
   (general-define-key
    :states '(insert)
@@ -121,7 +124,11 @@
   (general-define-key
    :states '(visual)
    "<" 'gf/visual-shift-left
-   ">" 'gf/visual-shift-right)
+   ">" 'gf/visual-shift-right
+
+   ;; fix move-text for visual mode
+   "M-j" (concat ":m '>+1" (kbd "RET") "gv=gv")
+   "M-k" (concat ":m '<-2" (kbd "RET") "gv=gv"))
 
   (general-define-key
    "M-q" 'gf/close-buffer-other-window

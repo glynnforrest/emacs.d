@@ -6,4 +6,6 @@
 
 (add-hook 'find-file-hook 'gf/maybe-smerge)
 
+(use-package move-text :ensure t)
+
 (provide 'setup-misc)
