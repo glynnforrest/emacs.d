@@ -39,6 +39,7 @@
 (require 'setup-elisp)
 (require 'setup-yaml)
 (require 'setup-sql)
+(require 'setup-go)
 (require 'setup-apache)
 (require 'setup-comments)
 (require 'setup-smartparens)
