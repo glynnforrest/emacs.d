@@ -6,10 +6,10 @@
   (defun gf/yaml-toggle-indent-offset ()
     "Toggle between 4 and 2 spaces for indenting yaml files."
     (interactive)
-    (if (eq yaml-indent-offset 4)
-        (setq yaml-indent-offset 2)
-      (setq yaml-indent-offset 4))
-    (message "Yaml indentation is now %s spaces" yaml-indent-offset))
+    (if (eq (default-value 'yaml-indent-offset) 4)
+        (setq-default yaml-indent-offset 2)
+      (setq-default yaml-indent-offset 4))
+    (message "Default yaml indentation is now %s spaces" (default-value 'yaml-indent-offset)))
 
   (defun gf/helm-dash-yaml ()
     (interactive)
