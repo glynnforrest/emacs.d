@@ -1,7 +1,7 @@
 (use-package yaml-mode :ensure t
-  :mode "\\.yaml\\$"
+  :mode "\\.ya?ml.dist\\'"
   :config
-  (setq yaml-indent-offset 4)
+  (setq-default yaml-indent-offset 4)
 
   (defun gf/yaml-toggle-indent-offset ()
     "Toggle between 4 and 2 spaces for indenting yaml files."
@@ -31,6 +31,6 @@
    :prefix "SPC"
    :non-normal-prefix "M-SPC"
    :keymaps 'yaml-mode-map
-   "ti" '(gf/yaml-toggle-indent-offset :which-key "toggle yaml indentation")))
+   "ti" '(gf/yaml-toggle-indent-offset :which-key "yaml indentation")))
 
 (provide 'setup-yaml)
