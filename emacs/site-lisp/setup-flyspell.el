@@ -1,5 +1,6 @@
 (use-package flyspell :ensure t
   :diminish "spell"
+  :defer t
   :init
   (add-hook 'prog-mode-hook #'flyspell-prog-mode)
   (mapc (lambda (hook)
