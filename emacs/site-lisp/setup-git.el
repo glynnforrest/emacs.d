@@ -3,6 +3,7 @@
   :config
   (setq magit-log-arguments '("-n256" "--decorate"))
   (setq inhibit-magit-revert t)
+  (add-hook 'with-editor-mode-hook 'evil-insert-state)
 
   (general-define-key
    :states '(normal)
@@ -10,9 +11,10 @@
    "b" 'magit-blame
    "j" 'magit-blame-next-chunk
    "k" 'magit-blame-previous-chunk
-   "y" 'magit-blame-copy-hash)
+   "y" 'magit-blame-copy-hash))
 
-  (use-package evil-magit :ensure t))
+(use-package evil-magit :ensure t
+  :after magit)
 
 (use-package git-gutter :ensure t
   :diminish ""
