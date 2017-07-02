@@ -44,9 +44,4 @@
   :init
   (add-hook 'css-mode-hook 'skewer-css-mode))
 
-(use-package rainbow-mode :ensure t
-  :defer t
-  :init
-  (add-hook 'css-mode-hook 'rainbow-mode))
-
 (provide 'setup-css)

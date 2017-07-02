@@ -18,6 +18,15 @@
   :config
   (add-hook 'prog-mode-hook 'rainbow-delimiters-mode))
 
+(use-package rainbow-mode :ensure t
+  :defer t
+  :init
+  (mapc (lambda (hook)
+          (add-hook hook 'rainbow-mode))
+        '(css-mode-hook
+          emacs-lisp-mode-hook
+          haskell-mode-hook)))
+
 (use-package spaceline-config
   :ensure spaceline
   :config
