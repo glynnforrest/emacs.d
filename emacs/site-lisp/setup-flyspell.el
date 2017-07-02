@@ -1,20 +1,22 @@
-(require 'flyspell)
-(setq flyspell-issue-message-flag nil)
+(use-package flyspell :ensure t
+  :diminish "spell"
+  :init
+  (add-hook 'prog-mode-hook #'flyspell-prog-mode)
+  (mapc (lambda (hook)
+          (add-hook hook #'flyspell-mode))
+        '(org-mode-hook
+          with-editor-mode-hook
+          rst-mode-hook))
+  :config
+  (setq flyspell-issue-message-flag nil)
+  (setq-default ispell-program-name "ispell")
+  (ispell-change-dictionary "english" t))
 
-;; spell checking in certain modes
-(dolist (hook '(org-mode-hook git-commit-mode-hook))
-  (add-hook hook (lambda ()
-                   (flyspell-mode 1)
-                   (auto-fill-mode 1)
-                   )))
-
-;; spell checking in comments
-(add-hook 'prog-mode-hook 'flyspell-prog-mode)
-
-;; make sure spell checking works
-(setq-default ispell-program-name "aspell")
-(ispell-change-dictionary "en_GB" t)
-
-(ac-flyspell-workaround)
+(use-package helm-flyspell :ensure t
+  :after (helm flyspell)
+  :config
+  (general-define-key
+   :keymaps 'evil-normal-state-map
+   "z=" 'helm-flyspell-correct))
 
 (provide 'setup-flyspell)

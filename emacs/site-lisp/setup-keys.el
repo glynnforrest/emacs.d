@@ -78,6 +78,7 @@
    "tr" '(rainbow-mode)
    "tg" '(global-git-gutter-mode :which-key "git-gutter")
    "tw" '(global-whitespace-mode :which-key "whitespace")
+   "ts" '(flyspell-mode :which-key "flyspell")
    "tp" '(smartparens-mode :which-key "smartparens")
    "tW" '(ws-butler-mode :which-key "whitespace butler")
 

@@ -33,6 +33,7 @@
 (require 'setup-saltstack)
 (require 'setup-markdown)
 (require 'setup-flycheck)
+(require 'setup-flyspell)
 (require 'setup-coffeescript)
 (require 'setup-ace-link)
 (require 'setup-emmet)
