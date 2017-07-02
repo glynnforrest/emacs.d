@@ -15,14 +15,18 @@
    "bb" 'helm-mini
    "bd" 'kill-this-buffer
    "bD" 'kill-matching-buffers
+   "bs" 'gf/switch-to-scratch-buffer
 
    "d" 'helm-dash
    "D" 'helm-dash-at-point
 
    "e" '(:ignore t :which-key "emacs/eval")
    "eb" 'eval-buffer
+   "ep" 'package-list-packages
+   "eP" 'package-autoremove
 
    "f" '(:ignore t :which-key "files")
+   "fd" 'dired
    "fD" 'delete-current-buffer-file
    "fe" 'gf/find-emacs-d-file
    "ff" 'helm-find-files
@@ -106,6 +110,7 @@
    "1" 'other-window
    "=" 'gf/indent-buffer
    "+" 'gf/indent-cleanup-buffer
+   "!" 'flycheck-next-error
    "*" '(hydra-rotate-text/body :which-key "rotate text")
    "$" 'gf/refresh-major-mode
    "\\" 'align-regexp
@@ -130,6 +135,7 @@
    :states '(visual)
    "<" 'gf/visual-shift-left
    ">" 'gf/visual-shift-right
+   "K" 'sort-lines
 
    ;; fix move-text for visual mode
    "M-j" (concat ":m '>+1" (kbd "RET") "gv=gv")
