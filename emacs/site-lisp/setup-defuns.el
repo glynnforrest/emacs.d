@@ -96,4 +96,10 @@ EXTENSION. Only the last extension of the file is considered."
   (message
    (symbol-name (get-char-property (point) 'face))))
 
+(defun gf/refresh-major-mode ()
+  "Refresh the major mode of the current buffer."
+  (interactive)
+  (call-interactively major-mode)
+  (message (format "Refreshed %s" major-mode)))
+
 (provide 'setup-defuns)

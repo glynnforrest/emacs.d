@@ -107,6 +107,7 @@
    "=" 'gf/indent-buffer
    "+" 'gf/indent-cleanup-buffer
    "*" '(hydra-rotate-text/body :which-key "rotate text")
+   "$" 'gf/refresh-major-mode
    "\\" 'align-regexp
    "TAB" 'previous-buffer)
 
