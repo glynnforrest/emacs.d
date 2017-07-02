@@ -52,10 +52,10 @@
    "m" '(:ignore t :which-key "major-mode")
 
    "o" '(:ignore t :which-key "org")
-   "oc" 'org-capture
    "oi" '(gf/find-org-info-file :which-key "open info file")
    "oN" 'gf/commit-notes
    "om" 'gf/find-current-month-notes-file
+   "oo" 'org-capture ; as in, "oo, I have an idea"
    "op" 'gf/toggle-switch-to-project-org-file
 
    "p" '(:ignore t :which-key "projects")

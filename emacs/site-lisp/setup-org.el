@@ -1,5 +1,9 @@
 (use-package org :ensure t
+  :defer t
+  :commands (gf/find-current-month-notes-file
+             gf/toggle-switch-to-project-org-file)
   :config
+  (require 'defuns-org)
 
   (setq org-directory "~/notes/")
   (setq org-listen-read-watch-file (concat org-directory "topics/listen-read-watch.org"))
@@ -115,20 +119,19 @@ TODO keywords, stars and list indicators."
                 ("DONE" :foreground "forest green" :weight bold :strike-through t)
                 ("WAITING" :foreground "#89BDFF" :weight bold))))
 
-  ;; Make it impossible to complete a task if subtasks are not done
-  (setq org-enforce-todo-dependencies t)
+  (setq org-enforce-todo-dependencies t ; can't close without subtasks being done
+        org-use-fast-todo-selection t)
 
-  (setq org-use-fast-todo-selection t)
-
+  (add-hook 'org-capture-mode-hook #'evil-insert-state)
 
   (setq org-capture-templates
         '(("t" "Todo" entry (file+headline org-default-notes-file "Tasks")
            "* TODO %?" :prepend t)
           ("n" "Note" entry (file+headline org-default-notes-file "Notes")
            "* %?")
-          ("T" "Project Todo" entry (file+headline (gf/org-resolve-project-org-file) "Tasks")
-           "* TODO %?" :prepend t)
-          ("N" "Project Note" entry (file+headline (gf/org-resolve-project-org-file) "Notes")
+          ("x" "Project todo" entry (function gf/org-select-project-file-header)
+           "* TODO %?")
+          ("z" "Project note" entry (function gf/org-select-project-file-header)
            "* %?")
           ("l" "Listen" entry (file+headline org-listen-read-watch-file "Listen")
            "* %?")
