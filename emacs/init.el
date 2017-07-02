@@ -37,6 +37,7 @@
 (require 'setup-go)
 (require 'setup-helm)
 (require 'setup-helm-dash)
+(require 'setup-help)
 (require 'setup-js)
 (require 'setup-markdown)
 (require 'setup-misc)
