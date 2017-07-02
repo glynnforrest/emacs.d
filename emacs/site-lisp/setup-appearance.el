@@ -25,7 +25,9 @@
           (add-hook hook 'rainbow-mode))
         '(css-mode-hook
           emacs-lisp-mode-hook
-          haskell-mode-hook)))
+          haskell-mode-hook))
+  :config
+  (diminish 'rainbow-mode))
 
 (use-package spaceline-config
   :ensure spaceline
