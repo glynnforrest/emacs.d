@@ -110,7 +110,6 @@
 
 
 ;; Clearly necessary
-;; (require 'setup-autocomplete)
 ;; (require 'setup-general)
 ;; (require 'setup-programming)
 ;; (require 'setup-helm)
