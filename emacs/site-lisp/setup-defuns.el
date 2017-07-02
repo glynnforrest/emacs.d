@@ -90,4 +90,10 @@ EXTENSION. Only the last extension of the file is considered."
   (kill-buffer (current-buffer))
   (other-window 1))
 
+(defun gf/face-at-point ()
+  "Get the name of the face at point."
+  (interactive)
+  (message
+   (symbol-name (get-char-property (point) 'face))))
+
 (provide 'setup-defuns)
