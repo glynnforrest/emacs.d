@@ -137,6 +137,13 @@ TODO keywords, stars and list indicators."
           ("w" "Watch" entry (file+headline org-listen-read-watch-file "Watch")
            "* %?")))
 
+  (defun gf/org-make-capture-frame ()
+    "Make a new frame for using org-capture."
+    (interactive)
+    (make-frame '((name . "capture") (width . 80) (height . 20)))
+    (select-frame-by-name "capture")
+    (org-capture))
+
   ;; Behaviour for capturing notes using make-capture-frame
   (defadvice org-capture-finalize
       (after delete-capture-frame activate)

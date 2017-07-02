@@ -102,4 +102,43 @@ EXTENSION. Only the last extension of the file is considered."
   (call-interactively major-mode)
   (message (format "Refreshed %s" major-mode)))
 
+(defun gf/switch-to-scratch-buffer()
+  "Switch to the scratch buffer. If the buffer doesn't exist,
+create it and write the initial message into it."
+  (interactive)
+  (let* ((scratch-buffer-name "*scratch*")
+         (scratch-buffer (get-buffer scratch-buffer-name)))
+    (unless scratch-buffer
+      (setq scratch-buffer (get-buffer-create scratch-buffer-name))
+      (with-current-buffer scratch-buffer
+        (lisp-interaction-mode)
+        (insert initial-scratch-message)))
+    (switch-to-buffer scratch-buffer)))
+
+(defvar gf/url-regex-string "https?:\/\/[-a-z0-9\.\/_\?=%&]+")
+
+(defun gf/open-url-from-buffer ()
+  "Prompt to open one of the urls in the current buffer."
+  (interactive)
+  (save-excursion
+    (goto-char (point-min))
+    (let ((urls ()))
+      (while (re-search-forward gf/url-regex-string nil t)
+        (let ((url (match-string-no-properties 0)))
+          (add-to-list 'urls url)
+          ))
+      (let ((url (completing-read "Open url in buffer: " urls nil t)))
+        (when url
+          (browse-url url))))))
+
+(defun gf/open-recent-url ()
+  "Open the url closest behind the current point, for example in an
+ERC buffer."
+  (interactive)
+  (save-excursion
+    (re-search-backward gf/url-regex-string nil t)
+    (let ((url (match-string-no-properties 0)))
+      (when url
+        (browse-url url)))))
+
 (provide 'setup-defuns)
