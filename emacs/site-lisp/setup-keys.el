@@ -53,11 +53,11 @@
    "oN" 'gf/commit-notes
    "om" 'gf/find-current-month-notes-file
    "op" 'gf/toggle-switch-to-project-org-file
-   "os" 'org-search-view
 
    "p" '(:ignore t :which-key "projects")
    "pk" 'projectile-kill-buffers
    "ps" 'projectile-switch-project
+   "pS" 'projectile-save-project-buffers
    "pr" 'projectile-replace
 
    "P" 'helm-show-kill-ring
@@ -72,7 +72,8 @@
    "R" 'gf/tmux-run
 
    "s" '(:ignore t :which-key "search")
-   "sp" 'counsel-ag
+   "sp" 'helm-do-ag-project-root
+   "so" 'org-search-view
 
    "t" '(:ignore t :which-key "toggle")
    "tr" '(rainbow-mode)
@@ -89,20 +90,22 @@
 
    "v" '(er/expand-region :which-key "expand-region")
 
-   "w" '(:ignore t :which-key "windows")
+   "w" '(:ignore t :which-key "windows/what")
    "wd" 'delete-window
+   "wf" 'gf/face-at-point
    "wm" '(delete-other-windows :which-key "maximise window")
+   "wr" 'winner-redo
    "wu" 'winner-undo
 
    "y" '(:ignore t :which-key "yasnippet")
    "yi" 'yas-insert-snippet
    "yr" 'yas-reload-all
 
-   "/" 'helm-swoop-without-pre-input
+   "/" 'helm-swoop
+   ";" 'helm-swoop-without-pre-input
    "1" 'other-window
    "=" 'gf/indent-buffer
    "+" 'gf/indent-cleanup-buffer
-   ";" 'evilnc-comment-or-uncomment-lines
    "*" '(hydra-rotate-text/body :which-key "rotate text")
    "\\" 'align-regexp
    "TAB" 'previous-buffer)
