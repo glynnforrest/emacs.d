@@ -16,82 +16,88 @@
 ;;              ///.----..>        \             _ -~             `.  ^-`  ^-_
 ;;                ///-._ _ _ _ _ _ _}^ - - - - ~                     ~-- ,.-~
 ;;                                                                   /.-~
-(require 'evil)
-(evil-mode 1)
 
-(setq evil-default-cursor t)
+(use-package evil :ensure t
+  :init
+  (setq-default
+   evil-want-C-d-scroll t
+   evil-want-C-u-scroll t)
 
-(require 'evil-numbers)
+  :config
+  (evil-mode 1)
+  (use-package evil-numbers :ensure t)
+
+  ;; Centre screen around a search
+  (defadvice
+      evil-search-forward
+      (after evil-search-forward-recenter activate)
+    (recenter))
+  (ad-activate 'evil-search-forward)
+
+  (defadvice
+      evil-search-next
+      (after evil-search-next-recenter activate)
+    (recenter))
+  (ad-activate 'evil-search-next)
+
+  (defadvice
+      evil-search-previous
+      (after evil-search-previous-recenter activate)
+    (recenter))
+  (ad-activate 'evil-search-previous)
+
+  (defun gf/visual-shift-left ()
+    "Shift left and keep the region active."
+    (interactive)
+    (call-interactively 'evil-shift-left)
+    (evil-normal-state)
+    (evil-visual-restore))
+
+  (defun gf/visual-shift-right ()
+    "Shift right and keep the region active."
+    (interactive)
+    (call-interactively 'evil-shift-right)
+    (evil-normal-state)
+    (evil-visual-restore))
+
+  (add-to-list 'evil-emacs-state-modes 'package-menu-mode)
+  (evil-set-initial-state 'package-menu-mode 'normal)
+  (evil-set-initial-state 'org-capture-mode 'insert)
+  (evil-set-initial-state 'git-commit-mode 'insert)
+  (evil-set-initial-state 'occur-mode 'normal))
 
 ;; Save point position between sessions
-(require 'saveplace)
-(setq-default save-place t)
+(use-package saveplace :ensure t
+  :config
+  (setq-default save-place t))
 
 ;; To not miss surround mode
-(require 'surround)
-(global-surround-mode t)
+(use-package surround :ensure t
+  :config
+  (global-surround-mode t))
 
-;; Vim style jumplist
-(require 'evil-jumper)
+(use-package undo-tree
+  :diminish "")
 
-;; Centre screen around a search
-(defadvice
-    evil-search-forward
-    (after evil-search-forward-recenter activate)
-    (recenter))
-(ad-activate 'evil-search-forward)
+(use-package evil-lisp-state :ensure t
+  :init (setq evil-lisp-state-global t
+              evil-lisp-state-enter-lisp-state-on-command nil))
 
-(defadvice
-    evil-search-next
-    (after evil-search-next-recenter activate)
-    (recenter))
-(ad-activate 'evil-search-next)
+(use-package expand-region :ensure t
+  :commands er/expand-region
+  :config
+  (setq expand-region-contract-fast-key "V"
+        expand-region-reset-fast-key "0"))
 
-(defadvice
-    evil-search-previous
-    (after evil-search-previous-recenter activate)
-    (recenter))
-(ad-activate 'evil-search-previous)
-
-;; Create lines above and below in normal and insert mode with <return>
-(define-key evil-normal-state-map (kbd "S-<return>") (lambda()
-													   (interactive)
-													   (evil-open-below 1)
-													   (evil-normal-state 1)))
-(define-key evil-normal-state-map (kbd "C-S-<return>") (lambda()
-														 (interactive)
-														 (evil-open-above 1)
-														 (evil-normal-state 1)))
-(define-key evil-insert-state-map (kbd "S-<return>") (lambda()
-													   (interactive)
-													   (evil-open-below 1)))
-(define-key evil-insert-state-map (kbd "C-S-<return>") (lambda()
-														 (interactive)
-														 (evil-open-above 1)))
-
-;; Start in insert mode / emacs for some modes
-(add-to-list 'evil-emacs-state-modes 'package-menu-mode)
-(evil-set-initial-state 'package-menu-mode 'normal)
-(evil-set-initial-state 'org-capture-mode 'insert)
-(evil-set-initial-state 'git-commit-mode 'insert)
-(evil-set-initial-state 'occur-mode 'normal)
-
-;; Expand region
-(require 'expand-region)
-(define-key evil-normal-state-map ",v" 'er/expand-region)
-
-(eval-after-load "evil" '(setq expand-region-contract-fast-key "V"
-                               expand-region-reset-fast-key "r"))
-
-(require 'evil-args)
-
-;; bind evil-args text objects
-(define-key evil-inner-text-objects-map "a" 'evil-inner-arg)
-(define-key evil-outer-text-objects-map "a" 'evil-outer-arg)
+(use-package evil-args :ensure t
+  :config
+  (define-key evil-inner-text-objects-map "a" 'evil-inner-arg)
+  (define-key evil-outer-text-objects-map "a" 'evil-outer-arg))
 
 ;; exchange two regions or motions with gx. gX cancels a pending swap
-(require 'evil-exchange)
-(evil-exchange-install)
+(use-package evil-exchange :ensure t
+  :config
+  (evil-exchange-install))
 
 (defun gf/evil-forward-arg (count)
   "Small wrapper around evil-forward-arg when at the opening bracket."
@@ -102,10 +108,10 @@
   )
 
 ;; bind evil-forward/backward-args
-(define-key evil-normal-state-map "L" 'gf/evil-forward-arg)
-(define-key evil-normal-state-map "H" 'evil-backward-arg)
+;; (define-key evil-normal-state-map "L" 'gf/evil-forward-arg)
+;; (define-key evil-normal-state-map "H" 'evil-backward-arg)
 
 ;; bind evil-jump-out-args
-(define-key evil-normal-state-map "K" 'evil-jump-out-args)
+;; (define-key evil-normal-state-map "K" 'evil-jump-out-args)
 
 (provide 'setup-evil)

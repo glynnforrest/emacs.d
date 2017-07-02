@@ -1,9 +1,3 @@
-(defun gf/my-kill-emacs ()
-  "Save some buffers, then exit unconditionally"
-  (interactive)
-  (save-some-buffers t)
-  (kill-emacs))
-
 (defun gf/comma-to-end-of-sentence ()
   "Change the next comma to a full stop and capitalise the next word."
   (interactive)
@@ -26,51 +20,6 @@
       (evil-downcase (point) (+ 1 (point)))))
 
 
-(defvar gf/url-regex-string "https?:\/\/[-a-z0-9\.\/_\?=%&]+")
-
-(defun gf/open-url-from-buffer ()
-  "Prompt to open one of the urls in the current buffer."
-  (interactive)
-  (save-excursion
-    (goto-char (point-min))
-    (let ((urls ()))
-      (while (re-search-forward gf/url-regex-string nil t)
-        (let ((url (match-string-no-properties 0)))
-          (add-to-list 'urls url)
-          ))
-      (let ((url (completing-read "Open url in buffer: " urls nil t)))
-        (when url
-          (browse-url url))))))
-
-(defun gf/open-recent-url ()
-  "Open the url closest behind the current point, for example in an
-ERC buffer."
-  (interactive)
-  (save-excursion
-    (re-search-backward gf/url-regex-string nil t)
-    (let ((url (match-string-no-properties 0)))
-      (when url
-        (browse-url url)))))
-
-(defun gf/toggle-comment ()
-  "Comments or uncomments the current line, or the region if active."
-  (interactive)
-  (if (region-active-p)
-      (progn
-        (comment-or-uncomment-region (region-beginning) (region-end))
-        (evil-visual-restore)
-        (message "region comment"))
-    (comment-or-uncomment-region (line-beginning-position) (line-end-position))))
-
-(defun gf/find-file-in-directory (directory)
-  "Hacky function to find a file in DIRECTORY. This depends on the
-`projectile` package."
-  (interactive)
-  (gf/switch-to-scratch-buffer)
-  (cd directory)
-  (projectile-find-file nil)
-  )
-
 (defun gf/split-window-and-move-right ()
   (interactive)
   (split-window-right)
@@ -81,27 +30,10 @@ ERC buffer."
   (split-window-below)
   (other-window 1))
 
-(defun gf/switch-to-scratch-buffer()
-  "Switch to the scratch buffer. If the buffer doesn't exist,
-create it and write the initial message into it."
-  (interactive)
-  (let* ((scratch-buffer-name "*scratch*")
-         (scratch-buffer (get-buffer scratch-buffer-name)))
-    (unless scratch-buffer
-      (setq scratch-buffer (get-buffer-create scratch-buffer-name))
-      (with-current-buffer scratch-buffer
-        (lisp-interaction-mode)
-        (insert initial-scratch-message)))
-    (switch-to-buffer scratch-buffer)))
-
 (defun gf/save-and-eval-buffer ()
   (interactive)
   (save-buffer)
   (eval-buffer))
-
-(defun gf/open-init-file ()
-  (interactive)
-  (find-file "~/.emacs.d/init.el"))
 
 (defun gf/eval-and-replace-sexp ()
   "Replace the preceding sexp with its value."
@@ -110,46 +42,6 @@ create it and write the initial message into it."
   (backward-kill-sexp)
   (prin1 (eval (read (current-kill 0)))
          (current-buffer)))
-
-(defun move-text-internal (arg)
-  (cond
-   ((and mark-active transient-mark-mode)
-    (if (> (point) (mark))
-        (exchange-point-and-mark))
-    (let ((column (current-column))
-          (text (delete-and-extract-region (point) (mark))))
-      (forward-line arg)
-      (move-to-column column t)
-      (set-mark (point))
-      (insert text)
-      (exchange-point-and-mark)
-      (setq deactivate-mark nil)))
-   (t
-    (beginning-of-line)
-    (when (or (> arg 0) (not (bobp)))
-      (forward-line)
-      (when (or (< arg 0) (not (eobp)))
-        (transpose-lines arg))
-      (forward-line -1)))))
-
-(defun move-text-up (arg)
-  "Move region (transient-mark-mode active) or current line
-  arg lines up."
-  (interactive "*p")
-  (move-text-internal (- arg)))
-
-(defun move-text-down (arg)
-  "Move region (transient-mark-mode active) or current line
-  arg lines down."
-  (interactive "*p")
-  (move-text-internal arg))
-
-(defun gf/quit-other-window ()
-  "Closes the buffer in the other window."
-  (interactive)
-  (other-window 1)
-  (kill-buffer (current-buffer))
-  (other-window 1))
 
 (defun gf/setup-electric-semicolon (mode-map)
   "Adds mappings for electric semicolon to MODE-MAP.
@@ -168,13 +60,6 @@ Press ; for electric-semicolon, C-; to insert a semicolon."
         (insert ";")
       (goto-char beg)
       )))
-
-(defun gf/make-capture-frame ()
-  "Make a new frame for using org-capture."
-  (interactive)
-  (make-frame '((name . "capture") (width . 80) (height . 20)))
-  (select-frame-by-name "capture")
-  (org-capture))
 
 (defun gf/fix-double-capital()
   "Go back to last occurence of a 'double capital' and correct."
@@ -195,76 +80,4 @@ Press ; for electric-semicolon, C-; to insert a semicolon."
                       (message "No double capital found!")))
 
 ;; >>>>>>> *end* <<<<<<<<<<<<<<<<<<<<<
-
-(require 'rotate-text)
-
-(defun gf/clever-rotate-text ()
-  "Wrapper to rotate-text that will try the start of the line as well
-as the current word."
-  (interactive)
-  (if (not (condition-case nil
-               (rotate-text 1)
-             (error nil)))
-      (save-excursion
-        (evil-first-non-blank)
-        (rotate-text 1))))
-
-(defun gf/clever-rotate-text-backward ()
-  "Wrapper to rotate-text-backward that will try the start of the
-line as well as the current word."
-  (interactive)
-  (if (not (condition-case nil
-               (rotate-text-backward 1)
-             (error nil)))
-      (save-excursion
-        (evil-first-non-blank)
-        (rotate-text-backward 1))))
-
-;; Adapted from @magnars to support directory creation
-(defun rename-current-buffer-file ()
-  "Renames current buffer and file it is visiting."
-  (interactive)
-  (let ((name (buffer-name))
-        (filename (buffer-file-name)))
-    (if (not (and filename (file-exists-p filename)))
-        (error "Buffer '%s' is not visiting a file!" name)
-      (let* ((new-name (read-file-name "New name: " (file-name-directory filename)))
-            (new-directory (s-join "/" (butlast (s-split "/" new-name)))))
-        (if (get-buffer new-name)
-            (error "A buffer named '%s' already exists!" new-name)
-          (if (not (file-directory-p new-directory))
-              (if (file-exists-p new-directory)
-                  (error "Target directory '%s' is a file!" new-directory)
-                (mkdir new-directory t)))
-          (rename-file filename new-name 1)
-          (rename-buffer new-name)
-          (set-visited-file-name new-name)
-          (set-buffer-modified-p nil)
-          (message "File '%s' successfully renamed to '%s'"
-                   name new-name))))))
-
-;; Thank you @magnars
-(defun delete-current-buffer-file ()
-  "Removes file connected to current buffer and kills buffer."
-  (interactive)
-  (let ((filename (buffer-file-name))
-        (buffer (current-buffer))
-        (name (buffer-name)))
-    (if (not (and filename (file-exists-p filename)))
-        (kill-buffer)
-      (when (yes-or-no-p "Are you sure you want to remove this file? ")
-        (delete-file filename)
-        (kill-buffer buffer)
-                (message "File '%s' successfully removed" filename)))))
-
-(defun gf/untabify-line ()
-  "Untabify the current line."
-  (interactive)
-  (untabify (point-at-bol) (point-at-eol)))
-
-(defun gf/untabify-buffer ()
-  "Untabify the whole buffer."
-  (interactive)
-  (untabify (point-min) (point-max)))
-
 (provide 'defuns)

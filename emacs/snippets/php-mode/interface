@@ -1,17 +1,17 @@
-# -*- mode: snippet -*-
-#name : interface definition
-#key : interface
+# -*- mode: snippet; require-final-newline: nil -*-
+# name : interface definition
+# key : interface
 # --
 <?php
 
-namespace ${1:`(gf/php-current-file-namespace)`};
+namespace `(gf/php-current-file-namespace)`;
 
 /**
- * ${2:`(buffer-file-name-body)`}
+ * `(buffer-file-name-body)`
  *
  * @author Glynn Forrest <me@glynnforrest.com>
  **/
-interface $2
+interface `(buffer-file-name-body)`
 {
 
     $0

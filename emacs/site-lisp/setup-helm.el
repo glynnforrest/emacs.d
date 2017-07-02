@@ -1,105 +1,81 @@
 ;; https://tuhdo.github.io/helm-intro.html has great helm tips.
-(require 'helm)
-(helm-mode)
+(use-package helm :ensure t
+  :diminish ""
+  :config
 
-(global-set-key (kbd "M-x") 'helm-M-x)
-(global-set-key (kbd "<menu>") 'helm-M-x)
+  (setq helm-move-to-line-cycle-in-source nil
+        helm-split-window-default-side 'other
+        helm-split-window-in-side-p t
+        helm-display-header-line nil
+        helm-candidate-number-limit 200
+        helm-M-x-requires-pattern 0
+        helm-net-prefer-curl-p t
+        helm-buffer-max-length nil
+        helm-autoresize-max-height 30
+        helm-autoresize-min-height 30)
 
-(define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action)
-(define-key helm-map (kbd "C-i") 'helm-execute-persistent-action)
-(define-key helm-map (kbd "C-z")  'helm-select-action)
+  (set-face-attribute 'helm-source-header nil :height 0.1)
 
-(setq
- helm-move-to-line-cycle-in-source nil
- helm-split-window-default-side 'other
- helm-split-window-in-side-p t
- helm-candidate-number-limit 200
- helm-M-x-requires-pattern 0
- helm-google-suggest-use-curl-p t
- )
+  (helm-mode)
+  (helm-autoresize-mode t)
 
-;; helm-ls-git can be used for grep / occur on many files at a time
-(require 'helm-ls-git)
 
-(require 'helm-dash)
-(define-key evil-normal-state-map ",\\" 'helm-dash)
-(define-key evil-normal-state-map ",|" 'helm-dash-at-point)
+  (general-define-key
+   :keymaps 'helm-map
+   "C-j" 'helm-next-line
+   "C-k" 'helm-previous-line
+   "C-h" 'helm-next-source
+   "C-l" (kbd "RET")))
 
-(defvar helm-dash-required-docsets '() "A list of required helm-dash-docsets")
+(use-package helm-files
+  :after helm
+  :config
+  (general-define-key
+   :keymaps '(helm-find-files-map helm-read-file-map)
+   "C-l" 'helm-execute-persistent-action
+   "C-h" 'helm-find-files-up-one-level))
 
-(setq helm-dash-required-docsets
-  '(
-    Ansible
-    Apache_HTTP_Server
-    BackboneJS
-    Bash
-    CSS
-    Font_Awesome
-    HTML
-    Haskell
-    Jade
-    JavaScript
-    LaTeX
-    Markdown
-    NodeJS
-    PHP
-    PHPUnit
-    SaltStack
-    Symfony
-    Twig
-    Vagrant
-    jQuery
-    ))
+(use-package helm-ag :ensure t
+  :after helm
+  :config
+  (setq helm-ag-base-command "rg --smart-case --no-heading --vimgrep")
 
-(defun gf/helm-dash-install-docsets ()
-  "Install required docsets"
-  (interactive)
-  (dolist (doc (mapcar 'symbol-name helm-dash-required-docsets))
-    (when (not (member doc (helm-dash-installed-docsets)))
-      (message (format "Installing helm-dash docset '%s'" doc))
-      (helm-dash-install-docset doc))))
+  (defun gf/helm-ag-goto ()
+    "Go to the occurrence on the current line and recenter."
+    (interactive)
+    (helm-ag-mode-jump-other-window)
+    (recenter))
 
-(defun gf/helm-dash-upgrade-docsets ()
-  "Upgrade installed docsets"
-  (interactive)
-  (dolist (doc (helm-dash-installed-docsets))
-      (message (format "Upgrading helm-dash docset '%s'" doc))
-      (helm-dash-update-docset doc)))
+  (defun gf/helm-ag-show ()
+    "Show a compilation in the other window, but stay in the compilation buffer."
+    (interactive)
+    (gf/helm-ag-goto)
+    (other-window -1))
 
-;; By default, no docsets are enabled.
-(setq helm-dash-common-docsets nil)
+  (general-define-key
+   :keymaps 'helm-do-ag-map
+   "M-RET" 'helm-ag--run-save-buffer
+   "M-e" 'helm-ag-edit)
 
-(defun helm-dash-php ()
-  (interactive)
-  (setq-local helm-dash-docsets '("PHP" "PHPUnit" "Symfony" "Twig")))
-(add-hook 'php-mode-hook 'helm-dash-php)
+  (general-define-key
+   :states '(normal insert visual emacs)
+   :keymaps 'helm-ag-mode-map
+   "q" 'kill-this-buffer)
 
-(defun helm-dash-js ()
-  (interactive)
-  (setq-local helm-dash-docsets '("JavaScript" "BackboneJS" "jQuery")))
-(add-hook 'js2-mode-hook 'helm-dash-js)
+  (general-define-key
+   :states '(normal)
+   :keymaps 'helm-ag-mode-map
+   "RET" 'gf/helm-ag-show
+   "M-RET" 'gf/helm-ag-goto))
 
-(defun helm-dash-html ()
-  (interactive)
-  (setq-local helm-dash-docsets '("Html" "Font_Awesome")))
-(add-hook 'html-mode-hook 'helm-dash-html)
-(add-hook 'web-mode-hook 'helm-dash-html)
+(use-package helm-css-scss :ensure t
+  :config
+  (setq helm-css-scss-split-with-multiple-windows nil))
 
-(defun helm-dash-css ()
-  (interactive)
-  (setq-local helm-dash-docsets '("CSS")))
-(add-hook 'css-mode-hook 'helm-dash-css)
-
-(defun helm-dash-shell ()
-  (interactive)
-  (setq-local helm-dash-docsets '("Bash")))
-(add-hook 'sh-mode-hook 'helm-dash-shell)
-
-(defun helm-dash-yaml ()
-  (interactive)
-  (if (s-ends-with? ".sls" (buffer-file-name))
-      (setq-local helm-dash-docsets '("Saltstack"))
-    (setq-local helm-dash-docsets '("Ansible"))))
-(add-hook 'yaml-mode-hook 'helm-dash-yaml)
+(use-package helm-swoop :ensure t
+  :config
+  (setq helm-swoop-speed-or-color t
+        helm-swoop-split-direction 'split-window-horizontally
+        helm-swoop-use-line-number-face t))
 
 (provide 'setup-helm)

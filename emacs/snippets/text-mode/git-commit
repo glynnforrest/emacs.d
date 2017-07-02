@@ -1,0 +1,5 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: git commit
+# key: g
+# --
+`(yas-choose-value '("feat" "fix" "docs" "style" "refactor" "test" "chore"))`(${1:scope}): $0

@@ -1,41 +1,41 @@
-(require 'flycheck)
+(use-package flycheck :ensure t
+  :diminish ""
+  :config
+  (setq-default flycheck-disabled-checkers '(emacs-lisp-checkdoc
+                                             php-phpmd
+                                             php-phpcs
+                                             scss)
 
-(global-flycheck-mode)
+                ;; so flycheck can check (require) calls properly.
+                flycheck-emacs-lisp-load-path 'inherit)
 
-;; checkdoc is a bit intrusive for emacs lisp configs
-(eval-after-load 'flycheck '(setq flycheck-checkers (delq 'emacs-lisp-checkdoc flycheck-checkers)))
+  (setq flycheck-check-syntax-automatically '(save mode-enabled)
+        flycheck-standard-error-navigation nil
+        flycheck-highlighting-mode 'lines)
 
-(eval-after-load 'flycheck '(setq flycheck-checkers (delq 'php-phpmd flycheck-checkers)))
-(eval-after-load 'flycheck '(setq flycheck-checkers (delq 'php-phpcs flycheck-checkers)))
-(eval-after-load 'flycheck '(setq flycheck-checkers (delq 'scss flycheck-checkers)))
+  (set-face-attribute 'flycheck-error nil
+                      :foreground "#ffffff"
+                      :background "#671232"
+                      :underline nil)
 
-(add-hook 'js-mode-hook (lambda ()
-                         (interactive)
-                         (flycheck-mode -1)))
+  (set-face-attribute 'flycheck-warning nil
+                      :foreground "#ceb4e2"
+                      :background nil
+                      :underline nil)
 
-(setq flycheck-check-syntax-automatically '(save mode-enabled)
-      flycheck-standard-error-navigation nil)
+  (flycheck-define-checker proselint
+    "A linter for prose."
+    :command ("proselint" source-inplace)
+    :error-patterns
+    ((warning line-start (file-name) ":" line ":" column ": "
+              (id (one-or-more (not (any " "))))
+              (message (one-or-more not-newline)
+                       (zero-or-more "\n" (any " ") (one-or-more not-newline)))
+              line-end))
+    :modes (text-mode markdown-mode rst-mode))
+  (add-to-list 'flycheck-checkers 'proselint)
 
-;; so flycheck can check (require calls properly.
-(setq-default flycheck-emacs-lisp-load-path 'inherit)
+  (global-flycheck-mode))
 
-(setq flycheck-highlighting-mode 'symbols)
-
-(set-face-attribute 'flycheck-fringe-error nil
-                    :background nil)
-
-(set-face-attribute 'flycheck-fringe-warning nil
-                    :background nil)
-
-
-(set-face-attribute 'flycheck-error nil
-                    :foreground nil
-                    :background "darkred"
-                    :underline nil)
-
-(set-face-attribute 'flycheck-warning nil
-                    :background nil
-                    :foreground "orange"
-                    :underline nil)
 
 (provide 'setup-flycheck)
