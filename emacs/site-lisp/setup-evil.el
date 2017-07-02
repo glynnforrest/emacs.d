@@ -72,9 +72,10 @@
   (setq-default save-place t))
 
 ;; To not miss surround mode
-(use-package surround :ensure t
+(use-package evil-surround :ensure t
+  :after evil
   :config
-  (global-surround-mode t))
+  (global-evil-surround-mode t))
 
 (use-package undo-tree
   :diminish "")
