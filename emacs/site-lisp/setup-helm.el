@@ -25,14 +25,48 @@
    "C-j" 'helm-next-line
    "C-k" 'helm-previous-line
    "C-h" 'helm-next-source
-   "C-l" (kbd "RET"))
+   "C-l" (kbd "RET")))
 
-  (use-package helm-files
-    :config
-    (general-define-key
-     :keymaps '(helm-find-files-map helm-read-file-map)
-     "C-l" 'helm-execute-persistent-action
-     "C-h" 'helm-find-files-up-one-level)))
+(use-package helm-files
+  :after helm
+  :config
+  (general-define-key
+   :keymaps '(helm-find-files-map helm-read-file-map)
+   "C-l" 'helm-execute-persistent-action
+   "C-h" 'helm-find-files-up-one-level))
+
+(use-package helm-ag :ensure t
+  :after helm
+  :config
+  (setq helm-ag-base-command "rg --smart-case --no-heading --vimgrep")
+
+  (defun gf/helm-ag-goto ()
+    "Go to the occurrence on the current line and recenter."
+    (interactive)
+    (helm-ag-mode-jump-other-window)
+    (recenter))
+
+  (defun gf/helm-ag-show ()
+    "Show a compilation in the other window, but stay in the compilation buffer."
+    (interactive)
+    (gf/helm-ag-goto)
+    (other-window -1))
+
+  (general-define-key
+   :keymaps 'helm-do-ag-map
+   "M-RET" 'helm-ag--run-save-buffer
+   "M-e" 'helm-ag-edit)
+
+  (general-define-key
+   :states '(normal insert visual emacs)
+   :keymaps 'helm-ag-mode-map
+   "q" 'kill-this-buffer)
+
+  (general-define-key
+   :states '(normal)
+   :keymaps 'helm-ag-mode-map
+   "RET" 'gf/helm-ag-show
+   "M-RET" 'gf/helm-ag-goto))
 
 (use-package helm-css-scss :ensure t
   :config
@@ -43,8 +77,5 @@
   (setq helm-swoop-speed-or-color t
         helm-swoop-split-direction 'split-window-horizontally
         helm-swoop-use-line-number-face t))
-
-;; helm-ls-git can be used for grep / occur on many files at a time
-;; (require 'helm-ls-git)
 
 (provide 'setup-helm)

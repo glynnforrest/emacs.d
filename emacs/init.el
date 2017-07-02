@@ -64,14 +64,11 @@
 ;; (setq required-packages
 ;;       '(
 ;;         ace-jump-mode
-;;         ag
 ;;         dired+
 ;;         epl
 ;;         impatient-mode
 ;;         keychain-environment
 ;;         php-eldoc
-;;         wgrep
-;;         wgrep-ag
 ;;         ))
 
 ;; (defun gf/package-deps (package)
@@ -119,7 +116,6 @@
 ;; (require 'setup-helm)
 ;; (require 'defuns)
 
-;; (require 'setup-search)
 ;; (require 'mappings)
 
 ;; (setq tramp-default-method "ssh")
