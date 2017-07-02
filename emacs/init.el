@@ -61,8 +61,8 @@
 (require 'setup-personal nil t)
 
 ;; Load custom settings
-;; (setq custom-file "~/.emacs.d/custom.el")
-;; (load custom-file 'noerror)
+(setq custom-file "~/.emacs.d/custom.el")
+(load custom-file 'noerror)
 
 ;; Quarantine - old files that need updating
 ;; (require 'setup-general)
