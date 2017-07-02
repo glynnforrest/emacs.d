@@ -1,0 +1,7 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: image
+# key: i
+# --
+.. image:: ${1:img.png}
+
+$0
