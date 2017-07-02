@@ -1,3 +1,5 @@
+(use-package cask-mode :ensure t)
+
 (use-package lisp-mode
   :config
   (general-define-key
