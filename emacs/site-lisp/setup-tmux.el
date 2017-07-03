@@ -18,4 +18,24 @@
       (gf/tmux-do-run gf/tmux-previous-cmd)
     (call-interactively 'gf/tmux-execute-command)))
 
+(defmacro gf/tmux-def-command (name command key)
+  "Create a new function gf/tmux-command-NAME and bind it to SPC c `KEY'."
+  (let ((function (intern (format "gf/tmux-command-%s" name))))
+    `(progn
+       (defun ,function ()
+         (interactive)
+         (gf/tmux-do-run ,command))
+
+       (general-define-key
+        :states '(normal visual insert emacs)
+        :prefix "SPC"
+        :non-normal-prefix "M-SPC"
+        ,(concat "c" key) ',function))))
+
+(general-define-key
+ :states '(normal)
+ :prefix "SPC"
+ :non-normal-prefix "M-SPC"
+ "c" '(nil :which-key "tmux commands"))
+
 (provide 'setup-tmux)
