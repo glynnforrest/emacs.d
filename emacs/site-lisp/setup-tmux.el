@@ -30,12 +30,12 @@
         :states '(normal visual insert emacs)
         :prefix "SPC"
         :non-normal-prefix "M-SPC"
-        ,(concat "c" key) ',function))))
+        ,(concat "c" key) '(,function :which-key ,name)))))
 
 (general-define-key
  :states '(normal)
  :prefix "SPC"
  :non-normal-prefix "M-SPC"
- "c" '(nil :which-key "tmux commands"))
+ "c" '(:ignore t :which-key "tmux commands"))
 
 (provide 'setup-tmux)
