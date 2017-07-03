@@ -241,6 +241,10 @@ else
 fi;
 }
 
+# vagrant on MacOS sometimes has permission errors due to stale NFS file handles.
+# use this to jog its memory.
+alias jog='ls -Ra > /dev/null'
+
 # Download stuff
 dl() {
     (cd ~/Downloads/; curl -L -O $1)
