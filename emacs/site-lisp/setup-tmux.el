@@ -48,19 +48,46 @@
         gf/tmux--previous-cmd nil))
 
 
-(defmacro gf/tmux-def-command (name command key)
-  "Create a new function gf/tmux-command-NAME and bind it to SPC c `KEY'."
-  (let ((function (intern (format "gf/tmux-command-%s" name))))
+(defmacro gf/tmux-def-command (name command &rest args)
+  "Create a new function gf/tmux-command-NAME to run COMMAND in a tmux pane.
+
+COMMAND should be a string, or a lisp form that returns a string.
+When a lisp form, it will be evaluated when the function is called.
+
+
+Optional properties:
+
+:key The string name of a key to bind the function to SPC c `KEY'
+
+:project-root If t, run the command inside the projectile project root of the current buffer.
+
+
+Examples:
+
+(gf/tmux-def-command \"ls\" \"ls\")
+
+(gf/tmux-def-command \"figlet buffer name\"
+                     (concat \"figlet \" (buffer-file-name))
+                     :key \"f\")
+"
+  (let ((function (intern (format "gf/tmux-command-%s" name)))
+        (key (plist-get args :key)))
     `(progn
        (defun ,function ()
          (interactive)
-         (gf/tmux-do-run ,command))
-
-       (general-define-key
+         (gf/tmux--do-run ,(gf/tmux--command-modify command args)))
+    ,(when key
+       `(general-define-key
         :states '(normal visual insert emacs)
         :prefix "SPC"
         :non-normal-prefix "M-SPC"
-        ,(concat "c" key) '(,function :which-key ,name)))))
+        ,(concat "c" key) '(,function :which-key ,name))))))
+
+(defun gf/tmux--command-modify (command args)
+  "Modify a command according to the properties in ARGS."
+  (when (plist-get args :project-root)
+    (setq command `(concat "(cd " (projectile-project-root) " && " ,command ")")))
+  command)
 
 (general-define-key
  :states '(normal)
