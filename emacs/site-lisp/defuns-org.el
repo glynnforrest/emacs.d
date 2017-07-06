@@ -18,18 +18,35 @@
 (defun gf/org-select-next-task ()
   "Select an item marked as NEXT in the current buffer."
   (interactive)
-  (let ((choice (completing-read "Next task: " (gf/org-get-keyword-items "NEXT"))))
+  (let* ((choices (gf/org--get-keyword-items "NEXT"))
+         (choice (cadr (assoc (completing-read "Next task: " choices) choices))))
+    (goto-char (point-min))
     (re-search-forward choice)
     (beginning-of-line)
     (gf/org-show-entry)))
 
-(defun gf/org-get-keyword-items (keyword)
+(defun gf/org--get-keyword-items (keyword)
   "Get the names of all headings with todo keyword KEYWORD."
   (save-excursion
     (goto-char (point-min))
     (let ((headings nil))
       (while (re-search-forward (format "\\(^\\*+ %s .+\\)" keyword) nil t)
-        (add-to-list 'headings (match-string-no-properties 1) t))
+        (let* ((match (match-string-no-properties 1))
+               (parent-headings nil)
+               (label nil))
+          (save-excursion
+            (while (not (equal (org-outline-level) 1))
+              (outline-up-heading 1 t)
+              (beginning-of-line)
+              (re-search-forward "^\\*+ \\(.+\\)")
+              (add-to-list 'parent-headings (match-string-no-properties 1))))
+          (setq label (seq-reduce (lambda (initial item)
+                                    (if (equal initial match)
+                                        (concat match " | " item)
+                                      (concat initial " - " item)))
+                                  parent-headings
+                                  match))
+          (add-to-list 'headings (list label match) t)))
       headings)))
 
 (defun gf/org-show-entry ()
