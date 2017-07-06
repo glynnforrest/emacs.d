@@ -22,6 +22,7 @@
 
    "e" '(:ignore t :which-key "emacs/eval")
    "eb" 'eval-buffer
+   "em" 'gf/show-previous-sexp-macro-expand
    "ep" 'package-list-packages
    "eP" 'package-autoremove
 

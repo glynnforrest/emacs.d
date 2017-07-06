@@ -34,6 +34,8 @@
   (add-hook 'lisp-interaction-mode-hook 'elisp-slime-nav-mode)
   (add-hook 'ielm-mode-hook 'elisp-slime-nav-mode))
 
+(require 'defuns-elisp)
+
 (defun ielm-auto-complete ()
   "Enables `auto-complete' support in \\[ielm]."
   (setq ac-sources '(ac-source-functions
