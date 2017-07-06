@@ -3,10 +3,11 @@
   (interactive)
   (find-file (gf/org-resolve-project-org-file))
   (goto-char (point-min))
-  (let ((choice (completing-read "Project heading: " (gf/org-get-top-level-headings))))
-    (re-search-forward (format "^\* %s" choice))))
+  (let ((choice (completing-read "Project heading: " (gf/org--get-top-level-headings))))
+    (re-search-forward (format "^\* %s" choice)))
+  (outline-show-children))
 
-(defun gf/org-get-top-level-headings ()
+(defun gf/org--get-top-level-headings ()
   "Get the names of the top level headings in the current org file."
   (save-excursion
     (goto-char (point-min))
