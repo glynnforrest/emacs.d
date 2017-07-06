@@ -11,8 +11,6 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * `(buffer-file-name-body)`
- *
  * @author Glynn Forrest <me@glynnforrest.com>
  **/
 class `(buffer-file-name-body)` extends AbstractType
