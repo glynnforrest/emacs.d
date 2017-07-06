@@ -101,13 +101,6 @@ TODO keywords, stars and list indicators."
       (gf/org-beginning-of-line)
       (evil-change (point) eol)))
 
-  (defun gf/org-go-to-next-task ()
-    "Go to the first org item in the buffer tagged as `NEXT`."
-    (interactive)
-    (beginning-of-buffer)
-    (re-search-forward "^\\*+ NEXT")
-    (gf/evil-org-beginning-of-line))
-
   (setq org-todo-keywords
         '((sequence "TODO(t)" "NEXT(n)" "|" "DONE(d)")
           (sequence "WAITING(w)" "|" "CANCELLED(c)")))
@@ -355,7 +348,8 @@ Dates are returned in the style from `decode-time'."
    :prefix "SPC"
    :non-normal-prefix "M-SPC"
    :keymaps 'org-mode-map
-   "a" 'helm-org-in-buffer-headings)
+   "a" 'helm-org-in-buffer-headings
+   "A" 'gf/org-select-next-task)
 
   (general-define-key
    :states '(normal visual insert)

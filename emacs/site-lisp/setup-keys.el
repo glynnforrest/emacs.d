@@ -54,6 +54,7 @@
 
    "o" '(:ignore t :which-key "org")
    "oi" '(gf/find-org-info-file :which-key "open info file")
+   "ol" 'org-capture-goto-last-stored
    "oN" 'gf/commit-notes
    "om" 'gf/find-current-month-notes-file
    "oo" 'org-capture ; as in, "oo, I have an idea"
@@ -147,8 +148,6 @@
    "M-x" 'helm-M-x))
 
 (provide 'setup-keys)
-
-;; (evil-declare-key 'normal org-mode-map (kbd "gn") 'gf/org-go-to-next-task)
 
 ;; (evil-declare-key 'insert org-mode-map (kbd "M-<return>") (lambda()
 ;;                                 (interactive)
