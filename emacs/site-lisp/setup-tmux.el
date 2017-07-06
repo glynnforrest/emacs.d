@@ -70,7 +70,7 @@ Examples:
                      (concat \"figlet \" (buffer-file-name))
                      :key \"f\")
 "
-  (let ((function (intern (format "gf/tmux-command-%s" name)))
+  (let ((function (intern (s-dashed-words (format "gf/tmux-command-%s" name))))
         (key (plist-get args :key)))
     `(progn
        (defun ,function ()

@@ -48,4 +48,6 @@
 
 (use-package restart-emacs :ensure t)
 
+(use-package s :ensure t)
+
 (provide 'setup-core)
