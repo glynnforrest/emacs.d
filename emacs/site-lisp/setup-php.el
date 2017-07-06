@@ -1,5 +1,8 @@
 (use-package php-mode :ensure t
   :defer t
+  :commands (gf/php-insert-class
+             gf/php-insert-service
+             gf/php-insert-route)
   :config
   (require 'defuns-php)
 
@@ -8,10 +11,7 @@
    :prefix gf/major-mode-leader-key
    :non-normal-prefix gf/major-mode-non-normal-leader-key
    :keymaps 'php-mode-map
-   "c" 'gf/php-insert-use-class
-   "C" 'gf/php-insert-class
-   "s" 'gf/php-insert-service
-   "r" 'gf/php-insert-symfony-route)
+   "c" 'gf/php-insert-use-class)
 
   (general-define-key
    :states '(normal visual insert emacs)

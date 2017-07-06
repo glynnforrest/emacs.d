@@ -20,14 +20,6 @@
 
   (general-define-key
    :states '(normal visual insert emacs)
-   :prefix gf/major-mode-leader-key
-   :non-normal-prefix gf/major-mode-non-normal-leader-key
-   :keymaps 'yaml-mode-map
-   "C" 'gf/php-insert-class
-   "s" 'gf/php-insert-service)
-
-  (general-define-key
-   :states '(normal visual insert emacs)
    :prefix "SPC"
    :non-normal-prefix "M-SPC"
    :keymaps 'yaml-mode-map

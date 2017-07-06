@@ -48,6 +48,11 @@
 
    "G" 'git-gutter:revert-hunk
 
+   "i" '(:ignore t :which-key "insert")
+   "ic" 'gf/php-insert-class
+   "ir" 'gf/php-insert-symfony-route
+   "is" 'gf/php-insert-service
+
    "l" 'evil-lisp-state
 
    "m" '(:ignore t :which-key "major-mode")
