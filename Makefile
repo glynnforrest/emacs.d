@@ -5,6 +5,8 @@ base: prepare
 	stow -v -t ~ vim
 	stow -v -t ~ zsh
 	stow -v -t ~ tmux
+	mkdir -p ~/.bin
+	stow -v -t ~/.bin bin
 
 media:
 	stow -v -t ~ vimpc
