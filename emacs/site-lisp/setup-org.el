@@ -277,7 +277,7 @@ FILENAME is expected to be of the form <year>-<monthname>, e.g. 2016-november."
       (lambda(i)
         (concat
          "** TODO Review of week beginning " i "\n"
-         "*** TODO Write up notes from notebook\n"
+         "*** TODO Type up written notes\n"
          "*** TODO Import notes from email\n"
          "*** TODO Log work, timesheets, goal tracking\n"
          "*** TODO Cleanup downloads folder and home directory\n"
