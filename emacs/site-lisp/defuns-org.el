@@ -1,11 +1,36 @@
 (defun gf/org-select-project-file-header ()
-  "Visit a location to store a new note in the current project"
+  "Visit a location to store a new note in the current project."
   (interactive)
   (find-file (gf/org-resolve-project-org-file))
+  (gf/org-select-top-level-header))
+
+(defun gf/org-select-other-project-file-header ()
+  "Visit a location to store a new note in another project."
+  (interactive)
+  (let ((project (file-truename (completing-read "Project: " (projectile-relevant-known-projects)))))
+    (message project)
+    ;; TODO refactor project -> org file logic and reuse it here
+    (find-file (if (assoc project gf/org-project-file-override-alist)
+                   (concat org-directory (cadr (assoc project gf/org-project-file-override-alist)))
+                 (gf/create-org-path project)))
+    (gf/org-select-top-level-header)))
+
+(defun gf/org-select-top-level-header ()
+  "Visit a top level heading in the current file."
+  (interactive)
   (goto-char (point-min))
   (let ((choice (completing-read "Project heading: " (gf/org--get-top-level-headings))))
+    (goto-char (point-min))
     (re-search-forward (format "^\* %s" choice)))
-  (outline-show-children))
+  (outline-show-children)
+  (recenter))
+
+(defun gf/org-select-top-level-header-or-all (arg)
+  "Visit a heading in the current file. Choose from top level headings, or all headings if called with a prefix argument."
+  (interactive "P")
+  (if arg
+      (helm-org-in-buffer-headings)
+    (gf/org-select-top-level-header)))
 
 (defun gf/org--get-top-level-headings ()
   "Get the names of the top level headings in the current org file."
