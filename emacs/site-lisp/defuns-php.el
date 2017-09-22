@@ -137,6 +137,14 @@
                     (gf/candidates-from-command "php bin/console debug:router | sed -E 's/^ +//g' |  cut -d ' ' -f 1 | tail -n +3"))))
     (insert candidate)))
 
+(defun gf/php-insert-symfony-twig-helper ()
+  "Insert a twig function or filter for the current symfony project."
+  (interactive)
+  (insert (helm-comp-read
+           "Twig helper: "
+           (gf/candidates-from-command
+            "php bin/console debug:twig | grep -oE '\\* [-_a-zA-Z0-9]+' | sed 's/^. //g'"))))
+
 (defun gf/php-in-symfony-project-p ()
   "Return t if the current projectile project is a symfony project."
   (or

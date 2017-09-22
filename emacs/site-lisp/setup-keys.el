@@ -52,6 +52,7 @@
    "ic" 'gf/php-insert-class
    "ir" 'gf/php-insert-symfony-route
    "is" 'gf/php-insert-service
+   "it" 'gf/php-insert-symfony-twig-helper
 
    "l" 'evil-lisp-state
 
