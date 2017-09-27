@@ -348,7 +348,7 @@ Dates are returned in the style from `decode-time'."
    :prefix "SPC"
    :non-normal-prefix "M-SPC"
    :keymaps 'org-mode-map
-   "a" 'gf/org-select-file-header-or-all
+   "a" 'gf/org-select-top-level-header-or-all
    "A" 'gf/org-select-next-task)
 
   (general-define-key
