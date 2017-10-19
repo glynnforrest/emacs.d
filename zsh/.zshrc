@@ -164,8 +164,17 @@ git-between () {
     git log --oneline --pretty=format:"%h - %an, %ad : %s" --since="$1" --until="$2"
 }
 
+# FZF
+export FZF_DEFAULT_OPTS='--height 40% --reverse --border'
+
 # TMUX
-alias code='tmux new -s'
+tm() {
+  [[ -n "$TMUX" ]] && change="switch-client" || change="attach-session"
+  if [ $1 ]; then
+    tmux $change -t "$1" 2>/dev/null || (tmux new-session -d -s $1 && tmux $change -t "$1"); return
+  fi
+  session=$(tmux list-sessions -F "#{session_name}" 2>/dev/null | fzf --select-1 --exit-0) &&  tmux $change -t "$session" || echo "No sessions found."
+}
 
 # PACKAGE MANAGEMENT
 
