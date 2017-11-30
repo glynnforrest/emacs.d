@@ -1,0 +1,54 @@
+# -*- mode: snippet -*-
+# name: jenkins-pipeline
+# key: pipeline
+# --
+pipeline {
+    agent {
+        docker ''
+    }
+
+    triggers {
+        cron('H */4 * * 1-5')
+        pollSCM('H */4 * * 1-5')
+        upstream(upstreamProjects: 'job1,job2', threshold: hudson.model.Result.SUCCESS)
+    }
+
+    environment {
+        DB_ENGINE = 'sqlite'
+    }
+
+    stages {
+        stage('build') {
+            steps {
+                sh 'echo $PWD'
+            }
+        }
+        stage('test') {
+            failFast true
+            parallel {
+                stage('test-1') {
+                    steps {
+                    }
+                }
+                stage('test-2') {
+                    steps {
+                    }
+                }
+            }
+        }
+    }
+
+    post {
+        always {
+            junit 'build/*.xml'
+            deleteDir()
+        }
+        success {
+        }
+        failure {
+            mail to: 'me@glynnforrest.com',
+            subject: "Failed Pipeline: \${currentBuild.fullDisplayName}",
+            body: "See \${env.BUILD_URL}"
+        }
+    }
+}

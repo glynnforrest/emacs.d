@@ -35,6 +35,7 @@
 (require 'setup-flyspell)
 (require 'setup-git)
 (require 'setup-go)
+(require 'setup-groovy)
 (require 'setup-helm)
 (require 'setup-helm-dash)
 (require 'setup-help)
