@@ -1,0 +1,6 @@
+[user]
+name = Glynn Forrest
+email = me@glynnforrest.com
+
+[core]
+excludesfile = ~/.gitignore

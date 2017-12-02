@@ -5,6 +5,7 @@ base: prepare
 	stow -v -t ~ vim
 	stow -v -t ~ zsh
 	stow -v -t ~ tmux
+	stow -v -t ~ git
 	mkdir -p ~/.bin
 	stow -v -t ~/.bin bin
 
