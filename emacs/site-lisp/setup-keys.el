@@ -122,7 +122,7 @@
    "*" '(hydra-rotate-text/body :which-key "rotate text")
    "$" 'gf/refresh-major-mode
    "\\" 'align-regexp
-   "TAB" 'previous-buffer)
+   "TAB" 'alternate-buffer)
 
   (general-define-key
    :states '(normal visual)
