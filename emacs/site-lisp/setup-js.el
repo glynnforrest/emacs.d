@@ -38,7 +38,7 @@
   :config
   (add-hook 'vue-mode-hook #'smartparens-mode))
 
-(if (not (version< emacs-version "25.1"))
+(when (not (version< emacs-version "25.1"))
     (use-package lsp-vue :ensure t
       :after vue-mode
       :config

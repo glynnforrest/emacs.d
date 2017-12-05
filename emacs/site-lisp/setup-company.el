@@ -15,8 +15,10 @@
    "C-h" #'company-show-doc-buffer
    "TAB" nil))
 
-(use-package company-lsp :ensure t
-  :init
-  (push 'company-lsp company-backends))
+
+(when (not (version< emacs-version "25.1"))
+  (use-package company-lsp :ensure t
+    :init
+    (push 'company-lsp company-backends)))
 
 (provide 'setup-company)
