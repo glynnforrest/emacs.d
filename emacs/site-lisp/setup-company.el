@@ -15,4 +15,8 @@
    "C-h" #'company-show-doc-buffer
    "TAB" nil))
 
+(use-package company-lsp :ensure t
+  :init
+  (push 'company-lsp company-backends))
+
 (provide 'setup-company)

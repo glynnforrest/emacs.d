@@ -39,6 +39,7 @@
 (require 'setup-helm)
 (require 'setup-helm-dash)
 (require 'setup-help)
+(require 'setup-lsp)
 (require 'setup-js)
 (require 'setup-markdown)
 (require 'setup-misc)
