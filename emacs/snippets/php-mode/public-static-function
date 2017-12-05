@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+#name : public static function
+#key : pubs
+# --
+public static function ${4:name}($5)
+{
+    $0
+}
