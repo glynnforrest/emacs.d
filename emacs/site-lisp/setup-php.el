@@ -1,5 +1,6 @@
 (use-package php-mode :ensure t
   :defer t
+  :mode "\\.php$"
   :commands (gf/php-insert-class
              gf/php-insert-service
              gf/php-insert-route)
