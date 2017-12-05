@@ -61,6 +61,7 @@
    "o" '(:ignore t :which-key "org")
    "oi" '(gf/find-org-info-file :which-key "open info file")
    "ol" 'org-capture-goto-last-stored
+   "oL" 'org-refile-goto-last-stored
    "oN" 'gf/commit-notes
    "om" 'gf/find-current-month-notes-file
    "oo" 'org-capture ; as in, "oo, I have an idea"

@@ -11,7 +11,8 @@
    :prefix gf/major-mode-leader-key
    :non-normal-prefix gf/major-mode-non-normal-leader-key
    :keymaps 'php-mode-map
-   "c" 'gf/php-insert-use-class)
+   "c" 'gf/php-insert-use-class
+   "r" 'gf/php-refresh-class-candidates)
 
   (general-define-key
    :states '(normal visual insert emacs)
