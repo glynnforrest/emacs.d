@@ -4,6 +4,7 @@
     (server-start)))
 
 (use-package hydra :ensure t )
+(use-package diminish :ensure t )
 
 ;; enable/disable built-in modes
 (column-number-mode t)
