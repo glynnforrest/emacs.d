@@ -2,6 +2,6 @@
 # name: javascript babel
 # key: js
 # --
-#+begin_src js
+#+BEGIN_SRC js
   $0
-#+end_src
+#+END_SRC
