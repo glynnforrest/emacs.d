@@ -33,15 +33,4 @@
   :config
   (setq inferior-js-program-command "env NODE_NO_READLINE=1 node"))
 
-(use-package vue-mode
-  :ensure t
-  :config
-  (add-hook 'vue-mode-hook #'smartparens-mode))
-
-(when (not (version< emacs-version "25.1"))
-    (use-package lsp-vue :ensure t
-      :after vue-mode
-      :config
-      (add-hook 'vue-mode-hook #'lsp-vue-mmm-enable)))
-
 (provide 'setup-js)

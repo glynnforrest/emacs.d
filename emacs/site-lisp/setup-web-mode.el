@@ -1,15 +1,16 @@
 (use-package web-mode :ensure t
   :mode
-  (("\\.twig\\'" . web-mode)
-   ("\\.html?\\'" . web-mode)
-   ("\\.hbs\\'" . web-mode))
+  (
+   ".twig"
+   ".html?"
+   ".hbs$"
+   ".vue$"
+   )
   :config
   (setq
-   web-mode-disable-auto-pairing nil
-   web-mode-disable-css-colorization nil
    web-mode-markup-indent-offset 2
    web-mode-css-indent-offset 2
-   web-mode-code-indent-offset 4
+   web-mode-code-indent-offset 2
    web-mode-enable-auto-closing t
    web-mode-enable-auto-opening t
    web-mode-enable-auto-pairing t
@@ -32,5 +33,15 @@
       (php-mode)
     (web-mode)))
 
+(defun gf/web-maybe-activate-lsp ()
+  "Maybe activate language server protocol for the current buffer."
+  (if (equal (gf/filename-extension (buffer-file-name)) "vue")
+      (lsp-vue-mmm-enable)))
+
+(when (not (version< emacs-version "25.1"))
+  (use-package lsp-vue :ensure t
+    :after web-mode
+    :config
+        (add-hook 'web-mode-hook #'gf/web-maybe-activate-lsp)))
 
 (provide 'setup-web-mode)

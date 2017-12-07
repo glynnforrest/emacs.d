@@ -91,6 +91,7 @@
    "t" '(:ignore t :which-key "toggle")
    "tr" '(rainbow-mode)
    "tg" '(global-git-gutter-mode :which-key "git-gutter")
+   "tl" '(lsp-mode)
    "tw" '(global-whitespace-mode :which-key "whitespace")
    "ts" '(flyspell-mode :which-key "flyspell")
    "tp" '(smartparens-mode :which-key "smartparens")
