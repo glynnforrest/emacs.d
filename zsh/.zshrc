@@ -140,11 +140,8 @@ autoload -U url-quote-magic
 zle -N self-insert url-quote-magic
 
 # GIT
-alias gst='git status'
+alias gst='git status --short'
 alias gch='git checkout'
-alias gco='git commit'
-alias gad='git add'
-alias gcl='git clone'
 alias gbr='git branch'
 alias grbr='git branch --merged | grep -v \* | xargs git branch -d'
 alias glo='git log'
