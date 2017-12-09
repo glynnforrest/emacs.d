@@ -110,7 +110,7 @@ up() {
 
 # LS
 if is_mac; then
-    alias ls='gls -h --group-directories-first --color=always'
+    alias ls='ls -h -G'
 else
     alias ls='ls -h --group-directories-first --color=always'
 fi;
@@ -118,6 +118,9 @@ fi;
 alias ll='ls -l'
 alias la='ls -a'
 alias lla='ls -la'
+alias lr='ls -R'
+alias llr='ls -lR'
+alias llar='ls -laR'
 
 alias ff='find . -iname'
 
