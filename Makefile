@@ -2,11 +2,12 @@ prepare:
 	./bin/.bin/install-deps.sh
 
 base: prepare
+	stow -v -t ~ bin
+	stow -v -t ~ git
+	stow -v -t ~ pgcli
+	stow -v -t ~ tmux
 	stow -v -t ~ vim
 	stow -v -t ~ zsh
-	stow -v -t ~ tmux
-	stow -v -t ~ git
-	stow -v -t ~ bin
 
 media:
 	stow -v -t ~ vimpc
