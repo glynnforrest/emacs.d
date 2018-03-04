@@ -26,6 +26,7 @@
 (require 'setup-company)
 (require 'setup-css)
 (require 'setup-defuns)
+(require 'setup-hashicorp)
 (require 'setup-dired)
 (require 'setup-docker)
 (require 'setup-edit-server)
