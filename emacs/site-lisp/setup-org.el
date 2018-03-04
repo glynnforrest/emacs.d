@@ -182,61 +182,6 @@ TODO keywords, stars and list indicators."
   (setq org-src-fontify-natively t)
   (setq org-src-tab-acts-natively t)
 
-  (defvar org-projects-dir (expand-file-name  "~/notes/projects"))
-
-  (defun gf/create-org-path (path)
-    "Create a name suitable for an org file from the last part of a file
-path."
-    (let ((last (car (last (split-string (if (equal (substring path -1) "/")
-                                             (substring path 0 -1) path) "/")))))
-      (concat org-projects-dir "/"
-              (downcase
-               (replace-regexp-in-string
-                "\\." "-" (if (equal (substring last 0 1) ".")
-                              (substring last 1) last)))
-              ".org")))
-
-  (defvar gf/org-project-file-override-alist '()
-    "An association list of projectile directories and the project org file for them.
-
-This enables overriding the default behaviour of `gf/org-resolve-project-org-file'.
-
-CAR must be an absolute path to a project, including a trailing slash.
-CDR must be a path to an org file, relative to `org-directory'.
-
-Example:
-
-\'((\"/home/emacs/some-company/some-project\" \"projects/some-company.org\")
-(\"/home/emacs/some-company/different-project\" \"projects/some-company.org\"))")
-
-  (defun gf/org-resolve-project-org-file ()
-    "Get the path of the org file for the current project, either by creating a
-suitable name automatically or fetching from gf/org-project-file-override-alist."
-    (if (assoc (projectile-project-root) gf/org-project-file-override-alist)
-        (concat org-directory (cadr (assoc (projectile-project-root) gf/org-project-file-override-alist)))
-      (gf/create-org-path (projectile-project-root))))
-
-  (defun gf/org-switch-to-project-org-file ()
-    "Switch to the org file for the current project."
-    (interactive)
-    (find-file (gf/org-resolve-project-org-file)))
-
-  (defvar gf/previous-project-buffers (make-hash-table :test 'equal))
-
-  (defun gf/toggle-switch-to-project-org-file ()
-    "Alternate between the current buffer and the org file for the
-current project."
-    (interactive)
-    (if (and
-         (string-equal "org-mode" (symbol-name major-mode))
-         (s-contains-p "/notes/" (buffer-file-name)))
-        (if (gethash (buffer-file-name) gf/previous-project-buffers)
-            (switch-to-buffer (gethash (buffer-file-name) gf/previous-project-buffers))
-          (error "Previous project buffer not found"))
-      (let ((file (gf/org-resolve-project-org-file)))
-        (puthash file (current-buffer) gf/previous-project-buffers)
-        (find-file file))))
-
 (defvar gf/org-months '("january" "february" "march" "april" "may" "june" "july" "august" "september" "october" "november" "december"))
 
 (defun gf/org-calculate-month-file-offset (filename offset)
