@@ -65,7 +65,7 @@
    "oN" 'gf/commit-notes
    "om" 'gf/find-current-month-notes-file
    "oo" 'org-capture ; as in, "oo, I have an idea"
-   "op" 'gf/toggle-switch-to-project-org-file
+   "op" 'gf/projects-toggle-org-file
 
    "p" '(:ignore t :which-key "projects")
    "pk" 'projectile-kill-buffers
