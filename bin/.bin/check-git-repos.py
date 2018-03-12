@@ -40,7 +40,6 @@ def check_repos(file):
             try:
                 dir = repo[u'target']
                 check_repo(dir)
-                print("{} is clean.".format(dir))
             except Exception as e:
                 failures.append(repo[u'target'])
                 print("!! "+e.message)
