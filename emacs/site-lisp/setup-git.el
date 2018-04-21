@@ -6,10 +6,8 @@
   (add-hook 'with-editor-mode-hook 'evil-insert-state)
 
   (general-define-key
-   :states '(normal)
-   :prefix "SPC"
    :keymaps 'magit-mode-map
-   "1" 'other-window)
+   "SPC" 'nil)
 
   (general-define-key
    :states '(normal)
