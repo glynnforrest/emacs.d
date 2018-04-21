@@ -7,6 +7,12 @@
 
   (general-define-key
    :states '(normal)
+   :prefix "SPC"
+   :keymaps 'magit-mode-map
+   "1" 'other-window)
+
+  (general-define-key
+   :states '(normal)
    :keymaps 'magit-blame-mode-map
    "b" 'magit-blame
    "j" 'magit-blame-next-chunk
