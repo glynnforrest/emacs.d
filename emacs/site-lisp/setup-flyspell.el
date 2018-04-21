@@ -9,15 +9,15 @@
           with-editor-mode-hook
           rst-mode-hook))
   :config
-  (setq flyspell-issue-message-flag nil)
-  (setq-default ispell-program-name "ispell")
-  (ispell-change-dictionary "english" t))
+  (setq flyspell-issue-message-flag nil))
 
 (use-package helm-flyspell :ensure t
   :after (helm flyspell)
   :config
   (general-define-key
    :keymaps 'evil-normal-state-map
-   "z=" 'helm-flyspell-correct))
+   "z=" 'helm-flyspell-correct)
+  (general-define-key
+   "M-;" 'helm-flyspell-correct))
 
 (provide 'setup-flyspell)
