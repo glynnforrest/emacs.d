@@ -1,4 +1,5 @@
 prepare:
+	if test ! -d ~/.config; then mkdir -v ~/.config; fi
 	./bin/.bin/install-deps.sh
 
 base: prepare
