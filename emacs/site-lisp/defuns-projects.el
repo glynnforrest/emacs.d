@@ -32,11 +32,12 @@ path."
 (defun gf/projects--resolve-org-path (file)
   "Get the path of the project org file for the given file, either by creating a
 suitable name automatically or matching a regex in gf/projects-file-override-alist."
-  (let ((default-directory (file-name-directory file))
-        (override (car (assoc-default (buffer-file-name)
+  (let* ((resolved-file (if file file default-directory))
+        (default-directory (file-name-directory resolved-file))
+        (override (car (assoc-default resolved-file
                                       gf/projects-file-override-alist
                                       (lambda(regex org-file)
-                                        (string-match regex file))))))
+                                        (string-match regex resolved-file))))))
     (if override (concat gf/projects-org-directory (s-chop-prefix "/" override))
       (gf/projects--create-org-path (projectile-project-root)))))
 
