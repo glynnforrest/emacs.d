@@ -1,7 +1,7 @@
 (defun gf/org-select-project-file-header ()
   "Visit a location to store a new note in the current project."
   (interactive)
-  (find-file (gf/org-resolve-project-org-file))
+  (gf/projects-open-org-file)
   (gf/org-select-top-level-header))
 
 (defun gf/org-select-other-project-file-header ()
@@ -9,10 +9,7 @@
   (interactive)
   (let ((project (file-truename (completing-read "Project: " (projectile-relevant-known-projects)))))
     (message project)
-    ;; TODO refactor project -> org file logic and reuse it here
-    (find-file (if (assoc project gf/org-project-file-override-alist)
-                   (concat org-directory (cadr (assoc project gf/org-project-file-override-alist)))
-                 (gf/create-org-path project)))
+    (find-file (gf/projects--resolve-org-path project))
     (gf/org-select-top-level-header)))
 
 (defun gf/org-select-top-level-header ()
