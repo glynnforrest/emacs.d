@@ -26,6 +26,9 @@ TabBoxAlternative=false
 [Effect-Zoom]
 InitialZoom=1
 
+[ModifierOnlyShortcuts]
+Meta=
+
 [Plugins]
 coverswitchEnabled=true
 flipswitchEnabled=true
@@ -33,7 +36,7 @@ highlightwindowEnabled=true
 
 [TabBox]
 ActivitiesMode=1
-ApplicationsMode=0
+ApplicationsMode=1
 DesktopLayout=org.kde.breeze.desktop
 DesktopListLayout=org.kde.breeze.desktop
 DesktopMode=1
