@@ -44,7 +44,8 @@ suitable name automatically or matching a regex in gf/projects-file-override-ali
 (defun gf/projects-open-org-file ()
   "Open the org file for the current project."
   (interactive)
-  (find-file (gf/projects--resolve-org-path (buffer-file-name))))
+  (unless (gf/projects--in-project-file)
+    (find-file (gf/projects--resolve-org-path (buffer-file-name)))))
 
 (defvar gf/projects--previous-files (make-hash-table :test 'equal))
 
