@@ -6,7 +6,7 @@
   (add-hook 'with-editor-mode-hook 'evil-insert-state)
 
   (general-define-key
-   :keymaps 'magit-mode-map
+   :keymaps '(magit-mode-map magit-diff-mode-map)
    "SPC" 'nil)
 
   (general-define-key
