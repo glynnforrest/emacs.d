@@ -41,8 +41,11 @@
    "fz" '(gf/open-zshrc :which-key "open .zshrc")
    "fZ" '(gf/open-zshrc-local :which-key "open .zshrc.local")
 
-   "g" '(:ignore t :which-key "git")
+   "g" '(:ignore t :which-key "git/gtags")
    "gb" 'magit-blame
+   "gc" 'helm-gtags-create-tags
+   "gu" 'helm-gtags-update-tags
+   "gg" 'helm-gtags-select
    "gs" 'magit-status
    "gt" '(gf/git-timemachine :which-key "git-timemachine")
 
@@ -114,6 +117,9 @@
    "y" '(:ignore t :which-key "yasnippet")
    "yi" 'yas-insert-snippet
    "yr" 'yas-reload-all
+
+   "." 'helm-gtags-dwim
+   "," 'helm-gtags-pop-stack
 
    "/" 'helm-swoop
    ";" 'helm-swoop-without-pre-input
