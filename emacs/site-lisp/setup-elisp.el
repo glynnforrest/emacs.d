@@ -3,7 +3,6 @@
 (use-package lisp-mode
   :config
   (general-define-key
-   :states '(normal visual insert emacs)
    :keymaps 'lisp-mode-shared-map
    "M-RET" 'lisp-describe-thing-at-point))
 
@@ -32,7 +31,15 @@
   :init
   (add-hook 'emacs-lisp-mode-hook 'elisp-slime-nav-mode)
   (add-hook 'lisp-interaction-mode-hook 'elisp-slime-nav-mode)
-  (add-hook 'ielm-mode-hook 'elisp-slime-nav-mode))
+  (add-hook 'ielm-mode-hook 'elisp-slime-nav-mode)
+  :config
+  (general-define-key
+   :states '(normal visual insert emacs)
+   :prefix "SPC"
+   :non-normal-prefix "M-SPC"
+   :keymaps 'lisp-mode-shared-map
+   "." 'elisp-slime-nav-find-elisp-thing-at-point
+   "," 'pop-tag-mark))
 
 (require 'defuns-elisp)
 
