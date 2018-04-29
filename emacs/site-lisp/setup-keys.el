@@ -43,11 +43,12 @@
 
    "g" '(:ignore t :which-key "git/gtags")
    "gb" 'magit-blame
-   "gc" 'helm-gtags-create-tags
-   "gu" 'helm-gtags-update-tags
+   "gc" 'gf/gtags-generate-for-project
+   "gd" 'gf/gtags-delete-for-project
    "gg" 'helm-gtags-select
    "gs" 'magit-status
    "gt" '(gf/git-timemachine :which-key "git-timemachine")
+   "gu" 'helm-gtags-update-tags
 
    "G" 'git-gutter:revert-hunk
 
