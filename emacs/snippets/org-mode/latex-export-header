@@ -1,0 +1,6 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: latex export header
+# key: tex
+# --
+#+LATEX_HEADER: \usepackage{parskip}
+#+OPTIONS: toc:nil
