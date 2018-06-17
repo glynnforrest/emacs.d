@@ -1,33 +1,59 @@
-(defvar gf/tmux--target-pane nil)
-(defvar gf/tmux--previous-cmd nil)
+(defvar gf/tmux--target-panes nil "p-list of tmux sessions and their target panes.")
+(defvar gf/tmux--previous-cmds nil "p-list of tmux sessions and their previous commands.")
 
-(defun gf/tmux--list-panes ()
+(defun gf/tmux--list-sessions ()
   (split-string (shell-command-to-string
-                 "tmux list-panes -a -F \"#{session_name}:#{window_index}.#{pane_index} #{pane_current_command} in #{pane_current_path}\" | column -t") "\n"))
+                 "tmux list-sessions") "\n"))
 
-(defun gf/tmux--set-target-pane ()
+(defun gf/tmux--set-target-session (session)
+  "Set the name of the tmux session for the current frame."
+  (set-frame-parameter nil 'tmux-session session))
+
+(defun gf/tmux--get-target-session ()
+  "Get the name of the tmux session for the current frame, prompting for one if not set yet."
+  (unless (frame-parameter nil 'tmux-session)
+    (gf/tmux--set-target-session
+     (car
+      (split-string
+       (completing-read "Tmux session for this frame: " (gf/tmux--list-sessions) nil t) ":"))))
+  (frame-parameter nil 'tmux-session))
+
+(defun gf/tmux--list-panes (session)
+  (split-string (shell-command-to-string
+                 (format "tmux list-panes -st %s -F \"#{window_index}.#{pane_index} #{pane_current_command} in #{pane_current_path}\" | column -t" session)) "\n"))
+
+(defun gf/tmux--set-target-pane (session pane)
   "Set the target pane to run tmux commands in."
-  (setq gf/tmux--target-pane
-        (car (split-string
-              (completing-read "Select target tmux pane: " (gf/tmux--list-panes) nil t)
-              " "))))
+  (setq gf/tmux--target-panes
+        (plist-put gf/tmux--target-panes session pane)))
 
-(defun gf/tmux--get-target-pane ()
-  "Get the target pane to run tmux commands in."
-  (when (or (not gf/tmux--target-pane) current-prefix-arg)
-    (gf/tmux--set-target-pane))
-  gf/tmux--target-pane)
+(defun gf/tmux--get-target-pane (session)
+  "Get the target pane for the given tmux session, prompting for one if not set yet."
+  (when (or (not (plist-member gf/tmux--target-panes session)) current-prefix-arg)
+    (gf/tmux--set-target-pane
+     session
+     (concat
+      session ":"
+      (car
+       (split-string
+        (completing-read "Select target tmux pane: " (gf/tmux--list-panes session) nil t) " ")))))
+  (plist-get gf/tmux--target-panes session))
+
+(defun gf/tmux-clear-previous-cmds ()
+  (interactive)
+  (setq gf/tmux--previous-cmds nil))
 
 (defun gf/tmux--create-command (cmd)
-  (let ((target (gf/tmux--get-target-pane)))
+  (let ((target (gf/tmux--get-target-pane (gf/tmux--get-target-session))))
     (format "tmux send-keys -t %s -l '%s' && tmux send-keys -t %s Enter" target cmd target)))
 
 (defun gf/tmux--do-run (cmd)
   (save-buffer)
-  (setq gf/tmux--previous-cmd cmd)
   (shell-command-to-string
-   (gf/tmux--create-command cmd)))
-
+   (gf/tmux--create-command cmd))
+  ;; should use cl-pushnew onto a stack of commands for each session
+  (setq gf/tmux--previous-cmds
+        (plist-put gf/tmux--previous-cmds (gf/tmux--get-target-session) cmd)))
 
 (defun gf/tmux-run (cmd)
   "Run a command in the target tmux pane."
@@ -37,8 +63,8 @@
 (defun gf/tmux-run-last ()
   "Run the last command in the previous tmux pane."
   (interactive)
-  (if gf/tmux--previous-cmd
-      (gf/tmux--do-run gf/tmux--previous-cmd)
+  (if (plist-member gf/tmux--previous-cmds (gf/tmux--get-target-session))
+      (gf/tmux--do-run (plist-get gf/tmux--previous-cmds (gf/tmux--get-target-session)))
     (call-interactively 'gf/tmux-run)))
 
 (defun gf/tmux-reset ()
