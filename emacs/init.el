@@ -49,6 +49,7 @@
 (require 'setup-os)
 (require 'setup-php)
 (require 'setup-projects)
+(require 'setup-pug)
 (require 'setup-rotate-text)
 (require 'setup-saltstack)
 (require 'setup-shell-script)
