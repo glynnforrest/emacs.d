@@ -124,6 +124,14 @@ alias llar='ls -laR'
 
 alias ff='find . -iname'
 
+emptydirs () {
+    find $1 -type d -empty
+}
+
+rmemptydirs () {
+    find $1 -type d -empty -delete
+}
+
 # EDITORS
 alias e='emacsclient -nw'
 
