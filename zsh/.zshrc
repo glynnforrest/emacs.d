@@ -221,6 +221,10 @@ alias vr='vagrant reload'
 alias vg='vagrant global-status'
 alias vp='vagrant provision'
 
+# Docker
+
+alias dpostgres='docker run -ti --rm --name pg -p 5432:5432 -e POSTGRES_PASSWORD=postgres postgres'
+
 # PHP
 
 sy() {
