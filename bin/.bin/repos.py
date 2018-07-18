@@ -14,9 +14,10 @@ def usage():
 
     Available commands:
 
+    {0} add [URL] [TARGET]
     {0} check
     {0} clone
-    {0} add [URL] [TARGET]
+    {0} list
 """.format(os.path.basename(sys.argv[0])))
 
 def problem(message):
@@ -106,6 +107,11 @@ def add_repo(file, url, target):
     with open(file, mode='w+') as save_file:
         json.dump(repos, save_file, indent=4)
 
+def list_dirs(file):
+    with open(file) as json_data:
+        for repo in json.load(json_data):
+            print(os.path.expanduser(repo['target'].strip()))
+
 if len(sys.argv) < 2:
     usage()
     exit(1)
@@ -119,6 +125,8 @@ elif cmd == "check":
     check_repos(config_file)
 elif cmd == "add" and len(sys.argv) == 4:
     add_repo(config_file, sys.argv[2], sys.argv[3])
+elif cmd == "list":
+    list_dirs(config_file)
 else:
     usage()
     exit(1)
