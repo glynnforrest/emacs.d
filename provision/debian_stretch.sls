@@ -8,22 +8,26 @@ package_repos:
         pkg: packages
 
 packages:
-  pkg.latest:
+  pkg.installed:
     - refresh: True
     - names:
       - apt-transport-https
       - chromium
       - curl
       - emacs25
+      - exuberant-ctags
       - figlet
       - firmware-iwlwifi
+      - flatpak
       - g++
       - git
       - htop
       - imagemagick
       - jq
+      - libncurses5-dev
       - make
       - markdown
+      - python-pip
       - stow
       - sudo
       - tig
@@ -33,18 +37,14 @@ packages:
       - watch
       - zsh
 
-user_account:
-  user.present:
-    - name: {{user}}
-    - shell: /usr/bin/zsh
-    - createhome: true
-    - optional_groups:
-        - sudo
-  require:
-    - pkg: packages
+flatpak:
+  cmd.run:
+    - name: "flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo"
+    - unless: flatpak remote-list | grep flathub
 
 docker:
   pkgrepo.managed:
+    - file: /etc/apt/sources.list.d/docker.list
     - name: deb https://download.docker.com/linux/debian stretch stable
     - key_url: https://download.docker.com/linux/debian/gpg
   pkg.installed:
@@ -56,6 +56,47 @@ docker:
     - enable: True
     - require:
         - pkg: docker
+
+user_account:
+  user.present:
+    - name: {{user}}
+    - shell: /usr/bin/zsh
+    - createhome: true
+    - optional_groups:
+        - sudo
+        - docker
+  require:
+    - pkg: packages
+    - pkg: docker
+
+docker-compose:
+  pip.installed:
+    - name: docker-compose
+
+nodejs:
+  pkgrepo.managed:
+    - file: /etc/apt/sources.list.d/nodejs.list
+    - name: deb https://deb.nodesource.com/node_10.x stretch main
+    - key_url: https://deb.nodesource.com/gpgkey/nodesource.gpg.key
+  pkg.installed:
+    - name: nodejs
+    - require:
+      - pkgrepo: nodejs
+  npm.installed:
+    - require:
+      - pkg: nodejs
+    - pkgs:
+      - ember-cli
+      - vue-cli
+      - vue-language-server
+      - yarn
+
+dbeaver:
+  pkg.installed:
+    - name: dbeaver-ce
+    - sources:
+      - dbeaver: https://dbeaver.io/files/5.1.3/dbeaver-ce_5.1.3_amd64.deb
+    - unless: "dpkg --get-selections | grep dbeaver-ce"
 
 rg:
   archive.extracted:
@@ -75,19 +116,22 @@ rg:
 {% set global_src = 'https://ftp.gnu.org/pub/gnu/global/global-6.6.tar.gz' %}
 {% set global_hash = '0965b4800686641a28f7b16bb733aa3345316dde' %}
 global:
-  pkg.installed:
-    - names:
-      - exuberant-ctags
-      - libncurses5-dev
   archive.extracted:
     - name: /tmp/global
     - source: {{global_src}}
     - source_hash: {{global_hash}}
     - unless: which global
+  # cwd check for a non-exsiting folder fails, using jinja if instead
+  # state file has to be ran twice, once to extract the archive, then
+  # again so jinja will see it when state file is rendered
+  {%- if salt['file.directory_exists']('/tmp/global/global-6.6') %}
   cmd.run:
     - name: './configure --with-exuberant-ctags=/usr/bin/ctags-exuberant && make && make install'
     - cwd: '/tmp/global/global-6.6'
     - unless: which global
+    - require:
+      - archive: global
+  {%- endif %}
 
 fzf:
   archive.extracted:
