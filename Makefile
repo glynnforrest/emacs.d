@@ -22,6 +22,5 @@ linux: base media
 clean:
 	for i in $$(find . -type d -maxdepth 1); do stow -v -t ~ -D $$(basename $$i); done
 
-.PHONY: provision
-provision:
-	salt-call --local -l info --file-root=./provision state.sls debian_stretch
+provision_debian:
+	salt-call --local -l info --file-root=./provision --state-output=changes state.sls debian_stretch
