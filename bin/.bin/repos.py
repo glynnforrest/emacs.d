@@ -4,6 +4,7 @@ import json
 import subprocess
 import os
 import sys
+from operator import itemgetter
 
 def usage():
     print("""
@@ -15,6 +16,7 @@ def usage():
 
     {0} check
     {0} clone
+    {0} add [URL] [TARGET]
 """.format(os.path.basename(sys.argv[0])))
 
 def problem(message):
@@ -79,16 +81,44 @@ def check_repos(file):
 
     print("All repos are synced with the remotes.")
 
+def add_repo(file, url, target):
+    home = os.path.expanduser("~")
+    if home in target:
+        target = "~/" + os.path.relpath(os.path.expanduser(target), home)
+
+    repos = []
+    try:
+        with open(file) as json_data:
+            repos = json.load(json_data)
+            for repo in repos:
+                if repo['target'] == target:
+                    print("Target {} already exists in {}.".format(target, file))
+                    return
+            repos.append({
+                'url': url,
+                'target': target
+            })
+            repos = sorted(repos, key=itemgetter('target'))
+    except Exception as e:
+        print(e)
+        pass
+
+    with open(file, mode='w+') as save_file:
+        json.dump(repos, save_file, indent=4)
+
 if len(sys.argv) < 2:
     usage()
     exit(1)
 
 cmd = sys.argv[1]
+config_file = os.path.expanduser('~/.repos.json')
 
 if cmd == "clone":
-    clone_repos(os.path.expanduser('~/.repos.json'))
+    clone_repos(config_file)
 elif cmd == "check":
-    check_repos(os.path.expanduser('~/.repos.json'))
+    check_repos(config_file)
+elif cmd == "add" and len(sys.argv) == 4:
+    add_repo(config_file, sys.argv[2], sys.argv[3])
 else:
     usage()
     exit(1)
