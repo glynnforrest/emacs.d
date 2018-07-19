@@ -1,4 +1,8 @@
 {% set user = 'glynn' %}
+{% set flatpak_apps = [
+'com.slack.Slack',
+'com.spotify.Client',
+] %}
 
 package_repos:
   file.managed:
@@ -27,6 +31,7 @@ packages:
       - libncurses5-dev
       - make
       - markdown
+      - netbeans
       - python-pip
       - stow
       - sudo
@@ -34,13 +39,22 @@ packages:
       - tmux
       - tree
       - vim
+      - vlc
       - watch
+      - youtube-dl
       - zsh
 
 flatpak:
   cmd.run:
     - name: "flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo"
     - unless: flatpak remote-list | grep flathub
+
+{% for app in flatpak_apps %}
+flatpak_{{app}}:
+  cmd.run:
+    - name: 'flatpak install --assumeyes flathub {{app}}'
+    - unless: flatpak list | grep {{app}}
+{% endfor %}
 
 docker:
   pkgrepo.managed:
@@ -87,6 +101,7 @@ nodejs:
       - pkg: nodejs
     - pkgs:
       - ember-cli
+      - prez
       - vue-cli
       - vue-language-server
       - yarn
