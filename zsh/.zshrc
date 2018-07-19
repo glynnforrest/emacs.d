@@ -121,7 +121,6 @@ alias lla='ls -la'
 alias lr='ls -R'
 alias llr='ls -lR'
 alias llar='ls -laR'
-
 alias ff='find . -iname'
 
 emptydirs () {
@@ -195,7 +194,7 @@ if is_arch; then
 fi;
 
 # NETWORK
-alias myip='curl canihazip.com/s/'
+alias myip='curl -L https://canihazip.com/s/'
 alias png='ping -c 5 www.google.com'
 
 if is_mac; then
@@ -220,6 +219,7 @@ alias vh='vagrant halt'
 alias vr='vagrant reload'
 alias vg='vagrant global-status'
 alias vp='vagrant provision'
+alias vsus='vagrant suspend'
 
 # Docker
 
@@ -234,14 +234,6 @@ sy() {
         ./bin/console $*
     fi;
 }
-
-alias nep='php neptune'
-
-alias phpunit='./vendor/bin/phpunit'
-alias tphpunit='phpunit --testsuite'
-
-alias php53='/usr/local/Cellar/php53/*/bin/php'
-alias php54='/usr/local/Cellar/php54/*/bin/php'
 
 alias comi='composer install'
 alias comu='composer update'
@@ -272,24 +264,24 @@ dl() {
 }
 
 # Combine pdfs
-# pdf-combine 1.pdf 2.pdf
+# pdf_combine 1.pdf 2.pdf
 # OR
-# pdf-combine *.pdf
+# pdf_combine *.pdf
 # creates output.pdf
 # the input files are printed after 'from' when gs is followed by a command
 # (echo), but doesn't output anything normally. I have no idea why.
-alias pdf-combine='gs -dBATCH -dNOPAUSE -q -sDEVICE=pdfwrite -sOutputFile=output.pdf && echo "created output.pdf from"'
+alias pdf_combine='gs -dBATCH -dNOPAUSE -q -sDEVICE=pdfwrite -sOutputFile=output.pdf && echo "created output.pdf from"'
 
-alias clone_lib='cd ~/code/lib && git clone'
+alias cl='cd ~/Desktop && git clone'
 
 # Sometimes Chrome favicon cache needs a kick
 alias rm_chrome_favicons='rm ~/Library/Application\ Support/Google/Chrome/Default/Favicons'
 
-alias pygment-styles='python -c "from pygments.styles import get_all_styles; print(list(get_all_styles()))"'
+alias pygment_styles='python -c "from pygments.styles import get_all_styles; print(list(get_all_styles()))"'
 
 # FUN
 alias starwars='telnet towel.blinkenlights.nl'
-alias youtube-mp3="youtube-dl -t --extract-audio --audio-format mp3 --audio-quality 320k"
+alias youtube_mp3="youtube-dl -t --extract-audio --audio-format mp3 --audio-quality 320k"
 
 # FASD
 if command_exists fasd;
