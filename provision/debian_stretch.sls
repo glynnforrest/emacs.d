@@ -32,12 +32,15 @@ packages:
       - make
       - markdown
       - netbeans
+      - nfs-common
+      - nfs-kernel-server
       - python-pip
       - stow
       - sudo
       - tig
       - tmux
       - tree
+      - vagrant
       - vim
       - vlc
       - watch
@@ -70,6 +73,23 @@ docker:
     - enable: True
     - require:
         - pkg: docker
+
+virtualbox:
+  pkgrepo.managed:
+    - file: /etc/apt/sources.list.d/virtualbox.list
+    - name: deb http://download.virtualbox.org/virtualbox/debian stretch contrib
+    - key_url: https://www.virtualbox.org/download/oracle_vbox_2016.asc
+  pkg.installed:
+    - names:
+        - virtualbox-5.0
+        - net-tools
+    - require:
+      - pkgrepo: virtualbox
+
+vagrant_virtualbox_plugin:
+  cmd.run:
+    - name: 'vagrant plugin install vagrant-vbguest'
+    - unless: 'vagrant plugin list | grep vagrant-vbguest'
 
 user_account:
   user.present:
@@ -106,11 +126,18 @@ nodejs:
       - vue-language-server
       - yarn
 
+keepassxc:
+  pkg.installed:
+    - name: keepassxc
+    - sources:
+      - keepassxc: https://github.com/magkopian/keepassxc-debian/releases/download/2.3.3/keepassxc_2.3.3-1_amd64_stable_stretch.deb
+    - unless: 'dpkg --get-selections | grep keepassxc'
+
 dbeaver:
   pkg.installed:
     - name: dbeaver-ce
     - sources:
-      - dbeaver: https://dbeaver.io/files/5.1.3/dbeaver-ce_5.1.3_amd64.deb
+      - dbeaver-ce: https://dbeaver.io/files/5.1.3/dbeaver-ce_5.1.3_amd64.deb
     - unless: "dpkg --get-selections | grep dbeaver-ce"
 
 rg:
