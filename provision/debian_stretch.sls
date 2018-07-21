@@ -26,6 +26,7 @@ packages:
       - g++
       - git
       - htop
+      - hugo
       - imagemagick
       - jq
       - libncurses5-dev
@@ -34,6 +35,7 @@ packages:
       - netbeans
       - nfs-common
       - nfs-kernel-server
+      - procps
       - python-pip
       - stow
       - sudo
@@ -43,7 +45,6 @@ packages:
       - vagrant
       - vim
       - vlc
-      - watch
       - youtube-dl
       - zsh
 
@@ -126,6 +127,8 @@ nodejs:
       - vue-language-server
       - yarn
 
+# using unless: for pkg.installed with .deb sources to prevent downloading them again
+# this speeds things up significantly on subsequent runs
 keepassxc:
   pkg.installed:
     - name: keepassxc
@@ -139,6 +142,13 @@ dbeaver:
     - sources:
       - dbeaver-ce: https://dbeaver.io/files/5.1.3/dbeaver-ce_5.1.3_amd64.deb
     - unless: "dpkg --get-selections | grep dbeaver-ce"
+
+hugo:
+  pkg.installed:
+    - name: hugo
+    - sources:
+      - hugo: https://github.com/gohugoio/hugo/releases/download/v0.44/hugo_0.44_Linux-64bit.deb
+    - unless: "dpkg --get-selections | grep hugo"
 
 rg:
   archive.extracted:
@@ -196,12 +206,14 @@ fasd:
     - rev: master
     - target: /tmp/fasd
     - unless: which fasd
+  {%- if salt['file.directory_exists']('/tmp/fasd') %}
   cmd.run:
     - name: 'make install'
     - cwd: /tmp/fasd
     - unless: which fasd
     - require:
       - git: fasd
+  {%- endif %}
 
 php:
   pkgrepo.managed:
