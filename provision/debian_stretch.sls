@@ -16,7 +16,6 @@ packages:
     - refresh: True
     - names:
       - apt-transport-https
-      - chromium
       - curl
       - emacs25
       - exuberant-ctags
@@ -135,6 +134,13 @@ keepassxc:
     - sources:
       - keepassxc: https://github.com/magkopian/keepassxc-debian/releases/download/2.3.3/keepassxc_2.3.3-1_amd64_stable_stretch.deb
     - unless: 'dpkg --get-selections | grep keepassxc'
+
+chrome:
+  pkg.installed:
+    - name: google-chrome-stable
+    - sources:
+      - google-chrome: https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+    - unless: "dpkg --get-selections | grep google-chrome-stable"
 
 dbeaver:
   pkg.installed:
