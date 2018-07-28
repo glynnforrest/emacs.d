@@ -16,6 +16,7 @@ def usage():
 
     {0} add [URL] [TARGET]
     {0} check
+    {0} check [FOLDER]
     {0} clone
     {0} list
 """.format(os.path.basename(sys.argv[0])))
@@ -122,7 +123,14 @@ config_file = os.path.expanduser('~/.repos.json')
 if cmd == "clone":
     clone_repos(config_file)
 elif cmd == "check":
-    check_repos(config_file)
+    if len(sys.argv) == 3:
+        try:
+            check_repo(os.path.expanduser(sys.argv[2]))
+        except Exception as e:
+            print(e)
+            exit(1);
+    else:
+        check_repos(config_file)
 elif cmd == "add" and len(sys.argv) == 4:
     add_repo(config_file, sys.argv[2], sys.argv[3])
 elif cmd == "list":
