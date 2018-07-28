@@ -30,6 +30,10 @@
 ehthumbs.db
 Thumbs.db
 
+GTAGS
+GPATH
+GRTAGS
+
 # Others #
 ##########
 .ropeproject

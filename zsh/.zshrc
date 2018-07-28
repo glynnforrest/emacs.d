@@ -400,6 +400,9 @@ checkcert () {
     checkcertfull $1 $2 | egrep -A 1 'Not|Alt' | awk '{$1=$1;print $0}' | grep -v '\-\-'
 }
 
+# GTAGS
+export GTAGSLABEL=pygments
+
 alias t="terraform"
 alias tf_lock_providers="terraform providers lock -platform=linux_arm64 -platform=linux_amd64 -platform=darwin_amd64 -platform=windows_amd64"
 
