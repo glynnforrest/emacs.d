@@ -5,7 +5,6 @@
 
 set -e
 
-git init
 prez --init .
 echo '' > css/custom.css
 echo '' > js/custom.js
