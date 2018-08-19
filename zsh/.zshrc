@@ -46,10 +46,6 @@ distro () {
     cat /etc/*release | head -n 1 | cut -d \" -f 2
 }
 
-is_arch () {
-    test distro = "Arch Linux"
-}
-
 is_debian () {
     test `distro | cut -d ' ' -f 1` = "Debian"
 }
@@ -126,6 +122,8 @@ rmemptydirs () {
     find $1 -type d -empty -delete
 }
 
+alias lsbin='ls -1 ~/.bin'
+
 # EDITORS
 alias e='emacsclient -nw'
 
@@ -177,16 +175,6 @@ tm() {
   fi
   session=$(tmux list-sessions -F "#{session_name}" 2>/dev/null | fzf --select-1 --exit-0) &&  tmux $change -t "$session" || echo "No sessions found."
 }
-
-# PACKAGE MANAGEMENT
-
-# Arch
-if is_arch; then
-    alias bin='sudo pacman -Rs'
-    alias pup='sudo pacman -Syu'
-    alias porph='pacman -Qqdt' #Show package orphans
-    alias pgr='pacman -Qq | grep -i' #Grep installed packages
-fi;
 
 # NETWORK
 alias myip='curl -L https://canihazip.com/s/'
