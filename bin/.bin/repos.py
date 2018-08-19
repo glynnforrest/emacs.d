@@ -14,9 +14,9 @@ def usage():
 
     Available commands:
 
-    {0} add [URL] [TARGET]
+    {0} add [URL] [DIRECTORY]
     {0} check
-    {0} check [FOLDER]
+    {0} check [DIRECTORY]
     {0} clone
     {0} list
 """.format(os.path.basename(sys.argv[0])))
@@ -50,33 +50,38 @@ def git_check(command, dir):
 
 def check_repo(dir):
     if not os.path.isdir(dir):
-        problem("{} does not exist.".format(dir))
+        problem("does not exist")
 
     unpushed_commits = git_check('git log --branches --not --remotes --oneline', dir)
     if len(unpushed_commits) > 0:
-        problem("{} has {} unpushed {}.".format(dir, len(unpushed_commits), 'commit' if len(unpushed_commits) == 1 else 'commits'))
+        problem("{} unpushed {}".format(len(unpushed_commits), 'commit' if len(unpushed_commits) == 1 else 'commits'))
 
     stashes = git_check('git stash list', dir)
     if len(stashes) > 0:
-        problem("{} has {} {}.".format(dir, len(stashes), 'stash' if len(stashes) == 1 else 'stashes'))
+        problem("{} {}".format(len(stashes), 'stash' if len(stashes) == 1 else 'stashes'))
 
     changed_files = git_check('git status --short', dir)
     if len(changed_files) > 0:
-        problem("{} has {} changed or untracked {}.".format(dir, len(changed_files), 'file' if len(changed_files) == 1 else 'files'))
+        problem("{} changed or untracked {}".format(len(changed_files), 'file' if len(changed_files) == 1 else 'files'))
 
 
 def check_repos(file):
-    failures = []
+    failures = {}
+    max_dir_length = 0
     with open(file) as json_data:
         for repo in json.load(json_data):
             try:
+                dir_length = len(repo[u'target'])
+                if dir_length > max_dir_length:
+                    max_dir_length = dir_length
                 dir = os.path.expanduser(repo[u'target'])
                 check_repo(dir)
             except Exception as e:
-                failures.append(repo[u'target'])
-                print(e)
+                failures[repo[u'target']] = str(e)
 
     if len(failures) > 0:
+        for dir, failure in failures.items():
+            print(dir.ljust(max_dir_length) + "  " + failure)
         print("")
         print("{} {} unpushed changes.".format(len(failures), 'repo has' if len(failures) == 1 else 'repos have'))
         exit(1)
