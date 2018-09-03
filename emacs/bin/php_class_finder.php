@@ -49,9 +49,6 @@ $command = "find -L $directory -type f -name '*.php'";
 // excluding tests
 $command .= " | grep -v 'Test.php'";
 
-// and phpunit files
-$command .= " | grep -v 'phpunit'";
-
 // that contain a namespace declaration
 $command .= " | xargs grep '^namespace[^;]*'";
 
