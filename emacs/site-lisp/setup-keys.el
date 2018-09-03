@@ -15,6 +15,7 @@
    "bb" 'helm-mini
    "bd" 'kill-this-buffer
    "bD" 'kill-matching-buffers
+   "bm" 'gf/switch-to-messages-buffer
    "bs" 'gf/switch-to-scratch-buffer
 
    "d" 'helm-dash

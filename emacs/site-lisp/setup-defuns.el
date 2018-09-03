@@ -67,7 +67,7 @@ EXTENSION. Only the last extension of the file is considered."
   (call-interactively major-mode)
   (message (format "Refreshed %s" major-mode)))
 
-(defun gf/switch-to-scratch-buffer()
+(defun gf/switch-to-scratch-buffer ()
   "Switch to the scratch buffer. If the buffer doesn't exist,
 create it and write the initial message into it."
   (interactive)
@@ -79,6 +79,11 @@ create it and write the initial message into it."
         (lisp-interaction-mode)
         (insert initial-scratch-message)))
     (switch-to-buffer scratch-buffer)))
+
+(defun gf/switch-to-messages-buffer ()
+  "Switch to the messages buffer."
+  (interactive)
+  (switch-to-buffer "*Messages*"))
 
 (defvar gf/url-regex-string "https?:\/\/[-a-z0-9\.\/_\?=%&]+")
 
