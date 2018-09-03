@@ -19,6 +19,10 @@
   (helm-mode)
   (helm-autoresize-mode t)
 
+  (defun gf/helm-find-in-directory (start)
+    (interactive)
+    (let ((default-directory (expand-file-name start)))
+      (call-interactively 'helm-find-files)))
 
   (general-define-key
    :keymaps 'helm-map

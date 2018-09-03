@@ -15,6 +15,11 @@
 
 (general-define-key
   \"a\" (gf/key 'command-name \"arg1\" \"arg2\"))
+
+or if using plists
+
+(general-define-key
+  \"a\" `(,(gf/key 'command-name \"arg1\" \"arg2\") :which-key \"run command-name\"))
 "
   `(lambda () (interactive) ,(append (cdr cmd) args)))
 
@@ -48,6 +53,8 @@
    "fD" 'delete-current-buffer-file
    "fe" 'gf/find-emacs-d-file
    "ff" 'helm-find-files
+   "fh" `(,(gf/key 'gf/helm-find-in-directory "~/") :which-key "find in home directory")
+   "fH" `(,(gf/key 'gf/helm-find-in-directory "~/Desktop/") :which-key "find on the desktop")
    "fi" '(gf/open-init-file :which-key "open init.el")
    "fI" '(gf/open-personal-file :which-key "open setup-personal.el")
    "fo" 'gf/org-find-file
