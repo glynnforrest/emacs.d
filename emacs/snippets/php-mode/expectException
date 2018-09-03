@@ -2,4 +2,4 @@
 # name: setExpectedException
 # key: ex
 # --
-$this->setExpectedException(${1:\\Exception}::class);$0
+$this->expectException(${1:\\Exception}::class);$0
