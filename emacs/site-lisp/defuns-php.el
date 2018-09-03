@@ -17,7 +17,7 @@
 ;;             (other-window 1))
 ;;         (message (format "buffer not found: %s" b))))))
 
-(defun gf/php-add-use-class (classname)
+(defun gf/php-use-class (classname)
   "Insert CLASSNAME after the last use statement at the top of this file."
   (interactive)
   (save-excursion
@@ -33,6 +33,28 @@
     (newline)
     (insert (concat "use " classname ";"))))
 
+(defun gf/php-use-trait (classname)
+  "Use CLASSNAME as a trait in the current file."
+  (interactive)
+  (gf/php-use-class classname)
+  (save-excursion
+    (goto-char (point-max))
+    (if (not (re-search-backward "^    use" nil t))
+        (progn
+          (goto-char (point-min))
+          (if (not (re-search-forward "^class" nil t))
+              (error "Unable to detect where to add a trait use statement."))
+          (forward-line)
+          (when (not (looking-at-p "{"))
+            (forward-line -1))
+          (end-of-line)
+          (newline)
+          (forward-line -1)))
+    (end-of-line)
+    (newline)
+    (let ((classbasename (car (last (split-string classname "\\\\")))))
+      (insert (concat "    use " classbasename ";")))))
+
 (defun gf/php-class-candidates ()
   "Get a list of available PHP classes in the current projectile project."
   (interactive)
@@ -45,12 +67,19 @@
   (start-process-shell-command "php-class-candidates" nil (concat "~/.emacs.d/bin/php_class_finder.php " (projectile-project-root) " refresh"))
   (message (format "Refreshing class candidates for %s" (projectile-project-root))))
 
-(defun gf/php-insert-use-class ()
+(defun gf/php-use-class-select ()
   "Add a class to the use declarations in the current file."
   (interactive)
-  (gf/php-add-use-class (helm-comp-read
-                         "Class: "
-                         (gf/php-class-candidates))))
+  (gf/php-use-class (helm-comp-read
+                     "Class: "
+                     (gf/php-class-candidates))))
+
+(defun gf/php-use-trait-select ()
+  "Use a trait in the current class."
+  (interactive)
+  (gf/php-use-trait (helm-comp-read
+                     "Trait: "
+                     (gf/php-class-candidates))))
 
 (defun gf/php-insert-class ()
   "Insert a class name in the current projectile project."
@@ -68,15 +97,6 @@
   "Get a suitable namespace for `FILE`."
   (shell-command-to-string
    (concat user-emacs-directory "bin/php_resolve_namespace.php " file)))
-
-(defun gf/php-namespace-from-path (path substr)
-  "Extract a namespace from a path name that contains `substr`."
-  (let ((namespace-file
-         (s-right (- (length path)
-                     (s-index-of substr path)
-                     (+ 1 (length substr)))
-                  path)))
-    (s-join "\\" (butlast (s-split "/" namespace-file)))))
 
 (defun gf/evil-open-below-docblock (count)
   "Same as `evil-open-below`, but insert * if in a docblock."
