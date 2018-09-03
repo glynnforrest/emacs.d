@@ -1,3 +1,5 @@
+(require 'org)
+
 (defun gf/org-select-project-file-header ()
   "Visit a location to store a new note in the current project."
   (interactive)
@@ -79,5 +81,9 @@
   (save-excursion
     (outline-up-heading 1 t)
     (outline-show-branches)))
+
+(defun gf/org-find-file ()
+  (interactive)
+  (projectile-find-file-in-directory org-directory))
 
 (provide 'defuns-org)

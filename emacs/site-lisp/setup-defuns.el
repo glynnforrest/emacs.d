@@ -38,10 +38,6 @@ EXTENSION. Only the last extension of the file is considered."
   (interactive)
   (find-file "~/.zshrc.local"))
 
-(defun gf/find-notes-file ()
-  (interactive)
-  (projectile-find-file-in-directory org-directory))
-
 (defun gf/save-buffers-kill-emacs-no-prompt ()
   "Save some buffers, then exit unconditionally"
   (interactive)

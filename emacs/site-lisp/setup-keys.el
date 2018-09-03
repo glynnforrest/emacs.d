@@ -50,7 +50,7 @@
    "ff" 'helm-find-files
    "fi" '(gf/open-init-file :which-key "open init.el")
    "fI" '(gf/open-personal-file :which-key "open setup-personal.el")
-   "fo" 'gf/find-notes-file
+   "fo" 'gf/org-find-file
    "fp" 'projectile-find-file
    "fr" 'helm-recentf
    "fR" 'rename-current-buffer-file

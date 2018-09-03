@@ -1,7 +1,8 @@
 (use-package org :ensure t
   :defer t
   :commands (gf/find-current-month-notes-file
-             gf/toggle-switch-to-project-org-file)
+             gf/toggle-switch-to-project-org-file
+             gf/org-find-file)
   :config
   (require 'defuns-org)
 
@@ -163,7 +164,7 @@ TODO keywords, stars and list indicators."
      (lilypond . t)
      (haskell . t)
      (python . t)
-     (sh . t)
+     (shell . t)
      ))
 
   (setq org-confirm-babel-evaluate nil)
