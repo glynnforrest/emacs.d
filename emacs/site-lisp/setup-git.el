@@ -32,7 +32,7 @@
     "Git timemachine"
     ("n" git-timemachine-show-next-revision "Next commit")
     ("p" git-timemachine-show-previous-revision "Previous commit")
-    ("q" git-timemachine-quit "Quit"))
+    ("q" git-timemachine-quit "Quit" :exit t))
 
   (defun gf/git-timemachine ()
     "Start git-timemachine with a hydra."
