@@ -10,6 +10,14 @@
 (defvar gf/major-mode-non-normal-leader-key "M-SPC m"
   "Leader key prefix to use for major mode key bindings in non-normal evil modes.")
 
+(defmacro gf/key (cmd &rest args)
+  "Helper macro to add an argument to a key binding.
+
+(general-define-key
+  \"a\" (gf/key 'command-name \"arg1\" \"arg2\"))
+"
+  `(lambda () (interactive) ,(append (cdr cmd) args)))
+
 (use-package general :ensure t
   :config
   (general-define-key

@@ -14,6 +14,7 @@
 
 ;; Core stuff
 (require 'setup-core)
+(require 'setup-os)
 (require 'setup-evil)
 (require 'setup-keys)
 (require 'setup-appearance)
@@ -46,7 +47,6 @@
 (require 'setup-markdown)
 (require 'setup-misc)
 (require 'setup-org)
-(require 'setup-os)
 (require 'setup-php)
 (require 'setup-projects)
 (require 'setup-pug)
