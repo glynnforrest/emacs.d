@@ -1,13 +1,21 @@
+(defvar gf/leader-key "SPC"
+  "Leader key prefix to use for key bindings.")
+
+(defvar gf/non-normal-leader-key "M-SPC"
+  "Leader key prefix to use for key bindings in non-normal evil modes.")
+
+(defvar gf/major-mode-leader-key "SPC m"
+  "Leader key prefix to use for major mode key bindings.")
+
+(defvar gf/major-mode-non-normal-leader-key "M-SPC m"
+  "Leader key prefix to use for major mode key bindings in non-normal evil modes.")
+
 (use-package general :ensure t
   :config
-  (setq
-   gf/major-mode-leader-key "SPC m"
-   gf/major-mode-non-normal-leader-key "M-m")
-
   (general-define-key
    :states '(normal visual insert emacs)
-   :prefix "SPC"
-   :non-normal-prefix "M-SPC"
+   :prefix gf/leader-key
+   :non-normal-prefix gf/non-normal-leader-key
 
    "a" 'helm-imenu
 
