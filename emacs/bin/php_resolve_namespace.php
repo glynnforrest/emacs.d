@@ -37,20 +37,26 @@ function getAutoloadPaths($file) {
             continue;
         }
         $config = json_decode(file_get_contents($composerJson), true);
-        if (!isset($config['autoload']['psr-4'])) {
+        $paths = array_merge(
+            isset($config['autoload']['psr-4']) ? $config['autoload']['psr-4'] : [],
+            isset($config['autoload-dev']['psr-4']) ? $config['autoload-dev']['psr-4'] : []
+        );
+        if (empty($paths)) {
             continue;
         }
-        $paths = $config['autoload']['psr-4'];
         foreach ($paths as $namespace => $path) {
-            if ($path === '') {
-                //e.g. 'Vendor\FooBundle' => ''
-                // file is src/FooBundle/Entity/Something.php
-                // we want Vendor => 'src'
-                $pieces = explode('\\', trim($namespace, '\\'));
-                $lastNamespaceSegment = end($pieces);
-                $pos = strpos($file, $lastNamespaceSegment);
-                $paths[$namespace] = substr(dirname($file), strlen($path), $pos + strlen($lastNamespaceSegment));
+            $path = trim($path);
+            if ($path !== '') {
+                $paths[$namespace] = trim($path, '/');
+                continue;
             }
+            //path is empty, e.g. 'Vendor\FooBundle' => ''
+            // file is src/FooBundle/Entity/Something.php
+            // we want to return Vendor => 'src'
+            $pieces = explode('\\', trim($namespace, '\\'));
+            $lastNamespaceSegment = end($pieces);
+            $pos = strpos($file, $lastNamespaceSegment);
+            $paths[$namespace] = substr(dirname($file), strlen($path), $pos + strlen($lastNamespaceSegment));
         }
 
         return $paths;
