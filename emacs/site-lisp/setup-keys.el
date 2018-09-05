@@ -65,6 +65,9 @@ or if using plists
    "fz" '(gf/open-zshrc :which-key "open .zshrc")
    "fZ" '(gf/open-zshrc-local :which-key "open .zshrc.local")
 
+   "h" '(:ignore t :which-key "other help")
+   "hd" 'gf/php-show-date-format-help
+
    "g" '(:ignore t :which-key "git/gtags")
    "gb" 'magit-blame
    "gc" 'gf/gtags-generate-for-project

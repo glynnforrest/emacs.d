@@ -175,4 +175,28 @@
   "Return t if the current projectile project is a neptune php project."
   (file-exists-p (concat (projectile-project-root) "neptune")))
 
+(defun gf/php-show-date-format-help ()
+  "Show a read-only buffer in another window with the PHP date format parameters."
+  (interactive)
+  (with-current-buffer-window "*PHP Date Help*" nil nil
+                              (princ "
+Time              Date                  Timezone                       Other
+------------------------------------------------------------------------------------------------------
+a: am/pm          d: Day 01-31          e: UTC, GMT, Atlantic/Azores   B: Swatch 000-999
+A: AM/PM          D: Mon-Sun            O: +0200                       c: ISO 8601
+g: 12/hr 1-12     F: January-December   P: +02:00                      I: DST ? 1 : 0
+G: 24/hr 0-23     j: Day 1-31           T: UTC, GMT, EST               L: Leap year ? 1 : 0
+h: 12/hr 01-12    l: Monday-Sunday      Z: TZ offset in seconds        o: ISO-8601 week-numbering year
+H: 24/hr 00-23    m: Month 01-12                                       r: RFC 2822
+i: Min 00-59      M: Jan-Dec                                           t: Days in month
+u: Microseconds   n: Month 1-12                                        U: Seconds since epoch
+v: Milliseconds   N: Day 1-7                                           z: Day of year 0-365
+                  s: Sec 00-59
+                  S: nd, rd, th
+                  w: Day 0-6
+                  W: Week of year
+                  y: Year 00-99
+                  Y: YYYY
+")))
+
 (provide 'defuns-php)

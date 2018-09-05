@@ -3,7 +3,8 @@
   :mode "\\.php$"
   :commands (gf/php-insert-class
              gf/php-insert-service
-             gf/php-insert-route)
+             gf/php-insert-route
+             gf/php-show-date-format-help)
   :config
   (require 'defuns-php)
 
