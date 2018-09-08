@@ -17,6 +17,6 @@
   (general-define-key
    :keymaps 'dired-mode-map
    "]" 'dired-rsync
-   "[" (gf/key 'dired-rsync (expand-file-name "~/Desktop"))))
+   "[" (gf/key 'dired-rsync "~/Desktop")))
 
 (provide 'setup-dired)
