@@ -1,6 +1,6 @@
 [user]
 name = Glynn Forrest
-email = me@glynnforrest.com
+useConfigOnly = true
 
 [core]
 excludesfile = ~/.gitignore
