@@ -143,19 +143,6 @@ autoload -U url-quote-magic
 zle -N self-insert url-quote-magic
 
 # GIT
-alias gst='git status --short'
-alias gch='git checkout'
-alias gbr='git branch'
-alias grbr='git branch --merged | grep -v \* | xargs git branch -d'
-alias glo='git log'
-alias gloo='git log --oneline'
-alias gfe='git fetch'
-alias gpul='git pull'
-alias gpus='git push'
-alias gme='git merge'
-alias gdi='git diff'
-alias gsu='git submodule'
-
 git-since () {
     git log --oneline --pretty=format:"%h - %an, %ad : %s" --since="$1"
 }

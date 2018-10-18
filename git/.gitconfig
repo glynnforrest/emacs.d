@@ -4,3 +4,10 @@ email = me@glynnforrest.com
 
 [core]
 excludesfile = ~/.gitignore
+
+[alias]
+s = status --short
+ch = checkout
+br = branch
+rmb = !git branch --merged | grep -v '*' | xargs git branch -d
+authors = shortlog --summary --numbered --email
