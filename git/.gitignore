@@ -33,3 +33,4 @@ Thumbs.db
 # Others #
 ##########
 .ropeproject
+.php_cs.cache

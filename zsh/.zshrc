@@ -33,7 +33,7 @@ ZSH_THEME="steeef"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git)
+plugins=()
 
 source $ZSH/oh-my-zsh.sh
 
@@ -199,6 +199,7 @@ alias vsus='vagrant suspend'
 # Docker
 
 alias dpostgres='docker run -ti --rm --name pg -p 5432:5432 -e POSTGRES_PASSWORD=postgres postgres'
+alias dmysql='docker run -ti --rm --name=mysql -p 3306:3306 -e MYSQL_USER=my -e MYSQL_PASSWORD=my -e MYSQL_DATABASE=my mysql/mysql-server:5.7'
 
 # PHP
 
@@ -247,7 +248,7 @@ dl() {
 # (echo), but doesn't output anything normally. I have no idea why.
 alias pdf_combine='gs -dBATCH -dNOPAUSE -q -sDEVICE=pdfwrite -sOutputFile=output.pdf && echo "created output.pdf from"'
 
-alias cl='cd ~/Desktop && git clone'
+alias clone='cd ~/Desktop && git clone'
 
 # Sometimes Chrome favicon cache needs a kick
 alias rm_chrome_favicons='rm ~/Library/Application\ Support/Google/Chrome/Default/Favicons'
