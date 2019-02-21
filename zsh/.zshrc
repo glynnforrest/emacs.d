@@ -198,6 +198,10 @@ alias vsus='vagrant suspend'
 
 # Docker
 
+alias docker_rm_containers='docker rm `docker ps -aq --no-trunc -f status=exited`'
+alias docker_rm_images='docker rmi `docker images -q -f dangling=true`'
+alias docker_rm_all_images='docker rmi `docker images -q`'
+
 alias dpostgres='docker run -ti --rm --name pg -p 5432:5432 -e POSTGRES_PASSWORD=postgres postgres'
 alias dmysql='docker run -ti --rm --name=mysql -p 3306:3306 -e MYSQL_USER=my -e MYSQL_PASSWORD=my -e MYSQL_DATABASE=my mysql/mysql-server:5.7'
 
