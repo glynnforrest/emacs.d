@@ -1,10 +1,11 @@
 (use-package web-mode :ensure t
   :mode
   (
-   ".twig"
-   ".html?"
+   ".twig$"
+   ".html?$"
    ".hbs$"
    ".vue$"
+   ".blade.php$"
    )
   :config
   (setq
