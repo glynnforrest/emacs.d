@@ -95,6 +95,11 @@ or if using plists
 
    "m" '(:ignore t :which-key "major-mode")
 
+   "n" '(:ignore t :which-key "narrowing")
+   "nf" 'narrow-to-defun
+   "nr" 'narrow-to-region
+   "nw" 'widen
+
    "o" '(:ignore t :which-key "org")
    "oi" '(gf/find-org-info-file :which-key "open info file")
    "ol" 'org-capture-goto-last-stored

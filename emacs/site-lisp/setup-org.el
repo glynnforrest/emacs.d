@@ -2,6 +2,7 @@
   :defer t
   :commands (gf/find-current-month-notes-file
              gf/toggle-switch-to-project-org-file
+             gf/find-org-info-file
              gf/org-find-file)
   :config
   (require 'defuns-org)
@@ -291,7 +292,10 @@ Dates are returned in the style from `decode-time'."
    :non-normal-prefix "M-SPC"
    :keymaps 'org-mode-map
    "a" 'gf/org-select-top-level-header-or-all
-   "A" 'gf/org-select-next-task)
+   "A" 'gf/org-select-next-task
+   "nb" 'org-narrow-to-block
+   "ne" 'org-narrow-to-element
+   "ns" 'org-narrow-to-subtree)
 
   (general-define-key
    :states '(normal visual insert)
