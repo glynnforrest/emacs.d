@@ -6,6 +6,7 @@
              gf/php-insert-route
              gf/php-show-date-format-help)
   :config
+  (add-hook 'php-mode-hook 'php-enable-psr2-coding-style)
   (require 'defuns-php)
 
   (general-define-key
