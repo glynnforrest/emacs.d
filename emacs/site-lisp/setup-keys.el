@@ -39,8 +39,11 @@ or if using plists
    "bm" 'gf/switch-to-messages-buffer
    "bs" 'gf/switch-to-scratch-buffer
 
-   "d" 'helm-dash
-   "D" 'helm-dash-at-point
+   "d" '(:ignore t :which-key "dired")
+   "dd" 'dired
+   "df" 'projectile-find-dir
+   "dj" 'dired-jump
+   "dp" 'projectile-dired
 
    "e" '(:ignore t :which-key "emacs/eval")
    "eb" 'eval-buffer
@@ -49,7 +52,6 @@ or if using plists
    "eP" 'package-autoremove
 
    "f" '(:ignore t :which-key "files")
-   "fd" 'dired
    "fD" 'delete-current-buffer-file
    "fe" 'gf/find-emacs-d-file
    "ff" 'helm-find-files
@@ -62,11 +64,14 @@ or if using plists
    "fr" 'helm-recentf
    "fR" 'rename-current-buffer-file
    "fs" 'save-buffer
+   "fw" 'write-file
    "fz" '(gf/open-zshrc :which-key "open .zshrc")
    "fZ" '(gf/open-zshrc-local :which-key "open .zshrc.local")
 
-   "h" '(:ignore t :which-key "other help")
-   "hd" 'gf/php-show-date-format-help
+   "h" '(:ignore t :which-key "docs")
+   "hd" 'helm-dash
+   "hD" 'helm-dash-at-point
+   "ht" 'gf/php-show-date-format-help
 
    "g" '(:ignore t :which-key "git/gtags")
    "gb" 'magit-blame
