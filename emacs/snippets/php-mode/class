@@ -7,12 +7,7 @@
 
 namespace `(gf/php-current-file-namespace)`;
 
-/**
- * $1
- *
- * @author Glynn Forrest <me@glynnforrest.com>
- **/
-class `(buffer-file-name-body)` $2
+final class `(buffer-file-name-body)` $1
 {
     $0
 }

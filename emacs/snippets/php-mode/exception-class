@@ -7,9 +7,6 @@
 
 namespace `(gf/php-current-file-namespace)`;
 
-/**
- * @author Glynn Forrest <me@glynnforrest.com>
- **/
 class `(buffer-file-name-body)` extends \Exception
 {$0
 }

@@ -6,10 +6,9 @@
 
 namespace `(gf/php-current-file-namespace)`;
 
-/**
- * @author Glynn Forrest <me@glynnforrest.com>
- **/
-class `(buffer-file-name-body)` extends \PHPUnit_Framework_TestCase
+use PHPUnit\Framework\TestCase;
+
+class `(buffer-file-name-body)` extends TestCase
 {
     public function setUp()
     {

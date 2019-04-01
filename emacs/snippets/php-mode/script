@@ -1,0 +1,9 @@
+# -*- mode: snippet; require-final-newline nil -*-
+# name: script
+# key: script
+# --
+<?php
+
+include 'vendor/autoload.php';
+
+$0

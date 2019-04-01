@@ -1,8 +1,0 @@
-# -*- mode: snippet -*-
-#name : neptune controller action
-#key : action
-# --
-public function ${1:name}Action(Request $request${2:, $3})
-{
-    $0
-}

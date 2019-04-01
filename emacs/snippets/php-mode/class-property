@@ -2,4 +2,4 @@
 # name: Class property
 # key: p
 # --
-protected $$1;$0
+private $$1;$0

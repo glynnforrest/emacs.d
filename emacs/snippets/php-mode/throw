@@ -1,5 +1,5 @@
 # -*- mode: snippet -*-
 # name: throw
-# key: throw
+# key: th
 # --
-throw new ${1:\Exception}('$2');$0
+throw new ${1:\\}Exception('$2');$0

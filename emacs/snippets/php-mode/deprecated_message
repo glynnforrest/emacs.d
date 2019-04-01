@@ -1,0 +1,5 @@
+# -*- mode: snippet; require-final-newline nil -*-
+# name: deprecated_message
+# key: depr
+# --
+@trigger_error($1, E_USER_DEPRECATED);$0
