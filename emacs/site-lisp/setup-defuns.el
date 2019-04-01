@@ -52,10 +52,10 @@ EXTENSION. Only the last extension of the file is considered."
   (other-window 1))
 
 (defun gf/face-at-point ()
-  "Get the name of the face at point."
+  "Get the name of the face at point, excluding any overlays such as hl-line."
   (interactive)
   (message
-   (symbol-name (get-char-property (point) 'face))))
+   (symbol-name (get-text-property (point) 'face))))
 
 (defun gf/refresh-major-mode ()
   "Refresh the major mode of the current buffer."
