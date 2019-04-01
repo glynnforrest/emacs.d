@@ -107,4 +107,12 @@ ERC buffer."
       (when url
         (browse-url url)))))
 
+(defun gf/make-current-file-executable ()
+  "Add the executable bit to the current file."
+  (interactive)
+  (if (buffer-file-name)
+      (set-file-modes (buffer-file-name)
+                      (logior (file-modes (buffer-file-name)) (logand ?\111 (default-file-modes))))
+    (error "Not visiting a file.")))
+
 (provide 'setup-defuns)

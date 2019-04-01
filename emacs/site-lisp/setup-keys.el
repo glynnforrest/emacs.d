@@ -65,6 +65,7 @@ or if using plists
    "fR" 'rename-current-buffer-file
    "fs" 'save-buffer
    "fw" 'write-file
+   "fx" 'gf/make-current-file-executable
    "fz" '(gf/open-zshrc :which-key "open .zshrc")
    "fZ" '(gf/open-zshrc-local :which-key "open .zshrc.local")
 
