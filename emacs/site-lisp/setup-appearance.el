@@ -1,6 +1,6 @@
-(use-package zenburn-theme :ensure t
+(use-package kaolin-themes :ensure t
   :config
-  (load-theme 'zenburn t))
+  (load-theme 'kaolin-dark t))
 
 
 (defun gf/trim-ui ()
