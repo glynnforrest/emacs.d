@@ -41,16 +41,84 @@ export FZF_DEFAULT_OPTS='--height 40% --reverse --border'
 # zsh settings
 # http://zsh.sourceforge.net/Doc/Release/zsh_toc.html
 # look in $fpath for possible autoload options
-autoload -Uz compinit
-compinit
-
 setopt autocd
 unsetopt correct_all
+
+# history
+HISTFILE="$HOME/.zsh_history"
+HISTSIZE=50000
+SAVEHIST=10000
+setopt extended_history
+setopt hist_expire_dups_first
+setopt hist_ignore_dups
+setopt hist_ignore_space
+setopt hist_verify
+setopt inc_append_history
+setopt share_history
+
+# M-p and M-n to fuzzy search through history
+autoload -U up-line-or-beginning-search down-line-or-beginning-search
+zle -N up-line-or-beginning-search
+bindkey "^[p" up-line-or-beginning-search
+zle -N down-line-or-beginning-search
+bindkey "^[n" down-line-or-beginning-search
+
+# completion
+autoload -Uz compinit
+compinit
+# don't autoselect the first candidate
+unsetopt menu_complete
+# show position in completion menu
+setopt auto_menu
+setopt complete_in_word
+setopt always_to_end
+# use the menu
+zstyle ':completion:*:*:*:*:*' menu select
+# case insensitive
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|=*' 'l:|=* r:|=*'
+# complete . and ..
+zstyle ':completion:*' special-dirs true
+# cache slow autocomplete functions
+zstyle ':completion::complete:*' use-cache 1
+
+if [[ "${terminfo[kdch1]}" != "" ]]; then
+  bindkey "${terminfo[kdch1]}" delete-char
+fi
+
+# delete partial words
+autoload -U select-word-style
+select-word-style bash
 
 # quote pasted URLs
 autoload -Uz url-quote-magic bracketed-paste-magic
 zle -N self-insert url-quote-magic
 zle -N bracketed-paste bracketed-paste-magic
+
+# edit current command with C-xC-e
+autoload -U edit-command-line
+zle -N edit-command-line
+bindkey '\C-x\C-e' edit-command-line
+
+# ls -G config
+LSCOLORS="Bx" # dir
+LSCOLORS+="Fx" # symlink
+LSCOLORS+="bx" # socket
+LSCOLORS+="bx" # pipe
+LSCOLORS+="gx" # executable
+LSCOLORS+="bx" # block special
+LSCOLORS+="bx" # character special
+LSCOLORS+="gx" # executable with setuid bit
+LSCOLORS+="gx" # executable with setgid bit
+LSCOLORS+="ac" # dir globally writable with sticky bit
+LSCOLORS+="ac" # dir globally writable without sticky bit
+export LSCOLORS
+
+# show lscolors in completion
+zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
+
+# splash of colour in manpages
+# 1 is red
+export LESS_TERMCAP_md=$(tput bold; tput setaf 1)
 
 # prompt
 setopt promptsubst
