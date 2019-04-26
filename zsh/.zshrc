@@ -40,19 +40,21 @@ export FZF_DEFAULT_OPTS='--height 40% --reverse --border'
 
 # zsh settings
 # http://zsh.sourceforge.net/Doc/Release/zsh_toc.html
-# look in $fpath for possible options
-autoload -Uz compinit promptinit url-quote-magic bracketed-paste-magic
+# look in $fpath for possible autoload options
+autoload -Uz compinit
 compinit
-promptinit
 
 setopt autocd
 unsetopt correct_all
 
 # quote pasted URLs
+autoload -Uz url-quote-magic bracketed-paste-magic
 zle -N self-insert url-quote-magic
 zle -N bracketed-paste bracketed-paste-magic
 
 # prompt
+PS1="%n %F{67}at%f %M %F{67}in%f %~
+%(0?..%F{red}%?%f )$ "
 
 # functions
 path () {
