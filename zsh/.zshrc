@@ -53,8 +53,22 @@ zle -N self-insert url-quote-magic
 zle -N bracketed-paste bracketed-paste-magic
 
 # prompt
-PS1="%n %F{67}at%f %M %F{67}in%f %~
-%(0?..%F{red}%?%f )$ "
+setopt promptsubst
+
+_git-prompt() {
+    if test -f .git/HEAD
+    then
+        echo -n "%F{67}on%f "
+        echo -n "$(set -o pipefail; git symbolic-ref HEAD -q | cut -c12- || cat .git/HEAD)"
+        if test -n "`git status -s`"
+        then
+            echo -n "%F{67}*%f"
+        fi
+    fi
+}
+
+PROMPT='%n %F{67}at%f %M %F{67}in%f %~ $(_git-prompt)
+%(0?..%F{red}%?%f )$ '
 
 # functions
 path () {
