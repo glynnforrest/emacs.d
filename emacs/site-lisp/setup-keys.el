@@ -41,9 +41,9 @@ or if using plists
 
    "d" '(:ignore t :which-key "dired")
    "dd" 'dired
-   "df" 'projectile-find-dir
    "dj" 'dired-jump
-   "dp" 'projectile-dired
+   "dp" 'projectile-find-dir
+   "dP" 'projectile-dired
 
    "e" '(:ignore t :which-key "emacs/eval")
    "eb" 'eval-buffer
@@ -55,8 +55,8 @@ or if using plists
    "fD" 'delete-current-buffer-file
    "fe" 'gf/find-emacs-d-file
    "ff" 'helm-find-files
-   "fh" `(,(gf/key 'gf/helm-find-in-directory "~/") :which-key "find in home directory")
-   "fH" `(,(gf/key 'gf/helm-find-in-directory "~/Desktop/") :which-key "find on the desktop")
+   "fh" `(,(gf/key 'gf/helm-find-in-directory "~/Desktop/") :which-key "find on the desktop")
+   "fH" `(,(gf/key 'gf/helm-find-in-directory "~/") :which-key "find in home directory")
    "fi" '(gf/open-init-file :which-key "open init.el")
    "fI" '(gf/open-personal-file :which-key "open setup-personal.el")
    "fo" 'gf/org-find-file
