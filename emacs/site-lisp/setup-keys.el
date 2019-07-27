@@ -42,6 +42,8 @@ or if using plists
    "d" '(:ignore t :which-key "dired")
    "dd" 'dired
    "dj" 'dired-jump
+   "dh" `(,(gf/key 'dired "~/Desktop") :which-key "~/Desktop")
+   "dH" `(,(gf/key 'dired "~") :which-key "~")
    "dp" 'projectile-find-dir
    "dP" 'projectile-dired
 
