@@ -189,10 +189,9 @@ G: 24/hr 0-23     j: Day 1-31           T: UTC, GMT, EST               L: Leap y
 h: 12/hr 01-12    l: Monday-Sunday      Z: TZ offset in seconds        o: ISO-8601 week-numbering year
 H: 24/hr 00-23    m: Month 01-12                                       r: RFC 2822
 i: Min 00-59      M: Jan-Dec                                           t: Days in month
-u: Microseconds   n: Month 1-12                                        U: Seconds since epoch
-v: Milliseconds   N: Day 1-7                                           z: Day of year 0-365
-                  s: Sec 00-59
-                  S: nd, rd, th
+s: Sec 00-59      n: Month 1-12                                        U: Seconds since epoch
+u: Microseconds   N: Day 1-7                                           z: Day of year 0-365
+v: Milliseconds   S: nd, rd, th
                   w: Day 0-6
                   W: Week of year
                   y: Year 00-99
