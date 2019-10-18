@@ -3,6 +3,7 @@
   :config
   (setq dired-recursive-copies 'always
         dired-recursive-deletes 'top)
+  (put 'dired-find-alternate-file 'disabled nil)
   (general-define-key
    :keymaps 'dired-mode-map
    "M-e" 'wdired-change-to-wdired-mode
