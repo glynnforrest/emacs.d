@@ -1,6 +1,13 @@
 (use-package go-mode :ensure t
   :config
   (progn
-      (add-hook 'before-save-hook 'gofmt-before-save)))
+    (add-hook 'before-save-hook 'gofmt-before-save)
+
+    (require 'helm-dash)
+
+    (defun gf/helm-dash-go ()
+      (interactive)
+      (setq-local helm-dash-docsets '("Go")))
+    (add-hook 'go-mode-hook 'gf/helm-dash-go)))
 
 (provide 'setup-go)
