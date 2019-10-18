@@ -1,7 +1,12 @@
+(require 'setup-os)
+
 (use-package helm-dash :ensure t
   :config
 
   (defvar helm-dash-required-docsets '() "A list of required helm-dash-docsets")
+
+  (when gf/is-mac
+    (setq helm-dash-browser-func 'browse-url))
 
   (setq helm-dash-required-docsets
         '(
