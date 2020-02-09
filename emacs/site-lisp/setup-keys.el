@@ -23,7 +23,7 @@ or if using plists
 "
   `(lambda () (interactive) ,(append (cdr cmd) args)))
 
-(use-package general :ensure t
+(use-package general
   :config
   (general-define-key
    :states '(normal visual insert emacs)

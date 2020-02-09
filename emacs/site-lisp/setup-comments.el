@@ -1,4 +1,4 @@
-(use-package evil-nerd-commenter :ensure t
+(use-package evil-nerd-commenter
   :defer t
   :commands (evilnc-comment-operator)
   :init

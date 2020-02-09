@@ -1,4 +1,4 @@
-(use-package groovy-mode :ensure t
+(use-package groovy-mode
   :config)
 
 (provide 'setup-groovy)

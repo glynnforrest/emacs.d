@@ -1,4 +1,4 @@
-(use-package yaml-mode :ensure t
+(use-package yaml-mode
   :mode "\\.ya?ml.dist\\'"
   :config
   (setq-default yaml-indent-offset 4)

@@ -1,4 +1,4 @@
-(use-package yasnippet :ensure t
+(use-package yasnippet
   :diminish yas-minor-mode
   :config
   ;; Don't use bundled snippets

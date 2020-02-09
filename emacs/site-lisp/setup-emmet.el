@@ -1,4 +1,4 @@
-(use-package emmet-mode :ensure t
+(use-package emmet-mode
   :defer t
 
   :init

@@ -1,4 +1,4 @@
-(use-package kaolin-themes :ensure t
+(use-package kaolin-themes
   :config
   (load-theme 'kaolin-dark t))
 
@@ -14,11 +14,11 @@
 (blink-cursor-mode -1)
 (setq line-spacing 0)
 
-(use-package rainbow-delimiters :ensure t
+(use-package rainbow-delimiters
   :config
   (add-hook 'prog-mode-hook 'rainbow-delimiters-mode))
 
-(use-package rainbow-mode :ensure t
+(use-package rainbow-mode
   :defer t
   :init
   (mapc (lambda (hook)
@@ -30,7 +30,7 @@
   (diminish 'rainbow-mode))
 
 (use-package spaceline-config
-  :ensure spaceline
+  :straight spaceline
   :config
 
   (setq spaceline-highlight-face-func 'spaceline-highlight-face-evil-state

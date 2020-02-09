@@ -1,4 +1,4 @@
-(use-package salt-mode :ensure t
+(use-package salt-mode
   :config
   (defun gf/helm-dash-saltstack ()
     (interactive)

@@ -11,6 +11,6 @@
   :config
   (setq tramp-default-method "ssh"))
 
-(use-package move-text :ensure t)
+(use-package move-text)
 
 (provide 'setup-misc)

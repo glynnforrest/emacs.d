@@ -1,4 +1,4 @@
-(use-package magit :ensure t
+(use-package magit
   :commands magit-status
   :config
   (setq
@@ -18,15 +18,15 @@
    "k" 'magit-blame-previous-chunk
    "y" 'magit-blame-copy-hash))
 
-(use-package evil-magit :ensure t
+(use-package evil-magit
   :after magit)
 
-(use-package git-gutter :ensure t
+(use-package git-gutter
   :diminish ""
   :config
   (global-git-gutter-mode t))
 
-(use-package git-timemachine :ensure t
+(use-package git-timemachine
   :config
   (defhydra hydra-git-timemachine ()
     "Git timemachine"

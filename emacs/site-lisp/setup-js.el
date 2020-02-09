@@ -1,4 +1,4 @@
-(use-package js2-mode :ensure t
+(use-package js2-mode
   :init
   (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
   (add-to-list 'auto-mode-alist '("\\.jsx$" . js2-jsx-mode))
@@ -26,10 +26,10 @@
    :keymaps 'js2-mode-map
    "ti" '(gf/js2-mode-toggle-indent-offset :which-key "javascript indentation")))
 
-(use-package js2-refactor :ensure t
+(use-package js2-refactor
   :after js2-mode)
 
-(use-package js-comint :ensure t
+(use-package js-comint
   :config
   (setq inferior-js-program-command "env NODE_NO_READLINE=1 node"))
 

@@ -1,4 +1,4 @@
-(use-package css-mode :ensure t
+(use-package css-mode
   :mode ("\\.css\\'" . css-mode)
   :config
   (setq css-indent-offset 2)
@@ -34,12 +34,12 @@
    :non-normal-prefix "M-SPC"
    "a" 'helm-css-scss))
 
-(use-package scss-mode :ensure t
+(use-package scss-mode
   :mode ("\\.scss\\'" . scss-mode)
   :config
   (setq css-indent-offset 2))
 
-(use-package skewer-mode :ensure t
+(use-package skewer-mode
   :defer t
   :init
   (add-hook 'css-mode-hook 'skewer-css-mode))

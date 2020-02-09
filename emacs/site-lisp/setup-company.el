@@ -1,4 +1,4 @@
-(use-package company :ensure t
+(use-package company
   :diminish ""
   :config
   (global-company-mode)
@@ -17,7 +17,7 @@
 
 
 (when (not (version< emacs-version "25.1"))
-  (use-package company-lsp :ensure t
+  (use-package company-lsp
     :init
     (push 'company-lsp company-backends)))
 

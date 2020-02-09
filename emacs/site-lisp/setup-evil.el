@@ -17,7 +17,7 @@
 ;;                ///-._ _ _ _ _ _ _}^ - - - - ~                     ~-- ,.-~
 ;;                                                                   /.-~
 
-(use-package evil :ensure t
+(use-package evil
   :init
   (setq-default
    evil-want-C-d-scroll t
@@ -25,7 +25,7 @@
 
   :config
   (evil-mode 1)
-  (use-package evil-numbers :ensure t)
+  (use-package evil-numbers)
 
   ;; Centre screen around a search
   (defadvice
@@ -67,12 +67,12 @@
   (evil-set-initial-state 'occur-mode 'normal))
 
 ;; Save point position between sessions
-(use-package saveplace :ensure t
+(use-package saveplace
   :config
   (setq-default save-place t))
 
 ;; To not miss surround mode
-(use-package evil-surround :ensure t
+(use-package evil-surround
   :after evil
   :config
   (global-evil-surround-mode t))
@@ -80,23 +80,23 @@
 (use-package undo-tree
   :diminish "")
 
-(use-package evil-lisp-state :ensure t
+(use-package evil-lisp-state
   :init (setq evil-lisp-state-global t
               evil-lisp-state-enter-lisp-state-on-command nil))
 
-(use-package expand-region :ensure t
+(use-package expand-region
   :commands er/expand-region
   :config
   (setq expand-region-contract-fast-key "V"
         expand-region-reset-fast-key "0"))
 
-(use-package evil-args :ensure t
+(use-package evil-args
   :config
   (define-key evil-inner-text-objects-map "a" 'evil-inner-arg)
   (define-key evil-outer-text-objects-map "a" 'evil-outer-arg))
 
 ;; exchange two regions or motions with gx. gX cancels a pending swap
-(use-package evil-exchange :ensure t
+(use-package evil-exchange
   :config
   (evil-exchange-install))
 

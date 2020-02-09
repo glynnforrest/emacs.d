@@ -1,7 +1,7 @@
-(use-package hcl-mode :ensure t)
+(use-package hcl-mode)
 
 (use-package terraform-mode
-  :ensure t
+
   :config
 
   (general-define-key

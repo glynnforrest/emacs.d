@@ -1,4 +1,4 @@
-(use-package web-mode :ensure t
+(use-package web-mode
   :mode
   (
    ".twig$"
@@ -40,7 +40,7 @@
       (lsp-vue-mmm-enable)))
 
 (when (not (version< emacs-version "25.1"))
-  (use-package lsp-vue :ensure t
+  (use-package lsp-vue
     :after web-mode
     :config
         (add-hook 'web-mode-hook #'gf/web-maybe-activate-lsp)))

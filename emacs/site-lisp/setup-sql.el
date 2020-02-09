@@ -1,4 +1,4 @@
-(use-package sqlup-mode :ensure t
+(use-package sqlup-mode
   :defer t
   :init
   (add-hook 'sql-mode-hook 'sqlup-mode)

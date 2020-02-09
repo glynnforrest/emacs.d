@@ -1,4 +1,4 @@
-(use-package smartparens :ensure t
+(use-package smartparens
   :commands (sp-split-sexp sp-newline sp-up-sexp)
 
   :init

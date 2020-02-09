@@ -1,4 +1,4 @@
-(use-package org :ensure t
+(use-package org
   :defer t
   :commands (gf/find-current-month-notes-file
              gf/toggle-switch-to-project-org-file
@@ -202,7 +202,7 @@ OFFSET is t for next month, or nil for previous month."
   (interactive)
   (find-file (concat org-directory "dates/" (gf/org-calculate-month-file-offset (buffer-file-name-body) nil) ".org")))
 
-(use-package time-ext :ensure t)
+(use-package time-ext)
 
 (defun gf/org-previous-month-name-from-filename (filename)
   (when (stringp filename)

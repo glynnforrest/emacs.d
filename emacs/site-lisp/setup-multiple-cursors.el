@@ -1,4 +1,4 @@
-(use-package multiple-cursors :ensure t
+(use-package multiple-cursors
   :config
   ;; Thanks to tkf on
   ;; https://github.com/magnars/multiple-cursors.el/issues/19

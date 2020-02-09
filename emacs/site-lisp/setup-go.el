@@ -1,4 +1,4 @@
-(use-package go-mode :ensure t
+(use-package go-mode
   :config
   (progn
     (add-hook 'before-save-hook 'gofmt-before-save)

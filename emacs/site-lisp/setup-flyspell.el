@@ -1,4 +1,4 @@
-(use-package flyspell :ensure t
+(use-package flyspell
   :diminish "spell"
   :defer t
   :init
@@ -11,7 +11,7 @@
   :config
   (setq flyspell-issue-message-flag nil))
 
-(use-package helm-flyspell :ensure t
+(use-package helm-flyspell
   :after (helm flyspell)
   :config
   (general-define-key

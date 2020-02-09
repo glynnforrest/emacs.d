@@ -1,4 +1,4 @@
-(use-package ace-link :ensure t
+(use-package ace-link
   :config
   (with-eval-after-load 'info
      (define-key Info-mode-map "o" 'ace-link-info))

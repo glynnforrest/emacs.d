@@ -1,6 +1,6 @@
 (require 'setup-os)
 
-(use-package helm-dash :ensure t
+(use-package helm-dash
   :config
 
   (defvar helm-dash-required-docsets '() "A list of required helm-dash-docsets")

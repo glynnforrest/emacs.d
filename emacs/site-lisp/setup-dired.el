@@ -1,4 +1,5 @@
 (use-package dired
+  :straight nil
   :defer t
   :config
   (setq dired-recursive-copies 'always
@@ -10,7 +11,7 @@
    "SPC" nil))
 
 (require 'setup-os)
-(use-package dired-rsync :ensure t
+(use-package dired-rsync
   :config
   (when gf/is-mac
     (setq dired-rsync-options "-az --progress"))

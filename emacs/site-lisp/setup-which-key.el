@@ -1,4 +1,4 @@
-(use-package which-key :ensure t
+(use-package which-key
   :diminish ""
   :config
   (setq which-key-idle-delay 0.4

@@ -1,4 +1,4 @@
-(use-package php-mode :ensure t
+(use-package php-mode
   :defer t
   :mode "\\.php$"
   :commands (gf/php-insert-class
@@ -35,7 +35,7 @@
     (setq-local helm-dash-docsets '("PHP" "PHPUnit" "Symfony")))
   (add-hook 'php-mode-hook 'gf/helm-dash-php))
 
-(use-package php-auto-yasnippets :ensure t
+(use-package php-auto-yasnippets
   :after php-mode)
 
 (provide 'setup-php)

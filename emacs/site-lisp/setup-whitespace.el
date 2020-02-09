@@ -1,5 +1,5 @@
 ;; May whitespace never bother me again
-(use-package ws-butler :ensure t
+(use-package ws-butler
   :config
   ;; Use spaces by default, override in individual modes with hooks.
   ;; The general rule of thumb is 4 spaces, with some mode-specific

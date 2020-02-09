@@ -2,7 +2,7 @@
 # name: (use-package ...)
 # key: use
 # --
-(use-package $1 :ensure t
+(use-package $1
   :config
   $0
 )

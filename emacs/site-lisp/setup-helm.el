@@ -1,5 +1,5 @@
 ;; https://tuhdo.github.io/helm-intro.html has great helm tips.
-(use-package helm :ensure t
+(use-package helm
   :diminish ""
   :config
 
@@ -32,6 +32,7 @@
    "C-l" (kbd "RET")))
 
 (use-package helm-files
+  :straight nil
   :after helm
   :config
   (general-define-key
@@ -39,7 +40,7 @@
    "C-l" 'helm-execute-persistent-action
    "C-h" 'helm-find-files-up-one-level))
 
-(use-package helm-ag :ensure t
+(use-package helm-ag
   :after helm
   :config
   (setq helm-ag-base-command "rg --smart-case --no-heading --vimgrep")
@@ -72,11 +73,11 @@
    "RET" 'gf/helm-ag-show
    "M-RET" 'gf/helm-ag-goto))
 
-(use-package helm-css-scss :ensure t
+(use-package helm-css-scss
   :config
   (setq helm-css-scss-split-with-multiple-windows nil))
 
-(use-package helm-swoop :ensure t
+(use-package helm-swoop
   :config
   (setq helm-swoop-speed-or-color t
         helm-swoop-split-direction 'split-window-horizontally

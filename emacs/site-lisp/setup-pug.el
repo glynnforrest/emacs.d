@@ -1,4 +1,4 @@
-(use-package pug-mode :ensure t
+(use-package pug-mode
   :config
   (setq pug-tab-width 2))
 

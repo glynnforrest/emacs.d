@@ -1,4 +1,4 @@
-(use-package flycheck :ensure t
+(use-package flycheck
   :diminish ""
   :config
   (setq-default flycheck-disabled-checkers '(emacs-lisp-checkdoc

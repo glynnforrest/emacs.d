@@ -1,4 +1,4 @@
-(use-package projectile :ensure t
+(use-package projectile
   :diminish ""
   :config
   (setq projectile-completion-system 'helm)

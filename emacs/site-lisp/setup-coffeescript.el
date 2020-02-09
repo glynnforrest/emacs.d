@@ -1,4 +1,4 @@
-(use-package coffee-mode :ensure t
+(use-package coffee-mode
    ;; :mode "\\.coffee\\'"
    :config
    (progn

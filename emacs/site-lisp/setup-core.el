@@ -1,10 +1,10 @@
-(use-package server :ensure t
+(use-package server
   :config
   (unless (server-running-p)
     (server-start)))
 
-(use-package hydra :ensure t )
-(use-package diminish :ensure t )
+(use-package hydra )
+(use-package diminish )
 
 ;; enable/disable built-in modes
 (column-number-mode t)
@@ -47,8 +47,8 @@
 ;; enable normally disabled functions
 (put 'narrow-to-region 'disabled nil)
 
-(use-package restart-emacs :ensure t)
+(use-package restart-emacs)
 
-(use-package s :ensure t)
+(use-package s)
 
 (provide 'setup-core)

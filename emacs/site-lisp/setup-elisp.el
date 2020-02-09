@@ -1,12 +1,13 @@
-(use-package cask-mode :ensure t)
+(use-package cask-mode)
 
 (use-package lisp-mode
+  :straight nil
   :config
   (general-define-key
    :keymaps 'lisp-mode-shared-map
    "M-RET" 'lisp-describe-thing-at-point))
 
-(use-package el-autoyas :ensure t
+(use-package el-autoyas
   :defer t
   :commands (el-autoyas-enable)
   :init
@@ -25,7 +26,7 @@
   :config
   (setq eldoc-idle-delay 0.2))
 
-(use-package elisp-slime-nav :ensure t
+(use-package elisp-slime-nav
   :defer t
   :diminish ""
   :init

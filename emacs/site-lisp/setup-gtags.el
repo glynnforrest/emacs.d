@@ -1,4 +1,4 @@
-(use-package helm-gtags :ensure t
+(use-package helm-gtags
   :config
   (setq helm-gtags-ignore-case t
         helm-gtags-auto-update t
