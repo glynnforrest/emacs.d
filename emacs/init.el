@@ -27,6 +27,11 @@
 (require 'setup-keys)
 (require 'setup-appearance)
 
+;; Load these before others to prevent require errors
+(require 'setup-projects)
+(require 'setup-helm)
+(require 'setup-helm-dash)
+
 ;; Everything else
 (require 'setup-ace-link)
 (require 'setup-apache)
@@ -47,8 +52,6 @@
 (require 'setup-go)
 (require 'setup-groovy)
 (require 'setup-gtags)
-(require 'setup-helm)
-(require 'setup-helm-dash)
 (require 'setup-help)
 (require 'setup-lsp)
 (require 'setup-js)
@@ -56,7 +59,6 @@
 (require 'setup-misc)
 (require 'setup-org)
 (require 'setup-php)
-(require 'setup-projects)
 (require 'setup-pug)
 (require 'setup-rotate-text)
 (require 'setup-saltstack)
