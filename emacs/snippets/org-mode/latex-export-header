@@ -4,3 +4,6 @@
 # --
 #+LATEX_HEADER: \usepackage{parskip}
 #+OPTIONS: toc:nil
+#+OPTIONS: toc:nil author:nil
+#+TITLE:
+#+DATE:
