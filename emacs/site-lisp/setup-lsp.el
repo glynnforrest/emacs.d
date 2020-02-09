@@ -5,8 +5,9 @@
     :commands
     (lsp-mode lsp-define-stdio-client lsp-client-on-notification lsp-make-traverser)
     :init
-    (setq lsp-enable-eldoc t)
+    (setq lsp-enable-eldoc t))
+  (use-package lsp-ui :ensure t
     :config
-    (require 'lsp-flycheck)))
+    (add-hook 'lsp-mode-hook 'lsp-ui-mode)))
 
 (provide 'setup-lsp)
