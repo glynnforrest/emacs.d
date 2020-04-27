@@ -39,10 +39,10 @@
   (if (equal (gf/filename-extension (buffer-file-name)) "vue")
       (lsp-vue-mmm-enable)))
 
-(when (not (version< emacs-version "25.1"))
-  (use-package lsp-vue
-    :after web-mode
-    :config
-        (add-hook 'web-mode-hook #'gf/web-maybe-activate-lsp)))
+;; (when (not (version< emacs-version "25.1"))
+;;   (use-package lsp-vue
+;;     :after web-mode
+;;     :config
+;;         (add-hook 'web-mode-hook #'gf/web-maybe-activate-lsp)))
 
 (provide 'setup-web-mode)
