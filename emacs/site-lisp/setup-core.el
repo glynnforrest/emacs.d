@@ -6,6 +6,8 @@
 (use-package hydra )
 (use-package diminish )
 
+(use-package tramp)
+
 ;; enable/disable built-in modes
 (column-number-mode t)
 (delete-selection-mode t)
