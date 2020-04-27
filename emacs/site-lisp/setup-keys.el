@@ -57,6 +57,7 @@ or if using plists
    "fD" 'delete-current-buffer-file
    "fe" 'gf/find-emacs-d-file
    "ff" 'helm-find-files
+   "fF" 'find-function
    "fh" `(,(gf/key 'gf/helm-find-in-directory "~/Desktop/") :which-key "find on the desktop")
    "fH" `(,(gf/key 'gf/helm-find-in-directory "~/") :which-key "find in home directory")
    "fi" '(gf/open-init-file :which-key "open init.el")
@@ -155,6 +156,8 @@ or if using plists
    "wr" 'winner-redo
    "wu" 'winner-undo
 
+   "x" 'helm-M-x
+
    "y" '(:ignore t :which-key "yasnippet")
    "yi" 'yas-insert-snippet
    "yr" 'yas-reload-all
@@ -200,7 +203,9 @@ or if using plists
 
   (general-define-key
    "M-q" 'gf/close-buffer-other-window
-   "M-x" 'helm-M-x))
+   "M-x" 'helm-M-x
+   "M-d" 'scroll-other-window
+   "M-u" 'scroll-other-window-down))
 
 (provide 'setup-keys)
 
