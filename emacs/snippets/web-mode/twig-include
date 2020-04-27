@@ -3,4 +3,4 @@
 # key: inc
 # condition: (gf/in-file-type "twig")
 # --
-{% include '$1' %}
+{{ include('$1') }}
