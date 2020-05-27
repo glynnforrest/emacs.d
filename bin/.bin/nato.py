@@ -32,6 +32,7 @@ words = {
     "X": "X-Ray",
     "Y": "Yankee",
     "Z": "Zulu",
+    "0": "Zero",
     "1": "One",
     "2": "Two",
     "3": "Three",
@@ -48,7 +49,7 @@ def nato_char(char):
     try:
         return words[char.upper()]
     except KeyError:
-        return ""
+        return char
 
 
 def nato(string):
@@ -57,8 +58,19 @@ def nato(string):
 
 
 if __name__ == "__main__":
-    try:
-        print(nato(sys.argv[1]))
-    except IndexError:
-        for line in sys.stdin:
-            print(nato(line))
+    if len(sys.argv) > 1:
+        print(nato("".join(sys.argv[1:])))
+        sys.exit(0)
+
+    buffer = ''
+    while True:
+        buffer_len = len(buffer)
+        buffer += sys.stdin.read(1)
+
+        if len(buffer) == buffer_len:
+            print(nato(buffer))
+            sys.exit(0)
+
+        if buffer.endswith('\n') or len(buffer) > 79:
+            print(nato(buffer))
+            buffer = ''
