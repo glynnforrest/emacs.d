@@ -6,9 +6,6 @@
 
 namespace `(gf/php-current-file-namespace)`;
 
-/**
- * @author Glynn Forrest <me@glynnforrest.com>
- **/
 interface `(buffer-file-name-body)`
 {
     $0
