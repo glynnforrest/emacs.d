@@ -25,6 +25,7 @@ PATH+=:~/.bin
 PATH+=:~/.composer/vendor/bin
 PATH+=:~/.phpenv/bin
 PATH+=:~/.rvm/bin
+PATH+=:~/.local/bin
 
 if is_mac; then
     PATH+=:/usr/local/texlive/2016/bin/x86_64-darwin
