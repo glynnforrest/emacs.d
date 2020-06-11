@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 
-if test ! -d ~/.oh-my-zsh
+set -e -u
+
+if test ! -f ~/.bin/z.sh
 then
-    git clone https://github.com/robbyrussell/oh-my-zsh ~/.oh-my-zsh
+    curl https://raw.githubusercontent.com/rupa/z/master/z.sh > ~/.bin/z.sh
 fi

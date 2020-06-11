@@ -294,6 +294,12 @@ then
     source ~/.bin/tmuxinator.zsh
 fi;
 
+# z.sh
+if test -f ~/.bin/z.sh
+then
+    source ~/.bin/z.sh
+fi;
+
 # load private configuration if available
 if test -f ~/.zshrc.local
 then
