@@ -267,6 +267,10 @@ alias pygment_styles='python -c "from pygments.styles import get_all_styles; pri
 alias starwars='telnet towel.blinkenlights.nl'
 alias youtube_mp3="youtube-dl -t --extract-audio --audio-format mp3 --audio-quality 320k"
 
+# Defaults to port 8000
+# python_server <port> for a different port
+alias python_server="python -m SimpleHTTPServer"
+
 if command_exists fasd;
 then;
     eval "$(fasd --init auto)"
@@ -283,10 +287,12 @@ then;
     ee () {e `fasd -sif $1`}
 fi;
 
-# mac-specific aliases
+# platform-specific aliases
 if is_mac; then
     alias ls='ls -h -G'
     alias reset_dns='sudo killall -HUP mDNSResponder'
+else;
+    alias open='xdg-open'
 fi;
 
 # completions
