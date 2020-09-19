@@ -2,6 +2,15 @@
 
 (require 'defuns-core)
 
+(use-package diminish)
+
+(use-package which-key
+  :diminish ""
+  :config
+  (setq which-key-idle-delay 0.4
+        which-key-sort-order 'which-key-key-order-alpha)
+  (which-key-mode t))
+
 (use-package kaolin-themes
   :config
   (load-theme 'kaolin-dark t))
@@ -41,7 +50,6 @@
     (server-start)))
 
 (use-package hydra )
-(use-package diminish )
 
 (use-package tramp)
 
