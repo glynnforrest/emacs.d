@@ -16,19 +16,11 @@
                                         (gf/trim-ui)))
 
 (use-package rainbow-delimiters
-  :config
-  (add-hook 'prog-mode-hook 'rainbow-delimiters-mode))
+  :hook (prog-mode . rainbow-delimiters-mode))
 
 (use-package rainbow-mode
-  :defer t
-  :init
-  (mapc (lambda (hook)
-          (add-hook hook 'rainbow-mode))
-        '(css-mode-hook
-          emacs-lisp-mode-hook
-          haskell-mode-hook))
-  :config
-  (diminish 'rainbow-mode))
+  :diminish ""
+  :hook (css-mode emacs-list-mode haskell-mode))
 
 (use-package spaceline-config
   :straight spaceline
@@ -412,7 +404,7 @@
     (setq lsp-enable-eldoc t))
   (use-package lsp-ui
     :config
-    (add-hook 'lsp-mode-hook 'lsp-ui-mode))
+    :hook (lsp-mode . lsp-ui-mode))
 
   (use-package company-lsp
     :init
@@ -429,14 +421,9 @@
 
 (use-package smartparens
   :commands (sp-split-sexp sp-newline sp-up-sexp)
-
-  :init
-  (add-hook 'prog-mode-hook 'smartparens-mode)
-  (add-hook 'comint-mode-hook 'smartparens-mode)
-
+  :hook ((prog-mode comint-mode) . smartparens-mode)
   :config
   (progn
-    ;; settings
     (require 'smartparens-config)
     (setq sp-show-pair-delay 0.2
           ;; fix paren highlighting in normal mode
@@ -581,14 +568,8 @@ line as well as the current word."
 
 (use-package flyspell
   :diminish "spell"
-  :defer t
-  :init
-  (add-hook 'prog-mode-hook #'flyspell-prog-mode)
-  (mapc (lambda (hook)
-          (add-hook hook #'flyspell-mode))
-        '(org-mode-hook
-          with-editor-mode-hook
-          rst-mode-hook))
+  :hook ((prog-mode . flyspell-prog-mode)
+         ((org-mode with-editor-mode rst-mode). flyspell-mode))
   :config
   (setq flyspell-issue-message-flag nil))
 
