@@ -34,7 +34,6 @@
 (require 'setup-docker)
 (require 'setup-edit-server)
 (require 'setup-elisp)
-(require 'setup-emmet)
 (require 'setup-git)
 (require 'setup-go)
 (require 'setup-groovy)

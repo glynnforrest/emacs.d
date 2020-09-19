@@ -601,4 +601,10 @@ line as well as the current word."
   (general-define-key
    "M-;" 'helm-flyspell-correct))
 
+(use-package emmet-mode
+  :hook (html-mode web-mode css-mode)
+  :config
+  (setq emmet-move-cursor-between-quotes t)
+  (setq emmet-move-cursor-after-expanding t))
+
 (provide 'setup-core)
