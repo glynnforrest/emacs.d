@@ -6,7 +6,7 @@
 
 namespace `(gf/php-current-file-namespace)`;
 
-trait `(buffer-file-name-body)` $1
+trait `(gf/buffer-file-name-body)` $1
 {
     $0
 }

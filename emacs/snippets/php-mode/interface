@@ -6,7 +6,7 @@
 
 namespace `(gf/php-current-file-namespace)`;
 
-interface `(buffer-file-name-body)`
+interface `(gf/buffer-file-name-body)`
 {
     $0
 }

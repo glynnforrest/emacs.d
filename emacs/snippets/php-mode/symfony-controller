@@ -11,7 +11,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
-class `(buffer-file-name-body)` extends Controller
+class `(gf/buffer-file-name-body)` extends Controller
 {
     /**
      * @Route

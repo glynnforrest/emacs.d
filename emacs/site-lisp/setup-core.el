@@ -508,7 +508,7 @@ line as well as the current word."
 
 ;; Change to unix line endings when loading a DOS file
 ;; http://www.emacswiki.org/emacs/DosToUnix
-(defun dos2unix ()
+(defun gf/dos2unix ()
   "Not exactly but it's easier to remember"
   (interactive)
   (set-buffer-file-coding-system 'unix 't))

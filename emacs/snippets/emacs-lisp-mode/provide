@@ -2,4 +2,4 @@
 # name: (provide ...)
 # key: pro
 # --
-(provide '`(buffer-file-name-body)`)$0
+(provide '`(gf/buffer-file-name-body)`)$0

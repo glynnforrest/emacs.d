@@ -8,7 +8,7 @@ namespace `(gf/php-current-file-namespace)`;
 
 use PHPUnit\Framework\TestCase;
 
-class `(buffer-file-name-body)` extends TestCase
+class `(gf/buffer-file-name-body)` extends TestCase
 {
     public function setUp()
     {

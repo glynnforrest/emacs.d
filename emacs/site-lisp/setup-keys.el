@@ -67,7 +67,7 @@ or if using plists
 
    "f" '(:ignore t :which-key "files")
    "fc" `(,(gf/key 'gf/helm-find-in-directory "~/code/") :which-key "~/code")
-   "fD" 'delete-current-buffer-file
+   "fD" 'vnd/delete-current-buffer-file
    "fe" 'gf/find-emacs-d-file
    "fE" 'editorconfig-find-current-editorconfig
    "ff" 'helm-find-files
@@ -79,7 +79,7 @@ or if using plists
    "fo" 'gf/org-find-file
    "fp" 'projectile-find-file
    "fr" 'helm-recentf
-   "fR" 'rename-current-buffer-file
+   "fR" 'vnd/rename-current-buffer-file
    "fs" 'save-buffer
    "fw" 'write-file
    "fx" 'gf/make-current-file-executable
@@ -103,7 +103,7 @@ or if using plists
    "G" 'git-gutter:revert-hunk
 
    "i" '(:ignore t :which-key "insert")
-   "ib" '((lambda () (interactive) (insert (buffer-file-name-body))) :which-key "buffer-file-name-body")
+   "ib" '((lambda () (interactive) (insert (gf/buffer-file-name-body))) :which-key "gf/buffer-file-name-body")
    "ic" 'gf/php-insert-class
    "ir" 'gf/php-insert-symfony-route
    "is" 'gf/php-insert-service
@@ -189,7 +189,7 @@ or if using plists
    "*" '(hydra-rotate-text/body :which-key "rotate text")
    "$" 'gf/refresh-major-mode
    "\\" 'align-regexp
-   "TAB" 'alternate-buffer)
+   "TAB" 'vnd/alternate-buffer)
 
   (general-define-key
    :states '(normal visual)

@@ -195,12 +195,12 @@ OFFSET is t for next month, or nil for previous month."
 (defun gf/org-go-to-next-month ()
   "Go to the next month org file."
   (interactive)
-  (find-file (concat org-directory "dates/" (gf/org-calculate-month-file-offset (buffer-file-name-body) t) ".org")))
+  (find-file (concat org-directory "dates/" (gf/org-calculate-month-file-offset (gf/buffer-file-name-body) t) ".org")))
 
 (defun gf/org-go-to-previous-month ()
   "Go to the previous month org file."
   (interactive)
-  (find-file (concat org-directory "dates/" (gf/org-calculate-month-file-offset (buffer-file-name-body) nil) ".org")))
+  (find-file (concat org-directory "dates/" (gf/org-calculate-month-file-offset (gf/buffer-file-name-body) nil) ".org")))
 
 (use-package time-ext)
 

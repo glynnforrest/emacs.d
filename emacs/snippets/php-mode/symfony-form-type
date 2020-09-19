@@ -10,7 +10,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class `(buffer-file-name-body)` extends AbstractType
+class `(gf/buffer-file-name-body)` extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {

@@ -7,6 +7,6 @@
 
 namespace `(gf/php-current-file-namespace)`;
 
-class `(buffer-file-name-body)` extends \Exception
+class `(gf/buffer-file-name-body)` extends \Exception
 {$0
 }
