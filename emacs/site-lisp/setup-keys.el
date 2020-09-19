@@ -40,6 +40,7 @@ or if using plists
    "bs" 'gf/switch-to-scratch-buffer
 
    "d" '(:ignore t :which-key "dired")
+   "dc" `(,(gf/key 'dired "~/code") :which-key "~/code")
    "dd" 'dired
    "dj" 'dired-jump
    "dh" `(,(gf/key 'dired "~/Desktop") :which-key "~/Desktop")
@@ -56,13 +57,14 @@ or if using plists
    "eP" 'package-autoremove
 
    "f" '(:ignore t :which-key "files")
+   "fc" `(,(gf/key 'gf/helm-find-in-directory "~/code/") :which-key "~/code")
    "fD" 'delete-current-buffer-file
    "fe" 'gf/find-emacs-d-file
    "fE" 'editorconfig-find-current-editorconfig
    "ff" 'helm-find-files
    "fF" 'find-function
-   "fh" `(,(gf/key 'gf/helm-find-in-directory "~/Desktop/") :which-key "find on the desktop")
-   "fH" `(,(gf/key 'gf/helm-find-in-directory "~/") :which-key "find in home directory")
+   "fh" `(,(gf/key 'gf/helm-find-in-directory "~/Desktop/") :which-key "~/Desktop")
+   "fH" `(,(gf/key 'gf/helm-find-in-directory "~/") :which-key "~")
    "fi" '(gf/open-init-file :which-key "open init.el")
    "fI" '(gf/open-personal-file :which-key "open setup-personal.el")
    "fo" 'gf/org-find-file
@@ -92,6 +94,7 @@ or if using plists
    "G" 'git-gutter:revert-hunk
 
    "i" '(:ignore t :which-key "insert")
+   "ib" '((lambda () (interactive) (insert (buffer-file-name-body))) :which-key "buffer-file-name-body")
    "ic" 'gf/php-insert-class
    "ir" 'gf/php-insert-symfony-route
    "is" 'gf/php-insert-service
