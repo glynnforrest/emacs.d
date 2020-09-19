@@ -181,6 +181,14 @@
   :config
   (evil-exchange-install))
 
+(use-package evil-nerd-commenter
+  :defer t
+  :commands (evilnc-comment-operator)
+  :init
+  (general-define-key
+   :states '(normal visual)
+   "gc" 'evilnc-comment-operator))
+
 (defun gf/evil-forward-arg (count)
   "Small wrapper around evil-forward-arg when at the opening bracket."
   (interactive "p")
@@ -368,5 +376,227 @@
 ;;   (interactive)
 ;;   (setq-local helm-dash-docsets '("Bash")))
 ;; (add-hook 'sh-mode-hook 'helm-dash-shell)
+
+(use-package company
+  :diminish ""
+  :config
+  (global-company-mode)
+  (setq company-idle-delay 0
+        company-minimum-prefix-length 2
+        company-dabbrev-downcase nil
+        company-dabbrev-ignore-case nil
+        company-tooltip-limit 10)
+
+  (general-define-key
+   :keymaps '(company-active-map company-search-map company-filter-map)
+   "C-j" #'company-select-next
+   "C-k" #'company-select-previous
+   "C-h" #'company-show-doc-buffer
+   "TAB" nil))
+
+(when (not (version< emacs-version "25.1"))
+  (use-package lsp-mode
+    :defer t
+    :diminish lsp-mode
+    :commands
+    (lsp-mode lsp-define-stdio-client lsp-client-on-notification lsp-make-traverser)
+    :init
+    (setq lsp-enable-eldoc t))
+  (use-package lsp-ui
+    :config
+    (add-hook 'lsp-mode-hook 'lsp-ui-mode))
+
+  (use-package company-lsp
+    :init
+    (push 'company-lsp company-backends)))
+
+(defun gf/maybe-smerge ()
+  (save-excursion
+    (goto-char (point-min))
+    (when (re-search-forward "^<<<<<<< " nil t)
+      (smerge-mode t))))
+
+(add-hook 'find-file-hook 'gf/maybe-smerge)
+
+(use-package tramp
+  :defer t
+  :config
+  (setq tramp-default-method "ssh"))
+
+(use-package move-text)
+
+(use-package smartparens
+  :commands (sp-split-sexp sp-newline sp-up-sexp)
+
+  :init
+  (add-hook 'prog-mode-hook 'smartparens-mode)
+  (add-hook 'comint-mode-hook 'smartparens-mode)
+
+  :config
+  (progn
+    ;; settings
+    (require 'smartparens-config)
+    (setq sp-show-pair-delay 0.2
+          ;; fix paren highlighting in normal mode
+          sp-show-pair-from-inside t
+          sp-cancel-autoskip-on-backward-movement nil
+          sp-highlight-pair-overlay nil
+          sp-highlight-wrap-overlay nil
+          sp-highlight-wrap-tag-overlay nil)))
+
+(use-package rotate-text
+  :commands (gf/clever-rotate-text gf/clever-rotate-text-backward)
+  :init
+  (defhydra hydra-rotate-text ()
+    "Rotate text"
+    ("n" gf/clever-rotate-text "Next")
+    ("p" gf/clever-rotate-text-backward "Previous")
+    ("q" nil "Quit"))
+
+  :config
+  (defun gf/clever-rotate-text ()
+    "Wrapper to rotate-text that will try the start of the line as well
+as the current word."
+    (interactive)
+    (if (not (condition-case nil
+                 (rotate-text 1)
+               (error nil)))
+        (save-excursion
+          (evil-first-non-blank)
+          (rotate-text 1))))
+
+  (defun gf/clever-rotate-text-backward ()
+    "Wrapper to rotate-text-backward that will try the start of the
+line as well as the current word."
+    (interactive)
+    (if (not (condition-case nil
+                 (rotate-text-backward 1)
+               (error nil)))
+        (save-excursion
+          (evil-first-non-blank)
+          (rotate-text-backward 1)))))
+
+(use-package yasnippet
+  :diminish yas-minor-mode
+  :config
+  ;; Don't use bundled snippets
+  (setq yas-snippet-dirs '("~/.emacs.d/snippets"))
+  ;; don't expand part of words
+  (setq yas-key-syntaxes '("w_" "w_." "^ "))
+  (yas-global-mode 1)
+
+  (general-define-key
+   :states '(normal visual insert emacs)
+   :prefix gf/major-mode-leader-key
+   :non-normal-prefix gf/major-mode-non-normal-leader-key
+   :keymaps 'snippet-mode-map
+   "t" 'yas-tryout-snippet))
+
+(use-package ws-butler
+  :config
+  ;; Use spaces by default, override in individual modes with hooks.
+  ;; The general rule of thumb is 4 spaces, with some mode-specific
+  ;; exceptions.
+  (setq-default
+   c-basic-offset 4
+   tab-width 4
+   indent-tabs-mode nil)
+
+  ;; Final newline is important
+  ;; http://robots.thoughtbot.com/no-newline-at-end-of-file
+  (setq require-final-newline t)
+  (setq mode-require-final-newline t)
+  (ws-butler-global-mode t))
+
+(use-package editorconfig
+  :diminish ""
+  :config
+  (editorconfig-mode 1)
+  (setq editorconfig-trim-whitespaces-mode 'ws-butler-mode))
+
+(defun gf/indent-buffer ()
+  "Indent the entire buffer."
+  (interactive)
+  (indent-region (point-min) (point-max)))
+
+(defun gf/indent-cleanup-buffer ()
+  "Indent and cleanup the whitespace of the entire buffer."
+  (interactive)
+  (gf/indent-buffer)
+  (ws-butler-clean-region (point-min) (point-max)))
+
+;; Change to unix line endings when loading a DOS file
+;; http://www.emacswiki.org/emacs/DosToUnix
+(defun dos2unix ()
+  "Not exactly but it's easier to remember"
+  (interactive)
+  (set-buffer-file-coding-system 'unix 't))
+
+(use-package try-code
+  :defer t
+  :commands try-code)
+
+(use-package ace-link)
+
+(use-package flycheck
+  :diminish ""
+  :config
+  (setq-default flycheck-disabled-checkers '(emacs-lisp-checkdoc
+                                             php-phpmd
+                                             php-phpcs
+                                             scss)
+
+                ;; so flycheck can check (require) calls properly.
+                flycheck-emacs-lisp-load-path 'inherit)
+
+  (setq flycheck-check-syntax-automatically '(save mode-enabled)
+        flycheck-standard-error-navigation nil
+        flycheck-highlighting-mode 'lines)
+
+  (set-face-attribute 'flycheck-error nil
+                      :foreground "#ffffff"
+                      :background "#671232"
+                      :underline nil)
+
+  (set-face-attribute 'flycheck-warning nil
+                      :foreground "#ceb4e2"
+                      :background nil
+                      :underline nil)
+
+  (flycheck-define-checker proselint
+    "A linter for prose."
+    :command ("proselint" source-inplace)
+    :error-patterns
+    ((warning line-start (file-name) ":" line ":" column ": "
+              (id (one-or-more (not (any " "))))
+              (message (one-or-more not-newline)
+                       (zero-or-more "\n" (any " ") (one-or-more not-newline)))
+              line-end))
+    :modes (text-mode markdown-mode rst-mode))
+  (add-to-list 'flycheck-checkers 'proselint)
+
+  (global-flycheck-mode))
+
+(use-package flyspell
+  :diminish "spell"
+  :defer t
+  :init
+  (add-hook 'prog-mode-hook #'flyspell-prog-mode)
+  (mapc (lambda (hook)
+          (add-hook hook #'flyspell-mode))
+        '(org-mode-hook
+          with-editor-mode-hook
+          rst-mode-hook))
+  :config
+  (setq flyspell-issue-message-flag nil))
+
+(use-package helm-flyspell
+  :after (helm flyspell)
+  :config
+  (general-define-key
+   :keymaps 'evil-normal-state-map
+   "z=" 'helm-flyspell-correct)
+  (general-define-key
+   "M-;" 'helm-flyspell-correct))
 
 (provide 'setup-core)
