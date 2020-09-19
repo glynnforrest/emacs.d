@@ -15,22 +15,15 @@
 (require 'use-package)
 
 ;; Tell straight to install the package for each use-package declaration
+(eval-when-compile (require 'straight))
 (setq straight-use-package-by-default t)
 
 (add-to-list 'load-path (expand-file-name "site-lisp" user-emacs-directory))
 (add-to-list 'load-path (expand-file-name "plugins" user-emacs-directory))
 
-;; Core stuff
-(require 'setup-core)
-(require 'setup-os)
-(require 'setup-evil)
+(require 'tramp)
 (require 'setup-keys)
-(require 'setup-appearance)
-
-;; Load these before others to prevent require errors
-(require 'setup-projects)
-(require 'setup-helm)
-(require 'setup-helm-dash)
+(require 'setup-core)
 
 ;; Everything else
 (require 'setup-ace-link)

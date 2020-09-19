@@ -10,7 +10,6 @@
    "M-e" 'wdired-change-to-wdired-mode
    "SPC" nil))
 
-(require 'setup-os)
 (use-package dired-rsync
   :config
   (when gf/is-mac
