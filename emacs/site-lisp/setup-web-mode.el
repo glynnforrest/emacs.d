@@ -1,3 +1,5 @@
+(eval-when-compile (require 'use-package))
+
 (use-package web-mode
   :mode
   (
@@ -15,8 +17,18 @@
    web-mode-enable-auto-closing t
    web-mode-enable-auto-opening t
    web-mode-enable-auto-pairing t
-   web-mode-enable-auto-indentation t
-))
+   web-mode-enable-auto-indentation t)
+
+  ;; Let smartparens handle auto closing brackets, e.g. {{ }} or {% %}
+  ;; https://github.com/hlissner/doom-emacs/blob/develop/modules/lang/web/%2Bhtml.el#L56
+  (dolist (alist web-mode-engines-auto-pairs)
+    (setcdr alist
+            (cl-loop for pair in (cdr alist)
+                     unless (string-match-p "^[a-z-]" (cdr pair))
+                     collect (cons (car pair)
+                                   (string-trim-right (cdr pair)
+                                                      "\\(?:>\\|]\\|}\\)+\\'")))))
+  )
 
 ;; (defun gf/web-mode-toggle-markup-offset ()
 ;;   "Switch between 2 and 4 spaces for markup indentation"
