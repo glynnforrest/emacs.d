@@ -47,8 +47,10 @@ or if using plists
    "dp" 'projectile-find-dir
    "dP" 'projectile-dired
 
-   "e" '(:ignore t :which-key "emacs/eval")
+   "e" '(:ignore t :which-key "emacs/eval/editor")
    "eb" 'eval-buffer
+   "ec" 'editorconfig-display-current-properties
+   "eC" 'editorconfig-apply
    "em" 'gf/show-previous-sexp-macro-expand
    "ep" 'package-list-packages
    "eP" 'package-autoremove
@@ -56,6 +58,7 @@ or if using plists
    "f" '(:ignore t :which-key "files")
    "fD" 'delete-current-buffer-file
    "fe" 'gf/find-emacs-d-file
+   "fE" 'editorconfig-find-current-editorconfig
    "ff" 'helm-find-files
    "fF" 'find-function
    "fh" `(,(gf/key 'gf/helm-find-in-directory "~/Desktop/") :which-key "find on the desktop")

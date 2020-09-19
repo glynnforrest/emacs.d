@@ -1,4 +1,3 @@
-;; May whitespace never bother me again
 (use-package ws-butler
   :config
   ;; Use spaces by default, override in individual modes with hooks.
@@ -14,6 +13,12 @@
   (setq require-final-newline t)
   (setq mode-require-final-newline t)
   (ws-butler-global-mode t))
+
+(use-package editorconfig
+  :diminish ""
+  :config
+  (editorconfig-mode 1)
+  (setq editorconfig-trim-whitespaces-mode 'ws-butler-mode))
 
 (defun gf/indent-buffer ()
   "Indent the entire buffer."
