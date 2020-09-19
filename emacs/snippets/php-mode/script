@@ -2,6 +2,7 @@
 # name: script
 # key: script
 # --
+#!/usr/bin/env php
 <?php
 
 include 'vendor/autoload.php';
