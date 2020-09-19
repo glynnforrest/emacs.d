@@ -19,4 +19,5 @@ projectile*
 /skewer-cache/
 /history
 transient/
-straight/
+/straight/*
+!/straight/versions
