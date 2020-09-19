@@ -197,6 +197,9 @@ or if using plists
    "k" 'evil-previous-visual-line
    "gj" 'evil-next-line
    "gk" 'evil-previous-line
+   "L" 'gf/evil-forward-arg
+   "H" 'evil-backward-arg
+   "K" 'evil-jump-out-args
 
    "M-j" 'move-text-down
    "M-k" 'move-text-up)

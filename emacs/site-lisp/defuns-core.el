@@ -115,4 +115,17 @@ ERC buffer."
                       (logior (file-modes (buffer-file-name)) (logand ?\111 (default-file-modes))))
     (error "Not visiting a file.")))
 
-(provide 'setup-defuns)
+(defun gf/evil-forward-arg (count)
+  "Small wrapper around evil-forward-arg when at the opening bracket."
+  (interactive "p")
+  (if (looking-at-p "(")
+      (forward-char))
+  (evil-forward-arg count))
+
+(defun gf/maybe-smerge ()
+  (save-excursion
+    (goto-char (point-min))
+    (when (re-search-forward "^<<<<<<< " nil t)
+      (smerge-mode t))))
+
+(provide 'defuns-core)

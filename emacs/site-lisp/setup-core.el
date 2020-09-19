@@ -1,5 +1,7 @@
 (eval-when-compile (require 'use-package))
 
+(require 'defuns-core)
+
 (use-package kaolin-themes
   :config
   (load-theme 'kaolin-dark t))
@@ -188,21 +190,6 @@
   (general-define-key
    :states '(normal visual)
    "gc" 'evilnc-comment-operator))
-
-(defun gf/evil-forward-arg (count)
-  "Small wrapper around evil-forward-arg when at the opening bracket."
-  (interactive "p")
-  (if (looking-at-p "(")
-      (forward-char))
-  (evil-forward-arg count)
-  )
-
-;; bind evil-forward/backward-args
-;; (define-key evil-normal-state-map "L" 'gf/evil-forward-arg)
-;; (define-key evil-normal-state-map "H" 'evil-backward-arg)
-
-;; bind evil-jump-out-args
-;; (define-key evil-normal-state-map "K" 'evil-jump-out-args)
 
 (defvar gf/is-mac (equal system-type 'darwin))
 (defvar gf/is-linux (equal system-type 'gnu/linux))
@@ -409,12 +396,6 @@
   (use-package company-lsp
     :init
     (push 'company-lsp company-backends)))
-
-(defun gf/maybe-smerge ()
-  (save-excursion
-    (goto-char (point-min))
-    (when (re-search-forward "^<<<<<<< " nil t)
-      (smerge-mode t))))
 
 (add-hook 'find-file-hook 'gf/maybe-smerge)
 
