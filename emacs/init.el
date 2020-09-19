@@ -38,7 +38,6 @@
 (require 'setup-git)
 (require 'setup-go)
 (require 'setup-groovy)
-(require 'setup-gtags)
 (require 'setup-help)
 (require 'setup-js)
 (require 'setup-markdown)
