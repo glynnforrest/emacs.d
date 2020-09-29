@@ -291,6 +291,7 @@ fi;
 if is_mac; then
     alias ls='ls -h -G'
     alias reset_dns='sudo killall -HUP mDNSResponder'
+    alias brew-dump='(cd ~/code/github.com/glynnforrest/dotfiles/ && brew bundle dump --force && echo "Updated Brewfile")'
 else;
     alias open='xdg-open'
 fi;
