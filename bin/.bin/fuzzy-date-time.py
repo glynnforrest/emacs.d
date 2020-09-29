@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-from time import gmtime, strftime
+from time import localtime, strftime
 import bisect
 
 minLookup=[
@@ -29,9 +29,9 @@ hourLookup=[
 ]
 
 #Get minutes
-time_min = strftime("%M", gmtime())
+time_min = strftime("%M", localtime())
 #Get hour, as int
-time_hour = int(strftime("%H", gmtime()))
+time_hour = int(strftime("%H", localtime()))
 
 #round minutes to nearest 5, return as int
 time_min = int(round(float(time_min)*2,-1)/2)
@@ -55,4 +55,4 @@ else:
 		time_hour = 0
 	message = minLookup[int((60-time_min)/5)] + " to " + hourLookup[time_hour+1]
 
-print(message + ', ' + strftime("%a %b %-d", gmtime()))
+print(message + ', ' + strftime("%a %b %-d", localtime()))
