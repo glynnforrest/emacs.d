@@ -118,6 +118,7 @@ def add_repo(file, url, target):
 
     with open(file, mode='w+') as save_file:
         json.dump(repos, save_file, indent=4)
+        save_file.write('\n')
 
 def list_dirs(file):
     with open(file) as json_data:
