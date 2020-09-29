@@ -68,6 +68,12 @@ bindkey "^[n" down-line-or-beginning-search
 # completion
 autoload -Uz compinit
 compinit
+# Run this when shown 'zsh compinit: insecure directories, run
+# compaudit for list.'
+compinit-fix() {
+    compaudit | xargs chmod g-w
+}
+
 # don't autoselect the first candidate
 unsetopt menu_complete
 # show position in completion menu
