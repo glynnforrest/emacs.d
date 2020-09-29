@@ -10,14 +10,5 @@ base: prepare
 	stow -v -t ~ vim
 	stow -v -t ~ zsh
 
-media:
-	stow -v -t ~ vimpc
-
-mac: base media
-
-linux: base media
-	stow -v -t ~ xorg
-	stow -v -t ~ xmonad
-
 clean:
 	for i in $$(find . -type d -maxdepth 1); do stow -v -t ~ -D $$(basename $$i); done

@@ -295,12 +295,6 @@ else;
     alias open='xdg-open'
 fi;
 
-# completions
-if test -f ~/.bin/tmuxinator.zsh
-then
-    source ~/.bin/tmuxinator.zsh
-fi;
-
 # z.sh
 if test -f ~/.bin/z.sh
 then
