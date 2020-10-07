@@ -516,11 +516,16 @@ line as well as the current word."
   (interactive)
   (indent-region (point-min) (point-max)))
 
+(defun gf/untabify-buffer ()
+  (interactive)
+  (untabify (point-min) (point-max)))
+
 (defun gf/indent-cleanup-buffer ()
   "Indent and cleanup the whitespace of the entire buffer."
   (interactive)
   (gf/indent-buffer)
-  (ws-butler-clean-region (point-min) (point-max)))
+  (ws-butler-clean-region (point-min) (point-max))
+  (gf/untabify-buffer))
 
 ;; Change to unix line endings when loading a DOS file
 ;; http://www.emacswiki.org/emacs/DosToUnix

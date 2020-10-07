@@ -177,6 +177,7 @@ or if using plists
    ";" 'helm-swoop-without-pre-input
    "1" 'other-window
    "=" 'gf/indent-buffer
+   "-" 'gf/untabify-buffer
    "+" 'gf/indent-cleanup-buffer
    "!" 'flycheck-next-error
    "*" '(hydra-rotate-text/body :which-key "rotate text")
