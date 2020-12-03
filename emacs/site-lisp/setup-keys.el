@@ -102,6 +102,8 @@ or if using plists
    "is" 'gf/php-insert-service
    "it" 'gf/php-insert-symfony-twig-helper
 
+   "j" 'vnd/arrayify
+
    "l" 'evil-lisp-state
 
    "m" '(:ignore t :which-key "major-mode")

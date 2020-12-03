@@ -183,4 +183,15 @@ current window."
           (message "File '%s' successfully renamed to '%s'"
                    name new-name))))))
 
+;; https://news.ycombinator.com/item?id=22131815
+(defun vnd/arrayify (start end quote)
+  "Turn strings on newlines into a QUOTEd, comma-separated one-liner."
+    (interactive "r\nMQuote: ")
+    (let ((insertion
+           (mapconcat
+            (lambda (x) (format "%s%s%s" quote x quote))
+            (split-string (buffer-substring start end) "[\f\t\n\r\v]+") ", ")))
+      (delete-region start end)
+      (insert insertion)))
+
 (provide 'defuns-core)
