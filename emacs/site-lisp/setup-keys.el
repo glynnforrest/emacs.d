@@ -134,12 +134,8 @@
 
    "v" '(er/expand-region :which-key "expand-region")
 
-   "w" '(:ignore t :which-key "windows/what")
-   "wd" 'delete-window
+   "w" '(:ignore t :which-key "what")
    "wf" 'gf/face-at-point
-   "wm" '(delete-other-windows :which-key "maximise window")
-   "wr" 'winner-redo
-   "wu" 'winner-undo
 
    "x" 'helm-M-x
 
@@ -152,15 +148,13 @@
 
    "/" 'helm-swoop
    ";" 'helm-swoop-without-pre-input
-   "1" 'other-window
    "=" 'gf/indent-buffer
    "-" 'gf/untabify-buffer
    "+" 'gf/indent-cleanup-buffer
    "!" 'flycheck-next-error
    "*" '(hydra-rotate-text/body :which-key "rotate text")
    "$" 'gf/refresh-major-mode
-   "\\" 'align-regexp
-   "TAB" 'vnd/alternate-buffer)
+   "\\" 'align-regexp)
 
   (general-define-key
    :states '(normal visual)
@@ -189,6 +183,15 @@
    ;; fix move-text for visual mode
    "M-j" (concat ":m '>+1" (kbd "RET") "gv=gv")
    "M-k" (concat ":m '<-2" (kbd "RET") "gv=gv"))
+
+  (general-define-key
+   :keymaps 'evil-window-map
+   "d" 'delete-window
+   "m" '(delete-other-windows :which-key "maximise window")
+   "u" 'winner-undo
+   "U" 'winner-redo
+   "." 'vnd/alternate-buffer
+   "C-." 'vnd/alternate-buffer)
 
   (general-define-key
    "M-q" 'gf/close-buffer-other-window

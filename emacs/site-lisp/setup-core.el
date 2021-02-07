@@ -130,7 +130,9 @@ or if using plists
   :init
   (setq-default
    evil-want-C-d-scroll t
-   evil-want-C-u-scroll t)
+   evil-want-C-u-scroll t
+   evil-want-C-w-delete nil
+   evil-want-C-w-in-emacs-state t)
 
   :config
   (evil-mode 1)
