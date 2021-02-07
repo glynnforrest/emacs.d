@@ -1,28 +1,3 @@
-(defvar gf/leader-key "SPC"
-  "Leader key prefix to use for key bindings.")
-
-(defvar gf/non-normal-leader-key "M-SPC"
-  "Leader key prefix to use for key bindings in non-normal evil modes.")
-
-(defvar gf/major-mode-leader-key "SPC m"
-  "Leader key prefix to use for major mode key bindings.")
-
-(defvar gf/major-mode-non-normal-leader-key "M-SPC m"
-  "Leader key prefix to use for major mode key bindings in non-normal evil modes.")
-
-(defmacro gf/key (cmd &rest args)
-  "Helper macro to add an argument to a key binding.
-
-(general-define-key
-  \"a\" (gf/key 'command-name \"arg1\" \"arg2\"))
-
-or if using plists
-
-(general-define-key
-  \"a\" `(,(gf/key 'command-name \"arg1\" \"arg2\") :which-key \"run command-name\"))
-"
-  `(lambda () (interactive) ,(append (cdr cmd) args)))
-
 (eval-when-compile (require 'use-package))
 
 (use-package general

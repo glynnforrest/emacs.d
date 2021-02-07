@@ -22,8 +22,8 @@
 (add-to-list 'load-path (expand-file-name "plugins" user-emacs-directory))
 
 (require 'tramp)
-(require 'setup-keys)
 (require 'setup-core)
+(require 'setup-keys)
 
 ;; Major modes
 (require 'setup-apache)
