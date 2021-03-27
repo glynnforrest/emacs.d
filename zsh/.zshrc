@@ -44,6 +44,8 @@ export FZF_DEFAULT_OPTS='--height 40% --reverse --border'
 # look in $fpath for possible autoload options
 setopt autocd
 unsetopt correct_all
+# get Ctrl-A and Ctrl-E working in tmux
+bindkey -e
 
 # history
 HISTFILE="$HOME/.zsh_history"
