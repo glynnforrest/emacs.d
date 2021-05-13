@@ -1,0 +1,8 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: twig-macro
+# key: macro
+# condition: (gf/in-file-type "twig")
+# --
+{% macro ${1:name} %}
+   $0
+{% endmacro %}
