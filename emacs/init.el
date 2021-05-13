@@ -39,6 +39,7 @@
 (require 'setup-groovy)
 (require 'setup-help)
 (require 'setup-js)
+(require 'setup-jsonnet)
 (require 'setup-markdown)
 (require 'setup-org)
 (require 'setup-php)
