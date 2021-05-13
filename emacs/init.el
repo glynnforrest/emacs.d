@@ -46,6 +46,7 @@
 (require 'setup-saltstack)
 (require 'setup-shell-script)
 (require 'setup-sql)
+(require 'setup-typescript)
 (require 'setup-tmux)
 (require 'setup-web-mode)
 (require 'setup-yaml)

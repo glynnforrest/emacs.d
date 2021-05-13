@@ -1,3 +1,4 @@
+(eval-when-compile (require 'use-package))
 (use-package js2-mode
   :init
   (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
