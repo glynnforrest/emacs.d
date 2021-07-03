@@ -76,6 +76,7 @@
    "ir" 'gf/php-insert-symfony-route
    "is" 'gf/php-insert-service
    "it" 'gf/php-insert-symfony-twig-helper
+   "iu" '((lambda () (interactive) (insert (gf/uuid))) :which-key "gf/uuid")
 
    "j" 'vnd/arrayify
 

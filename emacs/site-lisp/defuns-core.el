@@ -126,6 +126,16 @@ ERC buffer."
     (when (re-search-forward "^<<<<<<< " nil t)
       (smerge-mode t))))
 
+(defun gf/uuid ()
+  "Generate a pseudo-random UUID. Just the format, not adhering to any versioned UUID spec."
+  (let ((hash (md5 (number-to-string (random)))))
+    (format "%s-%s-%s-%s-%s"
+            (substring hash 0 8)
+            (substring hash 8 12)
+            (substring hash 12 16)
+            (substring hash 16 20)
+            (substring hash 20 32))))
+
 ;; https://github.com/syl20bnr/spacemacs/blob/c7a103a772d808101d7635ec10f292ab9202d9ee/core/core-funcs.el#L305
 (defun vnd/alternate-buffer (&optional window)
   "Switch back and forth between current and last buffer in the
