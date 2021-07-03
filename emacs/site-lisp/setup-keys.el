@@ -158,6 +158,12 @@
    "\\" 'align-regexp)
 
   (general-define-key
+   :states '(normal)
+   "g+" 'evil-numbers/inc-at-pt
+   "g=" 'evil-numbers/inc-at-pt
+   "g-" 'evil-numbers/dec-at-pt)
+
+  (general-define-key
    :states '(normal visual)
    "j" 'evil-next-visual-line
    "k" 'evil-previous-visual-line

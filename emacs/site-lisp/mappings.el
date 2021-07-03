@@ -32,8 +32,6 @@
 (define-key evil-normal-state-map "]s" 'flyspell-goto-next-error)
 (define-key evil-normal-state-map "z=" 'ispell-word)
 
-(define-key evil-normal-state-map (kbd "C-a") 'evil-numbers/inc-at-pt)
-(define-key evil-normal-state-map (kbd "C-S-a") 'evil-numbers/dec-at-pt)
 (define-key evil-normal-state-map (kbd "C-S-h") 'evil-window-decrease-width)
 (define-key evil-normal-state-map (kbd "C-S-j") 'evil-window-decrease-height)
 (define-key evil-normal-state-map (kbd "C-S-k") 'evil-window-increase-height)
