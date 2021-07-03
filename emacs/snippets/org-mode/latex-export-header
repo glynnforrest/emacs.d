@@ -2,7 +2,7 @@
 # name: latex export header
 # key: tex
 # --
-#+LATEX_HEADER: \usepackage{parskip}
+#+LATEX_HEADER: \usepackage{parskip} \makeatletter \@ifpackageloaded{geometry}{\geometry{margin=2cm}}{\usepackage[margin=2cm]{geometry}} \makeatother \hypersetup{hidelinks}
 #+OPTIONS: toc:nil
 #+OPTIONS: toc:nil author:nil
 #+TITLE:
