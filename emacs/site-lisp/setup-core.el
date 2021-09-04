@@ -188,6 +188,7 @@ or if using plists
   (evil-set-initial-state 'package-menu-mode 'normal)
   (evil-set-initial-state 'org-capture-mode 'insert)
   (evil-set-initial-state 'git-commit-mode 'insert)
+  (evil-set-initial-state 'grep-mode 'normal)
   (evil-set-initial-state 'occur-mode 'normal))
 
 ;; Save point position between sessions
@@ -253,7 +254,7 @@ or if using plists
   :config
   (general-define-key
    :keymaps 'vertico-map
-   "M-RET" 'vertico-exit-input
+   "M-RET" 'embark-export
    "C-l" 'vertico-insert
    "C-j" 'vertico-next
    "M-j" 'vertico-next-group
@@ -305,6 +306,21 @@ or if using plists
 (use-package marginalia
   :config
   (marginalia-mode))
+
+(use-package embark)
+
+(use-package embark-consult
+  :after (embark consult)
+  :demand t
+  :hook
+  (embark-collect-mode . consult-preview-at-point-mode))
+
+(use-package wgrep
+  :config
+  (setq wgrep-auto-save-buffer t)
+  (general-define-key
+   :keymaps 'grep-mode-map
+   "M-e" 'wgrep-change-to-wgrep-mode))
 
 (use-package company
   :diminish ""
