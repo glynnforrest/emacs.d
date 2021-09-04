@@ -514,14 +514,12 @@ line as well as the current word."
   :config
   (setq flyspell-issue-message-flag nil))
 
-(use-package helm-flyspell
-  :after (helm flyspell)
+(use-package flyspell-correct
+  :after (flyspell)
   :config
   (general-define-key
-   :keymaps 'evil-normal-state-map
-   "z=" 'helm-flyspell-correct)
-  (general-define-key
-   "M-;" 'helm-flyspell-correct))
+   :states '(normal)
+   "z=" 'flyspell-correct-wrapper))
 
 (use-package emmet-mode
   :hook (html-mode web-mode css-mode)
