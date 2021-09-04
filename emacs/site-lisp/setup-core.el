@@ -133,13 +133,19 @@ or if using plists
 
 (use-package s)
 
+(use-package undo-tree
+  :config
+  (global-undo-tree-mode t)
+  :diminish "")
+
 (use-package evil
   :init
   (setq-default
    evil-want-C-d-scroll t
    evil-want-C-u-scroll t
    evil-want-C-w-delete nil
-   evil-want-C-w-in-emacs-state t)
+   evil-want-C-w-in-emacs-state t
+   evil-undo-system 'undo-tree)
 
   :config
   (evil-mode 1)
@@ -194,9 +200,6 @@ or if using plists
   :after evil
   :config
   (global-evil-surround-mode t))
-
-(use-package undo-tree
-  :diminish "")
 
 (use-package evil-lisp-state
   :init (setq evil-lisp-state-global t
