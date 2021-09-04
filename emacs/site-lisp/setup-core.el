@@ -298,7 +298,9 @@ or if using plists
   ;; Enable recursive minibuffers
   (setq enable-recursive-minibuffers t))
 
-(use-package consult)
+(use-package consult
+  :config
+  (setq consult-preview-key nil))
 
 (use-package marginalia
   :config
