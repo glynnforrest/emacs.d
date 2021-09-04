@@ -1,5 +1,5 @@
 # -*- mode: snippet -*-
 #name : echo short tags
-#key : =
+#key : ?
 # --
 <?=$0?>

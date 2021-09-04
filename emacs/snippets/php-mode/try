@@ -4,6 +4,6 @@
 # --
 try {
     $1
-} catch (${2:\Exception} ${3:$e}) {
+} catch (${2:\Throwable} ${3:$e}) {
     $0
 }
