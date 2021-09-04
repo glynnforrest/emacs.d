@@ -44,6 +44,7 @@
 (require 'setup-org)
 (require 'setup-php)
 (require 'setup-pug)
+(require 'setup-python)
 (require 'setup-saltstack)
 (require 'setup-shell-script)
 (require 'setup-sql)
