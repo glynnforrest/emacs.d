@@ -119,6 +119,13 @@ or if using plists
  undo-tree-visualizer-timestamps 1
  vc-follow-symlinks t)
 
+;; https://stackoverflow.com/a/2903256
+(prefer-coding-system 'utf-8)
+(set-default-coding-systems 'utf-8)
+(set-terminal-coding-system 'utf-8)
+(set-keyboard-coding-system 'utf-8)
+(setq-default buffer-file-coding-system 'utf-8)
+
 ;; enable normally disabled functions
 (put 'narrow-to-region 'disabled nil)
 
