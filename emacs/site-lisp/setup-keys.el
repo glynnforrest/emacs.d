@@ -191,8 +191,10 @@
    "m" '(delete-other-windows :which-key "maximise window")
    "u" 'winner-undo
    "U" 'winner-redo
-   "." 'vnd/alternate-buffer
-   "C-." 'vnd/alternate-buffer)
+   "o" 'vnd/alternate-buffer
+   "C-o" 'vnd/alternate-buffer
+   "C-l" 'evil-window-right
+   "C-h" 'evil-window-left)
 
   (general-define-key
    "M-q" 'gf/close-buffer-other-window
