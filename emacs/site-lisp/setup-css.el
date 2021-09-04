@@ -25,7 +25,8 @@
    :keymaps 'css-mode-map
    :prefix gf/major-mode-leader-key
    :non-normal-prefix gf/major-mode-non-normal-leader-key
-   "e" 'skewer-css-eval-current-rule)
+   "e" 'skewer-css-eval-current-rule
+   "c" 'css-cycle-color-format)
 
   (general-define-key
    :states '(normal visual insert emacs)
