@@ -241,95 +241,68 @@ or if using plists
 (use-package projectile
   :diminish ""
   :config
-  (setq projectile-completion-system 'helm)
   (projectile-mode)
   (require 'defuns-projects))
 
-;; https://tuhdo.github.io/helm-intro.html has great helm tips.
-(use-package helm
-  :diminish ""
-  :commands helm
-  :config
+(use-package vertico
+  :straight (vertico :includes vertico-directory
+                     :files (:defaults "extensions/vertico-directory.el"))
+  :init
+  (vertico-mode)
 
-  (setq helm-move-to-line-cycle-in-source nil
-        helm-split-window-default-side 'other
-        helm-split-window-in-side-p t
-        helm-display-header-line nil
-        helm-candidate-number-limit 200
-        helm-M-x-requires-pattern 0
-        helm-net-prefer-curl-p t
-        helm-buffer-max-length nil
-        helm-autoresize-max-height 30
-        helm-autoresize-min-height 30)
-
-  (set-face-attribute 'helm-source-header nil :height 0.1)
-
-  (helm-mode)
-  (helm-autoresize-mode t)
-
-  (defun gf/helm-find-in-directory (start)
-    (interactive)
-    (let ((default-directory (expand-file-name start)))
-      (call-interactively 'helm-find-files)))
-
-  (general-define-key
-   :keymaps 'helm-map
-   "C-j" 'helm-next-line
-   "C-k" 'helm-previous-line
-   "C-h" 'helm-next-source
-   "C-l" (kbd "RET")))
-
-(use-package helm-files
-  :straight nil
-  :after helm
   :config
   (general-define-key
-   :keymaps '(helm-find-files-map helm-read-file-map)
-   "C-l" 'helm-execute-persistent-action
-   "C-h" 'helm-find-files-up-one-level))
+   :keymaps 'vertico-map
+   "M-RET" 'vertico-exit-input
+   "C-l" 'vertico-insert
+   "C-j" 'vertico-next
+   "M-j" 'vertico-next-group
+   "C-k" 'vertico-previous
+   "M-k" 'vertico-previous-group)
 
-(use-package helm-ag
-  :after helm
+  (setq vertico-cycle t))
+
+(use-package vertico-directory
   :config
-  (setq helm-ag-base-command "rg --smart-case --no-heading --vimgrep")
+  (general-define-key :keymaps 'vertico-map
+                      "C-l" 'vertico-directory-enter
+                      "C-h" 'vertico-directory-delete-word)
 
-  (defun gf/helm-ag-goto ()
-    "Go to the occurrence on the current line and recenter."
-    (interactive)
-    (helm-ag-mode-jump-other-window)
-    (recenter))
+  ;; Tidy shadowed file names
+  :hook (rfn-eshadow-update-overlay . vertico-directory-tidy))
 
-  (defun gf/helm-ag-show ()
-    "Show a compilation in the other window, but stay in the compilation buffer."
-    (interactive)
-    (gf/helm-ag-goto)
-    (other-window -1))
+(use-package orderless
+  :init
+  (setq completion-styles '(orderless)
+        completion-category-defaults nil
+        completion-category-overrides '((file (styles partial-completion)))))
 
-  (general-define-key
-   :keymaps 'helm-do-ag-map
-   "M-RET" 'helm-ag--run-save-buffer
-   "M-e" 'helm-ag-edit)
+(use-package emacs
+  :init
+  ;; Add prompt indicator to `completing-read-multiple'.
+  ;; Alternatively try `consult-completing-read-multiple'.
+  (defun crm-indicator (args)
+    (cons (concat "[CRM] " (car args)) (cdr args)))
+  (advice-add #'completing-read-multiple :filter-args #'crm-indicator)
 
-  (general-define-key
-   :states '(normal insert visual emacs)
-   :keymaps 'helm-ag-mode-map
-   "q" 'kill-this-buffer)
+  ;; Do not allow the cursor in the minibuffer prompt
+  (setq minibuffer-prompt-properties
+        '(read-only t cursor-intangible t face minibuffer-prompt))
+  (add-hook 'minibuffer-setup-hook #'cursor-intangible-mode)
 
-  (general-define-key
-   :states '(normal)
-   :keymaps 'helm-ag-mode-map
-   "RET" 'gf/helm-ag-show
-   "M-RET" 'gf/helm-ag-goto))
+  ;; Emacs 28: Hide commands in M-x which do not work in the current mode.
+  ;; Vertico commands are hidden in normal buffers.
+  (setq read-extended-command-predicate
+        #'command-completion-default-include-p)
 
-(use-package helm-css-scss
+  ;; Enable recursive minibuffers
+  (setq enable-recursive-minibuffers t))
+
+(use-package consult)
+
+(use-package marginalia
   :config
-  (setq helm-css-scss-split-with-multiple-windows nil))
-
-(use-package helm-swoop
-  :config
-  (setq helm-swoop-speed-or-color t
-        helm-swoop-split-direction 'split-window-horizontally
-        helm-swoop-use-line-number-face t))
+  (marginalia-mode))
 
 (use-package company
   :diminish ""

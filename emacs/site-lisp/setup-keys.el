@@ -7,10 +7,10 @@
    :prefix gf/leader-key
    :non-normal-prefix gf/non-normal-leader-key
 
-   "a" 'helm-imenu
+   "a" 'imenu
 
    "b" '(:ignore t :which-key "buffers")
-   "bb" 'helm-mini
+   "bb" 'switch-to-buffer
    "bd" 'kill-this-buffer
    "bD" 'kill-matching-buffers
    "bm" 'gf/switch-to-messages-buffer
@@ -38,7 +38,7 @@
    "fD" 'vnd/delete-current-buffer-file
    "fe" 'gf/find-emacs-d-file
    "fE" 'editorconfig-find-current-editorconfig
-   "ff" 'helm-find-files
+   "ff" 'find-file
    "fF" 'find-function
    "fh" `(,(gf/key 'gf/helm-find-in-directory "~/Desktop/") :which-key "~/Desktop")
    "fH" `(,(gf/key 'gf/helm-find-in-directory "~/") :which-key "~")
@@ -46,7 +46,7 @@
    "fI" '(gf/open-personal-file :which-key "open setup-personal.el")
    "fo" 'gf/org-find-file
    "fp" 'projectile-find-file
-   "fr" 'helm-recentf
+   "fr" 'consult-recent-file
    "fR" 'vnd/rename-current-buffer-file
    "fs" 'save-buffer
    "fw" 'write-file
@@ -102,7 +102,7 @@
    "pS" 'projectile-save-project-buffers
    "pr" 'projectile-replace
 
-   "P" 'helm-show-kill-ring
+   "P" 'yank-from-kill-ring
 
    "q" '(:ignore t :which-key "quitting")
    "qf" 'delete-frame
@@ -114,7 +114,7 @@
    "R" 'gf/tmux-run
 
    "s" '(:ignore t :which-key "search")
-   "sp" 'helm-do-ag-project-root
+   "sp" 'consult-ripgrep
    "so" 'org-search-view
 
    "t" '(:ignore t :which-key "toggle")
@@ -136,17 +136,13 @@
    "w" '(:ignore t :which-key "what")
    "wf" 'gf/face-at-point
 
-   "x" 'helm-M-x
+   "x" 'execute-extended-command
 
    "y" '(:ignore t :which-key "yasnippet")
    "yi" 'yas-insert-snippet
    "yr" 'yas-reload-all
 
-   "." 'helm-gtags-dwim
-   "," 'helm-gtags-pop-stack
-
-   "/" 'helm-swoop
-   ";" 'helm-swoop-without-pre-input
+   ";" 'consult-line
    "=" 'gf/indent-buffer
    "-" 'gf/untabify-buffer
    "+" 'gf/indent-cleanup-buffer
@@ -200,7 +196,6 @@
 
   (general-define-key
    "M-q" 'gf/close-buffer-other-window
-   "M-x" 'helm-M-x
    "M-d" 'scroll-other-window
    "M-u" 'scroll-other-window-down))
 
