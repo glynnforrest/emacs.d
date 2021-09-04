@@ -1,3 +1,5 @@
+(eval-when-compile (require 'use-package))
+
 (use-package magit
   :commands magit-status
   :config
@@ -20,6 +22,18 @@
 
 (use-package evil-magit
   :after magit)
+
+(use-package git-link
+  :after magit
+  :config
+
+  (setq git-link-open-in-browser t)
+
+  (general-define-key
+   :states '(normal visual insert emacs)
+   :prefix gf/leader-key
+   :non-normal-prefix gf/non-normal-leader-key
+   "go" 'git-link))
 
 (use-package git-gutter
   :diminish ""
