@@ -1,3 +1,4 @@
+(eval-when-compile (require 'use-package))
 (use-package org
   :defer t
   :commands (gf/find-current-month-notes-file
@@ -6,8 +7,10 @@
              gf/org-find-file)
   :config
   (require 'defuns-org)
+  (require 'org-tempo)
 
-  (setq org-directory "~/notes/")
+  (setq org-directory "~/notes/"
+        org-adapt-indentation t)
   (setq org-listen-read-watch-file (concat org-directory "topics/listen-read-watch.org"))
 
   ;; Split up the search string on whitespace
