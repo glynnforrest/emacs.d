@@ -55,8 +55,6 @@
    "fZ" '(gf/open-zshrc-local :which-key "open .zshrc.local")
 
    "h" '(:ignore t :which-key "docs")
-   "hd" 'helm-dash
-   "hD" 'helm-dash-at-point
    "ht" 'gf/php-show-date-format-help
 
    "g" '(:ignore t :which-key "git")

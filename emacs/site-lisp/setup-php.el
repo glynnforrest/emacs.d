@@ -1,3 +1,5 @@
+(eval-when-compile (require 'use-package))
+
 (use-package php-mode
   :defer t
   :mode "\\.php$"
@@ -28,12 +30,8 @@
   (general-define-key
    :states '(insert emacs)
    :keymaps 'php-mode-map
-   "C-c l" 'yas/create-php-snippet)
+   "C-c l" 'yas/create-php-snippet))
 
-  (defun gf/helm-dash-php ()
-    (interactive)
-    (setq-local helm-dash-docsets '("PHP" "PHPUnit" "Symfony")))
-  (add-hook 'php-mode-hook 'gf/helm-dash-php))
 
 (use-package php-auto-yasnippets
   :after php-mode)

@@ -1,9 +1,7 @@
+(eval-when-compile (require 'use-package))
+
 (use-package salt-mode
   :config
-  (defun gf/helm-dash-saltstack ()
-    (interactive)
-    (setq-local helm-dash-docsets '("SaltStack")))
-  (add-hook 'salt-mode-hook 'gf/helm-dash-saltstack)
   (add-hook 'salt-mode-hook
             (lambda ()
               (flyspell-mode 1)))

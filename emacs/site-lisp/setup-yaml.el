@@ -1,3 +1,5 @@
+(eval-when-compile (require 'use-package))
+
 (use-package yaml-mode
   :mode "\\.ya?ml.dist\\'"
   :config
@@ -10,13 +12,6 @@
         (setq-default yaml-indent-offset 2)
       (setq-default yaml-indent-offset 4))
     (message "Default yaml indentation is now %s spaces" (default-value 'yaml-indent-offset)))
-
-  (defun gf/helm-dash-yaml ()
-    (interactive)
-    (if (s-ends-with? ".sls" (buffer-file-name))
-        (setq-local helm-dash-docsets '("Saltstack"))
-      (setq-local helm-dash-docsets '("Ansible"))))
-  (add-hook 'yaml-mode-hook 'gf/helm-dash-yaml)
 
   (general-define-key
    :states '(normal visual insert emacs)
