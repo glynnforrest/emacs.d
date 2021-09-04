@@ -126,6 +126,11 @@ ERC buffer."
     (when (re-search-forward "^<<<<<<< " nil t)
       (smerge-mode t))))
 
+(defun gf/hexstring (length)
+  "Generate a hexadecimal string."
+  (let ((hash (md5 (number-to-string (random)))))
+            (substring hash 0 length)))
+
 (defun gf/uuid ()
   "Generate a pseudo-random UUID. Just the format, not adhering to any versioned UUID spec."
   (let ((hash (md5 (number-to-string (random)))))

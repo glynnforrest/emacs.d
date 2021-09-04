@@ -73,6 +73,9 @@
    "is" 'gf/php-insert-service
    "it" 'gf/php-insert-symfony-twig-helper
    "iu" '((lambda () (interactive) (insert (gf/uuid))) :which-key "gf/uuid")
+   "i4" '((lambda () (interactive) (insert (gf/hexstring 4))) :which-key "4-char hex")
+   "i6" '((lambda () (interactive) (insert (gf/hexstring 6))) :which-key "6-char hex")
+   "i8" '((lambda () (interactive) (insert (gf/hexstring 8))) :which-key "8-char hex")
 
    "j" 'vnd/arrayify
 
