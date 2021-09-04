@@ -36,6 +36,11 @@ EXTENSION. Only the last extension of the file is considered."
   (interactive)
   (find-file "~/.zshrc.local"))
 
+(defun gf/open-dotenv-file ()
+  (interactive)
+  (when (projectile-project-root)
+    (find-file (concat (projectile-project-root) "/.env.local"))))
+
 (defun gf/save-buffers-kill-emacs-no-prompt ()
   "Save some buffers, then exit unconditionally"
   (interactive)

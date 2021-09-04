@@ -53,6 +53,7 @@
    "fx" 'gf/make-current-file-executable
    "fz" '(gf/open-zshrc :which-key "open .zshrc")
    "fZ" '(gf/open-zshrc-local :which-key "open .zshrc.local")
+   "f." '(gf/open-dotenv-file :which-key "open dotenv for this project")
 
    "h" '(:ignore t :which-key "docs")
    "ht" 'gf/php-show-date-format-help
