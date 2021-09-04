@@ -22,18 +22,9 @@
 
   (general-define-key
    :states '(normal visual insert emacs)
-   :prefix "SPC"
-   :non-normal-prefix "M-SPC"
+   :prefix gf/leader-key
+   :non-normal-prefix gf/non-normal-leader-key
    :keymaps 'php-mode-map
-   "+" 'gf/php-cleanup-style)
-
-  (general-define-key
-   :states '(insert emacs)
-   :keymaps 'php-mode-map
-   "C-c l" 'yas/create-php-snippet))
-
-
-(use-package php-auto-yasnippets
-  :after php-mode)
+   "+" 'gf/php-cleanup-style))
 
 (provide 'setup-php)
