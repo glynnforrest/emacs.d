@@ -141,6 +141,8 @@ or if using plists
 (use-package evil
   :init
   (setq-default
+   evil-want-keybinding nil
+   evil-want-integration t
    evil-want-C-d-scroll t
    evil-want-C-u-scroll t
    evil-want-C-w-delete nil
@@ -149,7 +151,6 @@ or if using plists
 
   :config
   (evil-mode 1)
-  (use-package evil-numbers)
 
   ;; Centre screen around a search
   (defadvice
@@ -182,14 +183,15 @@ or if using plists
     (interactive)
     (call-interactively 'evil-shift-right)
     (evil-normal-state)
-    (evil-visual-restore))
+    (evil-visual-restore)))
 
-  (add-to-list 'evil-emacs-state-modes 'package-menu-mode)
-  (evil-set-initial-state 'package-menu-mode 'normal)
-  (evil-set-initial-state 'org-capture-mode 'insert)
-  (evil-set-initial-state 'git-commit-mode 'insert)
-  (evil-set-initial-state 'grep-mode 'normal)
-  (evil-set-initial-state 'occur-mode 'normal))
+(use-package evil-numbers
+  :after evil)
+
+(use-package evil-collection
+  :after evil
+  :config
+  (evil-collection-init))
 
 ;; Save point position between sessions
 (use-package saveplace

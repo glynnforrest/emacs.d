@@ -10,18 +10,15 @@
 
   (general-define-key
    :keymaps '(magit-mode-map magit-diff-mode-map)
-   "SPC" 'nil)
+   "SPC" 'nil))
 
-  (general-define-key
-   :states '(normal)
-   :keymaps 'magit-blame-mode-map
-   "b" 'magit-blame
-   "j" 'magit-blame-next-chunk
-   "k" 'magit-blame-previous-chunk
-   "y" 'magit-blame-copy-hash))
-
-(use-package evil-magit
-  :after magit)
+  ;; (general-define-key
+  ;;  :states '(normal)
+  ;;  :keymaps 'magit-blame-mode-map
+  ;;  "b" 'magit-blame
+  ;;  "j" 'magit-blame-next-chunk
+  ;;  "k" 'magit-blame-previous-chunk
+  ;;  "y" 'magit-blame-copy-hash))
 
 (use-package git-link
   :after magit
