@@ -24,3 +24,4 @@ transient/
 /lsp-cache/
 /.lsp-session-v1
 /.cache/
+/eln-cache/
