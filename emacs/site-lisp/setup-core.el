@@ -338,21 +338,28 @@ or if using plists
    "C-h" #'company-show-doc-buffer
    "TAB" nil))
 
-(when (not (version< emacs-version "25.1"))
-  (use-package lsp-mode
-    :defer t
-    :diminish lsp-mode
-    :commands
-    (lsp-mode lsp-define-stdio-client lsp-client-on-notification lsp-make-traverser)
-    :init
-    (setq lsp-enable-eldoc t))
-  (use-package lsp-ui
-    :config
-    :hook (lsp-mode . lsp-ui-mode))
+(use-package lsp-mode
+  :init
+  (setq lsp-keymap-prefix "C-c l"
+        lsp-headerline-breadcrumb-enable nil
+        lsp-enable-file-watchers nil
+        lsp-enable-imenu nil
+        lsp-enable-folding nil
+        lsp-enable-indentation nil
+        lsp-enable-snippet nil
+        ;; lsp-imenu-index-function 'lsp-imenu-create-categorized-index
+        ;; lsp-imenu-index-symbol-kinds '(Function Method)
+        lsp-intelephense-multi-root t
+        lsp-symbol-highlighting-skip-current t)
+  :hook ((php-mode . lsp-deferred)
+         (lsp-mode . lsp-enable-which-key-integration))
+  :commands (lsp lsp-deferred)
+  :config
+    (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]vendor\\'")
+    (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]var/cache\\'")
+  )
 
-  (use-package company-lsp
-    :init
-    (push 'company-lsp company-backends)))
+(setq gc-cons-threshold 100000000)
 
 (add-hook 'find-file-hook 'gf/maybe-smerge)
 

@@ -21,3 +21,6 @@ projectile*
 transient/
 /straight/*
 !/straight/versions
+/lsp-cache/
+/.lsp-session-v1
+/.cache/
