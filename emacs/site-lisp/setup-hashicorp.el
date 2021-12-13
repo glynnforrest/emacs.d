@@ -1,4 +1,7 @@
-(use-package hcl-mode)
+(eval-when-compile (require 'use-package))
+
+(use-package hcl-mode
+  :mode "\\.hcl2\\'")
 
 (use-package terraform-mode
 
