@@ -221,6 +221,19 @@ troll () {
     clear
 }
 
+ips () {
+    LIST="internet\t $(curl ifconfig.me 2>/dev/null)\n"
+
+    if command_exists ip;
+    then
+        LIST+=$(ip addr list | awk '{print $NF "\t" $2}')
+    else
+        LIST+=$(ifconfig | awk -F '[: ]' '{if (/^[a-z]/) printf $1 " "} {if (/inet /) printf $2 " "}' | grep -oE '[a-z0-9]+ ([0-9]{1,3}\.){3}[0-9]{1,3}')
+    fi
+
+    echo $LIST | column -t
+}
+
 # aliases
 alias c='cd -'
 alias e='emacsclient -nw'
@@ -271,7 +284,7 @@ alias youtube_mp3="youtube-dl -t --extract-audio --audio-format mp3 --audio-qual
 
 # Defaults to port 8000
 # python_server <port> for a different port
-alias python_server="python -m SimpleHTTPServer"
+alias python_server="ips && python -m SimpleHTTPServer"
 
 if command_exists fasd;
 then;
