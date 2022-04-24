@@ -216,6 +216,16 @@ placeholder () {
     wget http://placekitten.com/$1/$2 -O $1\x$2.jpg
 }
 
+clear_aws () {
+    unset AWS_ACCESS_KEY_ID
+    unset AWS_SECRET_ACCESS_KEY
+    unset AWS_PROFILE
+    unset AWS_REGION
+    unset AWS_SESSION_TOKEN
+}
+
+alias aws-ssm="aws ssm start-session --target"
+
 troll () {
     export PS1='C:${PWD//\//\\}> '
     clear
