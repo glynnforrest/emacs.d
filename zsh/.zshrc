@@ -226,6 +226,21 @@ clear_aws () {
 
 alias aws-ssm="aws ssm start-session --target"
 
+# Find EC2 instances by exact tag Name
+# ec2_search 'my-instance'
+# ec2_search my-instance | jq
+ec2_search () {
+    aws ec2 describe-instances --filters "Name=tag:Name,Values=$1" --query 'Reservations[].Instances[].[InstanceId,Tags[?Key==`Name`]| [0].Value,PrivateIpAddress,InstanceType]'
+}
+
+ec2_ips () {
+    ec2_search $1 | jq -r '.[][2]'
+}
+
+ec2_all_ips () {
+    aws ec2 describe-instances --query 'Reservations[].Instances[].[InstanceId,Tags[?Key==`Name`]| [0].Value,PrivateIpAddress,InstanceType]' | jq -r '.[][2]'
+}
+
 troll () {
     export PS1='C:${PWD//\//\\}> '
     clear
