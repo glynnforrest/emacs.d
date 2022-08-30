@@ -41,6 +41,7 @@
 (require 'setup-js)
 (require 'setup-jsonnet)
 (require 'setup-markdown)
+(require 'setup-nix)
 (require 'setup-org)
 (require 'setup-php)
 (require 'setup-pug)
