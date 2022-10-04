@@ -70,21 +70,21 @@
 (defun gf/php-use-class-select ()
   "Add a class to the use declarations in the current file."
   (interactive)
-  (gf/php-use-class (helm-comp-read
+  (gf/php-use-class (completing-read
                      "Class: "
                      (gf/php-class-candidates))))
 
 (defun gf/php-use-trait-select ()
   "Use a trait in the current class."
   (interactive)
-  (gf/php-use-trait (helm-comp-read
+  (gf/php-use-trait (completing-read
                      "Trait: "
                      (gf/php-class-candidates))))
 
 (defun gf/php-insert-class ()
   "Insert a class name in the current projectile project."
   (interactive)
-  (let ((class (helm-comp-read
+  (let ((class (completing-read
                 "Class: "
                 (gf/php-class-candidates))))
     (insert class)))
@@ -127,7 +127,7 @@
 (defun gf/php-insert-symfony-service ()
   "Insert a service name for the current symfony project."
   (interactive)
-  (let ((service (helm-comp-read
+  (let ((service (completing-read
                   "Service: "
                   (gf/candidates-from-command "php bin/console debug:container | sed -E 's/^ +//g' | cut -d ' ' -f 1"))))
     (insert service)))
@@ -135,7 +135,7 @@
 (defun gf/php-insert-neptune-service ()
   "Insert a service name for the current neptune php project."
   (interactive)
-  (let ((service (helm-comp-read
+  (let ((service (completing-read
                   "Service: "
                   (gf/candidates-from-command "php neptune service:list -N | tail -n +2"))))
     (insert service)))
@@ -152,7 +152,7 @@
 (defun gf/php-insert-symfony-route ()
   "Insert a route name for the current symfony project."
   (interactive)
-  (let ((candidate (helm-comp-read
+  (let ((candidate (completing-read
                     "Route: "
                     (gf/candidates-from-command "php bin/console debug:router | sed -E 's/^ +//g' |  cut -d ' ' -f 1 | tail -n +3"))))
     (insert candidate)))
@@ -160,7 +160,7 @@
 (defun gf/php-insert-symfony-twig-helper ()
   "Insert a twig function or filter for the current symfony project."
   (interactive)
-  (insert (helm-comp-read
+  (insert (completing-read
            "Twig helper: "
            (gf/candidates-from-command
             "php bin/console debug:twig | grep -oE '\\* [-_a-zA-Z0-9]+' | sed 's/^. //g'"))))
