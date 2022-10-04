@@ -1,0 +1,5 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+#name : array member same name
+#key : =
+# --
+'${1:var}' => $$1,$0
