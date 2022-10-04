@@ -13,3 +13,4 @@ rmb = !git branch --merged | grep -v '*' | xargs git branch -d
 authors = shortlog --summary --numbered --email
 l = log --oneline --decorate
 la = log --oneline --decorate --graph --all
+whatadded = log --diff-filter=A
