@@ -7,7 +7,7 @@
    :prefix gf/leader-key
    :non-normal-prefix gf/non-normal-leader-key
 
-   "a" 'imenu
+   "a" 'consult-imenu
 
    "b" '(:ignore t :which-key "buffers")
    "bb" 'switch-to-buffer

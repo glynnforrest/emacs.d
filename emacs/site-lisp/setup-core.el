@@ -303,7 +303,9 @@ or if using plists
 
 (use-package consult
   :config
-  (setq consult-preview-key nil))
+  (setq consult-preview-key nil
+        consult-project-root-function #'projectile-project-root
+        ))
 
 (use-package marginalia
   :config
