@@ -273,6 +273,15 @@ ips () {
     echo $LIST | column -t
 }
 
+clear_hashi () {
+    unset VAULT_TOKEN
+    unset VAULT_ADDR
+    unset CONSUL_HTTP_TOKEN
+    unset CONSUL_HTTP_ADDR
+    unset NOMAD_TOKEN
+    unset NOMAD_ADDR
+}
+
 # aliases
 alias c='cd -'
 alias e='emacsclient -nw'
@@ -324,6 +333,27 @@ alias youtube_mp3="youtube-dl -t --extract-audio --audio-format mp3 --audio-qual
 # Defaults to port 8000
 # python_server <port> for a different port
 alias python_server="ips && python -m SimpleHTTPServer"
+
+alias grafana_tmp="docker run --name grafana-tmp --rm -ti --network agent-test -p 3000:3000 grafana/grafana"
+
+random-secret () {
+    python3 -c "import secrets; import string; print(''.join([secrets.choice(string.ascii_letters + string.digits) for i in range(32)]))"
+}
+
+fix-svg () {
+    svgcleaner $1 $1
+    xmllint --format $1 --output $1
+}
+
+source-env () {
+    export $(cat $1 | xargs)
+}
+
+nomad-restart-job () {
+    nomad job status $1 | grep -E 'run\s+running' | awk '{print $1}' | xargs -t -n 1 -P $2 nomad alloc restart
+}
+
+alias tf_lock_providers="terraform providers lock -platform=linux_arm64 -platform=linux_amd64 -platform=darwin_amd64 -platform=windows_amd64"
 
 if command_exists fasd;
 then;
