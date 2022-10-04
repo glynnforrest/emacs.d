@@ -15,21 +15,35 @@ command_exists () {
     type "$1" &> /dev/null;
 }
 
+path_add () {
+    PATH=$1:$PATH
+}
+
 # environment variables
+export GOPATH=~/code/go
+export NIX_PATH=~/.nix-defexpr/channels:/nix/var/nix/profiles/per-user/root/channels
+
 export PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
 
-export GOPATH=~/code/go
-
-PATH+=:$GOPATH/bin
-PATH+=:~/.bin
-PATH+=:~/.composer/vendor/bin
-PATH+=:~/.phpenv/bin
-PATH+=:~/.rvm/bin
-PATH+=:~/.local/bin
+path_add /usr/local/opt/bison/bin
+path_add /usr/local/opt/openssl@1.1/bin
+path_add /usr/local/opt/php@7.4/sbin
+path_add /usr/local/opt/php@7.4/bin
+path_add $GOPATH/bin
 
 if is_mac; then
-    PATH+=:/usr/local/texlive/2016/bin/x86_64-darwin
+    path_add /Library/TeX/texbin
 fi;
+
+path_add /nix/var/nix/profiles/default/bin
+path_add ~/.nix-profile/bin
+
+path_add ~/.bin
+
+if command_exists direnv
+then
+   eval "$(direnv hook zsh)"
+fi
 
 if command_exists emacs; then
     export EDITOR='emacsclient -nw'
