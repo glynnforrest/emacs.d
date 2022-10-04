@@ -23,3 +23,8 @@ then
     title "Installing z.sh"
     curl https://raw.githubusercontent.com/rupa/z/master/z.sh > ~/.bin/z.sh
 fi
+
+# if is_mac
+# then
+#     xcode-select --install
+# fi

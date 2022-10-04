@@ -8,7 +8,10 @@ wait() {
     read -p "Press enter when ready. "
 }
 
-wait "* Download Google Chrome at https://www.google.com/chrome/
+# Install brew
+# Install chrome
+
+wait "* Open Google Chrome
 * Login to Bitwarden
 * Get your SSH key and install to ~/.ssh/
 "
