@@ -357,6 +357,7 @@ or if using plists
         lsp-intelephense-multi-root t
         lsp-symbol-highlighting-skip-current t)
   :hook ((php-mode . lsp-deferred)
+         (go-mode . lsp-deferred)
          (lsp-mode . lsp-enable-which-key-integration))
   :commands (lsp lsp-deferred)
   :config
