@@ -117,6 +117,7 @@ or if using plists
  select-enable-clipboard t
  shift-select-mode nil
  undo-tree-visualizer-timestamps 1
+ undo-tree-auto-save-history nil
  vc-follow-symlinks t)
 
 ;; https://stackoverflow.com/a/2903256
