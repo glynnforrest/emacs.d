@@ -5,3 +5,5 @@
 /group_vars/*
 !/group_vars/_example.yml
 /bin/.bin/z.sh
+packer_compiled.lua
+/.luarc.json

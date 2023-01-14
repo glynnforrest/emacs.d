@@ -13,6 +13,7 @@ prepare:
 link: prepare
 	stow -v -t ~ bin
 	stow -v -t ~ git
+	stow -v -t ~ nvim
 	stow -v -t ~ pgcli
 	stow -v -t ~ tmux
 	stow -v -t ~ vim
