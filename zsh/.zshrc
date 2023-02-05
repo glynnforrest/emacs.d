@@ -35,6 +35,8 @@ if is_mac; then
     path_add /Library/TeX/texbin
 fi;
 
+path_add ~/bin
+
 path_add /nix/var/nix/profiles/default/bin
 path_add ~/.nix-profile/bin
 
