@@ -284,6 +284,10 @@ clear_hashi () {
     unset NOMAD_ADDR
 }
 
+alias unsafeconsul="CONSUL_HTTP_SSL_VERIFY=false consul"
+alias unsafevault="VAULT_SKIP_VERIFY=true vault"
+alias unsafenomad="NOMAD_SKIP_VERIFY=true nomad"
+
 # aliases
 alias c='cd -'
 alias e='emacsclient -nw'
