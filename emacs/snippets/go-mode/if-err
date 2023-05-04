@@ -1,6 +1,6 @@
 # -*- mode: snippet -*-
 # name: go if err not nil
-# key: ifer
+# key: ife
 # --
 if err != nil {
 	$0
