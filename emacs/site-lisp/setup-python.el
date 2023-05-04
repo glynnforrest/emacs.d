@@ -5,8 +5,6 @@
 (use-package lsp-python-ms
   :ensure t
   :init (setq lsp-python-ms-auto-install-server t)
-  :hook (python-ts-mode . (lambda ()
-                          (require 'lsp-python-ms)
-                          (lsp-deferred))))
+  :hook (python-ts-mode . 'eglot-ensure))
 
 (provide 'setup-python)

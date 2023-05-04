@@ -345,27 +345,7 @@ or if using plists
    "C-h" #'company-show-doc-buffer
    "TAB" nil))
 
-(use-package lsp-mode
-  :init
-  (setq lsp-keymap-prefix "C-c l"
-        lsp-headerline-breadcrumb-enable nil
-        lsp-enable-file-watchers nil
-        lsp-enable-imenu nil
-        lsp-enable-folding nil
-        lsp-enable-indentation nil
-        lsp-enable-snippet nil
-        ;; lsp-imenu-index-function 'lsp-imenu-create-categorized-index
-        ;; lsp-imenu-index-symbol-kinds '(Function Method)
-        lsp-intelephense-multi-root t
-        lsp-symbol-highlighting-skip-current t)
-  :hook ((php-mode . lsp-deferred)
-         (go-mode . lsp-deferred)
-         (lsp-mode . lsp-enable-which-key-integration))
-  :commands (lsp lsp-deferred)
-  :config
-    (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]vendor\\'")
-    (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]var/cache\\'")
-  )
+(use-package eglot)
 
 (setq gc-cons-threshold 100000000)
 

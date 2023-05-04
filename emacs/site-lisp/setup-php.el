@@ -10,6 +10,9 @@
   :config
   (add-hook 'php-mode-hook 'php-enable-psr2-coding-style)
   (require 'lib-php)
+  (add-hook 'php-mode-hook 'eglot-ensure)
+  (add-to-list 'eglot-server-programs
+               '(php-mode "intelephense" "--stdio"))
 
   (general-define-key
    :states '(normal visual insert emacs)
