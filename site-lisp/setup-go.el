@@ -2,8 +2,8 @@
 
 (use-package go-mode
   :config
-  (progn
-    (add-hook 'before-save-hook 'gofmt-before-save))
+  (add-hook 'before-save-hook 'gofmt-before-save)
+  (add-hook 'go-mode-hook 'eglot-ensure)
 
   (general-define-key
    :states '(normal visual insert emacs)
