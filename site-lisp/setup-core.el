@@ -314,11 +314,9 @@ or if using plists
   :config
   (marginalia-mode))
 
-(use-package embark)
-
 (use-package embark-consult
-  :after (embark consult)
   :demand t
+  :after consult
   :hook
   (embark-collect-mode . consult-preview-at-point-mode))
 
