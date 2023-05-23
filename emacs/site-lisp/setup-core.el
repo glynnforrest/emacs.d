@@ -37,9 +37,11 @@ or if using plists
         which-key-sort-order 'which-key-key-order-alpha)
   (which-key-mode t))
 
-(use-package kaolin-themes
+(use-package dracula-theme
   :config
-  (load-theme 'kaolin-dark t))
+  (load-theme 'dracula t))
+
+(use-package kaolin-themes)
 
 
 (defun gf/trim-ui ()
