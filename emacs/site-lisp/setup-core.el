@@ -55,7 +55,7 @@ or if using plists
 
 (use-package rainbow-mode
   :diminish ""
-  :hook (css-mode emacs-list-mode haskell-mode))
+  :hook (css-mode emacs-lisp-mode haskell-mode))
 
 (use-package spaceline-config
   :straight spaceline
