@@ -25,6 +25,7 @@ export NIX_PATH=~/.nix-defexpr/channels:/nix/var/nix/profiles/per-user/root/chan
 
 export PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
 
+path_add /opt/homebrew/bin
 path_add /usr/local/opt/bison/bin
 path_add /usr/local/opt/openssl@1.1/bin
 path_add /usr/local/opt/php@7.4/sbin
@@ -46,6 +47,7 @@ if command_exists direnv
 then
    eval "$(direnv hook zsh)"
 fi
+alias dr="direnv reload"
 
 if command_exists emacs; then
     export EDITOR='emacsclient -nw'
@@ -276,12 +278,15 @@ ips () {
 }
 
 clear_hashi () {
-    unset VAULT_TOKEN
-    unset VAULT_ADDR
-    unset CONSUL_HTTP_TOKEN
     unset CONSUL_HTTP_ADDR
-    unset NOMAD_TOKEN
+    unset CONSUL_HTTP_SSL_VERIFY
+    unset CONSUL_HTTP_TOKEN
     unset NOMAD_ADDR
+    unset NOMAD_SKIP_VERIFY
+    unset NOMAD_TOKEN
+    unset VAULT_ADDR
+    unset VAULT_SKIP_VERIFY
+    unset VAULT_TOKEN
 }
 
 alias unsafeconsul="CONSUL_HTTP_SSL_VERIFY=false consul"
