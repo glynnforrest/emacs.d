@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name:terraform output
+# key: o
+# --
+output "$1" {
+  value = $0
+}
