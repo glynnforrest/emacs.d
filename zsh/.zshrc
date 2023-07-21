@@ -347,6 +347,10 @@ alias python_server="ips && python -m SimpleHTTPServer"
 
 alias grafana_tmp="docker run --name grafana-tmp --rm -ti --network agent-test -p 3000:3000 grafana/grafana"
 
+codeimg () {
+    silicon --to-clipboard $1 --no-window-controls --background '#fff0'
+}
+
 random-secret () {
     python3 -c "import secrets; import string; print(''.join([secrets.choice(string.ascii_letters + string.digits) for i in range(32)]))"
 }
