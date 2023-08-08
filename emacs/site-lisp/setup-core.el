@@ -74,6 +74,7 @@ or if using plists
 
 (use-package server
   :config
+  (setq server-socket-dir "/tmp/emacs")
   (unless (server-running-p)
     (server-start)))
 
