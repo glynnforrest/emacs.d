@@ -50,7 +50,7 @@ fi
 alias dr="direnv reload"
 
 if command_exists emacs; then
-    export EDITOR='emacsclient -nw'
+    export EDITOR='emacsclient -nw --socket-name /tmp/emacs/server'
 else
     export EDITOR='vim'
 fi;
@@ -295,7 +295,7 @@ alias unsafenomad="NOMAD_SKIP_VERIFY=true nomad"
 
 # aliases
 alias c='cd -'
-alias e='emacsclient -nw'
+alias e='emacsclient -nw --socket-name /tmp/emacs/server'
 alias ez="e ~/.zshrc"
 alias ff='find . -iname'
 alias l='ls -lah'
