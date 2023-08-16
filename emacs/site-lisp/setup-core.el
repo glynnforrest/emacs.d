@@ -305,12 +305,6 @@ or if using plists
   ;; Enable recursive minibuffers
   (setq enable-recursive-minibuffers t))
 
-(use-package consult
-  :config
-  (setq consult-preview-key nil
-        consult-project-root-function #'projectile-project-root
-        ))
-
 (use-package marginalia
   :config
   (marginalia-mode))
@@ -318,10 +312,13 @@ or if using plists
 (use-package embark)
 
 (use-package embark-consult
-  :after (embark consult)
-  :demand t
   :hook
   (embark-collect-mode . consult-preview-at-point-mode))
+
+(use-package consult
+  :config
+  (setq consult-preview-key nil
+        consult-project-root-function #'projectile-project-root))
 
 (use-package wgrep
   :config
