@@ -20,8 +20,29 @@
    :states 'normal
    "TAB" 'outline-cycle)
 
+  (general-define-key
+   :states '(normal visual insert emacs)
+   :prefix gf/leader-key
+   :non-normal-prefix gf/non-normal-leader-key
+   :keymaps 'markdown-mode-map
+   "gj" 'gf/markdown-open-jira-ticket)
+
   (add-hook 'markdown-mode-hook 'flyspell-mode)
-  (add-hook 'markdown-mode-hook 'ws-butler-mode)
-  (add-hook 'markdown-mode-hook 'outline-minor-mode))
+  (add-hook 'markdown-mode-hook 'ws-butler-mode))
+
+
+(defun gf/markdown-jira-ticket ()
+  (save-excursion
+    (save-match-data
+      (markdown-back-to-heading)
+      (if (re-search-forward "[A-Z]+-[0-9]+" (line-end-position) t)
+          (match-string-no-properties 0)))))
+
+
+(defun gf/markdown-open-jira-ticket ()
+  (interactive)
+  (let ((ticket (gf/markdown-jira-ticket)))
+    (when ticket
+      (browse-url (concat "https://roblox.atlassian.net/browse/" ticket)))))
 
 (provide 'setup-markdown)

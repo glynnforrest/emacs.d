@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: go struct func
+# key: sf
+# --
+func (${1:s *Type}) ${2:name}(${3:arguments}) (${4:results}) {
+	$0
+}
