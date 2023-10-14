@@ -63,7 +63,6 @@
 (load custom-file 'noerror)
 
 ;; Quarantine - old files that need updating
-;; (require 'setup-general)
 ;; (require 'defuns)
 ;; (require 'mappings)
 ;; (require 'appearance)
@@ -73,9 +72,7 @@
 ;; (require 'setup-multiple-cursors)
 
 ;; Quarantined packages
-;; ace-jump-mode
 ;; dired+
 ;; epl
 ;; impatient-mode
-;; keychain-environment
 ;; php-eldoc

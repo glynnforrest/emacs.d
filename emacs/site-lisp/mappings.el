@@ -6,8 +6,6 @@
 
 (evil-leader/set-key
   "e" 'gf/maybe-eval-region
-  "m" 'ace-jump-line-mode
-  "M" 'ace-jump-mode
   "n" 'gf/narrow-or-widen
   "N" 'narrow-to-defun
   "S" 'gf/split-window-and-move-below
@@ -36,8 +34,6 @@
 (define-key evil-normal-state-map (kbd "C-S-j") 'evil-window-decrease-height)
 (define-key evil-normal-state-map (kbd "C-S-k") 'evil-window-increase-height)
 (define-key evil-normal-state-map (kbd "C-S-l") 'evil-window-increase-width)
-(define-key evil-normal-state-map (kbd "M-j") 'move-text-down)
-(define-key evil-normal-state-map (kbd "M-k") 'move-text-up)
 
 
 ;; Visual mode
@@ -55,16 +51,7 @@
 (define-key global-map (kbd "C-c u") 'gf/open-url-from-buffer)
 (define-key global-map (kbd "C-c U") 'gf/open-recent-url)
 
-(define-key minibuffer-local-map (kbd "C-w") 'evil-delete-backward-word)
 ;; use M-h to highlight everything
-
-;; Dired
-(evil-declare-key 'normal dired-mode-map "\\" 'dired-up-directory)
-(evil-declare-key 'normal dired-mode-map "q" 'evil-record-macro)
-(evil-declare-key 'normal wdired-mode-map ",e" 'wdired-finish-edit)
-(evil-declare-key 'normal wdired-mode-map ",a" 'wdired-abort-changes)
-(define-key dired-mode-map (kbd "C-h") 'evil-window-left)
-(define-key dired-mode-map (kbd "M-b") 'helm-mini)
 
 ;; Lisp
 (evil-declare-key 'normal lisp-mode-shared-map (kbd "M-.") 'elisp-slime-nav-find-elisp-thing-at-point)
