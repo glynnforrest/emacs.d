@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: go if err not nil log fatal
+# key: ifel
+# --
+if err != nil {
+	log.Fatalln(err)
+}$0
