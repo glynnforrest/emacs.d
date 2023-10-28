@@ -40,6 +40,7 @@
 (require 'setup-help)
 (require 'setup-js)
 (require 'setup-jsonnet)
+(require 'setup-kubernetes)
 (require 'setup-lua)
 (require 'setup-markdown)
 (require 'setup-nix)
