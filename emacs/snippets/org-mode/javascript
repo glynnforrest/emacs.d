@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name: javascript babel
-# key: js
-# --
-#+BEGIN_SRC js
-  $0
-#+END_SRC
