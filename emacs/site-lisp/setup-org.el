@@ -10,7 +10,8 @@
   (require 'org-tempo)
 
   (setq org-directory "~/notes/"
-        org-adapt-indentation t)
+        org-adapt-indentation nil
+        org-edit-src-content-indentation 0)
   (setq org-listen-read-watch-file (concat org-directory "topics/listen-read-watch.org"))
 
   ;; Split up the search string on whitespace
