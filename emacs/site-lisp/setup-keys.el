@@ -10,7 +10,7 @@
    "a" 'consult-imenu
 
    "b" '(:ignore t :which-key "buffers")
-   "bb" 'switch-to-buffer
+   "bb" 'consult-buffer
    "bd" 'kill-this-buffer
    "bD" 'kill-matching-buffers
    "bm" 'gf/switch-to-messages-buffer
@@ -88,12 +88,12 @@
    "nw" 'widen
 
    "o" '(:ignore t :which-key "org")
+   "oc" 'org-capture
    "oi" '(gf/find-org-info-file :which-key "open info file")
    "ol" 'org-capture-goto-last-stored
    "oL" 'org-refile-goto-last-stored
    "oN" 'gf/commit-notes
    "om" 'gf/find-current-month-notes-file
-   "oo" 'org-capture ; as in, "oo, I have an idea"
    "op" 'gf/projects-toggle-org-file
 
    "p" '(:ignore t :which-key "projects")
