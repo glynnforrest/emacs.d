@@ -198,4 +198,4 @@ v: Milliseconds   S: nd, rd, th
                   Y: YYYY
 ")))
 
-(provide 'defuns-php)
+(provide 'lib-php)

@@ -31,4 +31,4 @@
            (describe-function sym))
           ((setq sym (variable-at-point)) (describe-variable sym)))))
 
-(provide 'defuns-elisp)
+(provide 'lib-elisp)

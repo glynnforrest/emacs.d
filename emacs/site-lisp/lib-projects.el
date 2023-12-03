@@ -67,4 +67,4 @@ current project."
   (interactive)
   (find-file (gf/projects--get-toggle-org-file)))
 
-(provide 'defuns-projects)
+(provide 'lib-projects)

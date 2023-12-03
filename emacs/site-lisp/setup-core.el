@@ -1,6 +1,6 @@
 (eval-when-compile (require 'use-package))
 
-(require 'defuns-core)
+(require 'lib-core)
 
 (use-package general)
 (defvar gf/leader-key "SPC"
@@ -249,7 +249,7 @@ or if using plists
   :diminish ""
   :config
   (projectile-mode)
-  (require 'defuns-projects))
+  (require 'lib-projects))
 
 (use-package vertico
   :straight (vertico :includes vertico-directory
