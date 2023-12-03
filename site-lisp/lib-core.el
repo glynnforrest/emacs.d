@@ -262,4 +262,4 @@ current window."
       (delete-region start end)
       (insert insertion)))
 
-(provide 'defuns-core)
+(provide 'lib-core)

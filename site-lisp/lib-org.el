@@ -108,4 +108,4 @@
            (org-up-element)
            (not (looking-at-p (concat (s-repeat level "\\*") " "))))))
 
-(provide 'defuns-org)
+(provide 'lib-org)

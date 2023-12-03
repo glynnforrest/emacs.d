@@ -42,6 +42,6 @@
    "." 'elisp-slime-nav-find-elisp-thing-at-point
    "," 'pop-tag-mark))
 
-(require 'defuns-elisp)
+(require 'lib-elisp)
 
 (provide 'setup-elisp)

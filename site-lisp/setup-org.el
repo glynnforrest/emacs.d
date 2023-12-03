@@ -6,7 +6,7 @@
              gf/find-org-info-file
              gf/org-find-file)
   :config
-  (require 'defuns-org)
+  (require 'lib-org)
   (require 'org-tempo)
 
   (setq org-directory "~/notes/"
