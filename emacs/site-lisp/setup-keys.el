@@ -68,6 +68,7 @@
    "i" '(:ignore t :which-key "insert")
    "ib" '((lambda () (interactive) (insert (gf/buffer-file-name-body))) :which-key "gf/buffer-file-name-body")
    "ic" 'gf/php-insert-class
+   "id" '((lambda () (interactive) (insert (gf/short-date))) :which-key "short date")
    "ir" 'gf/php-insert-symfony-route
    "is" 'gf/php-insert-service
    "it" 'gf/php-insert-symfony-twig-helper
