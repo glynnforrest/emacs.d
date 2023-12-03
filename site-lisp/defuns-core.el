@@ -183,6 +183,17 @@ ERC buffer."
             (substring hash 16 20)
             (substring hash 20 32))))
 
+;; from `diary.el' (`diary-ordinal-suffix')
+(defun ordinal-suffix (n)
+  "Ordinal suffix for N. That is, `st', `nd', `rd', or `th', as appropriate."
+  (if (or (memq (% n 100) '(11 12 13)) (< 3 (% n 10)))
+      "th"
+    (aref ["th" "st" "nd" "rd"] (% n 10))))
+
+(defun gf/short-date ()
+  "Get a short date for headers etc."
+  (format (format-time-string "%a %-d%%s %b %Y") (ordinal-suffix (string-to-number (format-time-string "%-d")))))
+
 ;; https://github.com/syl20bnr/spacemacs/blob/c7a103a772d808101d7635ec10f292ab9202d9ee/core/core-funcs.el#L305
 (defun vnd/alternate-buffer (&optional window)
   "Switch back and forth between current and last buffer in the

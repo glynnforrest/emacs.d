@@ -261,12 +261,6 @@ Dates are returned in the style from `decode-time'."
         ;; subtract 6 days to get the week beginning for every sunday
         (mapcar (lambda (date) (decode-time (time-add-day date -6))) dates)))))
 
-;; from `diary.el' (`diary-ordinal-suffix')
-(defun ordinal-suffix (n)
-  "Ordinal suffix for N. That is, `st', `nd', `rd', or `th', as appropriate."
-  (if (or (memq (% n 100) '(11 12 13)) (< 3 (% n 10)))
-      "th"
-    (aref ["th" "st" "nd" "rd"] (% n 10))))
 
 (defun gf/find-org-info-file ()
   "Open info.org, full of delicious secrets."
