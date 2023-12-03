@@ -1,4 +1,5 @@
 (require 'org)
+(require 's)
 
 (defun gf/org-select-project-file-header ()
   "Visit a location to store a new note in the current project."
@@ -85,5 +86,12 @@
 (defun gf/org-find-file ()
   (interactive)
   (projectile-find-file-in-directory org-directory))
+
+(defun gf/org-up-to-level (level)
+  "Move up to the previous LEVEL heading."
+  (interactive)
+  (while (progn
+           (org-up-element)
+           (not (looking-at-p (concat (s-repeat level "\\*") " "))))))
 
 (provide 'defuns-org)
