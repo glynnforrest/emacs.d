@@ -12,12 +12,14 @@
   (setq org-directory "~/notes/"
         org-adapt-indentation nil
         org-edit-src-content-indentation 0)
-  (setq org-listen-read-watch-file (concat org-directory "topics/listen-read-watch.org"))
 
   ;; Split up the search string on whitespace
   (setq org-agenda-search-view-always-boolean t)
 
   (setq org-refile-targets '((nil :maxlevel . 2)))
+
+  (defun gf/org-path (fragment)
+    (concat org-directory fragment))
 
   (defun gf/org-reload ()
     "Reload the org file for the current month - useful for a long
@@ -110,28 +112,16 @@ TODO keywords, stars and list indicators."
   (add-hook 'org-capture-mode-hook #'evil-insert-state)
 
   (setq org-capture-templates
-        '(("n" "Note" entry (file+headline org-default-notes-file "Notes")
-           "* %?")
-          ("t" "Todo" entry (file+headline org-default-notes-file "Tasks")
-           "* TODO %?" :prepend t)
-          ("z" "Project note" entry (function gf/org-select-project-file-header)
-           "* %?")
-          ("x" "Project todo" entry (function gf/org-select-project-file-header)
-           "* TODO %?")
-          ("c" "Other project note" entry (function gf/org-select-other-project-file-header)
-           "* %?")
-          ("v" "Other project todo" entry (function gf/org-select-other-project-file-header)
-           "* TODO %?")
-          ;; ("s" "Someday" entry (file+headline org-someday-file "Notes")
-          ;;  "* %?")
-          ("l" "Listen" entry (file+headline org-listen-read-watch-file "Listen")
-           "* %?")
-          ("r" "Read" entry (file+headline org-listen-read-watch-file "Read")
-           "* %?")
-          ("w" "Watch" entry (file+headline org-listen-read-watch-file "Watch")
-           "* %?")
-          ("p" "Play" entry (file+headline org-listen-read-watch-file "Play")
-           "* %?")))
+        `(("t" "Task" entry (file+headline org-default-notes-file "Tasks") "* TODO %?" :prepend t)
+          ("i" "Inbox" entry (file ,(gf/org-path "topics/inbox.org")) "* %?")
+          ("I" "Idea" entry (file+function ,(gf/org-path "topics/ideas.org") gf/org-select-top-level-header) "* %?")
+          ("s" "Someday" entry (file ,(gf/org-path "topics/someday.org")) "* %?")
+          ("j" "Journal" entry (file+headline org-default-notes-file "Journal") "* %(gf/short-date)\n%?")
+          ("m" "Media" entry (file+function ,(gf/org-path "topics/media.org") gf/org-select-top-level-header) "* %?" :prepend t)
+          ("p" "Project note" entry (function gf/org-select-project-file-header) "* %?")
+          ("P" "Project task" entry (function gf/org-select-project-file-header) "* TODO %?")
+          ("o" "Other project note" entry (function gf/org-select-other-project-file-header) "* %?")
+          ("O" "Other project task" entry (function gf/org-select-other-project-file-header) "* TODO %?")))
 
   (defun gf/org-make-capture-frame ()
     "Make a new frame for using org-capture."

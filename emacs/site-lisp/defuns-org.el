@@ -19,11 +19,10 @@
   "Visit a top level heading in the current file."
   (interactive)
   (goto-char (point-min))
-  (let ((choice (completing-read "Project heading: " (gf/org--get-top-level-headings))))
+  (let ((choice (completing-read "Heading: " (gf/org--get-top-level-headings))))
     (goto-char (point-min))
     (re-search-forward (format "^\* %s" choice)))
-  (outline-show-children)
-  (recenter))
+  (outline-show-children))
 
 (defun gf/org-select-top-level-header-or-all (arg)
   "Visit a heading in the current file. Choose from top level headings, or all headings if called with a prefix argument."
