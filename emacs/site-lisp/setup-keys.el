@@ -16,6 +16,8 @@
    "bm" 'gf/switch-to-messages-buffer
    "bs" 'gf/switch-to-scratch-buffer
 
+   "c" 'org-capture
+
    "d" '(:ignore t :which-key "dired")
    "dc" `(,(gf/key 'dired "~/code") :which-key "~/code")
    "dd" 'dired
@@ -89,7 +91,6 @@
    "nw" 'widen
 
    "o" '(:ignore t :which-key "org")
-   "oc" 'org-capture
    "oi" '(gf/find-org-info-file :which-key "open info file")
    "ol" 'org-capture-goto-last-stored
    "oL" 'org-refile-goto-last-stored
