@@ -75,6 +75,21 @@
           (add-to-list 'headings (list label match) t)))
       headings)))
 
+(defun gf/org-insert-blank-title ()
+  (interactive)
+  (goto-char (point-min))
+  (if (looking-at-p ":PROPERTIES:")
+      (progn
+        (re-search-forward ":END:")
+        (forward-line 1)
+        (beginning-of-line)))
+  (insert "#+TITLE: ")
+  (newline)
+  (newline)
+  (forward-line -2)
+  (end-of-line)
+  (evil-insert-state))
+
 (defun gf/org-show-entry ()
   "Show the current entry and all parent headers."
   (interactive)

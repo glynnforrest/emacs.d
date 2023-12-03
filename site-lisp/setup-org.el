@@ -285,6 +285,7 @@ Dates are returned in the style from `decode-time'."
    :non-normal-prefix gf/major-mode-non-normal-leader-key
    "r" 'gf/org-refile-files-first
    "R" 'org-refile
+   "t" 'gf/org-insert-blank-title
    "." 'gf/org-go-to-next-month
    "," 'gf/org-go-to-previous-month)
 
