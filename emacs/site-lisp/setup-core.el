@@ -1,6 +1,7 @@
 (eval-when-compile (require 'use-package))
 
 (require 'lib-core)
+(require 'lib-vendor)
 
 (use-package general)
 (defvar gf/leader-key "SPC"
