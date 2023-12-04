@@ -54,11 +54,12 @@ EXTENSION. Only the last extension of the file is considered."
   (kill-buffer (current-buffer))
   (other-window 1))
 
-(defun gf/face-at-point ()
-  "Get the name of the face at point, excluding any overlays such as hl-line."
+(defun gf/props-at-point ()
+  "Get the properties of the text at point. This excludes any overlays
+such as hl-line."
   (interactive)
   (message
-   (symbol-name (get-text-property (point) 'face))))
+   (format "%S" (text-properties-at (point)))))
 
 (defun gf/refresh-major-mode ()
   "Refresh the major mode of the current buffer."
