@@ -136,7 +136,7 @@
    "v" '(er/expand-region :which-key "expand-region")
 
    "w" '(:ignore t :which-key "what")
-   "wf" 'gf/face-at-point
+   "wp" 'gf/props-at-point
 
    "x" 'execute-extended-command
 
