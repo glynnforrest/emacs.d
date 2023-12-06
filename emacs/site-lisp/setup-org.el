@@ -160,9 +160,10 @@ TODO keywords, stars and list indicators."
      (shell . t)
      ))
 
-  (setq org-confirm-babel-evaluate nil)
-  (setq org-src-fontify-natively t)
-  (setq org-src-tab-acts-natively t)
+  (setq org-confirm-babel-evaluate nil
+        org-src-fontify-natively t
+        org-src-tab-acts-natively t
+        org-descriptive-links nil)
 
 (defvar gf/org-months '("january" "february" "march" "april" "may" "june" "july" "august" "september" "october" "november" "december"))
 
@@ -217,6 +218,7 @@ OFFSET is t for next month, or nil for previous month."
    :keymaps 'org-mode-map
    :prefix gf/major-mode-leader-key
    :non-normal-prefix gf/major-mode-non-normal-leader-key
+   "l" 'org-toggle-link-display
    "r" 'gf/org-refile-files-first
    "R" 'org-refile
    "t" 'gf/org-insert-blank-title
