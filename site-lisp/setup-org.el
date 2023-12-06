@@ -176,7 +176,7 @@ OFFSET is t for next month, or nil for previous month."
   (let* ((pieces (split-string filename "-"))
          (year (string-to-number (car pieces)))
          (month (cadr pieces))
-         (month-number (position month gf/org-months :test 'equal)))
+         (month-number (cl-position month gf/org-months :test 'equal)))
     (if offset
         (if (eq month-number 11)
             (concat (number-to-string (+ year 1)) "-january")
@@ -199,7 +199,7 @@ OFFSET is t for next month, or nil for previous month."
 
 (defun gf/org-previous-month-name-from-filename (filename)
   (when (stringp filename)
-    (let ((index (position (cadr (split-string filename "-")) gf/org-months :test 'equal)))
+    (let ((index (cl-position (cadr (split-string filename "-")) gf/org-months :test 'equal)))
       (capitalize
        (if (eq 0 index) "december" (nth (- index 1) gf/org-months))))))
 
