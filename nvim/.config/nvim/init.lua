@@ -38,6 +38,13 @@ require('packer').startup(function(use)
   use 'hrsh7th/cmp-nvim-lsp'
   use 'folke/neodev.nvim'
   use({"L3MON4D3/LuaSnip", tag = "v1.*"})
+
+
+  use {'nvim-treesitter/nvim-treesitter'}
+  use {'nvim-orgmode/orgmode', config = function()
+	  require('orgmode').setup{}
+  end
+}
 end)
 
 vim.opt.tabstop = 4
