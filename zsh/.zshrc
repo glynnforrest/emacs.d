@@ -368,6 +368,14 @@ nomad-restart-job () {
     nomad job status $1 | grep -E 'run\s+running' | awk '{print $1}' | xargs -t -n 1 -P $2 nomad alloc restart
 }
 
+checkcertfull () {
+    openssl s_client -showcerts -servername $1 -connect $1:443 <<< "Q" 2>/dev/null | openssl x509 -text -noout
+}
+
+checkcert () {
+    checkcertfull $1 | egrep -A 1 'Not|Alt' | awk '{$1=$1;print $0}' | grep -v '\-\-'
+}
+
 alias tf_lock_providers="terraform providers lock -platform=linux_arm64 -platform=linux_amd64 -platform=darwin_amd64 -platform=windows_amd64"
 
 if command_exists fasd;
