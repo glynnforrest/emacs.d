@@ -200,6 +200,7 @@
    "C-h" 'evil-window-left)
 
   (general-define-key
+   :keymaps '(global prog-mode-map)
    "M-q" 'gf/close-buffer-other-window
    "M-d" 'scroll-other-window
    "M-u" 'scroll-other-window-down))
