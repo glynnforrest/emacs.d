@@ -1,7 +1,7 @@
 # -*- mode: snippet; require-final-newline: nil -*-
-# name: code block
-# key: /
+# name: text block
+# key: ,
 # --
-#+begin_src $1
+#+begin_src text
 $0
 #+end_src
