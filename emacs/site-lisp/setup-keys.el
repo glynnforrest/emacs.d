@@ -103,6 +103,7 @@
    "ps" 'projectile-switch-project
    "pS" 'projectile-save-project-buffers
    "pr" 'projectile-replace
+   "pR" 'projectile-remove-known-project
 
    "P" 'yank-from-kill-ring
 
