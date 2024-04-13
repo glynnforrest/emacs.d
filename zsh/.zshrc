@@ -277,7 +277,8 @@ ips () {
     echo $LIST | column -t
 }
 
-clear_hashi () {
+# clear hashi
+ch () {
     unset CONSUL_HTTP_ADDR
     unset CONSUL_HTTP_SSL_VERIFY
     unset CONSUL_HTTP_TOKEN
@@ -289,9 +290,16 @@ clear_hashi () {
     unset VAULT_TOKEN
 }
 
+# clear k8s
+ck () {
+    unset KUBECONFIG
+}
+
 alias unsafeconsul="CONSUL_HTTP_SSL_VERIFY=false consul"
 alias unsafevault="VAULT_SKIP_VERIFY=true vault"
 alias unsafenomad="NOMAD_SKIP_VERIFY=true nomad"
+
+alias nu="nomad ui -authenticate"
 
 # aliases
 alias c='cd -'
@@ -347,8 +355,20 @@ alias python_server="ips && python -m SimpleHTTPServer"
 
 alias grafana_tmp="docker run --name grafana-tmp --rm -ti --network agent-test -p 3000:3000 grafana/grafana"
 
+alias dnow="date +%Y-%m-%d"
+alias dtnow="date -u +%Y-%m-%d-%H:%M:%S"
+alias dtutcnow="date -u +%Y-%m-%d-%H:%M:%S"
+
+wa() {
+    watch -x zsh -ci "$1"
+}
+
 codeimg () {
     silicon --to-clipboard $1 --no-window-controls --background '#fff0'
+}
+
+fcodeimg () {
+    silicon $1 --no-window-controls --background '#fff0' --output ~/Desktop/codeimg.png
 }
 
 random-secret () {
@@ -368,14 +388,19 @@ nomad-restart-job () {
     nomad job status $1 | grep -E 'run\s+running' | awk '{print $1}' | xargs -t -n 1 -P $2 nomad alloc restart
 }
 
+getcert () {
+    openssl s_client -showcerts -servername $1 -connect $1:${2:-443} <<< "Q"
+}
+
 checkcertfull () {
-    openssl s_client -showcerts -servername $1 -connect $1:443 <<< "Q" 2>/dev/null | openssl x509 -text -noout
+    getcert $1 $2 2>/dev/null | openssl x509 -text -noout
 }
 
 checkcert () {
-    checkcertfull $1 | egrep -A 1 'Not|Alt' | awk '{$1=$1;print $0}' | grep -v '\-\-'
+    checkcertfull $1 $2 | egrep -A 1 'Not|Alt' | awk '{$1=$1;print $0}' | grep -v '\-\-'
 }
 
+alias t="terraform"
 alias tf_lock_providers="terraform providers lock -platform=linux_arm64 -platform=linux_amd64 -platform=darwin_amd64 -platform=windows_amd64"
 
 if command_exists fasd;
@@ -393,6 +418,8 @@ then;
 
     ee () {e `fasd -sif $1`}
 fi;
+
+alias k='kubectl'
 
 # platform-specific aliases
 if is_mac; then
@@ -414,3 +441,12 @@ if test -f ~/.zshrc.local
 then
     source ~/.zshrc.local
 fi
+
+jwtd() {
+    jq -R 'split(".") | .[0],.[1] | @base64d | fromjson' <<< "${1}"
+    echo "Signature: $(echo "${1}" | awk -F'.' '{print $3}')"
+}
+
+whichpy() {
+    python3 -c "import $1; print($1.__file__)"
+}
