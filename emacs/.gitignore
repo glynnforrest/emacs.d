@@ -25,3 +25,4 @@ transient/
 /.lsp-session-v1
 /.cache/
 /eln-cache/
+/tree-sitter/
