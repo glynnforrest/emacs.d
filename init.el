@@ -46,6 +46,7 @@
 (require 'setup-nix)
 (require 'setup-org)
 (require 'setup-php)
+(require 'setup-protobuf)
 (require 'setup-pug)
 (require 'setup-python)
 (require 'setup-saltstack)
