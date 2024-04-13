@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: go struct
+# key: s
+# --
+type $1 struct {
+	$0
+}

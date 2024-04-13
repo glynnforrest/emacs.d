@@ -1,6 +1,5 @@
 # -*- mode: snippet; require-final-newline: nil -*-
-# name: method
-# key: m
+# name: p
+# key: p
 # --
-def $1(self$2):
-    $0
+pathlib.Path(__file__)$0

@@ -1,6 +1,5 @@
 # -*- mode: snippet; require-final-newline: nil -*-
-# name: method
-# key: m
+# name: return false
+# key: rf
 # --
-def $1(self$2):
-    $0
+return False
