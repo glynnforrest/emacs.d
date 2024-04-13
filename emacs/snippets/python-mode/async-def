@@ -1,6 +1,6 @@
 # -*- mode: snippet; require-final-newline: nil -*-
-# name: method
-# key: m
+# name: async-def
+# key: ad
 # --
-def $1(self$2):
+async def $1($2):
     $0
