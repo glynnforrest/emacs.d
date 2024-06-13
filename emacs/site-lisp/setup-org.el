@@ -197,6 +197,13 @@ OFFSET is t for next month, or nil for previous month."
 
 (use-package time-ext)
 
+(defun gf/org-full-month-name-from-filename (filename)
+  (when (stringp filename)
+    (format "%s %s"
+            (capitalize
+             (cadr (split-string filename "-")))
+            (car (split-string filename "-")))))
+
 (defun gf/org-previous-month-name-from-filename (filename)
   (when (stringp filename)
     (let ((index (cl-position (cadr (split-string filename "-")) gf/org-months :test 'equal)))
