@@ -104,8 +104,12 @@
 (defun gf/org-up-to-level (level)
   "Move up to the previous LEVEL heading."
   (interactive)
-  (while (progn
-           (org-up-element)
-           (not (looking-at-p (concat (s-repeat level "\\*") " "))))))
+  (let ((pattern (concat (s-repeat level "\\*") " ")))
+    (beginning-of-line)
+    (while (not (looking-at-p pattern))
+      (progn
+        (if (equal (buffer-substring-no-properties (line-beginning-position) (line-end-position)) "")
+            (forward-line -1)
+          (org-up-element))))))
 
 (provide 'lib-org)
