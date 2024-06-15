@@ -165,13 +165,14 @@ ERC buffer."
 (defun gf/regex-dwim (regex)
   (save-excursion
     (save-match-data
-      (if (eq major-mode 'org-mode)
-          (gf/org-up-to-level 2)
-        (if (derived-mode-p 'prog-mode)
-            (beginning-of-defun)
-          (beginning-of-line)))
-      (if (re-search-forward regex (line-end-position) t)
-          (match-string-no-properties 0)))))
+      (let ((start-position (point)))
+        (if (eq major-mode 'org-mode)
+            (gf/org-up-to-level 2)
+          (if (derived-mode-p 'prog-mode)
+              (beginning-of-defun)
+            (beginning-of-line)))
+        (if (re-search-forward regex start-position t)
+            (match-string-no-properties 0))))))
 
 
 (defun gf/uuid ()
