@@ -26,22 +26,13 @@
 running emacs instance."
     (interactive)
     (setq gf/current-month-notes-last-visited nil)
-    (setq org-files (append (file-expand-wildcards (concat org-directory "*/*.org"))
-                            (file-expand-wildcards (concat org-directory "*/*/*.org"))))
+    (setq org-files (append (file-expand-wildcards (concat org-directory "*/*.org"))))
 
-    ;; Notes are grouped by month in dates/ for automatic archival.
-    ;; At the start of every month, move over notes that are still relevant.
-    ;; Agenda files are only used for searching - this setup is
-    ;; designed to work without scheduling, tags etc
-    (setq org-agenda-files (append
-                            (file-expand-wildcards (concat org-directory "dates/*.org"))
-                            (file-expand-wildcards (concat org-directory "topics/*.org"))
-                            (file-expand-wildcards (concat org-directory "topics/*/*.org"))))
     (setq org-default-notes-file (gf/org-current-month-notes-file)))
 
   (defun gf/org-current-month-notes-file ()
     "Get the path of the org file for the current month."
-    (concat org-directory "dates/"
+    (concat org-directory "0/"
             (downcase (format-time-string "%Y-%B.org"))))
 
   (defun gf/org-refile-files-first ()
@@ -188,12 +179,12 @@ OFFSET is t for next month, or nil for previous month."
 (defun gf/org-go-to-next-month ()
   "Go to the next month org file."
   (interactive)
-  (find-file (concat org-directory "dates/" (gf/org-calculate-month-file-offset (gf/buffer-file-name-body) t) ".org")))
+  (find-file (concat org-directory "0/" (gf/org-calculate-month-file-offset (gf/buffer-file-name-body) t) ".org")))
 
 (defun gf/org-go-to-previous-month ()
   "Go to the previous month org file."
   (interactive)
-  (find-file (concat org-directory "dates/" (gf/org-calculate-month-file-offset (gf/buffer-file-name-body) nil) ".org")))
+  (find-file (concat org-directory "0/" (gf/org-calculate-month-file-offset (gf/buffer-file-name-body) nil) ".org")))
 
 (use-package time-ext)
 

@@ -1,14 +1,12 @@
 (require 's)
 
-(defvar gf/projects-org-directory (expand-file-name  "~/notes/projects/"))
-
 (defvar gf/projects-file-override-alist '()
   "An association list of regex patterns and the project org file for them.
 
 This enables overriding the default behaviour of `gf/projects--resolve-org-path'.
 
 CAR must be a regular expression of files to match.
-CDR must be a path to an org file, relative to `gf/projects-org-directory'.
+CDR must be a path to an org file, relative to `org-directory'.
 
 Example:
 
@@ -19,13 +17,13 @@ Example:
 (defun gf/projects--create-org-path (file)
   "Create a name suitable for an org file from the last part of a file
 path."
-  (let ((last (car (last (split-string (if (equal (substring file -1) "/")
-                                           (substring file 0 -1) file) "/")))))
-    (concat gf/projects-org-directory
+  (let ((last (s-chop-prefix "." (car (last (split-string (s-chop-suffix "/" file) "/"))))))
+    (concat (expand-file-name org-directory)
+            (substring last 0 1)
+            "/"
             (downcase
              (replace-regexp-in-string
-              "\\." "-" (if (equal (substring last 0 1) ".")
-                            (substring last 1) last)))
+              "\\." "-" last))
             ".org")))
 
 
@@ -38,7 +36,7 @@ suitable name automatically or matching a regex in gf/projects-file-override-ali
                                       gf/projects-file-override-alist
                                       (lambda(regex org-file)
                                         (string-match regex resolved-file))))))
-    (if override (concat gf/projects-org-directory (s-chop-prefix "/" override))
+    (if override (concat org-directory (s-chop-prefix "/" override))
       (gf/projects--create-org-path (projectile-project-root)))))
 
 (defun gf/projects-open-org-file ()
