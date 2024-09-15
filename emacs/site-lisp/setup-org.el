@@ -104,11 +104,11 @@ TODO keywords, stars and list indicators."
 
   (setq org-capture-templates
         `(("t" "Task" entry (file+headline org-default-notes-file "Tasks") "* TODO %?" :prepend t)
-          ("i" "Inbox" entry (file ,(gf/org-path "topics/inbox.org")) "* %?")
-          ("I" "Idea" entry (file+function ,(gf/org-path "topics/ideas.org") gf/org-select-top-level-header) "* %?")
-          ("s" "Someday" entry (file ,(gf/org-path "topics/someday.org")) "* %?")
+          ("i" "Inbox" entry (file ,(gf/org-path "i/inbox.org")) "* %?")
+          ("I" "Idea" entry (file+function ,(gf/org-path "i/ideas.org") gf/org-select-top-level-header) "* %?")
+          ("s" "Someday" entry (file ,(gf/org-path "s/someday.org")) "* %?")
           ("j" "Journal" entry (file+headline org-default-notes-file "Journal") "* %(gf/short-date)\n%?")
-          ("m" "Media" entry (file+function ,(gf/org-path "topics/media.org") gf/org-select-top-level-header) "* %?" :prepend t)
+          ("m" "Media" entry (file+function ,(gf/org-path "m/media.org") gf/org-select-top-level-header) "* %?" :prepend t)
           ("p" "Project note" entry (function gf/org-select-project-file-header) "* %?")
           ("P" "Project task" entry (function gf/org-select-project-file-header) "* TODO %?")
           ("o" "Other project note" entry (function gf/org-select-other-project-file-header) "* %?")
