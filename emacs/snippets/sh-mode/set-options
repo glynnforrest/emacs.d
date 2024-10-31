@@ -1,0 +1,5 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: bash set options
+# key: s
+# --
+set -euo pipefail

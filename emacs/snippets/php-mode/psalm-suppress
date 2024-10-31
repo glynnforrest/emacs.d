@@ -1,0 +1,5 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+#name : psalm-suppress
+#key : ps
+# --
+/** @psalm-suppress ${1:all} */$0

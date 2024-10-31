@@ -1,0 +1,5 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: assertInternalType
+# key: ait
+# --
+$this->assertInternalType('${1:type}', ${2:$actual});$0

@@ -1,0 +1,5 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: assertNotNull
+# key: ann
+# --
+$this->assertNotNull(${1:$condition});$0

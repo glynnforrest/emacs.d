@@ -1,0 +1,5 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: p
+# key: p
+# --
+pathlib.Path(__file__)$0

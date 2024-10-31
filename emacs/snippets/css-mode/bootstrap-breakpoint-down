@@ -1,0 +1,7 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: bootstrap breakpoint down
+# key: brd
+# --
+@include media-breakpoint-down('${1:md}') {
+  $0
+}

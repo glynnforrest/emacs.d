@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name:terraform resource
+# key: r
+# --
+resource "$1" "$2" {
+  $0
+}

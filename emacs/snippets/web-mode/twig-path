@@ -1,0 +1,6 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: twig-path
+# key: path
+# condition: (gf/in-file-type "twig")
+# --
+{{path($1)}}$0

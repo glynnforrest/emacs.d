@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: lilypond babel
+# key: lily
+# --
+#+begin_src lilypond :file /tmp/$1.png
+  \include "lilypond-book-preamble.ly"
+  \paper { oddFooterMarkup = ##f }
+  $0
+#+end_src

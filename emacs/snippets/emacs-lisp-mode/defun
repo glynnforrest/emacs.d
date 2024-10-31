@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: (defun ...)
+# key: defun
+# --
+(defun ${1:func} ($2)
+"$3"
+	$0
+)

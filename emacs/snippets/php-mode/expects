@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: expects
+# key: exp
+# --
+expects($this->$1)
+    ->method('$2')
+    ->with($3)
+    ->will($this->returnValue($4));
+$0

@@ -1,0 +1,7 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: salt-if
+# key: if
+# --
+{%- if ${1:True} %}
+$0
+{%- endif %}

@@ -1,0 +1,7 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: bash block
+# key: /
+# --
+#+begin_src bash
+$0
+#+end_src

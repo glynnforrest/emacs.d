@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: vardump
+# key: v
+# --
+var_dump($1);$0

@@ -1,0 +1,12 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: jQuery ajax
+# key: $.ajax
+# --
+$.ajax({
+  url: $1,
+  type: '${2:post}',
+  data: {$3},
+  success: function (data) {
+    $0
+  }
+});

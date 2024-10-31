@@ -1,0 +1,5 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: assertEquals
+# key: ae
+# --
+$this->assertEquals(${1:$expected}, ${2:$actual});$0

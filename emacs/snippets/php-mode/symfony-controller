@@ -1,0 +1,27 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name : symfony controller
+# key : sycon
+# --
+<?php
+
+namespace `(gf/php-current-file-namespace)`;
+
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+
+class `(gf/buffer-file-name-body)` extends Controller
+{
+    /**
+     * @Route
+     * @Template
+     */
+    public function $1Action()
+    {
+        $0
+
+        return [
+        ];
+    }
+}

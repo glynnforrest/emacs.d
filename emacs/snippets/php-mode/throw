@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: throw
+# key: th
+# --
+throw new ${1:\\}Exception('$2');$0

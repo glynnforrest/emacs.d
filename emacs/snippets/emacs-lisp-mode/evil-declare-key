@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: (evil-declare-key ...)
+# key: evil-declare
+# --
+(evil-declare-key '$1 $2 ${3:(kbd "$4")} $5)$0

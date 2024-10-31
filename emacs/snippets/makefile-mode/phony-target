@@ -1,0 +1,7 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+#name : phony make target
+#key : .
+# --
+.PHONY: ${1:target}
+$1:
+	$0

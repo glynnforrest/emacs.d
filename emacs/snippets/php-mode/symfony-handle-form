@@ -1,0 +1,8 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: symfony handle form
+# key: syhf
+# --
+$${1:form}->handleRequest($request);
+if ($$1->isSubmitted() && $$1->isValid()) {
+   $0
+}

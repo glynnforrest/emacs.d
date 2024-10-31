@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: <div id="..." class="...">...</div>
+# key: divic
+# --
+<div id="$1" class="$2">
+  $0
+</div>

@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: <span class="...">...</span>
+# key: spanc
+# --
+<span class="$1">$2</span>

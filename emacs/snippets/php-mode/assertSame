@@ -1,0 +1,5 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: assertSame
+# key: as
+# --
+$this->assertSame(${1:$expected}, ${2:$actual});$0

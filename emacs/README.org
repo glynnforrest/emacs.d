@@ -1,0 +1,2 @@
+* My emacs settings
+  The emacs configuration of a vim convert.

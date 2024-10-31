@@ -1,0 +1,12 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name : interface definition
+# key : interface
+# --
+<?php
+
+namespace `(gf/php-current-file-namespace)`;
+
+interface `(gf/buffer-file-name-body)`
+{
+    $0
+}

@@ -1,0 +1,5 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: Link tag
+# key: link
+# --
+<link rel="stylesheet" type="text/css" href="$1" />$0

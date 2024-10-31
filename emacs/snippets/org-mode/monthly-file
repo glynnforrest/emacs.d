@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: monthly-file
+# key: monthly-file
+# --
+#+TITLE: `(gf/org-full-month-name-from-filename (gf/buffer-file-name-body))`
+
+* Tasks
+** NEXT Move tasks from `(gf/org-previous-month-name-from-filename (gf/buffer-file-name-body))`$0
+* Journal

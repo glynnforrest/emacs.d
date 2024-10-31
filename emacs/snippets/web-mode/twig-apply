@@ -1,0 +1,8 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: twig-apply
+# key: apply
+# condition: (gf/in-file-type "twig")
+# --
+{% apply ${1:filter} %}
+   $0
+{% endapply %}

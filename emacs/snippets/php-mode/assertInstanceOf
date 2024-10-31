@@ -1,0 +1,5 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: assertInstanceOf
+# key: ai
+# --
+$this->assertInstanceOf(${1:Class\Name}::class, ${2:$actual});$0

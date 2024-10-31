@@ -1,0 +1,15 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: getter-setter
+# key: getset
+# --
+public function set${1:Property}(${2:$1} $${3:var}): self
+{
+    $this->$3 = $$3;
+
+    return $this;
+}
+
+public function get$1(): $2
+{
+    return $this->$3;
+}

@@ -1,0 +1,17 @@
+# -*- mode: snippet -*-
+# name: PHPUnit test case
+# key: test
+# --
+<?php
+
+namespace `(gf/php-current-file-namespace)`;
+
+use PHPUnit\Framework\TestCase;
+
+class `(gf/buffer-file-name-body)` extends TestCase
+{
+    public function setUp()
+    {
+        $0
+    }
+}

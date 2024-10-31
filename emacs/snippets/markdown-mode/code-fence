@@ -1,0 +1,7 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: Code fence
+# key: `
+# --
+\`\`\`${1:lang}
+$0
+\`\`\`

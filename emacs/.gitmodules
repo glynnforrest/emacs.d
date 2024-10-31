@@ -1,0 +1,9 @@
+[submodule "plugins/evil-numbers"]
+	path = plugins/evil-numbers
+	url = https://github.com/cofi/evil-numbers.git
+[submodule "plugins/nyan-mode"]
+	path = plugins/nyan-mode
+	url = https://github.com/TeMPOraL/nyan-mode.git
+[submodule "plugins/php-auto-yasnippets"]
+	path = plugins/php-auto-yasnippets
+	url = https://github.com/ejmr/php-auto-yasnippets.git

@@ -1,0 +1,5 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: $this->
+# key: t
+# --
+$this->$0

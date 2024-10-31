@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: go if map get ok
+# key: ifm
+# --
+if ${1:val}, ok := ${2:dict}[$3]; ok {
+	$0
+}

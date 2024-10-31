@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: <a href="...">...</a>
+# key: ac
+# --
+<a href="$1" class="$2">$0</a>

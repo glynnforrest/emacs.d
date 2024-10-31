@@ -1,0 +1,5 @@
+# -*- mode: snippet; require-final-newline nil -*-
+# name: author annotation
+# key: @a
+# --
+@author Glynn Forrest <me@glynnforrest.com>

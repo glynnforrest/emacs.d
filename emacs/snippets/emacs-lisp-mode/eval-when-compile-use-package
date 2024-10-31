@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: eval-when-compile use-package
+# key: ecu
+# --
+(eval-when-compile (require 'use-package))
+$0

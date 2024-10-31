@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: latex commentary
+# key: lcomment
+# --
+\newline
+\newline
+\textit{
+\textcolor{$1}{
+$0
+}
+}

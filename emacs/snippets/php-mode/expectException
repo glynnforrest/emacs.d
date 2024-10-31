@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: setExpectedException
+# key: ex
+# --
+$this->expectException(${1:\\Exception}::class);$0

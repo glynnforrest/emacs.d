@@ -1,0 +1,10 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: (general-define-key ...)
+# key: key
+# --
+(general-define-key
+  ${1::states '(${2:normal})
+  }${3::keymaps '${4:mode-map}
+  }${5::prefix ${6:gf/major-mode-leader-key}
+  }${7::non-normal-prefix ${8:gf/major-mode-non-normal-leader-key}
+  }$0)

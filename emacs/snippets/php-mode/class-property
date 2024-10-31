@@ -1,0 +1,5 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: Class property
+# key: p
+# --
+private $$1;$0

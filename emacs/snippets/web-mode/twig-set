@@ -1,0 +1,6 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: twig-set
+# key: set
+# condition: (gf/in-file-type "twig")
+# --
+{% set $1 = $0 %}
