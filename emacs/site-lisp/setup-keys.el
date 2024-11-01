@@ -189,6 +189,11 @@
    "M-k" (concat ":m '<-2" (kbd "RET") "gv=gv"))
 
   (general-define-key
+   :states '(visual)
+   :prefix gf/leader-key
+   "\"" 'gf/normalize-quotes)
+
+  (general-define-key
    :keymaps 'evil-window-map
    "d" 'delete-window
    "m" '(delete-other-windows :which-key "maximise window")

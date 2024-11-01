@@ -196,4 +196,10 @@ ERC buffer."
   "Get a short date for headers etc."
   (format (format-time-string "%a %-d%%s %b %Y") (ordinal-suffix (string-to-number (format-time-string "%-d")))))
 
+(defun gf/normalize-quotes (start end)
+  "Replace left and right quotation marks with regular versions"
+  (interactive "r")
+  (replace-regexp-in-region "[““””]" "\"" start end)
+  (replace-regexp-in-region "[‘’]" "'" start end))
+
 (provide 'lib-core)
