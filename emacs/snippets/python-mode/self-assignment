@@ -1,5 +1,5 @@
 # -*- mode: snippet; require-final-newline: nil -*-
-# name: p
-# key: p
+# name: self assignment
+# key: s.
 # --
-pathlib.Path(${1:__file__})$0
+self.${1:prop} = $1$0
