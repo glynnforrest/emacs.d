@@ -11,7 +11,7 @@
 
    "b" '(:ignore t :which-key "buffers")
    "bb" 'consult-buffer
-   "bd" 'kill-this-buffer
+   "bd" 'kill-current-buffer
    "bD" 'kill-matching-buffers
    "bm" 'gf/switch-to-messages-buffer
    "bs" 'gf/switch-to-scratch-buffer
