@@ -118,6 +118,10 @@
 
    "s" '(:ignore t :which-key "search")
    "sp" 'consult-ripgrep
+   "sP" (lambda ()
+          (interactive)
+          (let ((current-prefix-arg 4))
+            (call-interactively 'consult-ripgrep)))
    "so" 'org-search-view
 
    "t" '(:ignore t :which-key "toggle")
